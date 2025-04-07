@@ -1,1 +1,464 @@
-<p>sidebar works!</p>
+<div class="sidebar-container">
+  <div class="sidebar">
+    <ul>
+      <!-- Sale with Submenu -->
+      <li class="menu-item-with-submenu" (mouseenter)="activeSubMenu = 'sale'" (mouseleave)="activeSubMenu = null">
+        <a href="#" (click)="toggleSubMenu('sale'); $event.preventDefault()">
+          <mat-icon class="icon-sale">shopping_cart</mat-icon> Sale
+        </a>
+    
+        <ul *ngIf="activeSubMenu === 'sale'" class="submenu">
+          
+          <!-- Invoice with Nested Submenu -->
+          <li class="has-submenu">
+            <a href="#">Invoice</a>
+            <ul class="nested-submenu">
+              <li><a href="#">New Invoice</a></li>
+              <li><a href="#">Manage Invoices</a></li>
+            </ul>
+          </li>
+    
+          <!-- Sale Return with Nested Submenu -->
+          <li class="has-submenu">
+            <a href="#">Sale Return</a>
+            <ul class="nested-submenu">
+              <li><a href="#">New Sale Return</a></li>
+              <li><a href="#">Manage Sale Returns</a></li>
+            </ul>
+          </li>
+    
+          <!-- Quotation with Nested Submenu -->
+          <li class="has-submenu">
+            <a href="#">Quotation</a>
+            <ul class="nested-submenu">
+              <li><a href="#">New Quotation</a></li>
+              <li><a href="#">Manage Quotations</a></li>
+            </ul>
+          </li>
+    
+          <!-- Delivery Note with Nested Submenu -->
+          <li class="has-submenu">
+            <a href="#">Delivery Note</a>
+            <ul class="nested-submenu">
+              <li><a href="#">New Delivery Note</a></li>
+              <li><a href="#">Manage Delivery Notes</a></li>
+            </ul>
+          </li>
+    
+          <!-- Proforma Invoice with Nested Submenu -->
+          <li class="has-submenu">
+            <a href="#">Proforma Invoice</a>
+            <ul class="nested-submenu">
+              <li><a href="#">New Proforma Invoice</a></li>
+              <li><a href="#">Manage Performa Invoices</a></li>
+            </ul>
+          </li>
+    
+          <!-- Sale Order with Nested Submenu -->
+          <li class="has-submenu">
+            <a href="#">Sale Order</a>
+            <ul class="nested-submenu">
+              <li><a href="#">New Sale Order</a></li>
+              <li><a href="#">Manage Sale Orders</a></li>
+            </ul>
+          </li>
+    
+          <!-- Credit Note -->
+          <li class="has-submenu">
+            <a href="#">Credit Note</a>
+            <ul class="nested-submenu">
+              <li><a href="#">New Credit Note</a></li>
+              <li><a href="#">Manage Credit Notes</a></li>
+            </ul>
+          </li>
+    
+          <!-- Debit Note -->
+          <li class="has-submenu">
+            <a href="#">Debit Note</a>
+            <ul class="nested-submenu">
+              <li><a href="#">New Debit Note</a></li>
+              <li><a href="#">Manage Debit Notes</a></li>
+            </ul>
+          </li>
+    
+        </ul>
+      </li>
+    
+ <!-- Purchase -->
+  <li class="menu-item-with-submenu" (mouseenter)="activeSubMenu = 'purchase'" (mouseleave)="activeSubMenu = null">
+  <a href="#" (click)="toggleSubMenu('purchase'); $event.preventDefault()" class="menu-link">
+    <mat-icon class="icon-purchase">receipt</mat-icon> Purchase
+  </a>
+  <ul *ngIf="activeSubMenu === 'purchase'" class="submenu">
+
+    <!-- Purchase Bill -->
+    <li class="has-submenu">
+      <a href="#">Purchase Bill</a>
+      <ul class="nested-submenu">
+        <li><a href="#">New Purchase Bill</a></li>
+        <li><a href="#">Manage Purchase Bills</a></li>
+      </ul>
+    </li>
+  
+    <!-- Purchase Return -->
+    <li class="has-submenu">
+      <a href="#">Purchase Return</a>
+      <ul class="nested-submenu">
+        <li><a href="#">New Purchase Return</a></li>
+        <li><a href="#">Manage Purchase Returns</a></li>
+      </ul>
+    </li>
+  
+    <!-- Purchase Order -->
+    <li class="has-submenu">
+      <a href="#">Purchase Order</a>
+      <ul class="nested-submenu">
+        <li><a href="#">New Purchase Order</a></li>
+        <li><a href="#">Manage Purchase Orders</a></li>
+      </ul>
+    </li>
+  
+    <!-- Credit Note -->
+    <li class="has-submenu">
+      <a href="#">Credit Note</a>
+      <ul class="nested-submenu">
+        <li><a href="#">New Credit Note</a></li>
+        <li><a href="#">Manage Credit Notes</a></li>
+      </ul>
+    </li>
+  
+    <!-- Debit Note -->
+    <li class="has-submenu">
+      <a href="#">Debit Note</a>
+      <ul class="nested-submenu">
+        <li><a href="#">New Debit Note</a></li>
+        <li><a href="#">Manage Debit Notes</a></li>
+      </ul>
+    </li>
+  
+    <!-- Supplier -->
+    <li class="has-submenu">
+      <a href="#">Supplier</a>
+      <ul class="nested-submenu">
+        <li><a href="#">Add Supplier</a></li>
+        <li><a href="#">Manage Suppliers</a></li>
+      </ul>
+    </li>
+  
+  </ul>
+</li>
+
+<!-- Inventory -->
+<li class="menu-item-with-submenu" (mouseenter)="activeSubMenu = 'inventory'" (mouseleave)="activeSubMenu = null">
+  <a href="#" (click)="toggleSubMenu('inventory'); $event.preventDefault()" class="menu-link">
+    <mat-icon class="icon-inventory">inventory_2</mat-icon> Inventory
+  </a>
+  <ul *ngIf="activeSubMenu === 'inventory'" class="submenu">
+    <li><a href="#">Add Stock Adjustment</a></li>
+    <li><a href="#">Manage Stock Adjustment</a></li>
+    <li><a href="#">Physical Stock Consiliation</a></li>
+  </ul> 
+</li>
+
+
+<!-- Master -->
+<li class="menu-item-with-submenu" (mouseenter)="activeSubMenu = 'master'" (mouseleave)="activeSubMenu = null">
+    <a href="#" (click)="toggleSubMenu('master'); $event.preventDefault()" class="menu-link">
+    <mat-icon class="icon-master">settings</mat-icon> Master
+  </a>
+  <ul *ngIf="activeSubMenu === 'master'" class="submenu">
+    <li><a href="#">Add Product</a></li>
+    <li><a href="#">Add service</a></li>
+    <li><a href="#">Manage Items</a></li>
+    <li class="has-submenu">
+      <a href="#">Discount Schemes</a>
+      <ul class="nested-submenu">
+        <li><a href="#">Add Discount Scheme</a></li>
+        <li><a href="#">Manage Discount Schemes</a></li>
+      </ul>
+    </li>   
+     <li><a href="#">Add Receipe</a></li>
+     <li><a href="#">Manage Receipes</a></li>
+     <li><a href="#">Kitchen Master</a></li>
+     <li><a href="#">Table Master</a></li>
+     <li><a href="#">Brand Master</a></li>
+     <li><a href="#">Group Master</a></li>
+     <li><a href="#">Bank Master</a></li>
+     <li class="has-submenu">
+      <a href="#">Miscellaneous</a>
+      <ul class="nested-submenu">
+        <li><a href="#">Unit Master</a></li>
+        <li><a href="#">Expense Master</a></li>
+        <li><a href="#">Holiday Master</a></li>
+        <li><a href="#">Department Master</a></li>
+        <li><a href="#">Designation Master</a></li>
+        <li><a href="#">Location Master</a></li>
+      </ul>
+    </li>   
+  </ul>  
+</li>
+
+<!-- Manufacture -->
+<li class="menu-item-with-submenu" (mouseenter)="activeSubMenu = 'manufacture'" (mouseleave)="activeSubMenu = null">
+    <a href="#" (click)="toggleSubMenu('manufacture'); $event.preventDefault()" class="menu-link">
+    <mat-icon class="icon-manufacture">build</mat-icon> Manufacture
+  </a>
+  <ul *ngIf="activeSubMenu === 'manufacture'" class="submenu">
+    <li class="has-submenu">
+      <a href="#">Assembled Item</a>
+      <ul class="nested-submenu">
+        <li><a href="#">Add Assembled Item</a></li>
+        <li><a href="#">Manage Assembled Items</a></li>
+      </ul>
+    </li>
+  
+    <li class="has-submenu">
+      <a href="#">Bill of Material</a>
+      <ul class="nested-submenu">
+        <li><a href="#">Add Bill of Material</a></li>
+        <li><a href="#">Manage Bill of Materials</a></li>
+      </ul>
+    </li>
+  </ul>  
+</li>
+
+<!-- Accounts -->
+<li class="menu-item-with-submenu" (mouseenter)="activeSubMenu = 'accounts'" (mouseleave)="activeSubMenu = null">
+  <a href="#" (click)="toggleSubMenu('accounts'); $event.preventDefault()" class="menu-link">
+    <mat-icon class="icon-accounts">account_balance</mat-icon> Accounts
+  </a>
+  <ul *ngIf="activeSubMenu === 'accounts'" class="submenu">
+    <li><a href="#">Bank Account</a></li>
+    <li><a href="#">Loan Account</a></li>
+    <li><a href="#">Asset Account</a></li>
+    <li><a href="#">Capital Account</a></li>
+    <li><a href="#">Other Income Account</a></li>
+     <li><a href="#">Tax Payment</a></li>
+  </ul>   
+</li>
+
+<!-- Expense -->
+<li class="menu-item-with-submenu" (mouseenter)="activeSubMenu = 'expense'" (mouseleave)="activeSubMenu = null">
+  <a href="#" (click)="toggleSubMenu('expense'); $event.preventDefault()" class="menu-link">
+    <mat-icon class="icon-expense">money_off</mat-icon> Expense
+  </a>
+  <ul *ngIf="activeSubMenu === 'expense'" class="submenu">
+    <li class="has-submenu">
+      <a href="#">Indirect Expense</a>
+      <ul class="nested-submenu">
+        <li><a href="#">Add Expense</a></li>
+        <li><a href="#">Manage Expenses</a></li>
+      </ul>
+    </li>
+    <li class="has-submenu">
+      <a href="#">Other Expense</a>
+      <ul class="nested-submenu">
+        <li><a href="#">Add Other Expense</a></li>
+        <li><a href="#">Manage Other Expenses</a></li>
+      </ul>
+    </li>
+  </ul>  
+</li>
+
+<!-- Customer -->
+<li class="menu-item-with-submenu" (mouseenter)="activeSubMenu = 'customer'" (mouseleave)="activeSubMenu = null">
+  <a href="#" (click)="toggleSubMenu('customer'); $event.preventDefault()" class="menu-link">
+    <mat-icon class="icon-customer">group</mat-icon> Customer
+  </a>
+  <ul *ngIf="activeSubMenu === 'customer'" class="submenu">
+    <li><a href="#">Add Customer</a></li>
+    <li><a href="#">Manage Customers</a></li>
+    <li><a href="#">Add Customer Loan</a></li>
+    <li><a href="#">Manage Customer Loans</a></li>
+  </ul>   
+</li>
+
+<!-- Staff -->
+<li class="menu-item-with-submenu" (mouseenter)="activeSubMenu = 'staff'" (mouseleave)="activeSubMenu = null">
+  <a href="#" (click)="toggleSubMenu('staff'); $event.preventDefault()" class="menu-link">
+    <mat-icon class="icon-staff">badge</mat-icon> Staff
+  </a>
+  <ul *ngIf="activeSubMenu === 'staff'" class="submenu">
+    <li><a href="#">Add Staff</a></li>
+    <li><a href="#">Manage Staffs</a></li>
+  </ul>  
+</li>
+
+<!-- Reports -->
+<li class="menu-item-with-submenu" (mouseenter)="activeSubMenu = 'reports'" (mouseleave)="activeSubMenu = null">
+  <a href="#" (click)="toggleSubMenu('reports'); $event.preventDefault()" class="menu-link">
+    <mat-icon class="icon-reports">bar_chart</mat-icon> Reports
+  </a>
+  <ul *ngIf="activeSubMenu === 'reports'" class="submenu">
+          
+    <!-- Accounts with Nested Submenu -->
+    <li class="has-submenu">
+      <a href="#">Accounts</a>
+      <ul class="nested-submenu">
+        <li><a href="#">Cash Book</a></li>
+        <li><a href="#">Business Book</a></li>
+        <li><a href="#">Payment Paid</a></li>
+        <li><a href="#">Payment Received</a></li>
+        <li><a href="#">Daily Summary</a></li>
+        <li><a href="#">Input / Output Tax</a></li>
+        <li><a href="#">Profit & Loss Summary</a></li>
+        <li><a href="#">Chart of Accounts</a></li>
+        <li><a href="#">Balance Sheet</a></li>
+      </ul>
+    </li>
+
+    <!-- Inventory with Nested Submenu -->
+    <li class="has-submenu">
+      <a href="#">Inventory</a>
+      <ul class="nested-submenu">
+        <li><a href="#">Cash Book</a></li>
+        <li><a href="#">Business Book</a></li>
+        <li><a href="#">Payment Paid</a></li>
+        <li><a href="#">Payment Received</a></li>
+        <li><a href="#">Daily Summary</a></li>
+        <li><a href="#">Input / Output Tax</a></li>
+        <li><a href="#">Profit & Loss Summary</a></li>
+        <li><a href="#">Chart of Accounts</a></li>
+        <li><a href="#">Balance Sheet</a></li>
+      </ul>
+    </li>
+
+    <!-- Sales with Nested Submenu -->
+    <li class="has-submenu">
+      <a href="#">Sales</a>
+      <ul class="nested-submenu">
+        <li><a href="#">Cash Book</a></li>
+        <li><a href="#">Business Book</a></li>
+        <li><a href="#">Payment Paid</a></li>
+        <li><a href="#">Payment Received</a></li>
+        <li><a href="#">Daily Summary</a></li>
+        <li><a href="#">Input / Output Tax</a></li>
+        <li><a href="#">Profit & Loss Summary</a></li>
+        <li><a href="#">Chart of Accounts</a></li>
+        <li><a href="#">Balance Sheet</a></li>
+      </ul>
+    </li>
+
+    <!-- Customers Note with Nested Submenu -->
+    <li class="has-submenu">
+      <a href="#">Customers</a>
+      <ul class="nested-submenu">
+        <li><a href="#">Amount</a></li>
+        <li><a href="#">Account Balances</a></li>
+        <li><a href="#">Payment History</a></li>
+      </ul>
+    </li>
+
+    <!-- Purchases with Nested Submenu -->
+    <li class="has-submenu">
+      <a href="#">Purchases</a>
+      <ul class="nested-submenu">
+        <li><a href="#">Cash Book</a></li>
+        <li><a href="#">Business Book</a></li>
+        <li><a href="#">Payment Paid</a></li>
+        <li><a href="#">Payment Received</a></li>
+        <li><a href="#">Daily Summary</a></li>
+        <li><a href="#">Input / Output Tax</a></li>
+        <li><a href="#">Profit & Loss Summary</a></li>
+        <li><a href="#">Chart of Accounts</a></li>
+        <li><a href="#">Balance Sheet</a></li>
+      </ul>
+    </li>
+
+    <!-- Suppliers with Nested Submenu -->
+    <li class="has-submenu">
+      <a href="#">Suppliers</a>
+      <ul class="nested-submenu">
+        <li><a href="#">Account Balances</a></li>
+        <li><a href="#">Payment History</a></li>
+      </ul>
+    </li>
+
+    <!-- Expenses with Nested Submenu -->
+    <li class="has-submenu">
+      <a href="#">Expenses</a>
+      <ul class="nested-submenu">
+        <li><a href="#">Search Expenses</a></li>
+        <li><a href="#">Search Indirect Expenses</a></li>
+      </ul>
+    </li>
+
+    <!-- Staff with Nested Submenu -->
+    <li class="has-submenu">
+      <a href="#">Staff</a>
+      <ul class="nested-submenu">
+        <li><a href="#">Search Salary</a></li>
+        <li><a href="#">Commissions</a></li>
+        <li><a href="#">Search Attendance</a></li>
+        <li><a href="#">Payment History</a></li>
+      </ul>
+    </li>
+
+    <!-- TCS Note -->
+    <li class="has-submenu">
+      <a href="#">TCS</a>
+      <ul class="nested-submenu">
+        <li><a href="#">TCS Payables</a></li>
+        <li><a href="#">TCS Receivables</a></li>
+      </ul>
+    </li>
+
+    <!-- GSTR with Nested Submenu -->
+    <li class="has-submenu">
+      <a href="#">GSTR</a>
+      <ul class="nested-submenu">
+        <li><a href="#">GSTR-1</a></li>
+        <li><a href="#">GSTR-3B</a></li>
+        <li class="has-submenu">
+          <a href="#">Compatible</a>
+          <ul class="nested-submenu">
+            <li><a href="#">Sales</a></li>
+            <li><a href="#">Purchase</a></li>
+            <li><a href="#">Indirect Expenses</a></li>
+          </ul>
+        </li>   
+      </ul>
+    </li>
+  </ul>
+</li>
+
+<!-- Tools -->
+<li class="menu-item-with-submenu" (mouseenter)="activeSubMenu = 'tools'" (mouseleave)="activeSubMenu = null">
+  <a href="#" (click)="toggleSubMenu('tools'); $event.preventDefault()" class="menu-link">
+    <mat-icon class="icon-tools">build_circle</mat-icon> Tools
+  </a>
+  <ul *ngIf="activeSubMenu === 'tools'" class="submenu">
+    <li><a href="#">Add Reminder</a></li>
+    <li><a href="#">Send SMS</a></li>
+    <li><a href="#">GST Calculator</a></li>
+    <li><a href="#">Barcode Generator</a></li>
+    <li class="has-submenu">
+      <a href="#">Import Items / Customers</a>
+      <ul class="nested-submenu">
+        <li><a href="#">Items</a></li>
+        <li><a href="#">Customers</a></li>
+      </ul>
+    </li>   
+     <li><a href="#">Item Variant Creator</a></li>
+  </ul>  
+</li>
+
+<!-- Settings -->
+<li>
+  <a href="#" (click)="toggleSubMenu('settings'); $event.preventDefault()" class="menu-link">
+    <mat-icon class="icon-settings">settings_applications</mat-icon> Settings
+  </a>
+  <ul *ngIf="activeSubMenu === 'settings'" class="submenu">
+    <li><a href="#">Company Info</a></li>
+    <li><a href="#">Users</a></li>
+  </ul>
+</li>
+</ul>
+
+<div class="footer">
+<div id="clock">{{ time }}</div>
+<div>{{ today }}</div>
+</div>
+</div>
+
+</div>
