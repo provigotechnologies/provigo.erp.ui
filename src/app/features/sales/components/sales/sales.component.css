@@ -1,0 +1,400 @@
+.app-container {
+  display: flex;
+  background-color: #f7f7f7;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+}
+
+h3 {
+  color: #2c3e50;
+}
+
+form.invoice-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.section {
+  border: 1px solid #e0e0e0;
+  padding: 7px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.05);
+}
+
+.particulars-section input[type="text"]
+{
+  width: 120px;
+  font-size: 12px;
+}
+
+/* Reduce width of input/select */
+.particulars-section input[type="number"],
+.particulars-section select {
+  width: 100px;
+  font-size: 12px;
+}
+
+.particulars-section .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  column-gap: 2px;  /* ⬅️ reduce horizontal gap */
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); /* 👈 reduce 220px to 160px */
+  column-gap: 60px; /* 👈 only horizontal spacing */
+  row-gap: 10px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  font-size: 13px;
+  color: #333;
+  gap: 2px;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="number"],
+select {
+  border: 1px solid #ccc;
+  font-size: 13px;
+  margin-top: 2px;
+  height: 23px;
+  box-sizing: border-box;
+  width: 200px; /* 👈 Add this line to reduce width */
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 1px #007bff44;
+}
+
+.radio-group .radio-label {
+  font-weight: 500;
+  font-size: 12px;
+  color: #333;
+  min-width: 60px;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column; /* ⬅️ Stack vertically */
+  gap: 10px;
+}
+
+/* Avoid flex-column on radio labels */
+.radio-options label {
+  display: inline-flex;
+  flex-direction: row; /* ✅ This overrides the column */
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  color: #000;
+}
+
+.radio-options {
+  display: flex;
+  gap: 10px; /* ⬅️ Increased from 20px to 40px */
+}
+
+.item-tags {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+#desc {
+  width: 700px;  /* Increase width of Item Description */
+  height: 35px;
+  font-size: 13px;
+}
+
+#serial {
+  width: 100px;  /* Keep Serial No. narrow */
+  height: 26px;
+  font-size: 12px;
+}
+
+.item-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 5px;
+  font-size: 14px;
+  min-height: 200px; /* 👈 Ensures visible height when empty */
+  display: block;     /* Required for min-height to work on table */
+  overflow-x: auto;
+  background-color: rgb(254, 254, 227);
+}
+
+.item-table tbody {
+  min-height: 150px;
+  display: block;      /* Make tbody scrollable if needed */
+  width: 100%;
+}
+
+.item-table th,
+.item-table td {
+  border: 1px solid #ddd;
+  padding: 8px 10px;
+  text-align: center;
+}
+
+.item-table thead,
+.item-table tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed; /* Keep columns consistent */
+}
+
+.item-table thead {
+  background-color: #1a73e8;
+  font-weight: bold;
+  color: lavender;
+}
+
+.payment-info.total {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-right: 20px;
+  max-width: 250px; /* optional: to restrict width */
+  margin-left: 50px;
+}
+
+.payment-info.total .line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.row.checkbox-row {
+  display: flex;
+  align-items: center;
+  padding-bottom: 4px;              /* space between checkbox and label */
+  margin-left: 10px;
+  margin-top: 20px;   /* ⬅️ add vertical space between rows */
+  font-size: 14px;
+  color: #000;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between; /* 👈 Pushes left-icons and right-buttons to ends */
+  align-items: center;
+  background-color: #eeeeee;
+  position: sticky;
+  bottom: 0;
+  z-index: 100;
+}
+
+.left-icons {
+  display: flex;
+  gap: 12px;
+}
+
+.left-icons button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #333;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.left-icons button i {
+  color: #1669c1; /* 🔵 Default: blue for all icons */
+}
+
+/* 🔴 Only Restart icon red */
+.left-icons button[title="Reset all forms value"] i {
+  color: #f44336;
+}
+
+.left-icons button:hover {
+  background-color: #ddd;
+}
+
+.right-button {
+  display: flex;
+  gap: 15px;
+}
+
+.right-buttons .primary-btn {
+  margin-left: 10px;
+}
+
+.right-buttons .primary-btn:first-child {
+  margin-left: 0; /* No margin on the first button */
+}
+
+.primary-btn {
+  background-color: #1669c1;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.item-tags .primary-btn {
+  margin-left: 150px;
+  padding: 4px 10px;
+  font-size: 12px;
+  height: 30px;
+  background-color: green;
+}
+
+.primary-btn:hover {
+  opacity: 0.9;
+  background-color: #1a73e8;
+}
+
+
+.payment-tabs .tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.payment-tabs .tabs button {
+  padding: 4px 12px;
+  border: 1px solid #ccc;
+  background: #f8f8f8;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.payment-tabs .tabs button.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.rupee-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.symbol {
+  background-color: #007bff;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px 0 0 4px;
+  font-size: 13px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.rupee-amount input[type="number"] {
+  border-radius: 0 4px 4px 0;
+  border-left: none;
+  padding-left: 8px;
+}
+
+.below-table .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  column-gap: 20px;
+  row-gap: 10px;
+  margin-top: 2px;
+}
+
+.below-table textarea {
+  resize: vertical;
+  min-height: 60px;
+  width: 200px;
+}
+
+.custom-below-grid {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.left-side {
+  flex: 1;
+  min-width: 300px;
+}
+
+.right-side {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 60px;
+  gap: 10px;
+}
+
+.left-side .row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.left-side .row label {
+  display: flex;
+  margin-left: 10px;
+  gap: 6px;
+}
+
+.left-side .row input[type="number"],
+.left-side .row select {
+  width: 120px; /* 👈 Reduce width */
+  font-size: 12px;
+}
+
+.payment-info.total p {
+  font-weight: bold;
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .item-tags {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .right-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .right-buttons .primary-btn {
+    width: 100%;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+
