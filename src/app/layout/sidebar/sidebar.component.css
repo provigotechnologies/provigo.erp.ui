@@ -23,12 +23,6 @@
   display: none !important;
 }
 
-@media (max-width: 768px) {
-  .menu-toggle {
-    display: block;
-  }
-}
-
 /* Sidebar styles */
 .sidebar {
   width: 220px;
@@ -190,4 +184,9 @@ mat-icon {
   .has-submenu.active > a {
     background-color: #004a63;
   }
+
+  .menu-toggle {
+    display: block;
+  }
 }
+

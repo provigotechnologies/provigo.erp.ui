@@ -2,216 +2,193 @@
 <div class="app-container">
   <div class="main-content">
 
+    <!-- Invoice Info -->
     <form class="invoice-form">
+      <div class="section-container">
 
-      <!-- Invoice Info -->
-      <div class="section invoice-info">
+       <!-- Row 1 -->
+        <div class="form-row">
+        <label>
+          <span>Invoice No <span class="required">*</span></span>
+          <input type="text" />
+        </label>
+      
+        <label>
+          Invoice Date
+          <input type="date" />
+        </label>
 
-        <div class="grid">
-          <label>Invoice Type
-            <select>
-              <option>GST</option>
-              <option>Non-GST</option>
-            </select>
-          </label>
+        <label>
+          Invoice Type
+          <select>
+            <option>GST</option>
+            <option>Non-GST</option>
+          </select>
+        </label>
+  
+        <label>
+          <span>Place of Supply <span class="required">*</span></span>
+          <select>
+            <option>Tamil Nadu</option>
+            <option>Kerala</option>
+          </select>
+        </label>  
 
-          <label>Invoice No.
-            <input type="text" value="GST-034" />
-          </label>
-
-          <label>Date
-            <input type="date" />
-          </label>
-
-          <label>Place of Supply
-            <select>
-              <option>Tamil Nadu</option>
-              <option>Kerala</option>
-            </select>
-          </label>
-
-          <label>Due Date
-            <input type="date" />
-          </label>
-
-          <div class="radio-group">
-            <label class="radio-label">Bill To</label>
-            <div class="radio-options">
-              <label><input type="radio" name="billTo" checked /> Cash A/c</label>
-              <label><input type="radio" name="billTo" /> Customer A/c</label>
-            </div>
-          </div>
-          
-          
-          <label>Customer
-            <input type="text" value="CASH" />
-          </label>
-
-          <label>Contact No *<input type="text" /></label>
-          <label>Address *<input type="text" /></label>
-          <label>Customer GSTIN *<input type="text" /></label>
-          
-        </div>
-      </div>
-
-      <!-- Particulars Section -->
-      <div class="section particulars-section">
-
-        <div class="grid">
-          <!-- Inputs for items -->
-          <label>Serial No.<input type="text" /></label>
-          <label>Item Name *<input type="text" /></label>
-          <label>Unit *<select><option>PCS</option><option>KG</option></select></label>
-          <label>Quantity *<input type="number" /></label>
-          <label>Sale Price *<input type="number" /></label>
-          <label>M.R.P.<input type="number" /></label>
-          <label>Disc (%)<input type="number" /></label>
-          <label>Tax%<select></select></label>
-          <label>Cess%<select></select></label>
-          <label>Amount<input type="number" /></label>
+        <label>
+          Due Date
+          <input type="date" />
+        </label>
         </div>
 
-        <!-- Item Tag -->
-        <div class="item-tags">
+        <!-- Row 2 -->
+        <div class="form-row">
+        <div class="radio-group">
+          <label class="radio-label">Bill To</label>
           <div class="radio-options">
-          <label><input type="radio" name="tagcode" checked /> Item Tag</label>
-          <label><input type="radio" name="tagcode" /> Item Code</label>
-          <input id="desc" type="text" placeholder="Item Description" />
-          <input id="serial" type="text" placeholder="Serial No." />
-          <button type="add" class="primary-btn">
-            <i class="material-icons">add</i> Add
-          </button>       
-         </div>
+            <label><input type="radio" name="billTo" checked /> Cash A/c</label>
+            <label><input type="radio" name="billTo" /> Customer A/c</label>
+          </div>
         </div>
 
-        <!-- Table -->
-        <table class="item-table">
-          <thead>
-            <tr>
-              <th>S.No</th><th>Item Name</th><th>Tag</th><th>Quantity</th><th>Unit</th><th>Unit Price</th><th>Disc (%)</th><th>Tax (%)</th><th>Cess (%)</th><th>Net Price</th><th>Amount Before Tax</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td><td>Demo Item</td><td>T-101</td><td>2</td><td>PCS</td><td>100</td><td>5</td><td>12</td><td>1</td><td>190</td><td>180</td>
-            </tr>
-          </tbody>
-        </table>
+        <label>
+          <span>Customer <span class="required">*</span></span>
+          <input type="text" value="CASH" />
+        </label>
+        
+        <label>
+          Contact No 
+          <input type="text" />
+        </label>
+
+        <label>
+          Address
+          <input type="text" />
+        </label>
+
+        <label>
+          Customer GSTIN
+          <input type="text" />
+        </label>
+        </div>
       </div>
-      
-      <!-- After the item-table -->
-      <div class=" below-table">
-        <div class="grid custom-below-grid">
-          
-          <!-- Left Column -->
-          <div class="left-side">
-            <div class="row">
-              <label>Total Quantity
-                <input type="number" value="0" style="background-color: #ffffcc; font-weight: bold;" />
-              </label>
-              <label>Sold By
-                <select>
-                  <option>Select</option>
-                  <option>Staff A</option>
-                </select>
-              </label>
-            </div>
-          
-           <!-- Checkbox section -->
-            <div class="row checkbox-row">
-              <input type="checkbox" id="discount" />
-              <label for="discount">Add'l discount</label>
-            </div>
 
-            <div class="row checkbox-row">
-              <input type="checkbox" id="reference" />
-              <label for="reference">Add reference</label>
-            </div>
+      <div class="section-container">
 
-            <div class="row checkbox-row">
-              <input type="checkbox" id="shipping" />
-              <label for="shipping">Add shipping</label>
-            </div>
+        <!-- Particulars Section -->
+        <div class="section particulars-section">
 
-          </div>
-          
-      
-          <!-- Right Column -->
-          <div class="right-side">
-            <label>Delivery Terms
-              <textarea rows="3"></textarea>
-            </label>
-      
-            <label>Remarks (Private Use)
-              <textarea rows="3"></textarea>
-            </label>
-          </div>
-      
-          <!-- Payment Tabs Section -->
-          <div class="payment-info">
-            <!-- <div class="tabs">
-              <button [class.active]="activeTab === 1" (click)="activeTab = 1">Payment 1</button>
-              <button [class.active]="activeTab === 2" (click)="activeTab = 2">Payment 2</button>
-            </div> -->
-      
-            <div *ngIf="activeTab === 1 || activeTab === 2" class="grid">
-              <label>Date <input type="date" [value]="todayDate" /></label>
-              <label>Mode
-                <select>
-                  <option>Cash</option>
-                  <option>Card</option>
-                  <option>UPI</option>
-                  <option>Bank</option>
-                </select>
+           <!-- 🔹 Row 1: Horizontal Input Fields -->
+            <div class="input-row">
+              <label>Serial No.
+                <input type="text" style="background-color: #fefeb5;" />
               </label>
-              <label>Txn. ID <input type="text" /></label>
-              <label class="rupee-amount">Amount *
+              <label class="stacked-label">
+                <span>Item Name<span class="required">*</span></span>
+                <input type="text" />
+              </label>
+              <label class="stacked-label">
+                <span>Unit<span class="required">*</span></span>
+                <select><option>PCS</option><option>KG</option></select>
+              </label>
+              <label class="stacked-label">
+                <span>Quantity<span class="required">*</span></span>
+                <input type="text" />
+              </label>
+              <label class="stacked-label">
+                <span>Sale Price<span class="required">*</span></span>
+               <div class="rupee-wrapper">
+                 <input type="text" />
+                </div>
+              </label>
+              <label>M.R.P.
                 <div class="rupee-wrapper">
-                  <span class="symbol">₹</span>
-                  <input type="number" value="0" />
+                  <input type="text" />
+                </div>
+              </label>
+              <label>Disc (%)
+                <div class="rupee-wrapper">
+                  <input type="text" />
+                </div>
+              </label>
+              <label>Tax%
+                <select></select>
+              </label>
+              <label>Cess%
+                <select></select>
+              </label>
+              <label>Amount
+                <div class="rupee-wrapper">
+                  <input type="text" />
                 </div>
               </label>
             </div>
-          </div>
-      
-          <div class="payment-info total">
-            <div class="line">
-              <span>Sub Total</span>
-              <strong>₹ 0.00</strong>
+
+          <!-- 🔹 Row 2: Item Tag + Add -->
+          <div class="item-tags">
+
+            <div class="radio-group">
+              <div class="radio-options">
+                <label><input type="radio" name="tag" checked />Item Tag</label>
+                <label><input type="radio" name="tag" />Item Code</label>
+              </div>
             </div>
-            <div class="line">
-              <span>TOTAL AMOUNT</span>
-              <strong>₹ 0.00</strong>
+
+            <div class="item-fields">
+              <input id="desc" type="text" class="desc-input" placeholder="Item Description" />
+              <input id="serial" type="text" placeholder="Serial No." />
+              <button type="button" class="primary-btn">
+                <i class="material-icons">add</i> Add
+              </button>
             </div>
+            
+          </div>    
+
+          <div class="table-container">
+            <table class="item-table">
+              <thead>
+                <tr>
+                  <th>S.No</th>
+                  <th>Item Name</th>
+                  <th>Tag</th>
+                  <th>Quantity</th>
+                  <th>Unit</th>
+                  <th>Unit Price</th>
+                  <th>Disc (%)</th>
+                  <th>Tax (%)</th>
+                  <th>Cess (%)</th>
+                  <th>Net Price</th>
+                  <th>Amount Before Tax</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of itemList; let i = index">
+                  <td>{{i + 1}}</td>
+                  <td>{{item.itemName}}</td>
+                  <td>{{item.tag}}</td>
+                  <td>{{item.qty}}</td>
+                  <td>{{item.unit}}</td>
+                  <td>{{item.unitPrice}}</td>
+                  <td>{{item.discount}}</td>
+                  <td>{{item.tax}}</td>
+                  <td>{{item.cess}}</td>
+                  <td>{{item.netPrice}}</td>
+                  <td>{{item.amtBeforeTax}}</td>
+                  <td>
+                    <button (click)="editItem(i)">✏️</button>
+                    <button (click)="removeItem(i)">🗑️</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          
+
         </div>
-      </div>      
 
-<!-- Buttons -->
-<div class="actions">
-  <div class="left-icons">
-    <button title="Reminder"><i class="material-icons">notifications</i></button>
-    <button title="Calculator"><i class="material-icons">calculate</i></button>
-    <button title="Add details related to shipping"><i class="material-icons">local_shipping</i></button>
-    <button title="Payment history"><i class="material-icons">payments</i></button>
-    <button title="Hold invoice"><i class="material-icons">pan_tool</i></button>
-    <button title="Search invoices on hold"><i class="material-icons">search</i></button>
-    <button title="Reset all forms value"><i class="material-icons">refresh</i></button>
-  </div>
-  <div class="right-button">
-
-  <button type="submit" class="primary-btn">
-    <i class="material-icons">save</i> Save
-  </button>
-  
-  <button type="button" class="primary-btn">
-    <i class="material-icons">print</i> Save and Print
-  </button>
-</div>
-</div>
-
+      </div>
 
     </form>
   </div>
 </div>
+
+
+
