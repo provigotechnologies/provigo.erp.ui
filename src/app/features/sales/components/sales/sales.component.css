@@ -1,13 +1,26 @@
 .app-container {
-  padding: 0px;
-  font-family: 'Poppins', sans-serif;
+  display: flex;
+  width: 100%;
+}
+
+/* Sidebar will be flex child if inside .app-container */
+.main-content {
+  flex: 1;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+.invoice-form {
+  display: flex;
+  flex-direction: column;
 }
 
 .section-container {
   border: 1px solid #ccc;
-  padding: 6px 0 6px 10px;
-  margin: 2px 0 0 0;
-  background-color: #fff;
+  padding: 10px;
+  margin: 10px 0 0 0;
+  background-color: #f9f9f9;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 }
 
@@ -31,14 +44,15 @@ input[type="date"],
 select {
   padding: 4px;
   font-size: 13px;
-  border: 1px solid #ccc;
+  border: 2px solid #ccc;
   width: 100%; /* ✅ Fluid width */
-  max-width: 250px; /* ✅ Prevent being too wide on large screens */
-  box-sizing: border-box;}
+  max-width: 200px; /* ✅ Prevent being too wide on large screens */
+  box-sizing: border-box;
+}
 
 /* 🔵 Blue Radio Button */
-input[type="radio"] {
-  accent-color: #1669c1;
+input[type="radio"], [type="checkbox"] {
+  accent-color: #2980f2;
 }
 
 .required {
@@ -72,13 +86,21 @@ input[type="radio"] {
   margin-bottom: 0px;
 }
 
+input[type="text"]{
+  border: none;
+  border-bottom: 2px solid #ccc;
+  padding: 4px 8px;
+  transition: border-bottom 0.2s;
+}
+
 input[type="text"]:focus,
 input[type="date"]:focus,
-select:focus {
+textarea:focus {
   outline: none;
-  border-bottom: 2px solid #2980f2;     /* Blue border on focus */
-  background-color: #fff;        /* Keep background white */
+  border-bottom: 2px solid #2980f2;
+  background-color: #fff;
 }
+
 
 input[type="text"],
 input[type="date"],
@@ -129,6 +151,10 @@ select {
   box-sizing: border-box;
 }
 
+#itemname{
+   width: 200px;
+}
+
 /* Currency symbol alignment */
 .rupee-wrapper {
   width: 100%;
@@ -169,8 +195,8 @@ select {
 }
 
 .primary-btn {
-  background-color: #1669c1;
-  color: white;
+  background-color: #2980f2;
+  color: #efefea;
   padding: 6px 14px;
   border: none;
   font-size: 13px;
@@ -218,7 +244,7 @@ select {
 .item-table th {
   background-color: #2980f2;
   font-weight: 600;
-  color: rgb(239, 239, 234);
+  color: #efefea;
 }
 
 .item-table tbody {
@@ -245,7 +271,7 @@ select {
 @media (max-width: 768px) {
   .input-row {
     flex-direction: column;
-    gap: 6px;
+    gap: 15px;
     width: 100%;
     padding-left: 0;
     margin-left: 0;
@@ -258,6 +284,10 @@ select {
     box-sizing: border-box;
   }
 
+  #itemname{
+    width: 100%;
+ }
+ 
   .input-row input,
   .input-row select {
     width: 100%;
@@ -265,7 +295,7 @@ select {
   }
 
   .rupee-wrapper {
-    width: 100%;
+    width: 200px;
   }
 
   .rupee-wrapper input {
@@ -287,7 +317,397 @@ select {
     align-items: stretch;
   }
 
+  .item-fields .primary-btn{
+    align-items: stretch;
+   justify-content: center;
+  }
+
   .item-fields input#desc {
     order: -1; /* Make Item Description come first */
+  }
+}
+
+
+/**/
+.footer-columns {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.payment-tabs {
+  flex: none;
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* reduced overall gap */
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  align-items: flex-start; /* 👈 aligns buttons to top-left */
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tabs button {
+  width: 80px;
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  border: 1px solid #ccc;
+  background-color: white;
+  cursor: pointer;
+}
+
+.tabs button:hover{
+   background-color: #1c77ef;
+   color: #f9f9f9;
+}
+
+.invoice-footer-grid {
+  background: #f9f9f9;
+  padding: 15px;
+  font-size: 0.85rem;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  row-gap: 15px;
+  column-gap: 12px;
+  align-items: center;
+}
+
+.label {
+  font-weight: 500;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+}
+
+.input-pair input[type="text"] {
+  padding: 4px 6px;
+  font-size: 0.85rem;
+  border: 1px solid #ccc;
+  width: 113px; /* 👈 Customize width as needed */
+  min-width: unset; /* override min-width if needed */
+}
+
+.input-pair select {
+  width: 113px;
+}
+
+.input-pair {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.highlight {
+  background-color: #ffffcc;
+}
+
+.inline-form input[type="text"],
+.inline-form input[type="date"],
+.inline-form input[type="number"],
+.inline-form select {
+  width: 150px;  /* 👈 reduce this value as needed */
+  padding: 4px 6px;
+  font-size: 0.85rem;
+}
+
+.inline-form {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  row-gap: 10px;       /* 👈 Adds gap between each row */
+  column-gap: 8px;
+  align-items: center;
+  width: 100%;
+  padding: 0 6px 8px 8px;
+}
+
+.inline-form label {
+  font-size: 0.82rem;
+  font-weight: 500;
+  white-space: nowrap;
+  margin-bottom: 0px;
+}
+
+.inline-form input,
+.inline-form select {
+  width: 100%;
+  font-size: 0.82rem;
+  padding: 6px 8px;
+  border: 1px solid #ccc;
+  background-color: white;
+}
+
+.amount-input {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.amount-input input {
+  padding: 3px 5px;
+}
+
+
+
+/*amount-summary */
+.amount-summary {
+  max-width: 250px;
+  background-color: #f8f8f8;
+  font-size: 13px;
+  padding: 0px;
+  border-radius: 6px;
+  margin-left: 10px;
+}
+
+.amount-summary .row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  column-gap: 30px;
+}
+
+.amount-summary .value {
+  width: 100px;
+  text-align: right;
+}
+
+.amount-summary .total {
+  font-size: 15px;
+  margin-top: 8px;
+}
+
+
+
+@media (max-width: 768px) {
+  .footer-columns {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .payment-tabs {
+    width: 90%;           /* 👈 instead of 100% */
+    max-width: 270px;     /* 👈 optional: limit width on mobile */
+    padding: 8px;
+    gap: 4px;
+  }
+
+  .inline-form {
+    grid-template-columns: 1fr;
+    row-gap: 4px;
+  }
+
+  .inline-form label {
+    margin-top: 4px;
+  }
+
+  .inline-form input,
+  .inline-form select {
+    width: 100% !important;
+    padding: 3px 5px;
+  }
+
+  .textarea-row {
+    display: flex;
+    flex-wrap: wrap; /* mobile responsive */
+  }
+  
+  .textarea textarea {
+    width: 100%;
+  }
+
+  .input-pair {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .input-pair input,
+  .input-pair select {
+    width: 100%;
+  }
+
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1250px) {
+  .footer-columns {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .grid-container {
+    flex: 1 1 55%;
+  }
+
+  .textarea-column {
+    flex: 1 1 22%;
+    max-width: 100%;
+  }
+
+  .payment-tabs {
+    width: 90%;           /* 👈 instead of 100% */
+    max-width: 270px;     /* 👈 optional: limit width on mobile */
+    padding: 8px;
+    gap: 4px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .footer-columns {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* reuse the same styles as 768px block */
+  .inline-form,
+  .input-pair,
+  .textarea-row,
+  .textarea textarea,
+  .payment-tabs {
+    width: 100% !important;
+  }
+
+  .payment-tabs {
+    width: 95%;             /* 🔽 reduce width */
+    max-width: 260px;       /* 🔽 tighter fit */
+    padding: 10px;
+    gap: 4px;
+  }
+
+  .inline-form {
+    grid-template-columns: 1fr;
+    row-gap: 6px;
+  }
+
+  .inline-form label {
+    margin-top: 4px;
+  }
+
+  .inline-form input,
+  .inline-form select {
+    width: 100% !important;
+    padding: 3px 5px;
+  }
+}
+
+@media (max-width: 1250px) {
+  .footer-columns {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .payment-tabs {
+    width: 90%;           /* 👈 instead of 100% */
+    max-width: 270px;     /* 👈 optional: limit width on mobile */
+    padding: 8px;
+    gap: 4px;
+  }
+
+  .textarea-row {
+    flex-direction: column;
+  }
+
+  .textarea textarea {
+    width: 100%;
+  }
+}
+
+
+/**/
+.actions-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #e0e0e0;
+  position: sticky;
+  bottom: 0;
+  z-index: 100;
+  gap: 10px;
+}
+
+/* Left icons styling */
+.left-icons {
+  display: flex;
+  gap: 12px;
+}
+.left-icons button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #1c77ef;
+  cursor: pointer;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+}
+.left-icons button:hover {
+  background-color: #c9c5c5;
+}
+
+/* Center Balance */
+.balance {
+  flex: 1;
+  text-align: end;
+  color: #8b8989;
+  margin-right: 10px;
+}
+
+/* Right buttons styling */
+.right-buttons {
+  display: flex;
+  gap: 10px;
+}
+.primary-btn {
+  background-color: #1c77ef;
+  color: #efefea;
+  border: none;
+  padding: 8px 12px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+.primary-btn:hover {
+  background-color: #1565c0;
+}
+
+
+
+/* 🔽 Responsive tweaks for small screens */
+@media (max-width: 600px) {
+  .actions-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+  }
+
+  .left-icons,
+  .right-buttons {
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .balance {
+    text-align: center;
+    margin-right: 0;
+    font-size: 13px;
+  }
+
+  .primary-btn {
+    flex: 1 1 auto;
+    justify-content: center;
   }
 }
