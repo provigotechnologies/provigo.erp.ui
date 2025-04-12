@@ -75,14 +75,15 @@
 
       <div class="section-container">
 
-        <!-- Particulars Section -->
-        <div class="section particulars-section">
-
-           <!-- 🔹 Row 1: Horizontal Input Fields -->
+        <!-- 🔹 Row 1: Horizontal Input Fields -->
             <div class="input-row">
-              <label>Serial No.
-                <input type="text" style="background-color: #fefeb5;" />
-              </label> 
+              <label class="stacked-label">
+                <span>Serial No<span class="required">*</span></span>
+               <div class="rupee-wrapper"  style="display: flex; align-items: center;">
+                <span style="padding: 6px; background-color: #007bff; height: 13px; color: white;">₹</span>
+                 <input type="text" />
+                </div>
+              </label>
 
               <label class="stacked-label" id="itemname">
                 <span>Item Name<span class="required">*</span></span>
@@ -153,7 +154,7 @@
             <div class="item-fields">
               <input id="desc" type="text" class="desc-input" placeholder="Item Description" />
               <input id="serial" type="text" placeholder="Serial No." />
-              <button type="button" class="primary-btn">
+              <button type="button" class="add-btn">
                 <i class="material-icons">add</i> Add
               </button>
             </div>
@@ -252,8 +253,6 @@
             </table>
           </div>
 
-        </div>
-
       </div>
      
       <div class="invoice-footer-grid">
@@ -262,7 +261,7 @@
         <div class="grid-container">
           <div class="group">
             <label>Total Quantity</label>
-            <input type="text" value="0" readonly class="highlight" />
+            <input type="text" value="0" readonly class="highlight" style="width: 120px;" />
           </div>
           <div class="group">
             <label>Sold By</label>
@@ -322,8 +321,8 @@
         
         <div class="group payment-tabs">
           <div class="tabs">
-            <button>Payment</button>
-            <button>Payment</button>
+            <button>Payment1</button>
+            <button>Payment2</button>
             <button>Reward</button>
           </div>
           <div class="inline-form">
@@ -336,7 +335,7 @@
             <label>               
                <span>Amount<span class="required">*</span></span>
             </label>
-            <input type="text" value="0" readonly />
+            <input type="text" />
           </div>
         </div>
 

@@ -1,14 +1,16 @@
 <div class="layout-container">
-    <!-- <app-header></app-header> -->
   
-    <div class="layout-body">
-      <app-sidebar></app-sidebar>
-  
-      <main class="layout-content">
-        <router-outlet></router-outlet>
-      </main>
-    </div>
-  
-    <!-- <app-footer></app-footer> -->
+  <!-- 🔼 Place header at the top -->
+  <app-header></app-header>
+
+  <div class="layout-body">
+    <app-sidebar></app-sidebar>
+
+    <main class="layout-content">
+      <router-outlet></router-outlet>
+    </main>
   </div>
-  
+
+  <!-- Optional footer -->
+  <!-- <app-footer></app-footer> -->
+</div>

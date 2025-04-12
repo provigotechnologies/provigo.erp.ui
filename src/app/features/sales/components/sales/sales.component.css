@@ -20,7 +20,7 @@
   border: 1px solid #ccc;
   padding: 10px;
   margin: 10px 0 0 0;
-  background-color: #f9f9f9;
+  background-color: #f4f7fa;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 }
 
@@ -93,14 +93,15 @@ input[type="text"]{
   transition: border-bottom 0.2s;
 }
 
+/* Focus effect for input fields */
 input[type="text"]:focus,
 input[type="date"]:focus,
-textarea:focus {
+textarea:focus,
+select:focus { /* Added select:focus */
   outline: none;
   border-bottom: 2px solid #2980f2;
   background-color: #fff;
 }
-
 
 input[type="text"],
 input[type="date"],
@@ -124,6 +125,8 @@ select {
   }
 }
 
+
+
 /**/
 .input-row {
   display: flex;
@@ -143,13 +146,13 @@ select {
   margin-right: 8px;
 }
 
-.input-row input,
+/* .input-row input,
 .input-row select {
   width: 100%;
   padding: 4px 6px;
   font-size: 13px;
   box-sizing: border-box;
-}
+} */
 
 #itemname{
    width: 200px;
@@ -185,26 +188,6 @@ select {
   align-items: center;
   gap: 10px;
   flex-wrap: nowrap;
-}
-
-.item-fields input {
-  width: 100%;
-  padding: 4px;
-  font-size: 13px;
-  min-width: 160px;
-}
-
-.primary-btn {
-  background-color: #2980f2;
-  color: #efefea;
-  padding: 6px 14px;
-  border: none;
-  font-size: 13px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  justify-content: center;
 }
 
 .primary-btn i.material-icons {
@@ -266,6 +249,20 @@ select {
   margin: 0; /* remove default spacing */
 }
 
+.add-btn {
+  background-color: #1c77ef;
+  color: #efefea;
+  border: none;
+  padding: 4px 8px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.add-btn:hover {
+  background-color: #1565c0;
+}
+
 
 /* Responsive: full width fields on small screens */
 @media (max-width: 768px) {
@@ -313,17 +310,24 @@ select {
   .item-fields {
     flex-direction: column;
     width: 100%;
-    gap: 8px;
+    gap: 10px;
     align-items: stretch;
   }
 
   .item-fields .primary-btn{
+    width: 200px;
     align-items: stretch;
    justify-content: center;
   }
 
   .item-fields input#desc {
     order: -1; /* Make Item Description come first */
+  }
+
+  .add-btn {
+    flex: 1 1 auto;
+    justify-content: center;
+    width: 200px;
   }
 }
 
@@ -337,12 +341,13 @@ select {
 
 .payment-tabs {
   flex: none;
-  width: 240px;
-  display: flex;
+  min-width: 270px;  /* 👈 Set a minimum width */
+  max-width: 270px;  /* 👈 Set a fixed width */
+  width: 270px !important;  display: flex;
   flex-direction: column;
   gap: 12px; /* reduced overall gap */
   border: 1px solid #ccc;
-  background-color: #f9f9f9;
+  background-color: #f4f7fa;
   align-items: flex-start; /* 👈 aligns buttons to top-left */
 }
 
@@ -366,7 +371,7 @@ select {
 }
 
 .invoice-footer-grid {
-  background: #f9f9f9;
+  background: #f4f7fa;
   padding: 15px;
   font-size: 0.85rem;
 }
@@ -394,12 +399,26 @@ select {
   padding: 4px 6px;
   font-size: 0.85rem;
   border: 1px solid #ccc;
-  width: 113px; /* 👈 Customize width as needed */
+  width: 100px; /* 👈 Customize width as needed */
   min-width: unset; /* override min-width if needed */
 }
 
+.input-pair input[type="text"]{
+  border: none;
+  border-bottom: 2px solid #ccc;
+  padding: 4px 8px;
+  transition: border-bottom 0.2s;
+}
+
+/* Focus effect for input fields with placeholder */
+.input-pair input[type="text"]:focus {
+  outline: none;
+  border-bottom: 2px solid #2980f2;
+  background-color: #fff;
+}
+
 .input-pair select {
-  width: 113px;
+  width: 100px;
 }
 
 .input-pair {
@@ -423,28 +442,28 @@ select {
 
 .inline-form {
   display: grid;
-  grid-template-columns: auto 1fr;
-  row-gap: 10px;       /* 👈 Adds gap between each row */
+  grid-template-columns: 60px 1fr; /* 👈 Controls label width */
+  row-gap: 10px;
   column-gap: 8px;
   align-items: center;
   width: 100%;
   padding: 0 6px 8px 8px;
+  box-sizing: border-box;
 }
 
 .inline-form label {
   font-size: 0.82rem;
   font-weight: 500;
-  white-space: nowrap;
-  margin-bottom: 0px;
+  white-space: nowrap;  /* Prevent label wrapping */
+  margin-bottom: 0;
 }
 
 .inline-form input,
 .inline-form select {
-  width: 100%;
-  font-size: 0.82rem;
+  width: 100% !important;
+  min-width: 0;  font-size: 0.82rem;
   padding: 6px 8px;
-  border: 1px solid #ccc;
-  background-color: white;
+  box-sizing: border-box;
 }
 
 .amount-input {
@@ -457,12 +476,10 @@ select {
   padding: 3px 5px;
 }
 
-
-
 /*amount-summary */
 .amount-summary {
   max-width: 250px;
-  background-color: #f8f8f8;
+  background-color: #f4f7fa;
   font-size: 13px;
   padding: 0px;
   border-radius: 6px;
@@ -491,19 +508,25 @@ select {
 @media (max-width: 768px) {
   .footer-columns {
     flex-direction: column;
-    gap: 16px;
+    gap: 10px;
   }
 
   .payment-tabs {
-    width: 90%;           /* 👈 instead of 100% */
-    max-width: 270px;     /* 👈 optional: limit width on mobile */
-    padding: 8px;
-    gap: 4px;
+    width: 80%;
+    max-width: 200px; /* 👈 Reduce max-width */
+    padding: 6px 8px; /* 👈 Reduce inner padding */
+    gap: 6px;         /* Optional: less vertical gap */
+  }
+
+  .tabs button {
+    width: 72px;      /* 👈 Slightly smaller buttons */
+    padding: 3px 6px;
+    font-size: 0.75rem;
   }
 
   .inline-form {
     grid-template-columns: 1fr;
-    row-gap: 4px;
+    row-gap: 2px;
   }
 
   .inline-form label {
@@ -512,7 +535,7 @@ select {
 
   .inline-form input,
   .inline-form select {
-    width: 100% !important;
+    width: 100%;
     padding: 3px 5px;
   }
 
@@ -556,10 +579,9 @@ select {
   }
 
   .payment-tabs {
-    width: 90%;           /* 👈 instead of 100% */
-    max-width: 270px;     /* 👈 optional: limit width on mobile */
-    padding: 8px;
-    gap: 4px;
+    width: 270px !important;
+    max-width: 270px !important;
+    min-width: 270px !important;
   }
 }
 
@@ -579,8 +601,8 @@ select {
   }
 
   .payment-tabs {
-    width: 95%;             /* 🔽 reduce width */
-    max-width: 260px;       /* 🔽 tighter fit */
+    width: 95%;
+    max-width: 260px;
     padding: 10px;
     gap: 4px;
   }
@@ -601,7 +623,7 @@ select {
   }
 }
 
-@media (max-width: 1250px) {
+@media (max-width: 1400px) {
   .footer-columns {
     flex-direction: column;
     gap: 12px;
@@ -682,7 +704,6 @@ select {
 .primary-btn:hover {
   background-color: #1565c0;
 }
-
 
 
 /* 🔽 Responsive tweaks for small screens */
