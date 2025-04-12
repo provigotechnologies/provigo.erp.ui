@@ -2,16 +2,31 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
+  overflow: hidden; /* Prevent full-page scroll */
 }
 
 .layout-body {
   display: flex;
   flex: 1;
   overflow: hidden;
+  height: 100%; /* 👈 Add this */
 }
 
 .layout-content {
   flex: 1;
   overflow-y: auto;
   padding: 16px;
+  height: 100%; /* 👈 Already there, keep it */
+  box-sizing: border-box;
 }
+
+.layout-footer {
+  height: 36px;
+  background-color: #fff;
+  text-align: center;
+  font-size: 0.9rem;
+  padding: 8px 0;
+  color: #fff;
+  flex-shrink: 0;
+}
+
