@@ -1,10 +1,7 @@
+// Rename this to avoid conflict with interface
 export class BankName {
-    bankNameId!: number;
-    bank!: string;
-  
-    constructor(bankNameId: number, bank: string) {
-      this.bankNameId = bankNameId;
-      this.bank = bank;
-    }
-  }
-  
+  constructor(
+    public bankNameId: number,
+    public bank: string
+  ) {}
+}

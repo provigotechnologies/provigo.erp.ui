@@ -13,6 +13,11 @@ export const routes: Routes = [
           import('./features/dashboard/components/dashboard/dashboard.component').then(m => m.DashboardComponent),
       },
       {
+        path: 'master',
+        loadComponent: () =>
+          import('./features/master/components/bankname/bankname.component').then(m => m.BankNameComponent),
+      },
+      {
         path: 'sales',
         loadComponent: () =>
           import('./features/sales/components/sales/sales.component').then(m => m.SalesComponent),
