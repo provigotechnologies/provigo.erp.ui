@@ -54,7 +54,7 @@
   display: flex;
   align-items: center;
   color: white;
-  padding: 5px 10px; /* reduce from default 10px+ */
+  padding: 4px 10px; /* reduce from default 10px+ */
   text-decoration: none;
   gap: 8px;
   transition: background 0.2s;
@@ -67,7 +67,6 @@
 /* Submenu styles for desktop */
 .submenu {
   position: absolute;
-  top: 50px;
   left: 220px;
   width: 220px;
   background-color: #003147;
@@ -136,7 +135,7 @@ mat-icon {
 }
 
 .sale-spacing {
-  margin-top: 20px;
+  margin-top: 8px;
 }
 
 /* Responsive behavior for mobile */

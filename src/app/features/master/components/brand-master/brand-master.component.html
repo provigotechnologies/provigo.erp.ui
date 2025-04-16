@@ -1,9 +1,9 @@
 <div class="bank-form">
   <!-- Table Name Input -->
-  <label for="bankName">
+  <label for="brandName">
     <span>Bank Name <span class="required">*</span></span>
   </label>
-  <input type="text" id="bankName" name="bankName" [(ngModel)]="bankName" (input)="error = ''" />
+  <input type="text" id="brandName" name="brandName" [(ngModel)]="brandName" (input)="error = ''" />
 
   <!-- Error Message -->
   <div *ngIf="error" class="error-message">{{ error }}</div>
@@ -20,7 +20,7 @@
         <thead>
           <tr>
             <th>S.No</th>
-            <th>Bank Name</th>
+            <th>Brand Name</th>
             <th>Actions</th>
           </tr>
         </thead>

@@ -1,0 +1,111 @@
+<div class="group-form">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="groupName">Group Name <span class="required">*</span></label>
+        <input type="text" id="groupName" name="groupName" />
+      </div>
+  
+      <div class="form-group">
+        <label for="hsnCode">HSN/ SAC Code</label>
+        <input type="text" id="hsnCode" name="bankhsnCodeName" />
+      </div>
+    </div>
+  
+    <div class="form-group gst-wrapper">
+        <label for="gst">GST Rates</label>
+      
+        <div class="gst-two-rows">
+          <div class="gst-inline">
+            <div class="gst-box">
+              <span>CGST</span>
+              <input type="text" />
+              <span>%</span>
+            </div>
+            <div class="gst-box">
+              <span>Cess</span>
+              <input type="text" />
+              <span>%</span>
+            </div>
+          </div>
+      
+          <div class="gst-below">
+            <div class="gst-box">
+              <span>SGST</span>
+              <input type="text" />
+              <span>%</span>
+            </div>
+            <div class="gst-box">
+              <span>IGST</span>
+              <input type="text" />
+              <span>%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+  
+    <div class="button-group">
+      <button type="button">Add</button>
+      <button type="button">Cancel</button>
+    </div>
+
+    <div class="table-wrapper">
+        <table class="bank-table">
+          <thead>
+            <tr>
+              <th>S.No</th>
+              <th>Group Name</th>   
+              <th>HSN/ SAC Code</th>
+              <th>CGST (%)</th>     
+              <th>SGST (%)</th>
+              <th>IGST (%)</th>
+              <th>Cess (%)</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Test</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>
+                <button>✏️</button>
+                <button>🗑️</button>
+              </td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Test</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>
+                <button>✏️</button>
+                <button>🗑️</button>
+              </td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Test</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>
+                <button>✏️</button>
+                <button>🗑️</button>
+              </td>
+            </tr>
+            <!-- More rows will go here -->
+          </tbody>
+        </table>
+      </div>
+  </div>
+  

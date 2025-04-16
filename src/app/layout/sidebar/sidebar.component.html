@@ -178,13 +178,13 @@
         </ul>
       </li>
 
-      <li class="menu-item-with-submenu sale-spacing"
+   <li class="menu-item-with-submenu"
     [class.active]="activeSubMenu === 'master'"
     (mouseenter)="!isMobile && (activeSubMenu = 'master')"
     (mouseleave)="!isMobile && (activeSubMenu = null)">
 
-  <a href="#" (click)="toggleSubMenu('sale'); $event.preventDefault()">
-    <mat-icon class="icon-sale">shopping_cart</mat-icon> Master
+  <a href="#" (click)="toggleSubMenu('master'); $event.preventDefault()">
+    <mat-icon class="icon-master">shopping_cart</mat-icon> Master
   </a>
 
   <!-- Submenu (No nested submenu) -->
@@ -193,15 +193,15 @@
     [class.mobile-visible]="isMobile && activeSubMenu === 'master'"
     *ngIf="activeSubMenu === 'master'">
 
-    <li><a [routerLink]="['/master']">Bank Name</a></li>
-    <li><a [routerLink]="['']">Bank Master</a></li>
-    <li><a [routerLink]="['']">States</a></li>
-    <li><a [routerLink]="['']">Product Master</a></li>
-    <li><a [routerLink]="['']">Brand Master</a></li>
-    <li><a [routerLink]="['']">Group Master</a></li>
+    <li><a [routerLink]="['/master/bankname']">Bank Name</a></li>
+    <li><a [routerLink]="['/master/bank-master']">Bank Master</a></li>
+    <li><a [routerLink]="['/master/table-master']">Table Master</a></li>
+    <li><a [routerLink]="['/master/unit-master']">Unit Master</a></li>
+    <li><a [routerLink]="['/master/brand-master']">Brand Master</a></li>
+    <li><a [routerLink]="['/master/group-master']">Group Master</a></li>    
   
   </ul>
-</li>
+   </li>
 
     </ul>
 

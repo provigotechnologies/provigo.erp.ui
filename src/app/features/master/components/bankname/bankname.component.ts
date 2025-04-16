@@ -1,38 +1,41 @@
 import { Component } from '@angular/core';
-import { BanknameLocalService } from '../../../../core/local/bankname-local.service';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common'; // <-- Add this import
 
 @Component({
   selector: 'app-bankname',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],  // <-- Add CommonModule here
   templateUrl: './bankname.component.html',
-  styleUrls: ['./bankname.component.css']
+  styleUrl: './bankname.component.css'
 })
 export class BankNameComponent {
-  bankName: string = '';
+  bankName = '';
+  error = '';
+  bankList: string[] = [];
 
-  constructor(private bankService: BanknameLocalService) {}
-
-  async addBank() {
-    if (this.bankName.trim()) {
-      await this.bankService.addBankName({
-        bank: this.bankName.trim()  // Trim the input value before adding
-      });
-      console.log('Bank added:', this.bankName);
-      this.bankName = '';  // Clear input after adding
-    } else {
-      alert('Please enter a bank name.');
+  addTable() {
+    if (!this.bankName.trim()) {
+      this.error = 'Bank name is required';
+      return;
     }
+
+    this.bankList.push(this.bankName.trim());
+    this.bankName = '';
+    this.error = '';
   }
 
   cancel() {
-    console.log('Cancel clicked');
     this.bankName = '';
+    this.error = '';
   }
 
-  showAllBanks() {
-    const banks = this.bankService.getAllBankNames();
-    console.log('📋 All Banks:', banks);
+  editTable(index: number) {
+    this.bankName = this.bankList[index];
+    this.bankList.splice(index, 1);
+  }
+
+  deleteTable(index: number) {
+    this.bankList.splice(index, 1);
   }
 }
