@@ -44,6 +44,41 @@ export const routes: Routes = [
             path: 'unit-master',
             loadComponent: () =>
               import('./features/master/components/unit-master/unit-master.component').then(m => m.UnitMasterComponent),
+          },
+          {
+            path: 'department-master',
+            loadComponent: () =>
+              import('./features/master/components/department-master/department-master.component').then(m => m.DepartmentMasterComponent),
+          },
+           {
+            path: 'designation-master',
+            loadComponent: () =>
+              import('./features/master/components/designation-master/designation-master.component').then(m => m.DesignationMasterComponent),
+          },
+          {
+            path: 'expense-master',
+            loadComponent: () =>
+              import('./features/master/components/expense-master/expense-master.component').then(m => m.ExpenseMasterComponent),
+          },
+          {
+            path: 'holiday-master',
+            loadComponent: () =>
+              import('./features/master/components/holiday-master/holiday-master.component').then(m => m.HolidayMasterComponent),
+          },
+          {
+            path: 'location-master',
+            loadComponent: () =>
+              import('./features/master/components/location-master/location-master.component').then(m => m.LocationMasterComponent),
+          },
+          {
+            path: 'product-master',
+            loadComponent: () =>
+              import('./features/master/components/product-master/product-master.component').then(m => m.ProductMasterComponent),
+          },
+          {
+            path: 'service-master',
+            loadComponent: () =>
+              import('./features/master/components/service-master/service-master.component').then(m => m.ServiceMasterComponent),
           }
         ]
       },
