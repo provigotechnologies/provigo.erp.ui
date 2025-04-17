@@ -1,13 +1,16 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common'; // <-- Add this import
+import { CommonModule } from '@angular/common'; 
 
 @Component({
   selector: 'app-brand-master',
   standalone: true,
-  imports: [FormsModule, CommonModule],  // <-- Add CommonModule here
+  imports: [FormsModule, CommonModule],  
   templateUrl: './brand-master.component.html',
-  styleUrl: './brand-master.component.css'
+  styleUrls: [
+    './brand-master.component.css',
+    '../style.css' // ✅ this is the correct relative path
+  ]
 })
 export class BrandMasterComponent {
   brandName = '';

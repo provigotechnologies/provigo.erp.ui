@@ -18,16 +18,16 @@
 
 .section-container {
   border: 1px solid #ccc;
-  padding: 10px;
-  margin: 10px 0 0 0;
+  padding: 8px 10px;  /* Reduced padding for less space */
+  margin: 2px 0;      /* Reduced margin to decrease space above and below */
   background-color: #f4f7fa;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 }
 
 .form-row {
   display: grid;
-  gap: 20px;
-  margin-bottom: 8px; /* Reduced from 16px */
+  gap: 15px;  /* Reduced gap to bring items closer together */
+  margin-bottom: 6px; /* Reduced from 8px for less spacing between rows */
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 

@@ -7,7 +7,10 @@ import { CommonModule } from '@angular/common'; // <-- Add this import
   standalone: true,
   imports: [FormsModule, CommonModule],  // <-- Add CommonModule here
   templateUrl: './bankname.component.html',
-  styleUrl: './bankname.component.css'
+  styleUrls: [
+    './bankname.component.css',
+    '../style.css' 
+  ]
 })
 export class BankNameComponent {
   bankName = '';

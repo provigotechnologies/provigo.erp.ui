@@ -1,0 +1,153 @@
+
+<!-- Main Layout Container -->
+<div class="product-main-container">
+  
+<!-- Heading Section -->
+<div class="page-header-wrapper">
+  <label class="page-heading">Add New Service</label>
+</div>
+    <!-- Left Side -->
+    <div class="product-container">
+      <!-- Left Container 1 -->
+      <div class="product-inner-container">
+        <!-- Category -->
+        <div class="form-row">
+          <label for="category">Group <span class="required">*</span></label>
+          <select id="category">
+            <option value="">Select Group</option>
+            <option value="cat1">Cat 1</option>
+            <option value="cat2">Cat 2</option>
+          </select>
+        </div>
+  
+        <!-- Barcode -->
+        <div class="form-row">
+          <label for="itemcode">Item Code</label>
+          <input type="text" id="itemcode" />
+        </div>
+  
+        <!-- Product Name -->
+        <div class="form-row">
+          <label for="productName">Service Name <span class="required">*</span></label>
+          <input type="text" id="productName" />
+        </div>
+  
+        <!-- Price -->
+        <div class="form-row">
+          <label for="printname">Print Name</label>
+          <input type="text" id="printname" />
+        </div>
+      </div>
+  
+      <!-- Left Container 2 -->
+      <div class="product-inner-container">
+        <!-- Sale Price -->
+        <div class="form-row">
+            <label>Service Charge <span class="required">*</span></label>
+            <div class="input-flex-wrapper"> <!-- NEW WRAPPER -->
+              <div class="rupee-wrapper">
+                <span class="currency-symbol">₹</span>
+                <input type="text" />
+              </div>    
+            </div>          
+        </div>
+  
+        <!-- Min Sale Price -->
+        <div class="form-row">
+            <label>Min.Service Charge<span class="required">*</span></label>
+            <div class="input-flex-wrapper"> <!-- NEW WRAPPER -->
+              <div class="rupee-wrapper">
+                <span class="currency-symbol">₹</span>
+                <input type="text" />
+              </div>    
+            </div>         
+        </div>
+    </div>
+  
+      <!-- Left Container 3 -->
+      <div class="product-inner-container">
+        <div class="form-row">
+          <label> Sale Discount</label>
+          <div class="input-flex-wrapper"> <!-- NEW WRAPPER -->
+            <div class="rupee-wrapper">
+              <input type="text" />
+              <span class="currency-symbol">₹</span>
+            </div>    
+          </div>        
+      </div>
+      </div>
+
+    </div>
+  
+    <!-- Right Side -->
+    <div class="product-container">
+      <!-- Right Container 1 -->
+      <div class="product-inner-container">
+        <div class="form-row">
+          <label>HSN/ SAC Code</label>
+          <input type="text" />
+        </div>
+        <div class="form-row">
+          <div class="gst-container">
+            <label class="gst-label">GST Rates 
+              <span class="required">*</span></label>
+            <div class="gst-fields">
+              <div class="gst-row">
+                <div class="input-flex-wrapper"> <!-- NEW WRAPPER -->
+                  <div class="rupee-wrapper">
+                    <span class="currency-symbol">CGST</span>
+                    <input type="text" />
+                    <span class="currency-symbol">%</span>
+                  </div>    
+                </div>  
+                <div class="input-flex-wrapper"> <!-- NEW WRAPPER -->
+                  <div class="rupee-wrapper">
+                    <span class="currency-symbol">Cess</span>
+                    <input type="text" />
+                    <span class="currency-symbol">%</span>
+                  </div>    
+                </div>  
+                </div>
+              <div class="gst-row">
+                <div class="input-flex-wrapper"> <!-- NEW WRAPPER -->
+                  <div class="rupee-wrapper">
+                    <span class="currency-symbol">SGST</span>
+                    <input type="text" />
+                    <span class="currency-symbol">%</span>
+                  </div>    
+                </div>  
+                <div class="input-flex-wrapper"> <!-- NEW WRAPPER -->
+                  <div class="rupee-wrapper">
+                    <span class="currency-symbol">IGST</span>
+                    <input type="text" />
+                    <span class="currency-symbol">%</span>
+                  </div>    
+                </div>  
+                </div>
+            </div>
+          </div>
+        </div>            
+      </div>
+  
+      <!-- Right Container 2 -->
+      <div class="product-inner-container">   
+        <div class="form-row">
+          <label>Service Description</label>
+          <textarea rows="3"></textarea>
+        </div>
+            <!-- First Row - 3 Checkboxes -->
+            <div class="form-row checkbox-row">
+              <label><input type="checkbox" /> <span class="checkmark"></span> Print Description (Invoice)</label>
+            </div>
+     </div>
+  
+
+    <div class="right-buttons">
+      <button class="primary-btn">
+         <i class="material-icons">save</i> Save
+      </button>
+   </div>
+
+  </div>
+
+  </div>

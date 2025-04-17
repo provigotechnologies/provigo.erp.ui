@@ -3,67 +3,122 @@
   background-color: #e0e6ed;
   font-size: 0.85rem;
   display: flex;
-  justify-content: space-between;  /* Spread out the left and right sections */
-  align-items: center; /* Center vertically */
-  padding: 0 20px;  /* Horizontal padding */
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
   color: #333;
-  height: 60px;  /* Fixed footer height */
-  margin: 0;  /* Ensure no margin */
-  box-sizing: border-box; /* Ensures padding is included in height */
+  height: auto;  /* Allow height to adjust based on content */
+  margin: 0;
+  box-sizing: border-box;
 }
 
 .footer-left {
   display: flex;
-  gap: 30px;  /* Adjusted gap for better spacing */
-  align-items: center;  /* Ensure buttons are vertically aligned */
-  height: 100%;  /* Ensure the left section fills the footer height */
+  gap: 30px;
+  align-items: center;
+  height: auto;  /* Allow height to adjust */
+  flex-wrap: wrap;  /* Ensure the content wraps on smaller screens */
 }
 
 .icon-button {
   display: flex;
-  align-items: center;  /* Center vertically */
-  justify-content: center; /* Optional: centers horizontally if needed */
+  align-items: center;
+  justify-content: center;
   gap: 8px;
   background: none;
   border: none;
   cursor: pointer;
   transition: background-color 0.2s ease, transform 0.2s ease;
-  height: 100%;
   padding: 18px 12px;
   margin: 0;
-  line-height: 1; /* IMPORTANT: reduce any extra line-height */
+  line-height: 1;
 }
 
 .icon-button i {
-  font-size: 20px;  /* Adjust icon size */
+  font-size: 20px;
   color: blue;
- 
 }
 
 .icon-button span {
-  font-size: 0.85rem;  /* Label font size */
+  font-size: 0.85rem;
   color: #333;
-  padding-top: -5px;
 }
 
 .icon-button:hover {
-  background-color: rgba(0, 0, 0, 0.1);  /* Hover background */
-  transform: scale(1.05);  /* Scale effect on hover */
+  background-color: rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
 }
 
 .footer-right {
   display: flex;
   align-items: center;
-  gap: 12px;  /* Adjusted gap for better spacing */
+  gap: 12px;
 }
 
 .footer-right i {
-  font-size: 20px;  /* Adjust icon size */
+  font-size: 20px;
   color: blue;
   cursor: pointer;
   transition: color 0.2s ease;
 }
 
 .footer-right i:hover {
-  color: #007BFF; /* Highlight color on hover */
+  color: #007BFF;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 16px;
+    height: auto;
+  }
+
+  .footer-left {
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+  }
+
+  .icon-button {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 8px 4px;
+  }
+
+  .icon-button i {
+    font-size: 22px;
+  }
+
+  .icon-button span {
+    font-size: 0.78rem;
+    padding-top: 2px;
+  }
+
+  .footer-right {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .footer-right i {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .icon-button {
+    width: 48%;
+  }
+
+  .footer-left {
+    gap: 8px;
+  }
+
+  .footer-right {
+    gap: 10px;
+  }
 }

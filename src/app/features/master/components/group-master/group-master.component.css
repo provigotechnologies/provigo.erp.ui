@@ -132,7 +132,7 @@
     padding: 0 10px;
     font-size: 14px;
     outline: none;
-    width: 60px;
+    width: 57px;
     border-bottom: 2px solid #ccc;
   }  
   
@@ -298,7 +298,7 @@
     }
  
     .gst-box input {
-      width: 80px;
+      width: 57px;
     }
   
     .button-group {

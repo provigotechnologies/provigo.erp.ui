@@ -7,7 +7,10 @@ import { CommonModule } from '@angular/common'; // <-- Add this import
   standalone: true,
   imports: [FormsModule, CommonModule],  // <-- Add CommonModule here
   templateUrl: './unit-master.component.html',
-  styleUrl: './unit-master.component.css'
+  styleUrls: [
+    './unit-master.component.css',
+    '../style.css' 
+  ]
 })
 export class UnitMasterComponent {
   unitName = '';

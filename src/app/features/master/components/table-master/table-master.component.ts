@@ -7,7 +7,10 @@ import { CommonModule } from '@angular/common'; // <-- Add this import
   standalone: true,
   imports: [FormsModule, CommonModule],  // <-- Add CommonModule here
   templateUrl: './table-master.component.html',
-  styleUrl: './table-master.component.css'
+  styleUrls: [
+    './table-master.component.css',
+    '../style.css' 
+  ]
 })
 export class TableMasterComponent {
   tableName = '';

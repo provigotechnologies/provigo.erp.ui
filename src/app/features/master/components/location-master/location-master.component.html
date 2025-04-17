@@ -1,0 +1,57 @@
+<div class="bank-form">
+    <!-- Table Name Input -->
+    <label for="locationName">
+      <span>Location Name <span class="required">*</span></span>
+    </label>
+    <input type="text" id="locationName" name="locationName" [(ngModel)]="locationName" (input)="error = ''" />
+  
+    <!-- Error Message -->
+    <div *ngIf="error" class="error-message">{{ error }}</div>
+  
+    <!-- Buttons -->
+    <div class="button-group">
+      <button type="button" (click)="addTable()">Add</button>
+      <button type="button" (click)="cancel()">Cancel</button>
+    </div>
+  
+     <!-- 🔽 Added Table Section -->
+     <div class="table-wrapper">
+        <table class="bank-table">
+          <thead>
+            <tr>
+              <th>S.No</th>
+              <th>Location Name</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td></td>
+              <td>
+                <button>✏️</button>
+                <button>🗑️</button>
+              </td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td></td>
+              <td>
+                <button>✏️</button>
+                <button>🗑️</button>
+              </td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td></td>
+              <td>
+                <button>✏️</button>
+                <button>🗑️</button>
+              </td>
+            </tr>
+            <!-- More rows will go here -->
+          </tbody>
+        </table>
+      </div>
+  </div>
+  
