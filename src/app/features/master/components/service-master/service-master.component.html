@@ -70,8 +70,8 @@
           <label> Sale Discount</label>
           <div class="input-flex-wrapper"> <!-- NEW WRAPPER -->
             <div class="rupee-wrapper">
-              <input type="text" />
               <span class="currency-symbol">₹</span>
+              <input type="text" />
             </div>    
           </div>        
       </div>
@@ -135,10 +135,13 @@
           <label>Service Description</label>
           <textarea rows="3"></textarea>
         </div>
-            <!-- First Row - 3 Checkboxes -->
-            <div class="form-row checkbox-row">
-              <label><input type="checkbox" /> <span class="checkmark"></span> Print Description (Invoice)</label>
-            </div>
+         <!-- First Row - 3 Checkboxes -->
+         <div class="form-row checkbox-row">
+          <div class="checkbox-label-wrapper">
+            <input type="checkbox" id="printDescription" />
+            <label for="printDescription">Print Description (Invoice)</label>
+          </div>
+        </div>        
      </div>
   
 

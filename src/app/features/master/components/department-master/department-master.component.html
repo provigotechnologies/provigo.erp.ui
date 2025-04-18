@@ -1,4 +1,9 @@
+
 <div class="bank-form">
+
+  <div class="page-header-wrapper">
+    <label class="page-heading">Add New Department</label>
+  </div>
     <!-- Table Name Input -->
     <label for="departmentName">
       <span>Department Name <span class="required">*</span></span>
@@ -8,10 +13,10 @@
     <!-- Error Message -->
     <div *ngIf="error" class="error-message">{{ error }}</div>
   
-    <!-- Buttons -->
-    <div class="button-group">
-      <button type="button" (click)="addTable()">Add</button>
-      <button type="button" (click)="cancel()">Cancel</button>
+     <!-- Buttons -->
+     <div class="button-group">
+      <button class="primary-btn btn-add" type="button" (click)="addTable()">Add</button>
+      <button class="primary-btn btn-cancel" type="button" (click)="cancel()">Cancel</button>
     </div>
   
      <!-- 🔽 Added Table Section -->

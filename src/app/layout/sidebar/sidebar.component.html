@@ -1,3 +1,5 @@
+
+
 <div class="sidebar-container">
 
   <div class="main-content">
@@ -20,7 +22,7 @@
           (mouseleave)="!isMobile && (activeSubMenu = null)">
         
         <a href="#" (click)="toggleSubMenu('sale'); $event.preventDefault()">
-          <mat-icon class="icon-sale">shopping_cart</mat-icon> Sale
+         <mat-icon class="icon-sale">receipt_long</mat-icon> Sale
         </a>
 
         <!-- First-level submenu -->
@@ -163,7 +165,7 @@
              (mouseleave)="!isMobile && (activeNestedSubMenu = null)"
              (click)="isMobile && toggleNestedSubMenu('debit-note')">
 
-             <a href="#">Credit Note</a>
+             <a href="#">Cebit Note</a>
 
              <ul
                *ngIf="activeNestedSubMenu === 'debit-note'"
@@ -178,83 +180,236 @@
         </ul>
       </li>
 
-   <li class="menu-item-with-submenu"
-    [class.active]="activeSubMenu === 'master'"
-    (mouseenter)="!isMobile && (activeSubMenu = 'master')"
-    (mouseleave)="!isMobile && (activeSubMenu = null)">
+      <!-- Purchase with Submenu -->
+       <li class="menu-item-with-submenu sale-spacing"
+          [class.active]="activeSubMenu === 'purchase'"
+          (mouseenter)="!isMobile && (activeSubMenu = 'purchase')"
+          (mouseleave)="!isMobile && (activeSubMenu = null)">
+        
+        <a href="#" (click)="toggleSubMenu('purchase'); $event.preventDefault()">
+          <mat-icon class="icon-purchase">inventory_2</mat-icon> Purchase
+        </a>
 
-    <a href="#" (click)="toggleSubMenu('master'); $event.preventDefault()">
-      <mat-icon class="icon-master">shopping_cart</mat-icon> Master
-    </a>
+        <!-- First-level submenu -->
+        <ul
+          [class.submenu]="!isMobile"
+          [class.mobile-visible]="isMobile && activeSubMenu === 'purchase'"
+          *ngIf="activeSubMenu === 'purchase'">
 
-  <!-- Submenu (No nested submenu) -->
-  <ul
-    [class.submenu]="!isMobile"
-    [class.mobile-visible]="isMobile && activeSubMenu === 'master'"
-    *ngIf="activeSubMenu === 'master'">
-    
-     <li class="has-submenu"
-        [class.active]="activeNestedSubMenu === 'invoice'"
-        (mouseenter)="!isMobile && (activeNestedSubMenu = 'invoice')"
-        (mouseleave)="!isMobile && (activeNestedSubMenu = null)"
-        (click)="isMobile && toggleNestedSubMenu('invoice')">
+          <!-- Invoice with Nested Submenu -->
+          <li class="has-submenu"
+            [class.active]="activeNestedSubMenu === 'invoice'"
+            (mouseenter)="!isMobile && (activeNestedSubMenu = 'invoice')"
+            (mouseleave)="!isMobile && (activeNestedSubMenu = null)"
+            (click)="isMobile && toggleNestedSubMenu('invoice')">
 
-         <a href="#">Product Master</a>
+            <a href="#">Purchase Bill</a>
 
-         <ul
-           *ngIf="activeNestedSubMenu === 'invoice'"
-           [class.nested-submenu]="!isMobile"
-           [class.mobile-visible]="isMobile">
-           <li><a [routerLink]="['/master/product-master']">Add Product</a></li> 
-           <li><a [routerLink]="['/master/service-master']">Add Service</a></li> 
-           <li><a [routerLink]="['']">Manage Items</a></li>
+           <ul
+              *ngIf="activeNestedSubMenu === 'invoice'"
+              [class.nested-submenu]="!isMobile"
+              [class.mobile-visible]="isMobile">
+              <li><a [routerLink]="['/sales']">Add Purchase Bill</a></li>
+              <li><a [routerLink]="">Manage Purchase Bill</a></li>
+            </ul>
+          </li>
+
+           <!-- Sale Return with Nested Submenu -->
+           <li class="has-submenu"
+              [class.active]="activeNestedSubMenu === 'sale-return'"
+              (mouseenter)="!isMobile && (activeNestedSubMenu = 'sale-return')"
+              (mouseleave)="!isMobile && (activeNestedSubMenu = null)"
+              (click)="isMobile && toggleNestedSubMenu('sale-return')">
+
+              <a href="#">Purchase Return</a>
+
+              <ul
+                *ngIf="activeNestedSubMenu === 'sale-return'"
+                [class.nested-submenu]="!isMobile"
+                [class.mobile-visible]="isMobile">
+                <li><a [routerLink]="">New Purchase Return</a></li>
+                <li><a [routerLink]="">Manage Purchase Returns</a></li>
+              </ul>
+            </li>
+
+            <!-- Purchase Order with Nested Submenu -->
+            <li class="has-submenu"
+              [class.active]="activeNestedSubMenu === 'sale-order'"
+              (mouseenter)="!isMobile && (activeNestedSubMenu = 'sale-order')"
+              (mouseleave)="!isMobile && (activeNestedSubMenu = null)"
+              (click)="isMobile && toggleNestedSubMenu('sale-order')">
+
+              <a href="#">Purchase Order</a>
+
+              <ul
+                *ngIf="activeNestedSubMenu === 'sale-order'"
+                [class.nested-submenu]="!isMobile"
+                [class.mobile-visible]="isMobile">
+                <li><a [routerLink]="">New Purchase Order</a></li>
+                <li><a [routerLink]="">Manage Purchase Orders</a></li>
+              </ul>
+            </li>
+
+            <!-- Credit Note with Nested Submenu -->
+            <li class="has-submenu"
+              [class.active]="activeNestedSubMenu === 'credit-note'"
+              (mouseenter)="!isMobile && (activeNestedSubMenu = 'credit-note')"
+              (mouseleave)="!isMobile && (activeNestedSubMenu = null)"
+              (click)="isMobile && toggleNestedSubMenu('credit-note')">
+
+              <a href="#">Credit Note</a>
+
+              <ul
+                *ngIf="activeNestedSubMenu === 'credit-note'"
+                [class.nested-submenu]="!isMobile"
+                [class.mobile-visible]="isMobile">
+                <li><a [routerLink]="">New Credit Note</a></li>
+                <li><a [routerLink]="">Manage Credit Notes</a></li>
+              </ul>
+            </li>
+
+             <!-- Debit Note with Nested Submenu -->
+             <li class="has-submenu"
+             [class.active]="activeNestedSubMenu === 'debit-note'"
+             (mouseenter)="!isMobile && (activeNestedSubMenu = 'debit-note')"
+             (mouseleave)="!isMobile && (activeNestedSubMenu = null)"
+             (click)="isMobile && toggleNestedSubMenu('debit-note')">
+
+             <a href="#">Debit Note</a>
+
+             <ul
+               *ngIf="activeNestedSubMenu === 'debit-note'"
+               [class.nested-submenu]="!isMobile"
+               [class.mobile-visible]="isMobile">
+               <li><a [routerLink]="">New Debit Note</a></li>
+               <li><a [routerLink]="">Manage Debit Notes</a></li>
+             </ul>
+           </li>
+
+               <!-- Supplierwith Nested Submenu -->
+               <li class="has-submenu"
+               [class.active]="activeNestedSubMenu === 'debit-note'"
+               (mouseenter)="!isMobile && (activeNestedSubMenu = 'debit-note')"
+               (mouseleave)="!isMobile && (activeNestedSubMenu = null)"
+               (click)="isMobile && toggleNestedSubMenu('debit-note')">
+  
+               <a href="#">Supplier</a>
+  
+               <ul
+                 *ngIf="activeNestedSubMenu === 'debit-note'"
+                 [class.nested-submenu]="!isMobile"
+                 [class.mobile-visible]="isMobile">
+                 <li><a [routerLink]="">Add Suppliere</a></li>
+                 <li><a [routerLink]="">Manage Suppliers</a></li>
+               </ul>
+             </li>
+
+          <!-- You can repeat the same structure for other menus like Quotation, Delivery Note, etc. -->
+        </ul>
+      </li>
+
+       <!-- Inventory with Submenu -->
+       <li class="menu-item-with-submenu"
+       [class.active]="activeSubMenu === 'inventory'"
+       (mouseenter)="!isMobile && (activeSubMenu = 'inventory')"
+       (mouseleave)="!isMobile && (activeSubMenu = null)">
+
+       <a href="#" (click)="toggleSubMenu('inventory'); $event.preventDefault()" style="margin-top: 8px;">
+        <mat-icon class="icon-inventory">warehouse</mat-icon> Inventory
+      </a>
+
+        <!-- Submenu (No nested submenu) -->
+        <ul
+          [class.submenu]="!isMobile"
+          [class.mobile-visible]="isMobile && activeSubMenu === 'inventory'"
+          *ngIf="activeSubMenu === 'inventory'">
+ 
+          <li><a [routerLink]="">Add Stock Adjustment</a></li>
+          <li><a [routerLink]="">Manage Stock Adjustment</a></li>
+          <li><a [routerLink]="">Physical Stock Reconciliation</a></li>         
          </ul>
-       </li>
-       <li class="has-submenu"
-          [class.active]="activeNestedSubMenu === 'invoice'"
+
+      </li>
+      
+       <!-- Master with Submenu -->
+      <li class="menu-item-with-submenu"
+        [class.active]="activeSubMenu === 'master'"
+        (mouseenter)="!isMobile && (activeSubMenu = 'master')"
+        (mouseleave)="!isMobile && (activeSubMenu = null)">
+
+        <a href="#" (click)="toggleSubMenu('master'); $event.preventDefault()" style="margin-top: 8px;">
+          <mat-icon class="icon-master">table_chart</mat-icon> Master
+        </a>
+
+         <!-- Submenu (No nested submenu) -->
+         <ul
+           [class.submenu]="!isMobile"
+           [class.mobile-visible]="isMobile && activeSubMenu === 'master'"
+           *ngIf="activeSubMenu === 'master'">
+  
+           <li class="has-submenu"
+           [class.active]="activeNestedSubMenu === 'invoice'"
            (mouseenter)="!isMobile && (activeNestedSubMenu = 'invoice')"
            (mouseleave)="!isMobile && (activeNestedSubMenu = null)"
            (click)="isMobile && toggleNestedSubMenu('invoice')">
 
-           <a href="#">Discount Schemes</a>
+           <a href="#">Product Master</a>
 
-            <ul
-              *ngIf="activeNestedSubMenu === 'invoice'"
-              [class.nested-submenu]="!isMobile"
-              [class.mobile-visible]="isMobile">
-              <li><a [routerLink]="['']">Add Discount Scheme</a></li> 
-              <li><a [routerLink]="['r']">Manage Discount Schemes</a></li>
-            </ul>
-      </li>
-    <li><a [routerLink]="['/master/table-master']">Table Master</a></li>
-    <li><a [routerLink]="['/master/bankname']">Bank Name</a></li>
-    <li><a [routerLink]="['/master/bank-master']">Bank Master</a></li>
-    <li><a [routerLink]="['/master/brand-master']">Brand Master</a></li>
-    <li><a [routerLink]="['/master/group-master']">Group Master</a></li>    
-    <li><a [routerLink]="['/master/table-master']">Table Master</a></li>
-    <li class="has-submenu"
-    [class.active]="activeNestedSubMenu === 'invoice'"
-    (mouseenter)="!isMobile && (activeNestedSubMenu = 'invoice')"
-    (mouseleave)="!isMobile && (activeNestedSubMenu = null)"
-    (click)="isMobile && toggleNestedSubMenu('invoice')">
+          <ul
+             *ngIf="activeNestedSubMenu === 'invoice'"
+             [class.nested-submenu]="!isMobile"
+             [class.mobile-visible]="isMobile">
+             <li><a [routerLink]="['/master/product-master']">Add Product</a></li>
+             <li><a [routerLink]="['/master/service-master']">Add Service</a></li>
+             <li><a [routerLink]="['/master/manage-items']">Manage Items</a></li>
+           </ul>
+           </li>
+           <li class="has-submenu"
+           [class.active]="activeNestedSubMenu === 'invoice'"
+           (mouseenter)="!isMobile && (activeNestedSubMenu = 'invoice')"
+           (mouseleave)="!isMobile && (activeNestedSubMenu = null)"
+           (click)="isMobile && toggleNestedSubMenu('invoice')">
 
-    <a href="#">Miscellaneous</a>
+           <a href="#">Discount Scheme</a>
 
-       <ul
-         *ngIf="activeNestedSubMenu === 'invoice'"
-         [class.nested-submenu]="!isMobile"
-         [class.mobile-visible]="isMobile">
-         <li><a [routerLink]="['/master/unit-master']">Unit Master</a></li> 
-         <li><a [routerLink]="['/master/location-master']">Location Master</a></li>
-         <li><a [routerLink]="['/master/expense-master']">Expense Master</a></li>
-         <li><a [routerLink]="['/master/department-master']">Department Master</a></li>    
-         <li><a [routerLink]="['/master/designation-master']">Designation Master</a></li>
-         <li><a [routerLink]="['/master/holiday-master']">Holiday Master</a></li>
-         </ul>
-      </li>
-  </ul>
+          <ul
+             *ngIf="activeNestedSubMenu === 'invoice'"
+             [class.nested-submenu]="!isMobile"
+             [class.mobile-visible]="isMobile">
+             <li><a [routerLink]="['/master/discount-scheme']">Add Discount Scheme</a></li>
+             <li><a [routerLink]="">Manage Discount Schemes</a></li>
+           </ul>
+           </li>
 
-   </li>
+           <li><a [routerLink]="['/master/bankname']">Bank Name</a></li>
+           <li><a [routerLink]="['/master/bank-master']">Bank Master</a></li>
+           <li><a [routerLink]="['/master/brand-master']">Brand Master</a></li>
+           <li><a [routerLink]="['/master/group-master']">Group Master</a></li>    
+           <li><a [routerLink]="['/master/table-master']">Table Master</a></li>
+
+           <li class="has-submenu"
+             [class.active]="activeNestedSubMenu === 'invoice'"
+             (mouseenter)="!isMobile && (activeNestedSubMenu = 'invoice')"
+             (mouseleave)="!isMobile && (activeNestedSubMenu = null)"
+             (click)="isMobile && toggleNestedSubMenu('invoice')">
+
+             <a href="#">Miscellaneous</a>
+
+              <ul
+                *ngIf="activeNestedSubMenu === 'invoice'"
+                [class.nested-submenu]="!isMobile"
+                [class.mobile-visible]="isMobile">
+                <li><a [routerLink]="['/master/unit-master']">Unit Master</a></li> 
+                <li><a [routerLink]="['/master/location-master']">Location Master</a></li>
+                <li><a [routerLink]="['/master/expense-master']">Expense Master</a></li>
+                <li><a [routerLink]="['/master/department-master']">Department Master</a></li>    
+                <li><a [routerLink]="['/master/designation-master']">Designation Master</a></li>
+                <li><a [routerLink]="['/master/holiday-master']">Holiday Master</a></li>
+              </ul>
+           </li>
+          </ul>
+
+       </li>
    </ul>
 
     <!-- Optional: Footer -->
@@ -266,3 +421,13 @@
   </div> <!-- /sidebar -->
 </div>
 </div>
+
+
+
+
+
+
+
+
+
+

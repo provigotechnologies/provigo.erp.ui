@@ -79,6 +79,16 @@ export const routes: Routes = [
             path: 'service-master',
             loadComponent: () =>
               import('./features/master/components/service-master/service-master.component').then(m => m.ServiceMasterComponent),
+          },
+          {
+            path: 'discount-scheme',
+            loadComponent: () =>
+              import('./features/master/components/discount-scheme/discount-scheme.component').then(m => m.DiscountSchemeComponent),
+          },
+          {
+            path: 'manage-items',
+            loadComponent: () =>
+              import('./features/master/components/product-master/manage-items.component').then(m => m.ManageItemsComponent),
           }
         ]
       },

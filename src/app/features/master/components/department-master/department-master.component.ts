@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common'; // <-- Add this import
+import { CommonModule } from '@angular/common'; 
 
 @Component({
   selector: 'app-department-master',
   standalone: true,
-  imports: [FormsModule, CommonModule],  // <-- Add CommonModule here
+  imports: [FormsModule, CommonModule],  
   templateUrl: './department-master.component.html',
   styleUrls: [
     './department-master.component.css',
-    '../style.css' 
+    '../style.css' // ✅ this is the correct relative path
   ]
 })
 export class DepartmentMasterComponent {
@@ -19,7 +19,7 @@ export class DepartmentMasterComponent {
 
   addTable() {
     if (!this.departmentName.trim()) {
-      this.error = 'Department name is required';
+      this.error = 'Brand name is required';
       return;
     }
 

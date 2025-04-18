@@ -5,10 +5,14 @@ import { CommonModule } from '@angular/common'; // <-- Add this import
 @Component({
   selector: 'app-product-master',
   standalone: true,
-  imports: [FormsModule, CommonModule],  // <-- Add CommonModule here
+  imports: [FormsModule, CommonModule],
   templateUrl: './product-master.component.html',
-  styleUrl: './product-master.component.css'
+  styleUrls: [
+    './product-master.component.css',
+    './styles/style.css'
+  ]
 })
+
 export class ProductMasterComponent {
 
 }

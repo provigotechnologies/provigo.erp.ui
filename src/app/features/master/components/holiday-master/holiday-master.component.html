@@ -1,4 +1,9 @@
 <div class="bank-form">
+
+  <!-- Heading Section -->
+<div class="page-header-wrapper">
+  <label class="page-heading">Add New Holiday</label>
+</div>
     <!-- Table Name Input -->
     <label for="holidayName">
       <span>Holiday Name <span class="required">*</span></span>
@@ -9,10 +14,11 @@
     <div *ngIf="error" class="error-message">{{ error }}</div>
   
     <!-- Buttons -->
-    <div class="button-group">
-      <button type="button" (click)="addTable()">Add</button>
-      <button type="button" (click)="cancel()">Cancel</button>
-    </div>
+      <!-- Buttons -->
+      <div class="button-group">
+        <button class="primary-btn btn-add" type="button" (click)="addTable()">Add</button>
+        <button class="primary-btn btn-cancel" type="button" (click)="cancel()">Cancel</button>
+      </div>
   
      <!-- 🔽 Added Table Section -->
      <div class="table-wrapper">

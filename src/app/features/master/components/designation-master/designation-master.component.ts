@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common'; // <-- Add this import
+import { CommonModule } from '@angular/common'; 
 
 @Component({
   selector: 'app-designation-master',
   standalone: true,
-  imports: [FormsModule, CommonModule],  // <-- Add CommonModule here
+  imports: [FormsModule, CommonModule],  
   templateUrl: './designation-master.component.html',
   styleUrls: [
     './designation-master.component.css',
-    '../style.css' 
+    '../style.css' // ✅ this is the correct relative path
   ]
 })
 export class DesignationMasterComponent {
@@ -19,7 +19,7 @@ export class DesignationMasterComponent {
 
   addTable() {
     if (!this.designationName.trim()) {
-      this.error = 'Designation name is required';
+      this.error = 'Brand name is required';
       return;
     }
 

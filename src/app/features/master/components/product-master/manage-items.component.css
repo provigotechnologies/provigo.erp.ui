@@ -1,0 +1,375 @@
+.item-container { 
+  font-family: 'Segoe UI', sans-serif;
+  padding: 15px;
+  border: 1px solid #ccc;
+  background-color: #f5f8fa;
+  height: 550px;
+  margin-top: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.search-box {
+  flex-grow: 1;
+  display: flex;
+  margin: 10px 0;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  outline: none;
+}
+
+.search-btn {
+  padding: 0 16px;
+  background: #2980f2;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.search-btn:hover{
+  background: #1c6ed8;
+}
+
+.top-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.add-product {
+  padding: 10px 14px;
+  background: #2980f2;
+  color: white;
+  border: 1px solid #2980f2;
+  font-weight: 500;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+.add-service {
+  padding: 10px 14px;
+  background: white;
+  color: #333;
+  border: 1px solid #333;
+  font-weight: 500;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+.add-product:hover {
+  background-color: #1c6ed8;
+}
+
+.add-service:hover {
+  background-color: #f0f0f0;
+}
+
+.table-action-container {
+  border: 1px solid #ccc;
+  padding: 15px;
+  background-color: #fff;
+  height: 400px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.action-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.action-bar a {
+  margin-right: 16px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.action-bar a:hover {
+  text-decoration: underline;
+}
+
+.filter-dropdown {
+  margin-left: auto;
+  width: 100px;
+  height: 30px;
+  background-color: #f1f3f5;
+  border: 1px solid #ccc;
+  padding: 4px 8px;
+}
+
+.item-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.item-table th,
+.item-table td {
+  border: 1px solid #ccc;
+  padding: 8px 10px;
+  text-align: left;
+}
+
+.item-table th {
+  background-color: #2980f2;
+  color: #fff;
+  font-weight: 600;
+}
+
+.item-table tr:nth-child(even) {
+  background-color: #f1f9ff;
+}
+
+.item-table tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+.item-table input[type="checkbox"] {
+  appearance: none;
+  height: 14px;
+  width: 14px;
+  border: 2px solid #aaa;
+  border-radius: 3px;
+  cursor: pointer;
+  position: relative;
+  background-color: white;
+}
+
+.item-table input[type="checkbox"]:checked {
+  background-color: #2980f2;
+  border-color: #2980f2;
+}
+
+.item-table input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 0px;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.stock-warning {
+  background: #fff3cd;
+  padding: 4px 6px;
+  font-weight: 600;
+  color: #856404;
+  border-radius: 4px;
+}
+
+.footer {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 45px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.footer .buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+}
+
+.barcode-btn,
+.export-btn {
+  background: #2980f2;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.barcode-btn:hover,
+.export-btn:hover {
+  background-color: #1c6ed8;
+}
+
+.barcode-btn i,
+.export-btn i {
+  font-size: 15px;
+}
+
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: auto;  
+    max-height: 100%; /* Prevent height from increasing */
+  white-space: nowrap; /* Prevent column wrapping */
+}
+
+
+.table-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.table-scroll::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+
+
+/* Responsive Table Scroll on Small Screens */
+@media (max-width: 768px) {
+  .item-container {
+    height: auto !important;
+  }
+
+  .table-action-container {
+    overflow-x: auto;
+  }
+
+  .item-table {
+    min-width: 100%; /* Reduced from 900px to fit better on smaller screens */
+  }
+
+  .header, .top-buttons, .footer, .action-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .search-box input {
+    font-size: 14px;
+  }
+
+  .search-btn, .add-product, .add-service, 
+  .barcode-btn, .export-btn {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .search-box {
+    width: 100%;
+  }
+
+  .top-buttons {
+    width: 100%;
+    gap: 8px;
+    flex-direction: column;
+  }
+
+  .filter-dropdown {
+    margin-top: 10px;
+    justify-content: flex-start;
+  }
+
+  .footer {
+    gap: 20px;
+  }
+
+  .footer .buttons {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  /* Make the Add Product and Add Service buttons full width and stacked one by one */
+  .footer .buttons .add-product,
+  .footer .buttons .add-service {
+    width: 100%; /* Full width */
+    margin-bottom: 10px; /* Space between the buttons */
+  }
+
+  /* Ensure the barcode and export buttons still align in one row */
+  .footer .buttons .barcode-btn,
+  .footer .buttons .export-btn {
+    width: 48%; /* Keep them side-by-side */
+  }
+}
+
+@media (max-width: 1200px) {
+  .item-container {
+    height: auto !important;
+    overflow: visible;
+  }
+
+  .table-action-container {
+    height: auto !important;
+  }
+
+  .footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .footer .buttons {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+
+  .item-table{
+    width: 100%;
+  }
+}
+
+/* Extra small devices (phones <480px) */
+@media (max-width: 480px) {
+  .item-container {
+    height: auto !important;
+  }
+
+  .footer span {
+    font-size: 12px;
+  }
+
+  .item-table th, .item-table td {
+    font-size: 12px;
+    padding: 4px 6px;
+  }
+
+  .action-bar a {
+    font-size: 13px;
+  }
+
+  /* Ensure all buttons take full width on small screens */
+  .footer .buttons .barcode-btn,
+  .footer .buttons .export-btn,
+  .footer .buttons .add-product,
+  .footer .buttons .add-service {
+    margin-bottom: 10px; /* Add spacing between buttons */
+  }
+
+  
+  .footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  /* Ensure proper alignment in the footer */
+  .footer .buttons {
+    flex-direction: column;
+  }
+}

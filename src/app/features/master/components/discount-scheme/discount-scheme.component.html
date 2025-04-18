@@ -1,0 +1,96 @@
+<div class="bank-form">
+  
+   <!-- Start Date -->
+<div class="form-row">
+    <div class="form-group">
+      <label for="start-date">Start Date </label>
+      <input type="date" id="start-date" />
+    </div>
+  </div>
+  
+  <!-- End Date -->
+  <div class="form-row">
+    <div class="form-group">
+      <label for="end-date">End Date </label>
+      <input type="date" id="end-date" />
+    </div>
+  </div>  
+  
+    <!-- Name -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="name">Name <span class="required">*</span></label>
+        <input type="text" id="name" />
+      </div>
+    </div>
+  
+    <!-- Discount Type -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="discount">Discount Type</label>
+        <select id="discount">
+          <option value="">Select Discount Type</option>
+          <option value="discount1">Discount 1</option>
+          <option value="discount2">Discount 2</option>
+        </select>
+      </div>
+    </div>
+  
+ <!-- Quantity -->
+<div class="form-row">
+    <div class="form-group">
+      <label for="quantity">Quantity <span class="required">*</span></label>
+      <div class="combo-input-wrapper">
+        <select id="quantity">
+          <option value="quantity1">Equal to (=)</option>
+          <option value="quantity2">Greater than (>)</option>
+        </select>
+        <input type="text" id="quantityvalue" />
+      </div>
+    </div>
+  </div>  
+  
+    <!-- Free Quantity -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="freequantity">Free Quantity</label>
+        <input type="text" id="freequantity" />
+      </div>
+    </div>
+  
+    <!-- Percent -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="printname">Percent <span class="required">*</span></label>
+        <div class="input-flex-wrapper"> <!-- NEW WRAPPER -->
+            <div class="rupee-wrapper">
+                <input type="text" id="printname" />
+                <span class="currency-symbol">%</span>
+            </div>    
+          </div>       </div>
+    </div>
+  
+    <!-- Apply To -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="apply">Apply To</label>
+        <select id="apply">
+          <option value="apply1">All</option>
+          <option value="apply2">Some</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+        <label>Product Description</label>
+        <textarea rows="3"></textarea>
+      </div>
+
+    <div class="right-buttons">
+        <button class="primary-btn">
+           <i class="material-icons">save</i> Save
+        </button>
+     </div>
+
+  </div>
+  

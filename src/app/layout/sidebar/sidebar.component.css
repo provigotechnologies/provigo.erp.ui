@@ -109,8 +109,8 @@ mat-icon {
 .icon-sale { color: #4caf50; }
 .icon-purchase { color: #2196f3; }
 .icon-inventory { color: #ffc107; }
-.icon-master { color: #9c27b0; }
-.icon-manufacture { color: #f44336; }
+.icon-master { color: #f44336; }
+.icon-manufacture { color: #4caf50; }
 .icon-accounts { color: #3f51b5; }
 .icon-expense { color: #ffc107; }
 .icon-customer { color: #00bcd4; }
@@ -174,15 +174,11 @@ mat-icon {
   .sidebar ul li a {
     display: flex;
     color: white;
-    padding: 10px; /* reduce from default 10px+ */
+    padding: 4px 10px; /* reduce from default 10px+ */
     gap: 8px;
     transition: background 0.2s;
   }
 
-  .submenu li a,
-  .nested-submenu li a {
-    padding-left: 30px;
-  }
 
   .has-submenu > a::after {
     content: '▼';
