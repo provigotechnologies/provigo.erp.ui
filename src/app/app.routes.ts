@@ -26,6 +26,11 @@ export const routes: Routes = [
               import('./features/master/components/bank-master/bank-master.component').then(m => m.BankMasterComponent),
           },
           {
+            path: 'company-master',
+            loadComponent: () =>
+              import('./features/master/components/company-master/company-master.component').then(m => m.CompanyMasterComponent),
+          },
+          {
             path: 'group-master',
             loadComponent: () =>
               import('./features/master/components/group-master/group-master.component').then(m => m.GroupMasterComponent),
@@ -89,6 +94,16 @@ export const routes: Routes = [
             path: 'manage-items',
             loadComponent: () =>
               import('./features/master/components/product-master/manage-items.component').then(m => m.ManageItemsComponent),
+          },
+          {
+            path: 'industry',
+            loadComponent: () =>
+              import('./features/master/components/industry/industry.component').then(m => m.IndustryComponent),
+          },
+          {
+            path: 'warehouse',
+            loadComponent: () =>
+              import('./features/master/components/warehouse/warehouse.component').then(m => m.WarehouseComponent),
           }
         ]
       },

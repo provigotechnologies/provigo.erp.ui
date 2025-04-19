@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common'; // <-- Add this import
   templateUrl: './service-master.component.html',
   styleUrls: [
     './service-master.component.css',
-    '../product-master/styles/style.css'   // ✅ correct relative path
+    '../../styles/style.css' 
   ]
 })
 

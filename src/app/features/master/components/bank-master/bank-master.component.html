@@ -1,5 +1,9 @@
 <div class="bank-form">
+
   <!-- <button class="close-button">✖</button> -->
+  <div class="page-header-wrapper">
+    <label class="page-heading">Add New Bank</label>
+  </div>
 
   <div class="form-row">
     <div class="form-group">
@@ -35,9 +39,10 @@
     </div>
   </div>
 
+  <!-- Buttons -->
   <div class="button-group">
-    <button type="button">Add</button>
-    <button type="button">Cancel</button>
+    <button class="primary-btn btn-add" type="button" (click)="addTable()">Add</button>
+    <button class="primary-btn btn-cancel" type="button" (click)="cancel()">Cancel</button>
   </div>
 
   <div class="table-wrapper">

@@ -1,5 +1,7 @@
+
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common'; // <-- Add this import
 
 @Component({
   selector: 'app-bank-master',
@@ -9,5 +11,32 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./bank-master.component.css']
 })
 export class BankMasterComponent {
-  
+  groupName = '';
+  error = '';
+  groupList: string[] = [];
+
+  addTable() {
+    if (!this.groupName.trim()) {
+      this.error = 'Warehouse name is required';
+      return;
+    }
+
+    this.groupList.push(this.groupName.trim());
+    this.groupName = '';
+    this.error = '';
+  }
+
+  cancel() {
+    this.groupName = '';
+    this.error = '';
+  }
+
+  editTable(index: number) {
+    this.groupName = this.groupList[index];
+    this.groupList.splice(index, 1);
+  }
+
+  deleteTable(index: number) {
+    this.groupList.splice(index, 1);
+  }
 }

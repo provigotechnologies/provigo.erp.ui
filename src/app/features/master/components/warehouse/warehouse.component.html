@@ -1,13 +1,18 @@
 <div class="bank-form">
 
     <div class="page-header-wrapper">
-      <label class="page-heading">Add New Industry</label>
+      <label class="page-heading">Add New Warehouse</label>
     </div>
       <!-- Table Name Input -->
-      <label for="industryName">
-        <span>Industry Name <span class="required">*</span></span>
+      <label for="warehouseName">
+        <span>Warehouse Name <span class="required">*</span></span>
       </label>
-      <input type="text" id="industryName" name="industryName" [(ngModel)]="industryName" (input)="error = ''" />
+      <input type="text" id="warehouseName" name="warehouseName" [(ngModel)]="warehouseName" (input)="error = ''" />
+    
+      <label for="location">
+        <span>Location <span class="required">*</span></span>
+      </label>
+      <input type="text" id="location" name="location"/>
     
       <!-- Error Message -->
       <div *ngIf="error" class="error-message">{{ error }}</div>
@@ -24,7 +29,7 @@
             <thead>
               <tr>
                 <th>S.No</th>
-                <th>Industry Name</th>
+                <th>Warehouse Name</th>
                 <th>Actions</th>
               </tr>
             </thead>
