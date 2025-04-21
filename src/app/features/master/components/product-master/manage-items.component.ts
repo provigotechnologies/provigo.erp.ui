@@ -5,9 +5,11 @@ import { CommonModule } from '@angular/common'; // <-- Add this import
 @Component({
   selector: 'app-manage-items',
   standalone: true,
-  imports: [FormsModule, CommonModule],  // <-- Add CommonModule here
+  imports: [FormsModule, CommonModule],
   templateUrl: './manage-items.component.html',
-  styleUrl: './manage-items.component.css'
+  styleUrls: [
+    './manage-items.component.css',
+    '../../../styles/mastermanage-style.css'    ]
 })
 export class ManageItemsComponent {
 

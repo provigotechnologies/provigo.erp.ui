@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './company-master.component.html',
   styleUrls: [
     './company-master.component.css',
-    '../../styles/style.css'  ]
+    '../../../styles/product-style.css'   ]
 })
 
 export class CompanyMasterComponent {

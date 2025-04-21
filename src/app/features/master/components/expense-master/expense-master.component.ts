@@ -9,8 +9,7 @@ import { CommonModule } from '@angular/common'; // <-- Add this import
   templateUrl: './expense-master.component.html',
   styleUrls: [
     './expense-master.component.css',
-    '../style.css' 
-  ]
+    '../../../styles/masters-style.css'   ]
 })
 export class ExpenseMasterComponent {
   expenseName = '';

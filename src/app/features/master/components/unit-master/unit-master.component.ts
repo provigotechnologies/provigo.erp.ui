@@ -9,8 +9,7 @@ import { CommonModule } from '@angular/common'; // <-- Add this import
   templateUrl: './unit-master.component.html',
   styleUrls: [
     './unit-master.component.css',
-    '../style.css' 
-  ]
+    '../../../styles/masters-style.css'   ]
 })
 export class UnitMasterComponent {
   unitName = '';

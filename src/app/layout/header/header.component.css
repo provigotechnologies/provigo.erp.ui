@@ -30,6 +30,10 @@
     transition: color 0.2s ease;
   }
   
+  .header-right i:hover{
+    color: #007BFF;
+  }
+
   .help-btn {
     background-color: #003b5b;
     color: #fff; /* Black text color */

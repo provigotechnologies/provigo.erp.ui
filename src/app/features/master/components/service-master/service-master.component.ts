@@ -9,8 +9,7 @@ import { CommonModule } from '@angular/common'; // <-- Add this import
   templateUrl: './service-master.component.html',
   styleUrls: [
     './service-master.component.css',
-    '../../styles/style.css' 
-  ]
+    '../../../styles/product-style.css'   ]
 })
 
 export class ServiceMasterComponent {

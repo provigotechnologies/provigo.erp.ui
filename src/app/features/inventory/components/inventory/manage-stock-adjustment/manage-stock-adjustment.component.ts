@@ -3,15 +3,15 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common'; // <-- Add this import
 
 @Component({
-  selector: 'app-discount-scheme',
+  selector: 'app-manage-stock-adjustment',
   standalone: true,
   imports: [FormsModule, CommonModule],
-  templateUrl: './discount-scheme.component.html',
+  templateUrl: './manage-stock-adjustment.component.html',
   styleUrls: [
-    './discount-scheme.component.css',
-    '../../../styles/discountandstockadjust-style.css'
-   ]
+    './manage-stock-adjustment.component.css',
+    '../../../../styles/inventorymanage-style.css'
+  ]
 })
-export class DiscountSchemeComponent {
+export class ManageStockAdjustmentComponent {
 
 }

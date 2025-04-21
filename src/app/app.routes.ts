@@ -96,6 +96,11 @@ export const routes: Routes = [
               import('./features/master/components/product-master/manage-items.component').then(m => m.ManageItemsComponent),
           },
           {
+            path: 'manage-discount-scheme',
+            loadComponent: () =>
+              import('./features/master/components/discount-scheme/manage-discount-scheme.component').then(m => m.ManageDiscountSchemeComponent),
+          },
+          {
             path: 'industry',
             loadComponent: () =>
               import('./features/master/components/industry/industry.component').then(m => m.IndustryComponent),
@@ -107,16 +112,34 @@ export const routes: Routes = [
           }
         ]
       },
+      
       {
         path: 'sales',
         loadComponent: () =>
           import('./features/sales/components/sales/sales.component').then(m => m.SalesComponent),
       },
+
       {
         path: 'inventory',
-        loadComponent: () =>
-          import('./features/inventory/components/inventory/inventory.component').then(m => m.InventoryComponent),
+        children: [
+          {
+            path: 'add-stock-adjustment',
+            loadComponent: () =>
+              import('./features/inventory/components/inventory/add-stock-adjustment/add-stock-adjustment.component').then(m => m.AddStockAdjustmentComponent),
+          },
+          {
+            path: 'manage-stock-adjustment',
+            loadComponent: () =>
+              import('./features/inventory/components/inventory/manage-stock-adjustment/manage-stock-adjustment.component').then(m => m.ManageStockAdjustmentComponent),
+          },
+          {
+            path: 'physical-stock-reconciliation',
+            loadComponent: () =>
+              import('./features/inventory/components/inventory/physical-stock-reconciliation/physical-stock-reconciliation.component').then(m => m.PhysicalStockReconciliationComponent),
+          }
+        ]
       },
+      
       {
         path: 'reports',
         loadComponent: () =>

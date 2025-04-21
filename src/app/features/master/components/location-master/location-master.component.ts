@@ -9,8 +9,7 @@ import { CommonModule } from '@angular/common'; // <-- Add this import
   templateUrl: './location-master.component.html',
   styleUrls: [
     './location-master.component.css',
-    '../style.css' 
-  ]
+    '../../../styles/masters-style.css'   ]
 })
 export class LocationMasterComponent {
   locationName = '';

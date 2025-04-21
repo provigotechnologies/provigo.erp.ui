@@ -9,8 +9,7 @@ import { CommonModule } from '@angular/common'; // <-- Add this import
   templateUrl: './table-master.component.html',
   styleUrls: [
     './table-master.component.css',
-    '../style.css' 
-  ]
+    '../../../styles/masters-style.css'   ]
 })
 export class TableMasterComponent {
   tableName = '';

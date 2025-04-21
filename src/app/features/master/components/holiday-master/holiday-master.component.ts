@@ -9,8 +9,7 @@ import { CommonModule } from '@angular/common'; // <-- Add this import
   templateUrl: './holiday-master.component.html',
   styleUrls: [
     './holiday-master.component.css',
-    '../style.css' 
-  ]
+    '../../../styles/masters-style.css'   ]
 })
 export class HolidayMasterComponent {
   holidayName = '';

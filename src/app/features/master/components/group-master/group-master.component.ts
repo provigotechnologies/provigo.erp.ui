@@ -6,9 +6,12 @@ import { CommonModule } from '@angular/common'; // <-- Add this import
 @Component({
   selector: 'app-group-master',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './group-master.component.html',
-  styleUrls: ['./group-master.component.css']
+  styleUrls: [
+    './group-master.component.css',
+    '../../../styles/groupandadjustserialno-style.css'
+  ]
 })
 export class GroupMasterComponent {
   groupName = '';

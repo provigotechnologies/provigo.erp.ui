@@ -1,96 +1,97 @@
-<div class="bank-form">
-  
-   <!-- Start Date -->
-<div class="form-row">
-    <div class="form-group">
-      <label for="start-date">Start Date </label>
-      <input type="date" id="start-date" />
-    </div>
+<!-- Main Layout Container -->
+<div class="product-main-container">
+
+  <!-- Heading Section -->
+<div class="page-header-wrapper">
+  <label class="page-heading"> Discount Scheme</label>
+</div>
+
+<div class="product-container">
+  <div class="tab-header">
+    <div class="tab active">Scheme</div>
+    <div class="tab">Serial Numbers</div>
   </div>
-  
-  <!-- End Date -->
-  <div class="form-row">
-    <div class="form-group">
-      <label for="end-date">End Date </label>
-      <input type="date" id="end-date" />
-    </div>
-  </div>  
-  
-    <!-- Name -->
-    <div class="form-row">
-      <div class="form-group">
-        <label for="name">Name <span class="required">*</span></label>
-        <input type="text" id="name" />
-      </div>
-    </div>
-  
-    <!-- Discount Type -->
-    <div class="form-row">
-      <div class="form-group">
-        <label for="discount">Discount Type</label>
-        <select id="discount">
-          <option value="">Select Discount Type</option>
-          <option value="discount1">Discount 1</option>
-          <option value="discount2">Discount 2</option>
-        </select>
-      </div>
-    </div>
-  
- <!-- Quantity -->
-<div class="form-row">
-    <div class="form-group">
-      <label for="quantity">Quantity <span class="required">*</span></label>
-      <div class="combo-input-wrapper">
-        <select id="quantity">
-          <option value="quantity1">Equal to (=)</option>
-          <option value="quantity2">Greater than (>)</option>
-        </select>
-        <input type="text" id="quantityvalue" />
-      </div>
-    </div>
-  </div>  
-  
-    <!-- Free Quantity -->
-    <div class="form-row">
-      <div class="form-group">
-        <label for="freequantity">Free Quantity</label>
-        <input type="text" id="freequantity" />
-      </div>
-    </div>
-  
-    <!-- Percent -->
-    <div class="form-row">
-      <div class="form-group">
-        <label for="printname">Percent <span class="required">*</span></label>
-        <div class="input-flex-wrapper"> <!-- NEW WRAPPER -->
-            <div class="rupee-wrapper">
-                <input type="text" id="printname" />
-                <span class="currency-symbol">%</span>
-            </div>    
-          </div>       </div>
-    </div>
-  
-    <!-- Apply To -->
-    <div class="form-row">
-      <div class="form-group">
-        <label for="apply">Apply To</label>
-        <select id="apply">
-          <option value="apply1">All</option>
-          <option value="apply2">Some</option>
-        </select>
-      </div>
-    </div>
 
-    <div class="form-row">
-        <label>Product Description</label>
-        <textarea rows="3"></textarea>
+    <!-- Left Side -->
+    <div class="product-container">
+      <!-- Left Container 1 -->
+      <div class="product-inner-container">
+        
+        <div class="form-row">
+          <label for="date">Start Date </label>
+          <input type="date" id="start-date" />
+        </div>
+  
+        <div class="form-row">
+          <label for="date">End Date </label>
+          <input type="date" id="start-date" />
+        </div>
+
+        <div class="form-row">
+          <label for="name"> Name <span class="required">*</span></label>
+          <input type="text" id="name" />
       </div>
 
-    <div class="right-buttons">
-        <button class="primary-btn">
-           <i class="material-icons">save</i> Save
-        </button>
-     </div>
+        <!-- Brand -->
+        <div class="form-row">
+          <label for="discounttype">Discount Type</label>
+          <select id="discounttype">
+              <option value="">Percent</option>
+              <option value="">Amount</option>
+              <option value="">Buy X Get X Free</option>
+          </select>
+        </div>
+        
+        <div class="form-row">
+          <label for="quantity">Quantity <span class="required">*</span></label>
+          <div class="quantity-wrapper">
+            <select id="quantityvalue">
+              <option value="">Equal to (=)</option>
+              <option value="">Greater than (>)</option>
+            </select>
+            <input id="quantity" type="text" />
+          </div>
+        </div>
+        
 
-  </div>
+        <!-- Barcode -->
+        <div class="form-row">
+          <label for="freequantity">Free Quantity</label>
+          <input type="text" id="freequantity" />
+        </div>
+  
+        <div class="form-row">
+          <label for="Percent">Percent <span class="required">*</span></label>
+          <div class="input-flex-wrapper rupee-inline-wrapper">
+            <span class="currency-symbol">%</span>
+            <input type="text" id="Percent" />
+          </div>
+        </div>
+  
+      <div class="form-row">
+        <label for="customertype">Apply To</label>
+        <select id="customertype">
+            <option value="">All</option>
+            <option value="">Walking customers</option>
+            <option value="">Member customers</option>
+        </select>
+      </div>
+
+    <div class="form-row">
+      <label class="textarea">Remarks</label>
+      <textarea rows="3"></textarea>
+    </div>
+
+      </div>
+
+      <div class="right-buttons">
+          <button class="primary-btn">
+             <i class="material-icons">save</i> Save
+          </button>
+       </div> 
+    </div>
+
+    </div>
+
+
   

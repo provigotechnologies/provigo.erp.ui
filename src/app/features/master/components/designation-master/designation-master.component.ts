@@ -9,8 +9,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './designation-master.component.html',
   styleUrls: [
     './designation-master.component.css',
-    '../style.css' // ✅ this is the correct relative path
-  ]
+    '../../../styles/masters-style.css'   ]
 })
 export class DesignationMasterComponent {
   designationName = '';

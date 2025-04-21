@@ -1,0 +1,378 @@
+/* =================== */
+/* Base Layout Styles  */
+/* =================== */
+
+.product-main-container {
+  display: flex;
+  padding: 10px;
+  border-radius: 10px;
+  gap: 10px;
+  max-width: 900px;
+  margin: 0px auto;
+  background: #ffffff;
+  flex-wrap: wrap;
+  overflow-y: auto;
+
+  /* 🔥 Enhanced shadow with top visibility */
+  box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.1), 
+              0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.page-header-wrapper {
+  width: 100%;
+  margin: 2px auto;
+  box-sizing: border-box;
+}
+
+.page-heading {
+  font-size: 1.75rem;
+  font-weight: 560;
+  color: #1e2d3b;
+  border-left: 4px solid #1c77ef;
+  padding-left: 12px;
+  margin-bottom: 8px;
+}
+
+/* Each side column */
+.product-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-width: 320px;
+}
+
+/* Box styling */
+.product-inner-container {
+  background: #f9fafb;
+  padding: 10px 14px 4px;
+  border: 1px solid #d5d5d5;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: box-shadow 0.3s ease;
+}
+
+.product-inner-container:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* =================== */
+/* Form Field Styles   */
+/* =================== */
+
+.form-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.form-row label {
+  width: 120px;
+  flex: 0 0 auto;
+  font-weight: 500;
+  font-size: 14px;
+  margin-right: 16px;
+  color: #2d3a4a;
+}
+
+.form-row input[type="text"],
+.form-row select,
+.form-row textarea {
+  flex: 1;
+  max-width: 260px;
+  padding: 6px 8px;
+  font-size: 14px;
+  background-color: #fff;
+  border: 1.5px solid #ccc;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+  width: 100%;
+}
+
+.form-row input[type="text"] {
+  border: none;
+  border-bottom: 2px solid #ccc;
+  border-radius: 0;
+}
+
+.form-row input[type="text"]:focus {
+  border-bottom: 2px solid #1c77ef;
+}
+
+.form-row select:focus,
+.form-row textarea:focus {
+  border: 2px solid #1c77ef;
+}
+
+.input-flex-wrapper {
+  flex: 2;
+  max-width: 100%;
+}
+
+.rupee-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+}
+
+.currency-symbol {
+  padding: 5px 8px;
+  background-color: #1c77ef;
+  color: white;
+  font-size: 14px;
+}
+
+.rupee-wrapper input[type="text"] {
+  flex: 2;
+  padding: 6px 10px;
+  font-size: 14px;
+  border: none;
+  background-color: #fff;
+  border-bottom: 2px solid #ccc;
+  outline: none;
+  width: 100%;
+  max-width: 235px;
+  height: 26px;
+}
+
+.required {
+  color: red;
+  margin-left: 4px;
+}
+
+/* =================== */
+/* Checkbox Styles     */
+/* =================== */
+.checkbox-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px; /* smaller gap between checkboxes */
+  margin-bottom: 8px;
+}
+
+.checkbox-row label {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  color: #333;
+  margin: 0px;
+}
+
+.checkbox-row input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  height: 16px;
+  width: 16px;
+  border: 2px solid #888;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  background-color: white;
+  transition: background-color 0.3s ease;
+}
+
+.checkbox-row input[type="checkbox"]:checked {
+  background-color: #1c77ef;
+  border-color: #1c77ef;
+}
+
+.checkbox-row input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 0px;
+  width: 4px;
+  height: 9px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* =================== */
+/* Button Styles       */
+/* =================== */
+
+.right-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.primary-btn {
+  background-color: #1c77ef;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px; /* Space between icon and label */
+}
+
+.primary-btn:hover {
+  background-color: #006fe0;
+}
+
+.primary-btn i,
+.primary-btn svg {
+  font-size: 16px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+
+/* =================== */
+/* GST Section         */
+/* =================== */
+
+.gst-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.gst-label {
+  font-weight: 600;
+  padding-top: 5px;
+  min-width: 60px;
+  color: #2d3a4a;
+}
+
+.gst-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.gst-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.gst-row input {
+  width: 50px !important;
+  font-size: 13px;
+  padding: 4px;
+  border: 1.5px solid #ccc;
+  border-radius: 4px;
+}
+
+/* =================== */
+/* Responsive Media Queries */
+/* =================== */
+
+/* Tablet (below 1024px) */
+@media (max-width: 1024px) {
+  .product-main-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .product-inner-container {
+    width: 100%;
+    gap: 20px;
+  }
+
+  .gst-row input {
+    width: 50px;
+  }
+}
+
+/* Mobile (below 600px) */
+@media (max-width: 600px) {
+  .form-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .form-row label {
+    margin-bottom: 4px;
+  }
+
+  
+  .form-row input[type="text"],
+  .form-row select,
+  .form-row textarea{
+    width: 260px;
+  }
+
+  .rupee-wrapper input[type="text"] {
+    width: 240px;
+  }
+
+  .rupee-wrapper {
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .gst-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .gst-fields {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .gst-row input {
+    width: 100%;
+  }
+
+ 
+}
+
+
+/* Mobile (below 600px) */
+@media (max-width: 600px) {
+  .form-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .form-row label {
+    margin-bottom: 4px;
+  }
+
+  
+  .form-row input[type="text"],
+  .form-row select,
+  .form-row textarea{
+    width: 260px;
+  }
+
+  .rupee-wrapper input[type="text"] {
+    width: 240px;
+  }
+
+  .rupee-wrapper {
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .gst-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .gst-fields {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .gst-row input {
+    width: 100%;
+  }
+
+}

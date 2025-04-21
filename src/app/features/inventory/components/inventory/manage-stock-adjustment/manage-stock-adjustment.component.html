@@ -1,0 +1,106 @@
+<div class="item-container">
+
+  <div class="sec-container">
+
+    <div class="header">
+      <div class="filter-left">
+        <label>Select</label>
+        <select>
+          <option>Last 7 days</option>
+          <option>Today</option>
+          <option>This Month</option>
+        </select>
+
+        <label>From</label>
+        <input type="date" />
+
+        <label>To</label>
+        <input type="date" />
+      </div>
+
+      <div class="search-box">
+        <input type="text" placeholder="Search keyword . . .">
+        <button class="search-btn">🔍</button>
+      </div>
+
+      <div class="top-buttons">
+        <button class="add-product"><strong>+</strong> Add New Stock Adj.</button>
+      </div>
+    </div>
+
+    </div>
+    
+  <div class="section-container">
+
+    <div class="table-action-container">
+      <div class="action-bar">
+        <a style="color: #2d88ff;" href="#">Select All</a>
+        <a style="color: #ff0026;" href="#" title="Delete selected items">Delete</a>
+
+        <select class="filter-dropdown">
+          <option value="all">All</option>
+          <option value="credit">Credit</option>
+          <option value="debit">Debit</option>
+        </select>
+      </div>
+
+      <div class="table-scroll">
+        <table class="item-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>S. No.</th>
+              <th>Date</th>
+              <th>Adjust Type</th>
+              <th>Item Name</th>
+              <th>Reason</th>
+              <th>Quantity</th>
+              <th>Amount</th>
+              <th>Remarks</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="checkbox" /></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" /></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div> <!-- end section-container -->
+
+  <!-- Footer (outside the container) -->
+  <div class="footer">
+    <span>Credit Qty:</span>
+    <span>Credit Amt: </span>
+    <span>Debit Qty: </span>
+    <span>Debit Amt:</span>
+
+    <div class="buttons">
+      <button class="export-btn">
+        <i class="fas fa-file-excel"></i> Export 2 Excel
+      </button>
+    </div>
+  </div>
+
+</div>
