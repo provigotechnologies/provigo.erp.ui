@@ -8,7 +8,7 @@
     border-radius: 10px;
     gap: 0px;
     max-width: 570px;
-    margin: 0px auto;
+    margin: 2px auto;
     background: #ffffff;
     flex-wrap: wrap;
     overflow-y: auto;
@@ -20,17 +20,45 @@
   
   .page-header-wrapper {
     width: 100%;
-    margin: 2px auto;
     box-sizing: border-box;
   }
   
   .page-heading {
-    font-size: 1.75rem;
+    font-size: 1.15rem;
     font-weight: 560;
     color: #1e2d3b;
     border-left: 4px solid #1c77ef;
     padding-left: 12px;
-    margin-bottom: 8px;
+    margin-bottom: 18px;
+  }
+  
+  .tab-header {
+    display: flex;
+    margin: 10px 0 0 0 ;
+  }
+
+  .header {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping */
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .filter-left {
+    display: flex;
+    flex-wrap: wrap; /* Allow its children to wrap */
+    gap: 10px;
+    align-items: center;
+    flex: 1;
+    min-width: 300px;
+  }
+  
+  .filter-left label,
+  .filter-left select,
+  .filter-left input[type="date"] {
+    flex: 1 1 120px; /* allow shrink and grow */
+    min-width: 100px;
   }
   
   /* Each side column */
@@ -82,7 +110,6 @@
   .form-row select,
   .form-row textarea {
     flex: 1;
-    max-width: 260px;
     padding: 6px 8px;
     font-size: 14px;
     background-color: #fff;
@@ -90,8 +117,9 @@
     outline: none;
     box-sizing: border-box;
     transition: border-color 0.3s;
-    width: 100%;
+    width: 100%; /* ✅ MAKE THIS 100% instead of 260px */
   }
+  
   
   .form-row input[type="text"] {
     border: none;
@@ -250,107 +278,57 @@
   /* =================== */
   
   /* Tablet (below 1024px) */
-  @media (max-width: 1024px) {
-    .product-main-container {
-      flex-direction: column;
-      align-items: stretch;
+  @media (max-width: 1024px), (max-width: 768px), (max-width: 600px) {
+    .form-row input[type="text"],
+    .form-row input[type="date"],
+    .form-row select,
+    .form-row textarea {
+      width: 100% !important; /* ✅ FORCE full width on small screens */
+    }
+  
+    .rupee-wrapper,
+    .rupee-inline-wrapper {
+      width: 100%;
+      flex-direction: row;
+    }
+  
+    .rupee-wrapper input[type="text"] {
+      width: 100%;
     }
   
     .product-inner-container {
       width: 100%;
-      gap: 20px;
     }
   
-    .gst-row input {
-      width: 50px;
+    .product-main-container {
+      padding: 10px;
     }
   }
-  
-  /* Mobile (below 600px) */
+
   @media (max-width: 600px) {
-    .form-row {
+    .filter-left {
       flex-direction: column;
       align-items: flex-start;
-    }
-  
-    .form-row label {
-      margin-bottom: 4px;
-    }
-  
-    
-    .form-row input[type="text"],
-    .form-row select,
-    .form-row textarea{
-      width: 260px;
-    }
-  
-    .rupee-wrapper input[type="text"] {
-      width: 240px;
-    }
-  
-    .rupee-wrapper {
-      flex-direction: row;
       width: 100%;
     }
   
-    .gst-container {
-      flex-direction: column;
-      gap: 10px;
-    }
-  
-    .gst-fields {
-      flex-direction: column;
-      gap: 8px;
-    }
-  
-    .gst-row input {
+    .filter-left label,
+    .filter-left select,
+    .filter-left input[type="date"] {
       width: 100%;
     }
   
-   
+    .search-box {
+      width: 100%;
+      margin-top: 10px;
+    }
+  
+    .top-buttons {
+      width: 100%;
+      margin-top: 10px;
+      display: flex;
+      justify-content: flex-end;
+    }
   }
   
-  
-  /* Mobile (below 600px) */
-  @media (max-width: 600px) {
-    .form-row {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  
-    .form-row label {
-      margin-bottom: 4px;
-    }
-  
-    
-    .form-row input[type="text"],
-    .form-row select,
-    .form-row textarea{
-      width: 260px;
-    }
-  
-    .rupee-wrapper input[type="text"] {
-      width: 240px;
-    }
-  
-    .rupee-wrapper {
-      flex-direction: row;
-      width: 100%;
-    }
-  
-    .gst-container {
-      flex-direction: column;
-      gap: 10px;
-    }
-  
-    .gst-fields {
-      flex-direction: column;
-      gap: 8px;
-    }
-  
-    .gst-row input {
-      width: 100%;
-    }
-  
-  }
   

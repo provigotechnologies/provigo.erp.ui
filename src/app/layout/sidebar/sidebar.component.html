@@ -42,8 +42,8 @@
               *ngIf="activeNestedSubMenu === 'invoice'"
               [class.nested-submenu]="!isMobile"
               [class.mobile-visible]="isMobile">
-              <li><a [routerLink]="['/sales']">New Invoice</a></li>
-              <li><a [routerLink]="">Manage Invoices</a></li>
+              <li><a [routerLink]="['/sales/invoice']">New Invoice</a></li>
+              <li><a [routerLink]="['/sales/manage-invoice']">Manage Invoices</a></li>
             </ul>
           </li>
 
@@ -60,8 +60,8 @@
                 *ngIf="activeNestedSubMenu === 'sale-return'"
                 [class.nested-submenu]="!isMobile"
                 [class.mobile-visible]="isMobile">
-                <li><a [routerLink]="">New Sale Return</a></li>
-                <li><a [routerLink]="">Manage Sale Returns</a></li>
+                <li><a [routerLink]="['/sales/sale-return']">New Sale Return</a></li>
+                <li><a [routerLink]="['/sales/manage-salereturn']">Manage Sale Returns</a></li>
               </ul>
             </li>
 
@@ -79,26 +79,26 @@
                 *ngIf="activeNestedSubMenu === 'quotation'"
                 [class.nested-submenu]="!isMobile"
                 [class.mobile-visible]="isMobile">
-                <li><a [routerLink]="">New Quotation</a></li>
-                <li><a [routerLink]="">Manage Quotations</a></li>
+                <li><a [routerLink]="['/sales/quotation']">New Quotation</a></li>
+                <li><a [routerLink]="['/sales/manage-quotation']">Manage Quotations</a></li>
               </ul>
             </li>
 
             <!-- Delivery Note with Nested Submenu -->
             <li class="has-submenu"
-              [class.active]="activeNestedSubMenu === 'delivery-note'"
-              (mouseenter)="!isMobile && (activeNestedSubMenu = 'delivery-note')"
+              [class.active]="activeNestedSubMenu === 'deliverynote'"
+              (mouseenter)="!isMobile && (activeNestedSubMenu = 'deliverynote')"
               (mouseleave)="!isMobile && (activeNestedSubMenu = null)"
               (click)="isMobile && toggleNestedSubMenu('delivery-note')">
 
               <a href="#">Delivery Note</a>
 
               <ul
-                *ngIf="activeNestedSubMenu === 'delivery-note'"
+                *ngIf="activeNestedSubMenu === 'deliverynote'"
                 [class.nested-submenu]="!isMobile"
                 [class.mobile-visible]="isMobile">
-                <li><a [routerLink]="">New Delivery Note</a></li>
-                <li><a [routerLink]="">Manage Delivery Notes</a></li>
+                <li><a [routerLink]="['/sales/deliverynote']">New Delivery Note</a></li>
+                <li><a [routerLink]="['/sales/manage-deliverynote']">Manage Delivery Notes</a></li>
               </ul>
             </li>
 
@@ -115,8 +115,8 @@
                 *ngIf="activeNestedSubMenu === 'proforma-invoice'"
                 [class.nested-submenu]="!isMobile"
                 [class.mobile-visible]="isMobile">
-                <li><a [routerLink]="">New Proforma Invoice</a></li>
-                <li><a [routerLink]="">Manage Proforma Invoices</a></li>
+                <li><a [routerLink]="['/sales/proforma-invoice']">New Proforma Invoice</a></li>
+                <li><a [routerLink]="['/sales/manage-proforma-invoice']">Manage Proforma Invoices</a></li>
               </ul>
             </li>
 
@@ -133,8 +133,8 @@
                 *ngIf="activeNestedSubMenu === 'sale-order'"
                 [class.nested-submenu]="!isMobile"
                 [class.mobile-visible]="isMobile">
-                <li><a [routerLink]="">New Sale Order</a></li>
-                <li><a [routerLink]="">Manage Sale Orders</a></li>
+                <li><a [routerLink]="['/sales/saleorder']">New Sale Order</a></li>
+                <li><a [routerLink]="['/sales/manage-saleorder']">Manage Sale Orders</a></li>
               </ul>
             </li>
 
@@ -151,8 +151,8 @@
                 *ngIf="activeNestedSubMenu === 'credit-note'"
                 [class.nested-submenu]="!isMobile"
                 [class.mobile-visible]="isMobile">
-                <li><a [routerLink]="">New Credit Note</a></li>
-                <li><a [routerLink]="">Manage Credit Notes</a></li>
+                <li><a [routerLink]="['/sales/creditnote']">New Credit Note</a></li>
+                <li><a [routerLink]="['/sales/manage-creditnote']">Manage Credit Notes</a></li>
               </ul>
             </li>
 
@@ -163,14 +163,14 @@
              (mouseleave)="!isMobile && (activeNestedSubMenu = null)"
              (click)="isMobile && toggleNestedSubMenu('debit-note')">
 
-             <a href="#">Cebit Note</a>
+             <a href="#">Debit Note</a>
 
              <ul
                *ngIf="activeNestedSubMenu === 'debit-note'"
                [class.nested-submenu]="!isMobile"
                [class.mobile-visible]="isMobile">
-               <li><a [routerLink]="">New Debit Note</a></li>
-               <li><a [routerLink]="">Manage Debit Notes</a></li>
+               <li><a [routerLink]="['/sales/debitnote']">New Debit Note</a></li>
+               <li><a [routerLink]="['/sales/manage-debitnote']">Manage Debit Notes</a></li>
              </ul>
            </li>
 
@@ -325,7 +325,7 @@
  
         <li><a [routerLink]="['/inventory/add-stock-adjustment']">Add Stock Adjustment</a></li>
         <li><a [routerLink]="['/inventory/manage-stock-adjustment']">Manage Stock Adjustment</a></li>
-        <li><a [routerLink]="['/master/bank-master']">Physical Stock Reconcilation</a></li>
+        <li><a [routerLink]="['/inventory/physical-stock-reconciliation']">Physical Stock Reconcilation</a></li>
  
     </ul>
       </li>

@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common'; // <-- Add this import
   templateUrl: './manage-stock-adjustment.component.html',
   styleUrls: [
     './manage-stock-adjustment.component.css',
-    '../../../../styles/inventorymanage-style.css'
+    '../../../../styles/salesmanage-style.css'
   ]
 })
 export class ManageStockAdjustmentComponent {

@@ -3,10 +3,26 @@
   padding: 16px;
   background: #fff;
   border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+   margin-top: 10px;
+  box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.1),
+              0 6px 12px rgba(0, 0, 0, 0.1);
   font-family: 'Segoe UI', sans-serif;
   max-width: 100%;
   overflow-x: hidden;
+}
+
+.page-header-wrapper {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.page-heading {
+  font-size: 1.15rem;
+  font-weight: 560;
+  color: #1e2d3b;
+  border-left: 4px solid #1c77ef;
+  padding-left: 12px;
+  margin-bottom: 18px;
 }
 
 .section-container {
@@ -15,7 +31,7 @@
   border-radius: 12px;
   background-color: #fdfdfd;
   margin-bottom: 20px;
-  min-height: 400px; /* or any height you prefer */
+  min-height: 350px; /* or any height you prefer */
 }  
 
 /* Header Section */
@@ -26,7 +42,7 @@
   align-items: flex-end;
   gap: 15px;
   padding-bottom: 12px;
-  margin-bottom: 12px;
+  margin: 18px 0 10px;
 }
 
 /* Search Box */
@@ -121,11 +137,15 @@
   text-decoration: underline;
 }
 
+.filter-right {
+  margin-left: auto;
+}
+
 .filter-dropdown {
   padding: 6px 10px;
   border: 1px solid #ccc;
   font-size: 14px;
-  justify-content: flex-end;
+  border-radius: 4px;
 }
 
 /* Table Scroll */
@@ -274,8 +294,6 @@
   transform: rotate(45deg);
 }
 
-
-/* Responsive Design */
 @media (max-width: 992px) {
   .header {
     flex-direction: column;
@@ -286,33 +304,49 @@
     justify-content: flex-start;
   }
 
-  .top-buttons {
-      width: 180px;
-    justify-content: flex-end;
-  }
-
-  .add-product {
-    width: 100%;
-    text-align: center;
-  }
-
   .search-box {
     max-width: 100%;
     width: 100%;
+  }
+
+  .top-buttons {
+    flex-direction: column;
+    width: 180px;
+    align-items: flex-start; /* Align buttons to start */
+    gap: 10px;
+  }
+
+  .top-buttons button {
+    width: 100%;
+    text-align: left; /* Align text to left */
+    font-size: 14px;
+    padding: 10px 14px;
+    height: auto;
   }
 
   .footer {
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
+    gap: 10px;
   }
 
   .footer .buttons {
+    flex-direction: column;
     width: 180px;
+    align-items: flex-start;
   }
 
-  .export-btn {
+  .footer .buttons button {
     width: 100%;
-    text-align: center;
+    text-align: left;
+    font-size: 14px;
+    padding: 10px 14px;
+    height: auto;
+  }
+
+  .export-btn,
+  .barcode-btn {
+    width: 100%;
   }
 }

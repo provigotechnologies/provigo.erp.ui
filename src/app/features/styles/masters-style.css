@@ -22,12 +22,12 @@
   }
   
   .page-heading {
-    font-size: 1.75rem;
+    font-size: 1.15rem;
     font-weight: 560;
     color: #1e2d3b;
     border-left: 4px solid #1c77ef;
     padding-left: 12px;
-    margin-bottom: 8px;
+    margin-bottom: 18px;
   }
 
   .required {

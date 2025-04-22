@@ -12,6 +12,7 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./features/dashboard/components/dashboard/dashboard.component').then(m => m.DashboardComponent),
       },
+      
       {
         path: 'master',
         children: [
@@ -115,9 +116,89 @@ export const routes: Routes = [
       
       {
         path: 'sales',
-        loadComponent: () =>
-          import('./features/sales/components/sales/sales.component').then(m => m.SalesComponent),
-      },
+        children: [
+          {
+            path: 'invoice',
+            loadComponent: () =>
+              import('./features/sales/components/sales/invoice/invoice.component').then(m => m.InvoiceComponent),
+          },
+          {
+            path: 'manage-invoice',
+            loadComponent: () =>
+              import('./features/sales/components/sales/manage-invoice/manage-invoice.component').then(m => m.ManageInvoiceComponent),
+          },
+          {
+            path: 'sale-return',
+            loadComponent: () =>
+              import('./features/sales/components/sales/sale-return/sale-return.component').then(m => m.SaleReturnComponent),
+          },
+          {
+            path: 'manage-salereturn',
+            loadComponent: () =>
+              import('./features/sales/components/sales/manage-salereturn/manage-salereturn.component').then(m => m.ManageSaleReturnComponent),
+          },
+          {
+            path: 'quotation',
+            loadComponent: () =>
+              import('./features/sales/components/sales/quotation/quotation.component').then(m => m.QuotationComponent),
+          },
+          {
+            path: 'manage-quotation',
+            loadComponent: () =>
+              import('./features/sales/components/sales/manage-quotation/manage-quotation.component').then(m => m.ManageQuotationComponent),
+          },
+          {
+            path: 'deliverynote',
+            loadComponent: () =>
+              import('./features/sales/components/sales/deliverynote/deliverynote.component').then(m => m.DeliverynoteComponent),
+          },
+          {
+            path: 'manage-deliverynote',
+            loadComponent: () =>
+              import('./features/sales/components/sales/manage-deliverynote/manage-deliverynote.component').then(m => m.ManageDeliverynoteComponent),
+          },
+          {
+            path: 'proforma-invoice',
+            loadComponent: () =>
+              import('./features/sales/components/sales/proforma-invoice/proforma-invoice.component').then(m => m.ProformaInvoiceComponent),
+          },
+          {
+            path: 'manage-proforma-invoice',
+            loadComponent: () =>
+              import('./features/sales/components/sales/manage-proforma-invoice/manage-proforma-invoice.component').then(m => m.ManageProformaInvoiceComponent),
+          },
+          {
+            path: 'saleorder',
+            loadComponent: () =>
+              import('./features/sales/components/sales/saleorder/saleorder.component').then(m => m.SaleorderComponent),
+          },
+          {
+            path: 'manage-saleorder',
+            loadComponent: () =>
+              import('./features/sales/components/sales/manage-saleorder/manage-saleorder.component').then(m => m.ManageSaleorderComponent),
+          },
+          {
+            path: 'creditnote',
+            loadComponent: () =>
+              import('./features/sales/components/sales/creditnote/creditnote.component').then(m => m.CreditnoteComponent),
+          },
+          {
+            path: 'manage-creditnote',
+            loadComponent: () =>
+              import('./features/sales/components/sales/manage-creditnote/manage-creditnote.component').then(m => m.ManageCreditnoteComponent),
+          },
+          {
+            path: 'debitnote',
+            loadComponent: () =>
+              import('./features/sales/components/sales/debitnote/debitnote.component').then(m => m.DebitnoteComponent),
+          },
+          {
+            path: 'manage-debitnote',
+            loadComponent: () =>
+              import('./features/sales/components/sales/manage-debitnote/manage-debitnote.component').then(m => m.ManageDebitnoteComponent),
+          }
+        ]
+        },
 
       {
         path: 'inventory',

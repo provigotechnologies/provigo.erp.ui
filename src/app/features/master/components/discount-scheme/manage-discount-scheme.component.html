@@ -1,4 +1,10 @@
+  
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <div class="item-container">
+
+    <div class="page-header-wrapper">
+      <label class="page-heading">Search and Manage Discount Schemes</label>
+    </div>
 
     <div class="sec-container">
   
@@ -22,11 +28,17 @@
           <a style="color: #2d88ff;" href="#">Select All</a>
           <a style="color: #ff0026;" href="#" title="Delete selected items">Delete</a>
   
+          <div class="filter-right">
+
           <select class="filter-dropdown">
             <option value="all">All</option>
-            <option value="credit">Credit</option>
-            <option value="debit">Debit</option>
+            <option value="credit">Active</option>
+            <option value="debit">Expired</option>
+            <option value="all">Percent</option>
+            <option value="credit">Amount</option>
+            <option value="debit">Buy X Get X Free</option>
           </select>
+        </div>
         </div>
   
         <div class="table-scroll">
