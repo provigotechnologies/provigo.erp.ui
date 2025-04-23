@@ -117,7 +117,7 @@
     outline: none;
     box-sizing: border-box;
     transition: border-color 0.3s;
-    width: 100%; /* ✅ MAKE THIS 100% instead of 260px */
+    max-width: 260px; /* ✅ MAKE THIS 100% instead of 260px */
   }
   
   
@@ -279,11 +279,14 @@
   
   /* Tablet (below 1024px) */
   @media (max-width: 1024px), (max-width: 768px), (max-width: 600px) {
+
     .form-row input[type="text"],
     .form-row input[type="date"],
     .form-row select,
     .form-row textarea {
-      width: 100% !important; /* ✅ FORCE full width on small screens */
+      width: 100% !important; 
+      justify-content: flex-start;
+
     }
   
     .rupee-wrapper,
@@ -306,6 +309,12 @@
   }
 
   @media (max-width: 600px) {
+    .form-row{
+      flex-direction: column;
+      align-items: flex-start;
+     }
+ 
+    
     .filter-left {
       flex-direction: column;
       align-items: flex-start;

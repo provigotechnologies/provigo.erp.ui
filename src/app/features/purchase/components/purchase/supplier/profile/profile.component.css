@@ -1,0 +1,83 @@
+.product-main-container {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-radius: 10px;
+    gap: 10px;
+    max-width: 100%;
+    margin: 0px auto;
+    background: #ffffff;
+    overflow-y: auto;
+    height: 600px; /* Adjust to your desired height */
+    box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.1),
+                0 6px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .page-heading {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  /* Adjusted the positioning of tab-buttons */
+  .tab-buttons-container {
+    display: flex;
+    justify-content: flex-start; /* Align tabs to the left */
+    margin-bottom: 10px; /* Space between the tab buttons and the content */
+  }
+  
+  .tab-buttons {
+    display: flex;
+    gap: 5px;
+  }
+  
+  .tab-btn {
+    background: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 2px 12px;
+    font-weight: 500;
+    border-radius: 4px 4px 0 0;
+    cursor: pointer;
+  }
+  
+  .tab-btn.active {
+    background: #ffffff;
+    border-bottom: none;
+    font-weight: bold;
+  }
+  
+  .content-wrapper {
+    display: flex;
+    gap: 10px;
+    height: 100%; /* Ensure content-wrapper fills available height */
+  }
+  
+  .product-left-container {
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border: 2px solid #ccc;
+    margin-top: 0px;
+  }
+  
+  .product-right-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border: 2px solid #ccc;
+    padding: 10px;
+    position: relative;
+    margin-top: 0px;
+  }
+  
+  .form-row {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-row label {
+    font-weight: 500;
+    font-size: 14px;
+  }
+  

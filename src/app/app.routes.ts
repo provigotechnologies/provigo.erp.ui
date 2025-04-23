@@ -198,7 +198,73 @@ export const routes: Routes = [
               import('./features/sales/components/sales/manage-debitnote/manage-debitnote.component').then(m => m.ManageDebitnoteComponent),
           }
         ]
-        },
+      },
+
+      {
+        path: 'purchase',
+        children: [
+            {
+              path: 'purchase-bill',
+              loadComponent: () =>
+                import('./features/purchase/components/purchase/purchase-bill/purchase-bill.component').then(m => m.PurchaseBillComponent),
+            },
+            {
+              path: 'manage-purchase-bill',
+              loadComponent: () =>
+                import('./features/purchase/components/purchase-manage/manage-purchase-bill/manage-purchase-bill.component').then(m => m.ManagePurchaseBillComponent),
+            },
+            {
+              path: 'purchase-return',
+              loadComponent: () =>
+                import('./features/purchase/components/purchase/purchase-return/purchase-return.component').then(m => m.PurchaseReturnComponent),
+            },
+            {
+              path: 'manage-purchase-return',
+              loadComponent: () =>
+                import('./features/purchase/components/purchase-manage/manage-purchase-return/manage-purchase-return.component').then(m => m.ManagePurchaseReturnComponent),
+            },
+            {
+              path: 'purchase-order',
+              loadComponent: () =>
+                import('./features/purchase/components/purchase/purchase-order/purchase-order.component').then(m => m.PurchaseOrderComponent),
+            },
+            {
+              path: 'manage-purchase-order',
+              loadComponent: () =>
+                import('./features/purchase/components/purchase-manage/manage-purchase-order/manage-purchase-order.component').then(m => m.ManagePurchaseOrderComponent),
+            },
+            {
+              path: 'creditnote',
+              loadComponent: () =>
+                import('./features/purchase/components/purchase/creditnote/creditnote.component').then(m => m.CreditnoteComponent),
+            },
+            {
+              path: 'manage-creditnote',
+              loadComponent: () =>
+                import('./features/purchase/components/purchase-manage/manage-creditnote/manage-creditnote.component').then(m => m.ManageCreditnoteComponent),
+            },
+            {
+              path: 'debitnote',
+              loadComponent: () =>
+                import('./features/purchase/components/purchase/debitnote/debitnote.component').then(m => m.DebitnoteComponent),
+            },
+            {
+              path: 'manage-debitnote',
+              loadComponent: () =>
+                import('./features/purchase/components/purchase-manage/manage-debitnote/manage-debitnote.component').then(m => m.ManageDebitnoteComponent),
+            },
+            {
+              path: 'supplier',
+              loadComponent: () =>
+                import('./features/purchase/components/purchase/supplier/profile/profile.component').then(m => m.ProfileComponent),
+            },
+            {
+              path: 'manage-supplier',
+              loadComponent: () =>
+                import('./features/purchase/components/purchase-manage/manage-supplier/manage-supplier.component').then(m => m.ManageSupplierComponent),
+            }
+        ]
+      },
 
       {
         path: 'inventory',

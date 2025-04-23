@@ -394,19 +394,15 @@
   }
   
   .input-pair input[type="text"] {
-    padding: 4px 6px;
-    font-size: 0.85rem;
-    border: 1px solid #ccc;
-    width: 100px; /* 👈 Customize width as needed */
-    min-width: unset; /* override min-width if needed */
-  }
-  
-  .input-pair input[type="text"]{
-    border: none;
-    border-bottom: 2px solid #ccc;
     padding: 4px 8px;
+    font-size: 0.85rem;
+    border: none;
+    width: 100px; /* 👈 Customize width as needed */
+    min-width: unset; 
+    border-bottom: 2px solid #ccc;
     transition: border-bottom 0.2s;
   }
+  
   
   /* Focus effect for input fields with placeholder */
   .input-pair input[type="text"]:focus {

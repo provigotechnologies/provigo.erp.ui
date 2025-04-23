@@ -197,109 +197,109 @@
 
       <!-- Invoice with Nested Submenu -->
       <li class="has-submenu"
-        [class.active]="activeNestedSubMenu === 'invoice'"
-        (mouseenter)="!isMobile && (activeNestedSubMenu = 'invoice')"
+        [class.active]="activeNestedSubMenu === 'purchase-bill'"
+        (mouseenter)="!isMobile && (activeNestedSubMenu = 'purchase-bill')"
         (mouseleave)="!isMobile && (activeNestedSubMenu = null)"
-        (click)="isMobile && toggleNestedSubMenu('invoice')">
+        (click)="isMobile && toggleNestedSubMenu('purchase-bill')">
 
         <a href="#">Purchase Bill</a>
 
        <ul
-          *ngIf="activeNestedSubMenu === 'invoice'"
+          *ngIf="activeNestedSubMenu === 'purchase-bill'"
           [class.nested-submenu]="!isMobile"
           [class.mobile-visible]="isMobile">
-          <li><a [routerLink]="['/sales']">Add Purchase Bill</a></li>
-          <li><a [routerLink]="">Manage Purchase Bill</a></li>
+          <li><a [routerLink]="['/purchase/purchase-bill']">Add Purchase Bill</a></li>
+          <li><a [routerLink]="['/purchase/manage-purchase-bill']">Manage Purchase Bill</a></li>
         </ul>
       </li>
 
        <!-- Sale Return with Nested Submenu -->
        <li class="has-submenu"
-          [class.active]="activeNestedSubMenu === 'sale-return'"
-          (mouseenter)="!isMobile && (activeNestedSubMenu = 'sale-return')"
+          [class.active]="activeNestedSubMenu === 'purchase-return'"
+          (mouseenter)="!isMobile && (activeNestedSubMenu = 'purchase-return')"
           (mouseleave)="!isMobile && (activeNestedSubMenu = null)"
-          (click)="isMobile && toggleNestedSubMenu('sale-return')">
+          (click)="isMobile && toggleNestedSubMenu('purchase-return')">
 
           <a href="#">Purchase Return</a>
 
           <ul
-            *ngIf="activeNestedSubMenu === 'sale-return'"
+            *ngIf="activeNestedSubMenu === 'purchase-return'"
             [class.nested-submenu]="!isMobile"
             [class.mobile-visible]="isMobile">
-            <li><a [routerLink]="">New Purchase Return</a></li>
-            <li><a [routerLink]="">Manage Purchase Returns</a></li>
+            <li><a [routerLink]="['/purchase/purchase-return']">New Purchase Return</a></li>
+            <li><a [routerLink]="['/purchase/manage-purchase-return']">Manage Purchase Returns</a></li>
           </ul>
         </li>
 
         <!-- Purchase Order with Nested Submenu -->
         <li class="has-submenu"
-          [class.active]="activeNestedSubMenu === 'sale-order'"
-          (mouseenter)="!isMobile && (activeNestedSubMenu = 'sale-order')"
+          [class.active]="activeNestedSubMenu === 'purchase-order'"
+          (mouseenter)="!isMobile && (activeNestedSubMenu = 'purchase-order')"
           (mouseleave)="!isMobile && (activeNestedSubMenu = null)"
-          (click)="isMobile && toggleNestedSubMenu('sale-order')">
+          (click)="isMobile && toggleNestedSubMenu('purchase-order')">
 
           <a href="#">Purchase Order</a>
 
           <ul
-            *ngIf="activeNestedSubMenu === 'sale-order'"
+            *ngIf="activeNestedSubMenu === 'purchase-order'"
             [class.nested-submenu]="!isMobile"
             [class.mobile-visible]="isMobile">
-            <li><a [routerLink]="">New Purchase Order</a></li>
-            <li><a [routerLink]="">Manage Purchase Orders</a></li>
+            <li><a [routerLink]="['/purchase/purchase-order']">New Purchase Order</a></li>
+            <li><a [routerLink]="['/purchase/manage-purchase-order']">Manage Purchase Orders</a></li>
           </ul>
         </li>
 
         <!-- Credit Note with Nested Submenu -->
         <li class="has-submenu"
-          [class.active]="activeNestedSubMenu === 'credit-note'"
-          (mouseenter)="!isMobile && (activeNestedSubMenu = 'credit-note')"
+          [class.active]="activeNestedSubMenu === 'creditnote'"
+          (mouseenter)="!isMobile && (activeNestedSubMenu = 'creditnote')"
           (mouseleave)="!isMobile && (activeNestedSubMenu = null)"
-          (click)="isMobile && toggleNestedSubMenu('credit-note')">
+          (click)="isMobile && toggleNestedSubMenu('creditnote')">
 
           <a href="#">Credit Note</a>
 
           <ul
-            *ngIf="activeNestedSubMenu === 'credit-note'"
+            *ngIf="activeNestedSubMenu === 'creditnote'"
             [class.nested-submenu]="!isMobile"
             [class.mobile-visible]="isMobile">
-            <li><a [routerLink]="">New Credit Note</a></li>
-            <li><a [routerLink]="">Manage Credit Notes</a></li>
+            <li><a [routerLink]="['/purchase/creditnote']">New Credit Note</a></li>
+            <li><a [routerLink]="['/purchase/manage-creditnote']">Manage Credit Notes</a></li>
           </ul>
         </li>
 
          <!-- Debit Note with Nested Submenu -->
          <li class="has-submenu"
-         [class.active]="activeNestedSubMenu === 'debit-note'"
-         (mouseenter)="!isMobile && (activeNestedSubMenu = 'debit-note')"
+         [class.active]="activeNestedSubMenu === 'debitnote'"
+         (mouseenter)="!isMobile && (activeNestedSubMenu = 'debitnote')"
          (mouseleave)="!isMobile && (activeNestedSubMenu = null)"
-         (click)="isMobile && toggleNestedSubMenu('debit-note')">
+         (click)="isMobile && toggleNestedSubMenu('debitnote')">
 
          <a href="#">Debit Note</a>
 
          <ul
-           *ngIf="activeNestedSubMenu === 'debit-note'"
+           *ngIf="activeNestedSubMenu === 'debitnote'"
            [class.nested-submenu]="!isMobile"
            [class.mobile-visible]="isMobile">
-           <li><a [routerLink]="">New Debit Note</a></li>
-           <li><a [routerLink]="">Manage Debit Notes</a></li>
+           <li><a [routerLink]="['/purchase/debitnote']">New Debit Note</a></li>
+           <li><a [routerLink]="['/purchase/manage-debitnote']">Manage Debit Notes</a></li>
          </ul>
        </li>
 
            <!-- Supplierwith Nested Submenu -->
            <li class="has-submenu"
-           [class.active]="activeNestedSubMenu === 'debit-note'"
-           (mouseenter)="!isMobile && (activeNestedSubMenu = 'debit-note')"
+           [class.active]="activeNestedSubMenu === 'Supplier'"
+           (mouseenter)="!isMobile && (activeNestedSubMenu = 'Supplier')"
            (mouseleave)="!isMobile && (activeNestedSubMenu = null)"
-           (click)="isMobile && toggleNestedSubMenu('debit-note')">
+           (click)="isMobile && toggleNestedSubMenu('Supplier')">
 
            <a href="#">Supplier</a>
 
            <ul
-             *ngIf="activeNestedSubMenu === 'debit-note'"
+             *ngIf="activeNestedSubMenu === 'Supplier'"
              [class.nested-submenu]="!isMobile"
              [class.mobile-visible]="isMobile">
-             <li><a [routerLink]="">Add Suppliere</a></li>
-             <li><a [routerLink]="">Manage Suppliers</a></li>
+             <li><a [routerLink]="['/purchase/supplier']">Add Supplier</a></li>
+             <li><a [routerLink]="['/purchase/manage-supplier']">Manage Suppliers</a></li>
            </ul>
          </li>
 

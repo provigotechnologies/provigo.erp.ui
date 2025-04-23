@@ -3,7 +3,7 @@
 <div class="item-container">
 
   <div class="page-header-wrapper">
-    <label class="page-heading">Search and Manage Items</label>
+    <label class="page-heading">Search and Manage Suppliers</label>
   </div>
 
     <div class="header">
@@ -12,8 +12,7 @@
         <button class="search-btn">🔍</button>
       </div>
       <div class="top-buttons">
-        <button class="add-product"><strong>+</strong> Add New Product</button>
-        <button class="add-service"><strong>+</strong> Add New Service</button>
+        <button class="add-product"><strong>+</strong> Add New Supplier</button>
       </div>
     </div>
   
@@ -26,18 +25,15 @@
             <a style="color: #ff0026;" href="#" title="Delete selected item's">Delete</a>
             <a style="color: #1ac423;" href="#" title="Enable selected item's">Enable</a>
             <a style="color: #ff0026;" href="#" title="Disable selected item's">Disable</a>
-            <a style="color: #2d88ff;" href="#">Add To Online Store</a>
             
             <div class="filter-right">
 
              <select class="filter-dropdown">
               <option value="all">All</option>
-              <option value="all">Service</option>
-              <option value="all">Product</option>
-              <option value="all">Enabled</option>
-              <option value="all">Disabled</option>
-              <option value="all">Published</option>
-              <option value="all">Unpublished</option>
+              <option value="all">Active</option>
+              <option value="all">Not Active</option>
+              <option value="all">Positive Balance</option>
+              <option value="all">Negative Balance</option>
              </select>
             </div>
           </div>
@@ -49,22 +45,12 @@
         <tr>
           <th></th>
           <th>S. No.</th>
-          <th>Type</th>
-          <th>Group</th>
-          <th>Brand</th>
-          <th>Item Name</th>
-          <th>Print Name</th>
-          <th>UoM</th>
-          <th>Purchase Price</th>
-          <th>Sale Price</th>
-          <th>Min.Sale Price</th>
-          <th>M.R.P</th>
-          <th> HSn</th>
-          <th> CGST (%)</th>
-          <th>SGST (%)</th>
-          <th> IGST (%)</th>
-          <th>Ssle Discount (%)</th>
-          <th> Reorder Level</th>
+          <th>Supplier Name</th>
+          <th>Contact No</th>
+          <th>Address</th>
+          <th>City</th>
+          <th> State</th>
+          <th> Account Balance</th>
           <th>Status</th>
         </tr>
       </thead>
@@ -75,16 +61,6 @@
           <td></td>
           <td></td>
           <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>      
-          <td></td>
-          <td></td>
-          <td></td>
-          <td> </td>
           <td></td>
           <td></td>
           <td></td>
@@ -101,16 +77,6 @@
           <td></td>
           <td></td>
           <td></td>
-          <td><strong></strong></td>
-          <td></td>    
-          <td></td>
-          <td></td>
-          <td></td>
-          <td> </td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
         </tr>
       </tbody>
     </table>
@@ -120,17 +86,13 @@
    
     
     <div class="footer">
-        <span>Total Item(s): </span>
+        <span><strong>Net A/c Balance: </strong></span>
+        <span>Count: </span>
         <span>Enabled: </span>
         <span>Disabled: </span>
-        <span>Product(s): </span>
-        <span>Service(s): </span>
         
         <!-- Wrap the buttons in a div for right alignment -->
         <div class="buttons">
-          <button class="barcode-btn">
-            <i class="fas fa-barcode"></i> Barcode (A4)
-          </button>
           <button class="export-btn">
             <i class="fas fa-file-excel"></i> Export 2 Excel
           </button>

@@ -3,7 +3,7 @@
 <div class="item-container">
 
   <div class="page-header-wrapper">
-    <label class="page-heading">Search and Manage Invoices</label>
+    <label class="page-heading">Search and Manage Supplier Credit Notes</label>
   </div>
 
   <div class="sec-container">
@@ -37,7 +37,7 @@
       </div>
 
       <div class="top-buttons">
-        <button class="add-product"><strong>+</strong> Add New Invoice</button>
+        <button class="add-product"><strong>+</strong> Add New Credit Note</button>
       </div>
     </div>
 
@@ -49,15 +49,12 @@
       <div class="action-bar">
         <input type="checkbox" />
         <a style="color: #2d88ff;" href="#">Select All</a>
-        <a style="color: #ff0026;" href="#" title="Delete selected items">Delete</a>
+        <a style="color: #ff0026;" href="#" title="Delete selected purchase return(s)">Delete</a>
 
         <div class="filter-right">
 
         <select class="filter-dropdown">
           <option value="all">All</option>
-          <option value="paid">Paid</option>
-          <option value="unpaid">Unpaid</option>
-          <option value="overdue">Overdue</option>
           <option value="nongst">Non GST</option>
           <option value="gst">GSt</option>
           <option value="billsupply">Bill of Supply</option>
@@ -71,18 +68,16 @@
             <tr>
               <th></th>
               <th>S. No.</th>
-              <th>Status</th>
               <th>Date</th>
               <th>Type</th>
+              <th>Note No</th>
               <th>Invoice No</th>
               <th>Customer Name</th>
               <th>Contact No</th>
               <th>State(PoS)</th>    
               <th>Address</th>
               <th>GSTIN</th>
-              <th>Total Amount</th>    
-              <th>Due Date</th>
-              <th>Created On</th>
+              <th>Total Amount</th>
             </tr>
           </thead>
           <tbody>
@@ -94,19 +89,13 @@
               <td></td>
               <td></td>
               <td></td>
-              <td></td>
               <td></td>   
               <td></td>
-              <td></td>
-              <td></td> 
               <td></td>
               <td></td>
             </tr>
             <tr>
               <td><input type="checkbox" /></td>
-              <td></td>
-              <td></td>
-              <td></td>
               <td></td>
               <td></td>
               <td></td>
@@ -128,9 +117,6 @@
   <!-- Footer (outside the container) -->
   <div class="footer">
     <span><strong>Total:</strong></span>
-    <span>Paid:</span>
-    <span>Unpaid:</span>
-    <span>Overdue:</span>
 
     <div class="buttons">
       <button class="export-btn">

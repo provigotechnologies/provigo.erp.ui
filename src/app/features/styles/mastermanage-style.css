@@ -133,8 +133,36 @@
   font-size: 14px;
   text-decoration: none;
   font-weight: 500;
-  margin-right: 15px;
+  margin: 0 10px 0 5px;
   text-decoration: underline;
+}
+
+.action-bar input[type="checkbox"] {
+  appearance: none;
+  height: 13px;
+  width: 13px;
+  border: 2px solid #aaa;
+  border-radius: 3px;
+  cursor: pointer;
+  position: relative;
+  background-color: white;
+}
+
+.action-bar input[type="checkbox"]:checked {
+  background-color: #2980f2;
+  border-color: #2980f2;
+}
+
+.action-bar input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 0px;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
 }
 
 .filter-right {
