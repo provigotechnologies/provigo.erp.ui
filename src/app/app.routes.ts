@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { provideRouter } from '@angular/router';
+import { PriceCatelogComponent } from './features/inventory/components/inventory/add-stock-adjustment/price-catelog.component'; 
 
 export const routes: Routes = [
   {
@@ -283,7 +284,11 @@ export const routes: Routes = [
             path: 'physical-stock-reconciliation',
             loadComponent: () =>
               import('./features/inventory/components/inventory/physical-stock-reconciliation/physical-stock-reconciliation.component').then(m => m.PhysicalStockReconciliationComponent),
-          }
+          },
+          {
+            path: 'price-catelog',
+            component: PriceCatelogComponent, 
+          },
         ]
       },
       

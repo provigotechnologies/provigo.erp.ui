@@ -1,25 +1,42 @@
-<!-- Main Layout Container -->
 <div class="product-main-container">
 
-    <!-- Heading Section -->
+  <!-- Heading -->
   <div class="page-header-wrapper">
-    <label class="page-heading"> Stock Adjustment</label>
+    <label class="page-heading">Stock Adjustment</label>
   </div>
-      <!-- Left Side -->
-      <div class="product-container">
-        <div class="tab-header">
-          <div class="tab active">Item Info</div>
-          <div class="tab">Serial Numbers</div>
-        </div>
-        <!-- Left Container 1 -->
-        <div class="product-inner-container">
+
+  <div class="product-container">
+
+    <!-- Tabs -->
+    <div class="tab-header">
+      <div class="tab" 
+           [ngClass]="{'active': selectedTab === 'item'}"
+           (click)="selectTab('item')">
+        Item Info
+      </div>
+      <div class="tab" 
+           [ngClass]="{'active': selectedTab === 'serial'}"
+           (click)="selectTab('serial')">
+        Serial Numbers
+      </div>
+    </div>
+
+    <!-- Tab Content -->
+    <div class="product-inner-container">
+
+      <!-- Item Info UI -->
+      <ng-container *ngIf="selectedTab === 'item'">
+
+        <div class="serial-number-section">
+          <fieldset class="form-box">
+            <legend>Item Information</legend>
 
           <!-- Category -->
           <div class="form-row">
             <label for="category">Adjustment Date </label>
             <input type="date" id="start-date" />
           </div>
-    
+        
           <div class="form-row">
             <label class="radio-label">Type</label>
             <div class="radio-options">
@@ -27,7 +44,7 @@
               <label><input type="radio" name="billTo" /> Debit (-)</label>
             </div>
           </div>
-
+        
           <!-- Brand -->
           <div class="form-row">
             <label for="brand">Adjustment Reason</label>
@@ -42,63 +59,182 @@
                 <option value="">Others</option>
             </select>
           </div>
-    
+        
           <!-- Barcode -->
           <div class="form-row">
             <label for="itemcode">Item Code</label>
             <input type="text" id="itemcode" />
           </div>
-    
+        
           <!-- Product Name -->
           <div class="form-row">
             <label for="productName">Item Name <span class="required">*</span></label>
             <input type="text" id="productName" />
             <span class="add-item-link">Add Item</span>
         </div>
-    
+        
           <!-- Price -->
           <div class="form-row">
             <label for="printname">Quantity <span class="required">*</span></label>
             <input type="text" id="printname" />
           </div>
           
-<!-- Unit Price -->
-<div class="form-row">
-    <label for="unit-price">Unit Price <span class="required">*</span></label>
-    <div class="input-flex-wrapper rupee-inline-wrapper">
-      <span class="currency-symbol">₹</span>
-      <input type="text" id="unit-price" />
-    </div>
-  </div>
-  
-  <!-- Amount -->
-  <div class="form-row">
-    <label for="amount">Amount <span class="required">*</span></label>
-    <div class="input-flex-wrapper rupee-inline-wrapper">
-      <span class="currency-symbol">₹</span>
-      <input type="text" id="amount" />
-    </div>
-  </div>
-  
-
-      <div class="form-row">
+        <!-- Unit Price -->
+        <div class="form-row">
+        <label for="unit-price">Unit Price <span class="required">*</span></label>
+        <div class="input-flex-wrapper rupee-inline-wrapper">
+        <span class="currency-symbol">₹</span>
+        <input type="text" id="unit-price" />
+        </div>
+        </div>
+        
+        <!-- Amount -->
+        <div class="form-row">
+        <label for="amount">Amount <span class="required">*</span></label>
+        <div class="input-flex-wrapper rupee-inline-wrapper">
+        <span class="currency-symbol">₹</span>
+        <input type="text" id="amount" />
+        </div>
+        </div>
+        
+        
+        <div class="form-row">
         <label class="textarea">Remarks</label>
         <textarea rows="3"></textarea>
-      </div>
-
         </div>
+        
+      </fieldset>
+      </div>
+         <!-- Save Buttons (you can show for both tabs or only item tab) -->
+    <div class="right-buttons" *ngIf="selectedTab === 'item'">
+      <button class="primary-btn">
+         <i class="material-icons">save</i> Save
+      </button>
+      <button class="primary-btn">
+        <i class="material-icons">save</i> Save & New
+      </button>
+    </div>
+      </ng-container>
 
-        <div class="right-buttons">
+      <!-- Serial Numbers UI -->
+      <ng-container *ngIf="selectedTab === 'serial'">
+        <!-- You can design this however you want -->
+        <div class="serial-number-section">
+          <fieldset class="form-box">
+            <legend>Add Serial Number</legend>
+            <div class="form-row">
+              <label>
+                M.R.P.
+                <div class="input-group">
+                  <span class="currency-symbol">₹</span>
+                  <input type="text" class="input" [(ngModel)]="serialForm.mrp" />
+                </div>
+              </label>
+        
+              <label>
+                Sale Price
+                <div class="input-group">
+                  <span class="currency-symbol">₹</span>
+                  <input type="text" class="input" [(ngModel)]="serialForm.salePrice" />
+                  <button type="button" class="icon-button" (click)="navigateToPriceCatalog()">
+                    <i class="material-icons">list</i>
+                  </button>
+                  
+                </div>
+              </label>
+              
+              <label class="min-sale-price-shift">
+                Min. Sale Price
+                <div class="input-group">
+                  <span class="currency-symbol">₹</span>
+                  <input type="text" class="input" [(ngModel)]="serialForm.minSalePrice" />
+                </div>
+              </label>
+              
+            </div>
+        
+            <div class="form-row">
+              <label>
+                Serial No. <span class="required">*</span>
+                <div class="input-with-icon">
+                  <span class="barcode-icon">||||||</span>
+                  <input type="text" class="input" [(ngModel)]="serialForm.serialNo" />
+                </div>
+              </label>
+            </div>
+          </fieldset>
+        
+          <div class="save-button-wrapper">
             <button class="primary-btn">
-               <i class="material-icons">save</i> Save
-            </button>
-            <button class="primary-btn">
-              <i class="material-icons">save</i> Save & New
+              <i class="material-icons" (click)="addSerial()">save</i> Save
            </button>
-         </div> 
-      </div>
+          </div>
+        
+          
+          
 
-      </div>
+          <div class="table-scroll">
+
+            <table class="item-table">
+              <thead>
+                <tr>
+                  <th>S. No.</th>
+                  <th>Serial Number</th>
+                  <th>Agent</th>
+                  <th>Wholesale</th>
+                  <th>Sale Price</th>
+                  <th>Min.Sale Price</th>
+                  <th>M.R.P</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <!-- Repeat for other items -->
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+
+            
+        </div>
+        
+      </ng-container>
+
+    </div>
+
+ 
+
+  </div>
+
+</div>
 
 
-    
+
+
+
+ 

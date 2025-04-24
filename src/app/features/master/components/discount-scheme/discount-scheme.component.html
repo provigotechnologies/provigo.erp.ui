@@ -1,97 +1,188 @@
-<!-- Main Layout Container -->
 <div class="product-main-container">
 
-  <!-- Heading Section -->
-<div class="page-header-wrapper">
-  <label class="page-heading"> Discount Scheme</label>
-</div>
-
-<div class="product-container">
-  <div class="tab-header">
-    <div class="tab active">Scheme</div>
-    <div class="tab">Serial Numbers</div>
+  <!-- Heading -->
+  <div class="page-header-wrapper">
+    <label class="page-heading">Discount Scheme</label>
   </div>
 
-    <!-- Left Side -->
-    <div class="product-container">
-      <!-- Left Container 1 -->
-      <div class="product-inner-container">
-        
-        <div class="form-row">
-          <label for="date">Start Date </label>
-          <input type="date" id="start-date" />
-        </div>
-  
-        <div class="form-row">
-          <label for="date">End Date </label>
-          <input type="date" id="start-date" />
-        </div>
+  <div class="product-container">
 
-        <div class="form-row">
-          <label for="name"> Name <span class="required">*</span></label>
-          <input type="text" id="name" />
+    <!-- Tabs -->
+    <div class="tab-header">
+      <div class="tab" 
+           [ngClass]="{'active': selectedTab === 'scheme'}"
+           (click)="selectTab('scheme')">
+        Scheme
       </div>
+      <div class="tab" 
+           [ngClass]="{'active': selectedTab === 'mapitem'}"
+           (click)="selectTab('mapitem')">
+       Mapped Items
+      </div>
+    </div>
 
-        <!-- Brand -->
-        <div class="form-row">
-          <label for="discounttype">Discount Type</label>
-          <select id="discounttype">
-              <option value="">Percent</option>
-              <option value="">Amount</option>
-              <option value="">Buy X Get X Free</option>
-          </select>
-        </div>
-        
-        <div class="form-row">
-          <label for="quantity">Quantity <span class="required">*</span></label>
-          <div class="quantity-wrapper">
-            <select id="quantityvalue">
-              <option value="">Equal to (=)</option>
-              <option value="">Greater than (>)</option>
+    <!-- Tab Content -->
+    <div class="product-inner-container">
+
+      <!-- Item Info UI -->
+      <ng-container *ngIf="selectedTab === 'scheme'">
+
+        <div class="serial-number-section">
+          <fieldset class="form-box">
+            <legend>Scheme Information</legend>
+
+            <div class="form-row">
+              <label for="date">Start Date </label>
+              <input type="date" id="start-date" />
+            </div>
+      
+            <div class="form-row">
+              <label for="date">End Date </label>
+              <input type="date" id="start-date" />
+            </div>
+    
+            <div class="form-row">
+              <label for="name"> Name <span class="required">*</span></label>
+              <input type="text" id="name" />
+          </div>
+    
+            <!-- Brand -->
+            <div class="form-row">
+              <label for="discounttype">Discount Type</label>
+              <select id="discounttype">
+                  <option value="">Percent</option>
+                  <option value="">Amount</option>
+                  <option value="">Buy X Get X Free</option>
+              </select>
+            </div>
+            
+            <div class="form-row">
+              <label for="quantity">Quantity <span class="required">*</span></label>
+              <div class="quantity-wrapper">
+                <select id="quantityvalue">
+                  <option value="">Equal to (=)</option>
+                  <option value="">Greater than (>)</option>
+                </select>
+                <input id="quantity" type="text" />
+              </div>
+            </div>
+            
+    
+            <!-- Barcode -->
+            <div class="form-row">
+              <label for="freequantity">Free Quantity</label>
+              <input type="text" id="freequantity" />
+            </div>
+      
+            <div class="form-row">
+              <label for="Percent">Percent <span class="required">*</span></label>
+              <div class="input-flex-wrapper rupee-inline-wrapper">
+                <span class="currency-symbol">%</span>
+                <input type="text" id="Percent" />
+              </div>
+            </div>
+      
+          <div class="form-row">
+            <label for="customertype">Apply To</label>
+            <select id="customertype">
+                <option value="">All</option>
+                <option value="">Walking customers</option>
+                <option value="">Member customers</option>
             </select>
-            <input id="quantity" type="text" />
           </div>
+    
+        <div class="form-row">
+          <label class="textarea">Remarks</label>
+          <textarea rows="3"></textarea>
         </div>
         
+      </fieldset>
+      </div>
+         <!-- Save Buttons (you can show for both tabs or only item tab) -->
+      <div class="right-buttons" *ngIf="selectedTab === 'scheme'">
+        <button class="primary-btn">
+          <i class="material-icons">save</i> Save
+        </button>
+      </div>
+      </ng-container>
 
-        <!-- Barcode -->
-        <div class="form-row">
-          <label for="freequantity">Free Quantity</label>
-          <input type="text" id="freequantity" />
-        </div>
-  
-        <div class="form-row">
-          <label for="Percent">Percent <span class="required">*</span></label>
-          <div class="input-flex-wrapper rupee-inline-wrapper">
-            <span class="currency-symbol">%</span>
-            <input type="text" id="Percent" />
+
+      <!-- Serial Numbers UI -->
+      <ng-container *ngIf="selectedTab === 'mapitem'">
+        <!-- You can design this however you want -->
+        <div class="serial-number-section">
+          <div class="button-row">
+            <button class="secondary-btn">
+              <i class="material-icons"></i> Add Scheme Items
+            </button>
+            <button class="secondary-btn">
+              <i class="material-icons"></i> Delete Schema Items
+            </button>
+            <button class="secondary-btn">
+              <i class="material-icons"></i> Clear All Scheme Items
+            </button>
           </div>
-        </div>
-  
-      <div class="form-row">
-        <label for="customertype">Apply To</label>
-        <select id="customertype">
-            <option value="">All</option>
-            <option value="">Walking customers</option>
-            <option value="">Member customers</option>
-        </select>
-      </div>
+            
+           <div class="table-scroll">
 
-    <div class="form-row">
-      <label class="textarea">Remarks</label>
-      <textarea rows="3"></textarea>
+            <table class="item-table">
+              <thead>
+                <tr>
+                  <th>S. No.</th>
+                  <th>Serial Number</th>
+                  <th>Agent</th>
+                  <th>Wholesale</th>
+                  <th>Sale Price</th>
+                  <th>Min.Sale Price</th>
+                  <th>M.R.P</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <!-- Repeat for other items -->
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+   
+        </div> 
+      </ng-container>
+
     </div>
 
-      </div>
+ 
 
-      <div class="right-buttons">
-          <button class="primary-btn">
-             <i class="material-icons">save</i> Save
-          </button>
-       </div> 
-    </div>
+  </div>
 
-    </div>
+</div>
 
 
-  
+
+
+
+ 

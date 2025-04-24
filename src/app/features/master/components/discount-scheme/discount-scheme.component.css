@@ -19,6 +19,34 @@
   max-width: 125px !important;
 }
 
+.button-row {
+  display: flex;
+  gap: 21px;
+  margin-top: 20px;
+}
+
+.secondary-btn {
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ccc;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.secondary-btn:hover{
+  background-color: #f1f1f1;
+}
+
+.secondary-btn i.material-icons {
+  font-size: 18px;
+}
+
+
 
 /* Mobile (below 600px) */
 @media (max-width: 600px) {
@@ -31,5 +59,138 @@
   .quantity-wrapper input[type="text"] {
     width: 100% !important; /* full width on small screens */
     max-width: 260px !important;
+  }
+}
+
+
+.serial-number-section {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f9fafb;
+}
+
+.form-box, .table-box {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  font-size: 14px;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.serial-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.serial-table th, .serial-table td {
+  border: 1px solid #1c77ef;
+  padding: 0.5rem;
+  text-align: left;
+}
+.serial-table thead {
+  background-color: #1c77ef;
+  color: white;
+}
+
+
+/* Table Scroll */
+.table-scroll {
+  overflow-x: auto;
+}
+/* Scrollbar styling for modern browsers */
+.table-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.table-scroll::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.table-scroll::-webkit-scrollbar-thumb {
+  background-color: #ccc; /* light grey */
+  border-radius: 4px;
+}
+
+.table-scroll::-webkit-scrollbar-thumb:hover {
+  background: #b3b3b3; /* slightly darker on hover */
+}
+
+/* Firefox scrollbar */
+.table-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #ccc #fff;
+}
+
+
+.item-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  margin-top: 25px;
+}
+
+.item-table th {
+  background-color: #2980f2;
+  color: #fff;
+  font-weight: 600;  
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  text-align: left;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.item-table td {
+  padding: 16px;
+  border: 1px solid #e0e0e0;
+  text-align: left;
+  font-size: 14px;
+  white-space: nowrap;
+} 
+
+.item-table tr:nth-child(even) {
+  background-color: #f1f4f9;
+}
+
+.item-table tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+.item-table th {
+  font-weight: 600;
+  color: #fff;
+}
+
+@media (max-width: 868px) {
+  .form-row {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .input-group input,
+  .input-with-icon input,
+  .input,
+  .input-with-icon-button input {
+    width: 100%;
+  }
+
+  .input-with-icon-button {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .input-with-icon-button input {
+    border-radius: 0;
+    margin-right: 0;
+  }
+
+  .min-sale-price-shift {
+    margin-left: 0 !important; /* reset margin on mobile */
   }
 }

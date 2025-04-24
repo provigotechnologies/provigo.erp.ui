@@ -1,44 +1,101 @@
-<!-- Main Layout Container -->
-<div class="product-main-container">
+<div class="supplier-container">
+  <!-- Left Sidebar -->
+  <div class="sidebar">
+    <div class="status">
+      <p>Account Status</p>
+      <p class="active">ACTIVE</p>
+    </div>
+    <div class="balance">
+      <p>Account Balance</p>
+      <p class="amount">₹ 0</p>
+    </div>
+    <div class="bell-icon">🔔</div>
+    <button class="disable-btn">Disable A/c</button>
+    <button class="delete-btn">X Delete A/c</button>
+  </div>
 
-    <!-- Heading Section -->
-    <div class="page-header-wrapper">
-      <label class="page-heading">Supplier Information</label>
+  <!-- Main Area -->
+  <div class="main-content-wrapper">
+    <!-- Tabs (Moved outside the main content) -->
+    <div class="tabs">
+      <div class="tab active">Profile</div>
+      <div class="tab">Accounts</div>
+      <div class="tab">Payment History</div>
+      <div class="tab">Recent Payments</div>
     </div>
-  
-    <!-- Tab Buttons Section outside the right container -->
-    <div class="tab-buttons-container">
-      <div class="tab-buttons">
-        <button class="tab-btn active">General</button>
-        <button class="tab-btn">Bank</button>
-        <button class="tab-btn">History</button>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+      <!-- Form Area -->
+      <div class="form-section">
+        <div class="form-left">
+          <!-- Supplier Details -->
+          <div class="section-box">
+            <div class="section-title">Supplier Details</div>
+            <div class="form-group"><label>Company Name <span class="required">*</span></label><input type="text" /></div>
+            <div class="form-group"><label>Address</label><textarea></textarea></div>
+            <div class="form-group"><label>City <span class="required">*</span></label><input type="text" value="" /></div>
+            <div class="form-group"><label>State <span class="required">*</span></label><select><option>Select a state</option></select></div>
+            <div class="form-group"><label>Pin Code</label><input type="text" /></div>
+            <div class="form-group"><label>Country</label><input type="text" value="India" /></div>
+            <div class="form-group"><label>Email</label><input type="email" /></div>
+            <div class="form-group"><label>Phone No</label><input type="text" /></div>
+          </div>
+
+          <!-- Bank Details -->
+          <div class="section-box">
+            <div class="section-title">Bank Details</div>
+            <div class="form-group"><label>Bank Name</label><select></select></div>
+            <div class="form-group"><label>Bank A/c No.</label><input type="text" /></div>
+            <div class="form-group"><label>IFSC Code</label><input type="text" /></div>
+          </div>
+        </div>
+
+        <!-- Right Side Content -->
+        <div class="form-right">
+          <div class="section-box">
+            <div class="section-title">Tax Details</div>
+            <div class="form-group"><label>PAN No.</label><input type="text" /></div>
+            <div class="form-group"><label>GSTIN</label><input type="text" /></div>
+            <div class="form-group"><label>State <span class="required">*</span></label><select><option>Select a state</option></select></div>
+          </div>
+
+          <div class="section-box">
+            <div class="section-title">Account Details</div>
+            <div class="form-group"><label>Opening Balance</label><input type="text" /></div>
+            <div class="form-group radio-group">
+              <label>Type</label>
+              <label class="radio-option">
+                <input type="radio" name="type" value="debit" checked />
+                <span>Debit</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="type" value="credit" />
+                <span>Credit</span>
+              </label>
+            </div>
+            
+          </div>
+
+          <div class="section-box">
+            <div class="section-title">Contact Details</div>
+            <div class="form-group"><label>Contact Person</label><input type="text" /></div>
+            <div class="form-group"><label>Contact No. <span class="required">*</span></label><input type="text" value="" /></div>
+          </div>
+
+          <div class="section-box">
+            <div class="section-title">Other Details</div>
+            <div class="form-group"><label>Remark / Note</label><textarea></textarea></div>
+          </div>
+
+          <div class="right-buttons">
+            <button class="primary-btn">
+               <i class="material-icons">save</i> Save
+            </button>
+         </div> 
+
+        </div>
       </div>
-    </div>
-  
-    <!-- Content Layout Row -->
-    <div class="content-wrapper">
-  
-      <!-- Left Container -->
-      <div class="product-left-container">
-        <div class="form-row">
-          <label for="accountstatus">Account Status</label>
-        </div>
-        <div class="form-row">
-          <label for="accountstatus">Account Status</label>
-        </div>
-      </div>
-  
-      <!-- Right Container -->
-      <div class="product-right-container">
-        <!-- Form Rows or Tab Content -->
-        <div class="form-row">
-          <label for="accountstatus">Account Status</label>
-        </div>
-        <div class="form-row">
-          <label for="accountstatus">Account Status</label>
-        </div>
-      </div>
-  
     </div>
   </div>
-  
+</div>

@@ -1,34 +1,35 @@
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
 <div class="item-container">
 
-  <div class="page-header-wrapper">
-    <label class="page-heading">Physical Stock Reconciliation</label>
-  </div>
+     <!-- Heading Section -->
+     <div class="page-header-wrapper">
+      <label class="page-heading">Physical Stock Reconciliation</label>
+    </div>
 
     <div class="sec-container">
   
-        <div class="header">
-            <div class="header-field">
-              <label>Item Name  <span class="required">*</span></label>
-              <input type="text" class="header-input" />
+      <div class="header">
+          <div class="header-field">
+            <label>Item Name  <span class="required">*</span></label>
+            <input type="text" class="header-input" />
+          </div>
+          <div class="header-field">
+              <label>Available Stock</label>
+              <input style="background-color: #f6f6f6;" type="text" class="header-input" />
             </div>
-            <div class="header-field">
-                <label>Available Stock</label>
-                <input style="background-color: #f6f6f6;" type="text" class="header-input" />
-              </div>
-            <div class="header-field">
-              <label>Physical Stock  <span class="required">*</span></label>
-              <input type="text" class="header-input" />
-            </div>
-          
-            <div class="add-btn-container">
-              <button class="add-btn">Add</button>
-            </div>
-          </div>          
-  
-      </div>
-      
+          <div class="header-field">
+            <label>Physical Stock  <span class="required">*</span></label>
+            <input type="text" class="header-input" />
+          </div>
+        
+          <div class="add-btn-container">
+            <button class="add-btn">Add</button>
+          </div>
+        </div>          
+
+    </div>
+    
     <div class="section-container">
       <div class="table-action-container">
           
@@ -68,23 +69,22 @@
   
     </div> <!-- end section-container -->
   
-    <!-- Footer (outside the container) -->
-    <div class="footer">
-        <div class="footer-left">
-          <label>Process Mode</label>
-          <select class="footer-select">
-            <option>Adjust/ Reconcile</option>
-            <option>Credit Stcok/ Add Stock</option>
-          </select>
-        </div>
-      
-        <div class="footer-right-buttons">
-          <button class="primary-btn">
-            <i class="material-icons">autorenew</i> Process Items
-          </button>
-        </div>
-        
-      </div>
-      
+  <div class="footer">
+    <div class="footer-left">
+      <label>Process Mode</label>
+      <select class="footer-select">
+        <option>Adjust/ Reconcile</option>
+        <option>Credit Stcok/ Add Stock</option>
+      </select>
+    </div>
+  
+    <div class="footer-right-buttons">
+      <button class="primary-btn">
+        <i class="material-icons">autorenew</i> Process Items
+      </button>
+    </div>
+    
   </div>
   
+
+</div>

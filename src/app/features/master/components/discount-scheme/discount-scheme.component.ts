@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common'; // <-- Add this import
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-discount-scheme',
@@ -10,8 +10,38 @@ import { CommonModule } from '@angular/common'; // <-- Add this import
   styleUrls: [
     './discount-scheme.component.css',
     '../../../styles/discountandstockadjust-style.css'
-   ]
+  ]
 })
 export class DiscountSchemeComponent {
+  selectedTab: 'scheme' | 'mapitem' = 'scheme';
+
+  serialForm = {
+    mrp: null,
+    salePrice: null,
+    minSalePrice: null,
+    serialNo: '',
+    agent: '',
+    wholesale: '',
+  };
+
+  serialList: any[] = [];
+
+  selectTab(tab: 'scheme' | 'mapitem') {
+    this.selectedTab = tab;
+  }
+
+  addSerial() {
+    if (this.serialForm.serialNo.trim()) {
+      this.serialList.push({ ...this.serialForm });
+      this.serialForm = {
+        mrp: null,
+        salePrice: null,
+        minSalePrice: null,
+        serialNo: '',
+        agent: '',
+        wholesale: ''
+      };
+    }
+  }
 
 }
