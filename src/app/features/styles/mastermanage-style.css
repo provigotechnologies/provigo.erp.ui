@@ -95,6 +95,7 @@
   border: none;
   cursor: pointer;
   transition: background 0.3s;
+  border-radius: 4px;
 }
 
 .add-service {
@@ -106,6 +107,7 @@
   border: none;
   cursor: pointer;
   transition: background 0.3s;
+  border-radius: 4px;
 }
 
 .add-product:hover {
@@ -301,18 +303,9 @@
   align-items: center;
 }  
 
-.export-btn {
+.barcode-btn, .export-btn  {
   background-color: #4caf50;
-  color: white;
-  border: none;
-  padding: 10px 14px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.barcode-btn {
-  background-color: #4caf50;
+  border-radius: 4px;
   color: white;
   border: none;
   padding: 10px 14px;

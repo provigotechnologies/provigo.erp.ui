@@ -294,9 +294,24 @@ export const routes: Routes = [
       
       {
         path: 'reports',
-        loadComponent: () =>
-          import('./features/reports/components/reports/reports.component').then(m => m.ReportsComponent),
+        children: [
+          {
+            path: 'cash-book',
+            loadComponent: () =>
+              import('./features/reports/components/reports/accounts/cash-book/cash-book.component').then(m => m.CashBookComponent),
+          },
+          {
+            path: 'manage-stock-adjustment',
+            loadComponent: () =>
+              import('./features/inventory/components/inventory/manage-stock-adjustment/manage-stock-adjustment.component').then(m => m.ManageStockAdjustmentComponent),
+          },
+          {
+            path: 'physical-stock-reconciliation',
+            loadComponent: () =>
+              import('./features/inventory/components/inventory/physical-stock-reconciliation/physical-stock-reconciliation.component').then(m => m.PhysicalStockReconciliationComponent),
+          },
+        ]
       },
-    ],
+    ], 
   },
 ];

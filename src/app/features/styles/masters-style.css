@@ -67,6 +67,8 @@
     gap: 10px;
     margin-bottom: -10px;
     margin-top: auto; /* Push the buttons to the bottom */
+    border-radius: 4px;
+
   }
   
   .button-group [type="button"] {
@@ -74,6 +76,8 @@
     font-size: 16px;
     border: none;
     cursor: pointer;
+    border-radius: 4px;
+
   }
   
   button:first-child {

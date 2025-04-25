@@ -109,70 +109,88 @@
 
       <!-- Serial Numbers UI -->
       <ng-container *ngIf="selectedTab === 'mapitem'">
-        <!-- You can design this however you want -->
-        <div class="serial-number-section">
-          <div class="button-row">
-            <button class="secondary-btn">
-              <i class="material-icons"></i> Add Scheme Items
-            </button>
-            <button class="secondary-btn">
-              <i class="material-icons"></i> Delete Schema Items
-            </button>
-            <button class="secondary-btn">
-              <i class="material-icons"></i> Clear All Scheme Items
+        
+        <div class="form-wrapper">
+          <div class="form-group">
+            <label for="group">Group</label>
+            <select id="group">
+              <option value="">Select Group</option>
+              <option value=""></option>
+            </select>
+          </div>
+      
+          <div class="form-group">
+            <label for="brand">Brand</label>
+            <select id="brand">
+              <option value="">Select Brand</option>
+              <option value=""></option>
+            </select>
+          </div>
+      
+          <div class="form-group">
+            <label for="location">Location/Rack</label>
+            <select id="location">
+              <option value="">Select Location</option>
+              <option value=""></option>
+            </select>
+          </div>
+      
+          <div class="form-group">
+            <label for="search">Enter text to search</label>
+            <input type="text" id="search" placeholder="Search..." />
+          </div>
+      
+          <div class="search-button">
+            <button class="primary-btn">
+              <i class="material-icons">search</i> Search
             </button>
           </div>
+        </div>
+      
+        <div class="serial-number-section">
+          
+        <fieldset class="form-box">
+          <legend>Item(s)</legend>
+          <div class="action-bar">
             
-           <div class="table-scroll">
-
+            <input type="checkbox" />
+            <a href="#">Select All</a>
+            <a href="#"  title="Add items">Add Item To Scheme</a>
+          </div>
+      
+          <div class="table-scroll">
             <table class="item-table">
               <thead>
                 <tr>
-                  <th>S. No.</th>
-                  <th>Serial Number</th>
-                  <th>Agent</th>
-                  <th>Wholesale</th>
-                  <th>Sale Price</th>
-                  <th>Min.Sale Price</th>
-                  <th>M.R.P</th>
+                  <th></th>
+                  <th>Item Name</th>
+                  <th>Existing Scheme</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <!-- Repeat for other items -->
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <td><input type="checkbox" /></td>
+                  <td>Item 1</td>
+                  <td>Scheme 1</td>
                 </tr>
                 <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <td><input type="checkbox" /></td>
+                  <td>Item 2</td>
+                  <td>Scheme 2</td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" /></td>
+                  <td>Item 3</td>
+                  <td>Scheme 3</td>
                 </tr>
               </tbody>
             </table>
-            </div>
-   
-        </div> 
-      </ng-container>
+          </div>
+        </fieldset>
 
+        </div>
+      </ng-container>
+      
     </div>
 
  

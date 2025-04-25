@@ -44,4 +44,15 @@ export class DiscountSchemeComponent {
     }
   }
 
+  isAddSchemeModalOpen = false;
+
+  openAddSchemeModal() {
+    this.isAddSchemeModalOpen = true;
+  }
+  
+  closeAddSchemeModal() {
+    this.isAddSchemeModalOpen = false;
+  }
+  
+
 }

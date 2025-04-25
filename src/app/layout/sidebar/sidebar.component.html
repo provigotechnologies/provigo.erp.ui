@@ -417,6 +417,237 @@
    </ul>
      </li>
 
+     <!-- Report with Submenu -->
+     <li class="menu-item-with-submenu sale-spacing"
+     [class.active]="activeSubMenu === 'report'"
+     (mouseenter)="!isMobile && (activeSubMenu = 'report')"
+     (mouseleave)="!isMobile && (activeSubMenu = null)">
+   
+   <a href="#" (click)="toggleSubMenu('report'); $event.preventDefault()">
+    <mat-icon class="icon-report">assessment</mat-icon> Report
+   </a>
+
+   <!-- First-level submenu -->
+   <ul
+     [class.submenu]="!isMobile"
+     [class.mobile-visible]="isMobile && activeSubMenu === 'report'"
+     *ngIf="activeSubMenu === 'report'">
+
+     <!-- Invoice with Nested Submenu -->
+     <li class="has-submenu"
+       [class.active]="activeNestedSubMenu === 'accounts'"
+       (mouseenter)="!isMobile && (activeNestedSubMenu = 'accounts')"
+       (mouseleave)="!isMobile && (activeNestedSubMenu = null)"
+       (click)="isMobile && toggleNestedSubMenu('accounts')">
+
+       <a href="#">Accounts</a>
+
+      <ul
+         *ngIf="activeNestedSubMenu === 'accounts'"
+         [class.nested-submenu]="!isMobile"
+         [class.mobile-visible]="isMobile">
+         <li><a [routerLink]="['/reports/cash-book']">Cash Book</a></li>
+         <li><a [routerLink]="['/sales/manage-invoice']">Business Book</a></li>    
+         <li><a [routerLink]="['/sales/invoice']">Payment Paid</a></li>
+         <li><a [routerLink]="['/sales/manage-invoice']">Payment Received</a></li>
+         <li><a [routerLink]="['/sales/invoice']">Daily Summary</a></li>
+         <li><a [routerLink]="['/sales/manage-invoice']">Input / Output Tax</a></li>
+         <li><a [routerLink]="['/sales/invoice']">Profit & Loss Summary</a></li>
+         <li><a [routerLink]="['/sales/manage-invoice']">Chart of Accounts</a></li>
+         <li><a [routerLink]="['/sales/manage-invoice']">Balance Sheet</a></li>
+       </ul>
+     </li>
+
+      <!-- Sale Return with Nested Submenu -->
+      <li class="has-submenu"
+         [class.active]="activeNestedSubMenu === 'inventory'"
+         (mouseenter)="!isMobile && (activeNestedSubMenu = 'inventory')"
+         (mouseleave)="!isMobile && (activeNestedSubMenu = null)"
+         (click)="isMobile && toggleNestedSubMenu('inventory')">
+
+         <a href="#">Inventory</a>
+
+         <ul
+           *ngIf="activeNestedSubMenu === 'inventory'"
+           [class.nested-submenu]="!isMobile"
+           [class.mobile-visible]="isMobile">
+           <li><a [routerLink]="['/sales/sale-return']">Item Register</a></li>
+           <li><a [routerLink]="['/sales/manage-salereturn']">Low Level Stock</a></li>   
+           <li><a [routerLink]="['/sales/sale-return']">Stock Availability</a></li>
+           <li><a [routerLink]="['/sales/manage-salereturn']">Stock Adjustment</a></li>
+           <li><a [routerLink]="['/sales/sale-return']">Consumable Stock</a></li>
+           <li><a [routerLink]="['/sales/manage-salereturn']">Low Level Stock</a></li>
+           <li><a [routerLink]="['/sales/sale-return']">Fast Moving Items</a></li>
+           <li><a [routerLink]="['/sales/manage-salereturn']">Items Not Moving</a></li>
+           <li><a [routerLink]="['/sales/sale-return']">Available Serials</a></li>
+           <li><a [routerLink]="['/sales/manage-salereturn']">Item List</a></li>
+         </ul>
+       </li>
+
+       
+        <!-- Quotation with Nested Submenu -->
+       <li class="has-submenu"
+         [class.active]="activeNestedSubMenu === 'sales'"
+         (mouseenter)="!isMobile && (activeNestedSubMenu = 'sales')"
+         (mouseleave)="!isMobile && (activeNestedSubMenu = null)"
+         (click)="isMobile && toggleNestedSubMenu('sales')">
+
+         <a href="#">Sales</a>
+
+         <ul
+           *ngIf="activeNestedSubMenu === 'sales'"
+           [class.nested-submenu]="!isMobile"
+           [class.mobile-visible]="isMobile">
+           <li><a [routerLink]="['/sales/quotation']">Sales Aging</a></li>
+           <li><a [routerLink]="['/sales/manage-quotation']">Itemwise Sales</a></li>
+           <li><a [routerLink]="['/sales/manage-quotation']">Invoicewise Sales</a></li>
+           <li><a [routerLink]="['/sales/manage-quotation']">Invoicewise Profit / Margin</a></li>
+           <li><a [routerLink]="['/sales/manage-quotation']">Itemwise Profit / Margin</a></li>
+           <li><a [routerLink]="['/sales/manage-quotation']">Customerwise Profit / Margin</a></li>
+           <li><a [routerLink]="['/sales/manage-quotation']">Itemwise Sales Summary</a></li>
+           <li><a [routerLink]="['/sales/manage-quotation']">Invoicewise Sales Summary</a></li>
+           <li><a [routerLink]="['/sales/manage-quotation']">Customerwise Sales Summary</a></li>
+           <li><a [routerLink]="['/sales/manage-quotation']">GST Sales</a></li>
+           <li><a [routerLink]="['/sales/manage-quotation']">Active Recurring Invoices</a></li>
+         </ul>
+       </li>
+
+       <!-- Delivery Note with Nested Submenu -->
+       <li class="has-submenu"
+         [class.active]="activeNestedSubMenu === 'customer'"
+         (mouseenter)="!isMobile && (activeNestedSubMenu = 'customer')"
+         (mouseleave)="!isMobile && (activeNestedSubMenu = null)"  
+         (click)="isMobile && toggleNestedSubMenu('customer')">
+
+         <a href="#">Customers</a>
+
+         <ul
+           *ngIf="activeNestedSubMenu === 'customer'"
+           [class.nested-submenu]="!isMobile"
+           [class.mobile-visible]="isMobile">
+           <li><a [routerLink]="['/sales/deliverynote']">Amount Due</a></li>
+           <li><a [routerLink]="['/sales/manage-debitnote']">Payment History</a></li>
+           <li><a [routerLink]="['/sales/customer']">Account Balances</a></li>
+         </ul>
+       </li>
+
+       <!-- Proforma Invoice with Nested Submenu -->
+       <li class="has-submenu"
+         [class.active]="activeNestedSubMenu === 'proforma-invoice'"
+         (mouseenter)="!isMobile && (activeNestedSubMenu = 'proforma-invoice')"
+         (mouseleave)="!isMobile && (activeNestedSubMenu = null)"
+         (click)="isMobile && toggleNestedSubMenu('proforma-invoice')">
+
+         <a href="#">Purchases</a>
+
+         <ul
+           *ngIf="activeNestedSubMenu === 'proforma-invoice'"
+           [class.nested-submenu]="!isMobile"
+           [class.mobile-visible]="isMobile">
+           <li><a [routerLink]="['/sales/quotation']">Purchase Aging</a></li>
+           <li><a [routerLink]="['/sales/manage-quotation']">Itemwise Purchases</a></li>
+           <li><a [routerLink]="['/sales/manage-quotation']">Billwise Purchases</a></li>
+           <li><a [routerLink]="['/sales/manage-quotation']">Itemwise Purchase Summary</a></li>
+           <li><a [routerLink]="['/sales/manage-quotation']">Billwise Purchase Summary</a></li>
+           <li><a [routerLink]="['/sales/manage-quotation']">Supplierwise Purchase Summary</a></li>
+           <li><a [routerLink]="['/sales/manage-quotation']">GST Purchases</a></li>
+         </ul>
+       </li>
+
+       <!-- Sale Order with Nested Submenu -->
+       <li class="has-submenu"
+         [class.active]="activeNestedSubMenu === 'supplier'"
+         (mouseenter)="!isMobile && (activeNestedSubMenu = 'supplier')"
+         (mouseleave)="!isMobile && (activeNestedSubMenu = null)"
+         (click)="isMobile && toggleNestedSubMenu('supplier')">
+
+         <a href="#">Suppliers</a>
+
+         <ul
+           *ngIf="activeNestedSubMenu === 'supplier'"
+           [class.nested-submenu]="!isMobile"
+           [class.mobile-visible]="isMobile">
+           <li><a [routerLink]="['/sales/debitnote']">Account Balance</a></li>
+           <li><a [routerLink]="['/sales/manage-debitnote']">Payment History</a></li>
+         </ul>
+       </li>
+
+       <!-- Credit Note with Nested Submenu -->
+       <li class="has-submenu"
+         [class.active]="activeNestedSubMenu === 'expense'"
+         (mouseenter)="!isMobile && (activeNestedSubMenu = 'expense')"
+         (mouseleave)="!isMobile && (activeNestedSubMenu = null)"
+         (click)="isMobile && toggleNestedSubMenu('expense')">
+
+         <a href="#">Expenses</a>
+
+         <ul
+           *ngIf="activeNestedSubMenu === 'expense'"
+           [class.nested-submenu]="!isMobile"
+           [class.mobile-visible]="isMobile">
+           <li><a [routerLink]="['/sales/creditnote']">Search Expenses</a></li>
+           <li><a [routerLink]="['/sales/manage-creditnote']">Search Indirect Expenses</a></li>
+         </ul>
+       </li>
+
+        <!-- Debit Note with Nested Submenu -->
+        <li class="has-submenu"
+        [class.active]="activeNestedSubMenu === 'staff'"
+        (mouseenter)="!isMobile && (activeNestedSubMenu = 'staff')"
+        (mouseleave)="!isMobile && (activeNestedSubMenu = null)"
+        (click)="isMobile && toggleNestedSubMenu('staff')">
+
+        <a href="#">Staff</a>
+
+        <ul
+          *ngIf="activeNestedSubMenu === 'staff'"
+          [class.nested-submenu]="!isMobile"
+          [class.mobile-visible]="isMobile">
+          <li><a [routerLink]="['/sales/debitnote']">Search Salary</a></li>
+          <li><a [routerLink]="['/sales/manage-debitnote']">Commissions</a></li> 
+          <li><a [routerLink]="['/sales/debitnote']">Search Attendance</a></li>
+          <li><a [routerLink]="['/sales/manage-debitnote']">Payment History</a></li>
+        </ul>
+      </li>
+
+      <li class="has-submenu"
+      [class.active]="activeNestedSubMenu === 'tcs'"
+      (mouseenter)="!isMobile && (activeNestedSubMenu = 'tcs')"
+      (mouseleave)="!isMobile && (activeNestedSubMenu = null)"
+      (click)="isMobile && toggleNestedSubMenu('tcs')">
+
+      <a href="#">TCS</a>
+
+      <ul
+        *ngIf="activeNestedSubMenu === 'tcs'"
+        [class.nested-submenu]="!isMobile"
+        [class.mobile-visible]="isMobile">
+        <li><a [routerLink]="['/sales/debitnote']">TCS Payables (From 27EQ)</a></li>
+        <li><a [routerLink]="['/sales/manage-debitnote']">TCS Receivables</a></li>
+      </ul>
+    </li>
+
+    <li class="has-submenu"
+    [class.active]="activeNestedSubMenu === 'gstr'"
+    (mouseenter)="!isMobile && (activeNestedSubMenu = 'gstr')"
+    (mouseleave)="!isMobile && (activeNestedSubMenu = null)"
+    (click)="isMobile && toggleNestedSubMenu('gstr')">
+
+    <a href="#">GSTR</a>
+
+    <ul
+      *ngIf="activeNestedSubMenu === 'gstr'"
+      [class.nested-submenu]="!isMobile"
+      [class.mobile-visible]="isMobile">
+      <li><a [routerLink]="['/sales/debitnote']">GSTR-1</a></li>
+      <li><a [routerLink]="['/sales/manage-debitnote']">GSTR-3B</a></li>
+    </ul>
+  </li>
+
+     <!-- You can repeat the same structure for other menus like Quotation, Delivery Note, etc. -->
+   </ul>
+ </li>
+
    </ul>
 
     <!-- Optional: Footer -->

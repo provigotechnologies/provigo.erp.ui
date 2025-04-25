@@ -116,7 +116,7 @@ mat-icon {
 .icon-customer { color: #00bcd4; }
 .icon-staff { color: #9c27b0; }
 .icon-tools { color: #ff9800; }
-.icon-reports { color: #f44336; }
+.icon-report { color: #00bcd4; }
 .icon-settings { color: #4caf50; }
 
 .has-submenu > a::after {
