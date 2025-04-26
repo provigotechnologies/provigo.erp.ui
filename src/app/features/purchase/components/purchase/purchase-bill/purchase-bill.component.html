@@ -1,59 +1,32 @@
-<!-- 
 
 <div class="product-main-container">
 
-  <div class="page-header-wrapper">
-    <label class="page-heading">Discount Scheme</label>
-  </div>
-
   <div class="product-container">
 
+    <!-- Tabs -->
     <div class="tab-header">
       <div class="tab" 
            [ngClass]="{'active': selectedTab === 'bill'}"
-           (click)="selectTab('scheme')">
+           (click)="selectTab('bill')">
         Purchase Bill
       </div>
       <div class="tab" 
            [ngClass]="{'active': selectedTab === 'serial'}"
-           (click)="selectTab('mapitem')">
-       Serial Numbers
+           (click)="selectTab('serial')">
+        Serial Numbers
       </div>
-    </div>
+    </div>             
 
+    <!-- Tab Content -->
     <div class="product-inner-container">
 
+      <!-- Item Info UI -->
       <ng-container *ngIf="selectedTab === 'bill'">
 
         <div class="serial-number-section">
-          <fieldset class="form-box">
-            <legend>Purchase bill information</legend>
-        
-          </fieldset>
-        </div>
-      <div class="right-buttons" *ngIf="selectedTab === 'bill'">
-    
-      </div>
-      </ng-container>
 
-      <ng-container *ngIf="selectedTab === 'serial'">
-      </ng-container>
-
-    </div>
-
- 
-
-  </div>
-
-</div> -->
-
- 
-<!-- app.component.html -->
-<div class="app-container">
-  <div class="main-content">
-
-    <!-- Invoice Info -->
-    <form class="invoice-form">
+         <!-- Invoice Info -->
+          <form class="invoice-form">
 
       <div class="section-container">
 
@@ -387,9 +360,84 @@
         </div>
       </div>
 
-    </form>
-    
+           </form>
+        
+      </div>
+      </ng-container>
+
+      <!-- Serial Numbers UI -->
+      <ng-container *ngIf="selectedTab === 'serial'">
+        
+        <div class="form-wrapper">
+          <div class="form-group">
+            <label for="group">Item Name </label>
+            <select id="group">
+              <option value="">Select Item</option>
+              <option value=""></option>
+            </select>
+          </div>
+      
+          <div class="form-group">
+            <label for="text">Serial No </label>
+            <input type="text" id="text"/>
+          </div>
+      
+          <div class="save-button">
+            <button class="primary-btn">
+              <i class="material-icons">save</i>Save
+            </button>
+          </div>
+          <div class="reset-button">
+            <button class="primary-btn">
+              <i class="material-icons">reset</i> Reset
+            </button>
+          </div>
+        </div>
+      
+        <div class="serial-number-section">
+                  
+          <div class="table-scroll">
+            <table class="item-table">
+              <thead>
+                <tr>
+                  <th>S.No</th>
+                  <th>Item Name</th>
+                  <th>Existing Scheme</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td>Item 1</td>
+                  <td>Scheme 1</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>Item 2</td>
+                  <td>Scheme 2</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>Item 3</td>
+                  <td>Scheme 3</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </ng-container>
+      
+    </div>
+
+ 
+
   </div>
+
 </div>
 
 
+
+
+
+ 

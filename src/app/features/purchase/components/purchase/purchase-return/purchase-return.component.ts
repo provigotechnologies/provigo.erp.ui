@@ -105,4 +105,47 @@ export class PurchaseReturnComponent implements OnInit {
     const total = this.itemList.reduce((sum, item) => sum + parseFloat(item.amtBeforeTax), 0);
     return total.toFixed(2);
   }
+
+  selectedTab: 'bill' | 'serial' = 'bill';
+
+  serialForm = {
+    mrp: null,
+    salePrice: null,
+    minSalePrice: null,
+    serialNo: '',
+    agent: '',
+    wholesale: '',
+  };
+
+  serialList: any[] = [];
+
+  selectTab(tab: 'bill' | 'serial') {
+    this.selectedTab = tab;
+  }
+
+  addSerial() {
+    if (this.serialForm.serialNo.trim()) {
+      this.serialList.push({ ...this.serialForm });
+      this.serialForm = {
+        mrp: null,
+        salePrice: null,
+        minSalePrice: null,
+        serialNo: '',
+        agent: '',
+        wholesale: ''
+      };
+    }
+  }
+
+  isAddSchemeModalOpen = false;
+
+  openAddSchemeModal() {
+    this.isAddSchemeModalOpen = true;
+  }
+  
+  closeAddSchemeModal() {
+    this.isAddSchemeModalOpen = false;
+  }
+  
+
 }
