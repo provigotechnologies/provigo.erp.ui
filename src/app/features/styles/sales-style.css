@@ -384,7 +384,7 @@
   }
   
   .tabs button:hover{
-     background-color: #1c77ef;
+     background-color: #186bdf;
      color: #f9f9f9;
   }
   
@@ -680,7 +680,7 @@
     background: none;
     border: none;
     font-size: 20px;
-    color: #1c77ef;
+    color: #2d88ff;
     cursor: pointer;
     padding: 6px;
     display: flex;
@@ -715,7 +715,7 @@
     cursor: pointer;
   }
   .primary-btn:hover {
-    background-color: #1565c0;
+    background-color: #2d88ff;
   }
   
   

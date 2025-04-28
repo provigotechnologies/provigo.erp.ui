@@ -1,14 +1,17 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-profile',
+  standalone: true, // if standalone
+  imports: [CommonModule], // add CommonModule here
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent {
-  activeTab: string = 'profile'; // Default active tab is 'profile'
+  selectedTab: string = 'profile';
 
-  setActiveTab(tab: string) {
-    this.activeTab = tab; // Update the active tab when clicked
+  selectTab(tab: string) {
+    this.selectedTab = tab;
   }
 }

@@ -3,16 +3,16 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-cash-book',
+  selector: 'app-payment-paid',
   standalone: true,
   imports: [FormsModule, CommonModule],
-  templateUrl: './cash-book.component.html',
+  templateUrl: './payment-paid.component.html',
   styleUrls: [
-    './cash-book.component.css',
+    './payment-paid.component.css',
     '../../../../../styles/report-style.css'
   ]
 })
-export class CashBookComponent implements OnInit {  // Implement OnInit here
+export class PaymentPaidComponent implements OnInit {  // Implement OnInit here
   fromDate: string = '';
   toDate: string = '';
   activeTab: string = 'all';

@@ -18,14 +18,25 @@
   <div class="main-content-wrapper">
     <!-- Tabs (Moved outside the main content) -->
     <div class="tabs">
-      <div class="tab active">Profile</div>
-      <div class="tab">Accounts</div>
-      <div class="tab">Payment History</div>
-      <div class="tab">Recent Payments</div>
-    </div>
+      <div class="tab"    
+      [ngClass]="{'active': selectedTab === 'profile'}"
+      (click)="selectTab('profile')">Profile </div>
+      <div class="tab"    
+      [ngClass]="{'active': selectedTab === 'accounts'}"
+      (click)="selectTab('accounts')">Accounts </div>
+      <div class="tab"    
+      [ngClass]="{'active': selectedTab === 'history'}"
+      (click)="selectTab('history')">Payment History </div>
+      <div class="tab"    
+      [ngClass]="{'active': selectedTab === 'payments'}"
+      (click)="selectTab('payments')">Recent Payments
+     </div>
+      </div>
 
     <!-- Main Content Area -->
     <div class="main-content">
+
+      <ng-container *ngIf="selectedTab === 'profile'">
       <!-- Form Area -->
       <div class="form-section">
         <div class="form-left">
@@ -96,6 +107,129 @@
 
         </div>
       </div>
+      </ng-container>
+
+      <ng-container *ngIf="selectedTab === 'accounts'">
+        <!-- Form Area -->
+        <div class="form-wrapper">
+      
+          <div class="search-button">
+            <button class="primary-btn">
+              <i class="material-icons"></i> Add / Modify Payment
+            </button>
+          </div>
+
+          <div class="search-button">
+            <button class="primary-btn">
+              <i class="material-icons"></i> Add / Modify Adjustment
+            </button>
+          </div>
+
+        </div>
+      
+        <div class="serial-number-section">
+          
+        <fieldset class="form-box">
+          <legend>Account History</legend>
+      
+          <div class="table-scroll">
+            <table class="item-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Description</th>
+                  <th>Cr.</th>
+                  <th>Dr.</th>
+                  <th>Balance</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Item 1</td>
+                  <td>Scheme 1</td>
+                  <td>Scheme 1</td>
+                  <td>Item 1</td>
+                  <td>Scheme 1</td>
+                </tr>
+                <tr>
+                  <td>Item 1</td>
+                  <td>Scheme 1</td>
+                  <td>Scheme 1</td>
+                  <td>Item 1</td>
+                  <td>Scheme 1</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </fieldset>
+
+        </div>
+        </ng-container>
+
+
+         
+      <ng-container *ngIf="selectedTab === 'history'">
+        <!-- Form Area -->
+        <div class="form-wrapper">
+          <div class="form-group">
+            <label for="date">From </label>
+            <input type="date" id="start-date" />
+          </div>
+    
+          <div class="form-group">
+            <label for="date">To </label>
+            <input type="date" id="start-date" />
+          </div>
+      
+          <div class="search-button">
+            <button class="primary-btn">
+              <i class="material-icons">search</i> Search
+            </button>
+          </div>
+        </div>
+      
+        <div class="serial-number-section">
+          
+          <fieldset class="form-box">
+            <legend>Account History</legend>
+        
+            <div class="table-scroll">
+              <table class="item-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Cr.</th>
+                    <th>Dr.</th>
+                    <th>Balance</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Item 1</td>
+                    <td>Scheme 1</td>
+                    <td>Scheme 1</td>
+                    <td>Item 1</td>
+                    <td>Scheme 1</td>
+                  </tr>
+                  <tr>
+                    <td>Item 1</td>
+                    <td>Scheme 1</td>
+                    <td>Scheme 1</td>
+                    <td>Item 1</td>
+                    <td>Scheme 1</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </fieldset>
+  
+          </div>
+
+        </ng-container>
+
+       
     </div>
+
   </div>
 </div>

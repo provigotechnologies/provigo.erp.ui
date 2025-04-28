@@ -87,7 +87,7 @@
 }
 
 .add-product {
-  background-color: #2d88ff;
+  background-color: #1c77ef;
   color: white;
   padding: 10px 16px;
   font-weight: 500;
@@ -111,7 +111,7 @@
 }
 
 .add-product:hover {
-  background-color: #186bdf;
+  background-color: #2d88ff;
 }
 
 .add-service:hover {

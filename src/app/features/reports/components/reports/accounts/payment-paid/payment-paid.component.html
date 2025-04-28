@@ -7,6 +7,31 @@
     
     <!-- Row 1: Date + Buttons -->
     <div class="filter-row">
+        <div class="date-group"> 
+            <label>Payment Type</label>
+            <select>
+              <option>Any</option>     
+              <option>Expense</option>
+              <option>Supplier</option>
+              <option>Staff</option>
+            </select>
+          </div>
+          <div class="date-group">
+            <label>Keyward</label>
+            <input type="text" />
+          </div>
+          <div class="date-group">
+            <label>Narration/Remarks</label>
+            <input type="text" />
+          </div>
+          <div class="date-group"> 
+            <label>Payment Mode</label>
+           <select>
+             <option>Today</option>     
+             <option>Yesterday</option>
+             <option>This Week</option>
+           </select>
+         </div>
       <div class="date-group">
         <label>From</label>
         <input type="date" />
@@ -41,11 +66,13 @@
       <table class="item-table">
         <thead>
           <tr>
+            <th>S. No.</th>
             <th>Date</th>
-            <th>Particulars</th>
             <th>Type</th>
-            <th>Debit</th>
-            <th>Credit</th>
+            <th>Name</th>
+            <th>Pay Mode</th>
+            <th>Payment Ref.</th>
+            <th>Remarks</th>
           </tr>
         </thead>
         <tbody>
@@ -55,8 +82,12 @@
             <td></td>
             <td></td>
             <td></td>
+            <td></td>
+            <td></td>
           </tr>
           <tr>
+            <td></td>
+            <td></td>
             <td></td>
             <td></td>
             <td></td>

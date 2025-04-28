@@ -205,7 +205,7 @@
 }
 
 .primary-btn {
-  background-color: #1c77ef;
+  background-color: #1c77ef ;
   color: white;
   border: none;
   padding: 10px 16px;
@@ -219,7 +219,7 @@
 }
 
 .primary-btn:hover {
-  background-color: #006fe0;
+  background-color: #2d88ff;
 }
 
 .primary-btn i,

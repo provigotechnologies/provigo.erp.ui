@@ -90,6 +90,7 @@ input[type="text"]:focus {
   color: white;
   border: none;
   cursor: pointer;
+  border-radius: 4px;
 }
 
 .add-btn:hover {
@@ -191,7 +192,8 @@ input[type="text"]:focus {
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 6px; /* spacing between icon and text */
+  gap: 6px; 
+  border-radius: 4px;
 }
 
 .primary-btn .material-icons {

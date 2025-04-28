@@ -1,0 +1,12 @@
+
+  /* Quick filter buttons row */
+  .quick-filters {
+    margin-top: -40px !important;
+  }
+
+  .date-group input[type="date"],
+  .date-group input[type="text"],
+  .date-group select {
+    width: 180px !important;
+  }
+  

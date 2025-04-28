@@ -301,14 +301,14 @@ export const routes: Routes = [
               import('./features/reports/components/reports/accounts/cash-book/cash-book.component').then(m => m.CashBookComponent),
           },
           {
-            path: 'manage-stock-adjustment',
+            path: 'business-book',
             loadComponent: () =>
-              import('./features/inventory/components/inventory/manage-stock-adjustment/manage-stock-adjustment.component').then(m => m.ManageStockAdjustmentComponent),
+              import('./features/reports/components/reports/accounts/business-book/business-book.component').then(m => m.BusinessBookComponent),
           },
           {
-            path: 'physical-stock-reconciliation',
+            path: 'payment-paid',
             loadComponent: () =>
-              import('./features/inventory/components/inventory/physical-stock-reconciliation/physical-stock-reconciliation.component').then(m => m.PhysicalStockReconciliationComponent),
+              import('./features/reports/components/reports/accounts/payment-paid/payment-paid.component').then(m => m.PaymentPaidComponent),
           },
         ]
       },
