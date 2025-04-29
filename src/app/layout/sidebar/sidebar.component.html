@@ -446,15 +446,15 @@
          *ngIf="activeNestedSubMenu === 'accounts'"
          [class.nested-submenu]="!isMobile"
          [class.mobile-visible]="isMobile">
-         <li><a [routerLink]="['/reports/cash-book']">Cash Book</a></li>
-         <li><a [routerLink]="['/reports/business-book']">Business Book</a></li>    
-         <li><a [routerLink]="['/reports/payment-paid']">Payment Paid</a></li>
-         <li><a [routerLink]="['/sales/manage-invoice']">Payment Received</a></li>
-         <li><a [routerLink]="['/sales/invoice']">Daily Summary</a></li>
-         <li><a [routerLink]="['/sales/manage-invoice']">Input / Output Tax</a></li>
-         <li><a [routerLink]="['/sales/invoice']">Profit & Loss Summary</a></li>
-         <li><a [routerLink]="['/sales/manage-invoice']">Chart of Accounts</a></li>
-         <li><a [routerLink]="['/sales/manage-invoice']">Balance Sheet</a></li>
+         <li><a [routerLink]="['/reports/accounts/cash-book']">Cash Book</a></li>
+         <li><a [routerLink]="['/reports/accounts/business-book']">Business Book</a></li>    
+         <li><a [routerLink]="['/reports/accounts/payment-paid']">Payment Paid</a></li>
+         <li><a [routerLink]="['/reports/accounts/payment-received']">Payment Received</a></li>
+         <li><a [routerLink]="['/reports/accounts/daily-summary']">Daily Summary</a></li>
+         <li><a [routerLink]="['/reports/accounts/input-output-tax']">Input / Output Tax</a></li>
+         <li><a [routerLink]="['/reports/accounts/profit-loss-summary']">Profit & Loss Summary</a></li>
+         <li><a [routerLink]="['/reports/accounts/payment-received']">Chart of Accounts</a></li>
+         <li><a [routerLink]="['/reports/accounts/payment-received']">Balance Sheet</a></li>
        </ul>
      </li>
 
@@ -471,16 +471,15 @@
            *ngIf="activeNestedSubMenu === 'inventory'"
            [class.nested-submenu]="!isMobile"
            [class.mobile-visible]="isMobile">
-           <li><a [routerLink]="['/sales/sale-return']">Item Register</a></li>
-           <li><a [routerLink]="['/sales/manage-salereturn']">Low Level Stock</a></li>   
-           <li><a [routerLink]="['/sales/sale-return']">Stock Availability</a></li>
-           <li><a [routerLink]="['/sales/manage-salereturn']">Stock Adjustment</a></li>
-           <li><a [routerLink]="['/sales/sale-return']">Consumable Stock</a></li>
-           <li><a [routerLink]="['/sales/manage-salereturn']">Low Level Stock</a></li>
-           <li><a [routerLink]="['/sales/sale-return']">Fast Moving Items</a></li>
-           <li><a [routerLink]="['/sales/manage-salereturn']">Items Not Moving</a></li>
-           <li><a [routerLink]="['/sales/sale-return']">Available Serials</a></li>
-           <li><a [routerLink]="['/sales/manage-salereturn']">Item List</a></li>
+           <li><a [routerLink]="['/reports/inventory/item-register']">Item Register</a></li>
+           <li><a [routerLink]="['/reports/inventory/low-level-stock']">Low Level Stock</a></li>   
+           <li><a [routerLink]="['/reports/inventory/stock-availability']">Stock Availability</a></li>
+           <li><a [routerLink]="['/reports/inventory/stock-adjustment']">Stock Adjustment</a></li>
+           <li><a [routerLink]="['/reports/inventory/consumable-stock']">Consumable Stock</a></li>
+           <li><a [routerLink]="['/reports/inventory/sale-return']">Fast Moving Items</a></li>
+           <li><a [routerLink]="['/reports/inventory/manage-salereturn']">Items Not Moving</a></li>
+           <li><a [routerLink]="['/reports/inventory/available-serials']">Available Serials</a></li>
+           <li><a [routerLink]="['/reports/inventory/item-list']">Item List</a></li>
          </ul>
        </li>
 
@@ -498,17 +497,17 @@
            *ngIf="activeNestedSubMenu === 'sales'"
            [class.nested-submenu]="!isMobile"
            [class.mobile-visible]="isMobile">
-           <li><a [routerLink]="['/sales/quotation']">Sales Aging</a></li>
-           <li><a [routerLink]="['/sales/manage-quotation']">Itemwise Sales</a></li>
-           <li><a [routerLink]="['/sales/manage-quotation']">Invoicewise Sales</a></li>
-           <li><a [routerLink]="['/sales/manage-quotation']">Invoicewise Profit / Margin</a></li>
-           <li><a [routerLink]="['/sales/manage-quotation']">Itemwise Profit / Margin</a></li>
-           <li><a [routerLink]="['/sales/manage-quotation']">Customerwise Profit / Margin</a></li>
-           <li><a [routerLink]="['/sales/manage-quotation']">Itemwise Sales Summary</a></li>
-           <li><a [routerLink]="['/sales/manage-quotation']">Invoicewise Sales Summary</a></li>
-           <li><a [routerLink]="['/sales/manage-quotation']">Customerwise Sales Summary</a></li>
-           <li><a [routerLink]="['/sales/manage-quotation']">GST Sales</a></li>
-           <li><a [routerLink]="['/sales/manage-quotation']">Active Recurring Invoices</a></li>
+           <li><a [routerLink]="['/reports/sales/sales-aging']">Sales Aging</a></li>
+           <li><a [routerLink]="['/reports/sales/itemwise-sales']">Itemwise Sales</a></li>
+           <li><a [routerLink]="['/reports/sales/invoicewise-sales']">Invoicewise Sales</a></li>
+           <li><a [routerLink]="['/reports/sales/invoicewise-profit-margin']">Invoicewise Profit / Margin</a></li>
+           <li><a [routerLink]="['/reports/sales/itemwise-profit-margin']">Itemwise Profit / Margin</a></li>
+           <li><a [routerLink]="['/reports/sales/customerwise-profit-margin']">Customerwise Profit / Margin</a></li>
+           <li><a [routerLink]="['/reports/sales/itemwise-sales-summary']">Itemwise Sales Summary</a></li>
+           <li><a [routerLink]="['/reports/sales/invoicewise-sales-summary']">Invoicewise Sales Summary</a></li>
+           <li><a [routerLink]="['/reports/sales/customerwise-sales-summary']">Customerwise Sales Summary</a></li>
+           <li><a [routerLink]="['/reports/sales/gst-sales']">GST Sales</a></li>
+           <li><a [routerLink]="['/reports/sales/active-recurring-invoice']">Active Recurring Invoices</a></li>
          </ul>
        </li>
 
@@ -603,10 +602,10 @@
           *ngIf="activeNestedSubMenu === 'staff'"
           [class.nested-submenu]="!isMobile"
           [class.mobile-visible]="isMobile">
-          <li><a [routerLink]="['/sales/debitnote']">Search Salary</a></li>
-          <li><a [routerLink]="['/sales/manage-debitnote']">Commissions</a></li> 
-          <li><a [routerLink]="['/sales/debitnote']">Search Attendance</a></li>
-          <li><a [routerLink]="['/sales/manage-debitnote']">Payment History</a></li>
+          <li><a [routerLink]="['']">Search Salary</a></li>
+          <li><a [routerLink]="['']">Commissions</a></li> 
+          <li><a [routerLink]="['']">Search Attendance</a></li>
+          <li><a [routerLink]="['']">Payment History</a></li>
         </ul>
       </li>
 

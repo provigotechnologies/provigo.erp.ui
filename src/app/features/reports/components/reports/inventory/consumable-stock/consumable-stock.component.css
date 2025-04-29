@@ -1,0 +1,27 @@
+.footer-buttons {
+    display: flex;
+    gap: 20px;
+    background: #007bff;
+    padding: 6px 12px;
+    margin-top: -4px !important;
+  }
+  
+
+  .bottom-left-container {
+    justify-content: flex-end !important;
+  }
+
+  .serial-number-section {
+    margin-top: 20px !important;
+  }
+
+  .full-page-container {
+    max-width: 900px !important;
+    margin: 40px 0 0 150px !important;
+  }
+
+  @media (max-width: 1300px) {
+    .full-page-container {
+      margin: 10px !important;
+    }
+  }

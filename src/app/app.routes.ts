@@ -292,23 +292,159 @@ export const routes: Routes = [
         ]
       },
       
+     
       {
         path: 'reports',
         children: [
           {
-            path: 'cash-book',
-            loadComponent: () =>
-              import('./features/reports/components/reports/accounts/cash-book/cash-book.component').then(m => m.CashBookComponent),
+            path: 'accounts',
+            children:[
+              {
+                path: 'cash-book',
+                loadComponent: () =>
+                import('./features/reports/components/reports/accounts/cash-book/cash-book.component').then(m => m.CashBookComponent),
+              },
+              {
+                path: 'business-book',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/accounts/business-book/business-book.component').then(m => m.BusinessBookComponent),
+              },
+              {
+                path: 'payment-paid',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/accounts/payment-paid/payment-paid.component').then(m => m.PaymentPaidComponent),
+              },
+              {
+                path: 'payment-received',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/accounts/payment-received/payment-received.component').then(m => m.PaymentReceivedComponent),
+              },
+              {
+                path: 'daily-summary',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/accounts/daily-summary/daily-summary.component').then(m => m.DailySummaryComponent),
+              },
+              {
+                path: 'input-output-tax',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/accounts/input-output-tax/input-output-tax.component').then(m => m.InputOutputTaxComponent),
+              },
+              {
+                path: 'profit-loss-summary',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/accounts/profit-loss-summary/profit-loss-summary.component').then(m => m.ProfitLossSummaryComponent),
+              },
+              {
+                path: 'chart-accounts',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/accounts/chart-accounts/chart-accounts.component').then(m => m.ChartAccountsComponent),
+              },
+              {
+                path: 'balance-sheet',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/accounts/balance-sheet/balance-sheet.component').then(m => m.BalanceSheetComponent),
+              },
+            ]
           },
           {
-            path: 'business-book',
-            loadComponent: () =>
-              import('./features/reports/components/reports/accounts/business-book/business-book.component').then(m => m.BusinessBookComponent),
+            path: 'inventory',
+            children:[
+              {
+                path: 'item-register',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/inventory/item-register/item-register.component').then(m => m.ItemRegisterComponent),
+              },
+              {
+                path: 'low-level-stock',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/inventory/low-level-stock/low-level-stock.component').then(m => m.LowLevelStockComponent),
+              },
+              {
+                path: 'stock-availability',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/inventory/stock-availability/stock-availability.component').then(m => m.StockAvailabilityComponent),
+              },
+              {
+                path: 'stock-adjustment',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/inventory/stock-adjustment/stock-adjustment.component').then(m => m.StockAdjustmentComponent),
+              },
+              {
+                path: 'consumable-stock',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/inventory/consumable-stock/consumable-stock.component').then(m => m.ConsumableStockComponent),
+              },
+              {
+                path: 'available-serials',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/inventory/available-serials/available-serials.component').then(m => m.AvailableSerialsComponent),
+              },
+              {
+                path: 'item-list',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/inventory/item-list/item-list.component').then(m => m.ItemListComponent),
+              },
+            ]
           },
           {
-            path: 'payment-paid',
-            loadComponent: () =>
-              import('./features/reports/components/reports/accounts/payment-paid/payment-paid.component').then(m => m.PaymentPaidComponent),
+            path: 'sales',
+            children:[
+              {
+                path: 'sales-aging',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/sales/sales-aging/sales-aging.component').then(m => m.SalesAgingComponent),
+              },
+              {
+                path: 'itemwise-sales',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/sales/itemwise-sales/itemwise-sales.component').then(m => m.ItemwiseSalesComponent),
+              },
+              {
+                path: 'invoicewise-sales',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/sales/invoicewise-sales/invoicewise-sales.component').then(m => m.InvoicewiseSalesComponent),
+              },
+              {
+                path: 'itemwise-profit-margin',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/sales/itemwise-profit-margin/itemwise-profit-margin.component').then(m => m.ItemwiseProfitMarginComponent),
+              },
+              {
+                path: 'invoicewise-profit-margin',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/sales/invoicewise-profit-margin/invoicewise-profit-margin.component').then(m => m.InvoicewiseProfitMarginComponent),
+              },
+              {
+                path: 'customerwise-profit-margin',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/sales/customerwise-profit-margin/customerwise-profit-margin.component').then(m => m.CustomerwiseProfitMarginComponent),
+              },
+              {
+                path: 'itemwise-sales-summary',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/sales/itemwise-sales-summary/itemwise-sales-summary.component').then(m => m.ItemwiseSalesSummaryComponent),
+              },
+              {
+                path: 'invoicewise-sales-summary',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/sales/invoicewise-sales-summary/invoicewise-sales-summary.component').then(m => m.InvoicewiseSalesSummaryComponent),
+              },
+              {
+                path: 'customerwise-sales-summary',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/sales/customerwise-sales-summary/customerwise-sales-summary.component').then(m => m.CustomerwiseSalesSummaryComponent),
+              },
+              {
+                path: 'gst-sales',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/sales/gst-sales/gst-sales.component').then(m => m.GstSalesComponent),
+              },
+              {
+                path: 'active-recurring-invoice',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/sales/active-recurring-invoice/active-recurring-invoice.component').then(m => m.ActiveRecurringInvoiceComponent),
+              },
+            ]
           },
         ]
       },

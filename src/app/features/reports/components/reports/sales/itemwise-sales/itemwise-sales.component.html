@@ -2,9 +2,9 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <div class="full-page-container">
-
+  
   <div class="page-header-wrapper">
-    <label class="page-heading">Cash Book</label>
+    <label class="page-heading">Itemwise Sales</label>
   </div>
 
   <div class="content-body">
@@ -12,9 +12,41 @@
   <div class="left-side">
     
     <div class="filter-row">
+        <!-- Row 1 -->
+        <div class="row">
+          <div class="date-group">
+            <label>Group</label>
+            <select><option></option></select>
+          </div>
+          <div class="date-group">
+            <label>Brand</label>
+            <select><option></option></select>
+          </div>
+          <div class="date-group">
+            <label>Item</label>
+            <input type="text" />
+          </div>
+          <div class="date-group">
+            <label>Customer</label>
+            <input type="text" />
+          </div>
+        </div>
       
         <!-- Row 2 -->
         <div class="row">
+          <div class="date-group">
+            <label>Staff</label>
+            <select><option>Select a staff</option></select>
+          </div>
+          <div class="date-group">
+            <label>Type</label>
+            <select>
+              <option>All</option>
+              <option>GST</option>
+              <option>Non GST</option>
+              <option>Bill of Supply</option>
+            </select>
+          </div>
           <div class="date-group">
             <label>From</label>
             <input type="date" />
@@ -25,25 +57,25 @@
           </div>
         </div>
       
-<!-- Row: Quick Filters Left + Search/Reset Right -->
-<div class="row quick-filter-row">
-    <div class="left-buttons">
-      <button class="quick-btn">Today</button>
-      <button class="quick-btn">Yesterday</button>
-      <button class="quick-btn">7 Days</button>
-      <button class="quick-btn">30 Days</button>
-    </div>
-    <div class="right-buttons">
-      <button class="primary-btn">
-        <span class="material-icons">search</span> Search
-      </button>
-      <button class="primary-btn reset">
-        <span class="material-icons">refresh</span> Reset
-      </button>
-    </div>
-  </div>
+        <!-- Quick filter row -->
+        <div class="row quick-filter-row">
+          <div class="left-buttons">
+            <button class="quick-btn">Today</button>
+            <button class="quick-btn">Yesterday</button>
+            <button class="quick-btn">7 Days</button>
+            <button class="quick-btn">30 Days</button>
+          </div>
+          <div class="right-buttons">
+            <button class="primary-btn">
+              <span class="material-icons">search</span> Search
+            </button>
+            <button class="primary-btn reset">
+              <span class="material-icons">refresh</span> Reset
+            </button>
+          </div>
+        </div>
+      </div>
       
- </div>
       
 
     <div class="serial-number-section">
@@ -53,15 +85,17 @@
       <table class="item-table">
         <thead>
           <tr>
-            <th>Date</th>
-            <th>Particulars</th>
-            <th>Type</th>
-            <th>Debit</th>
-            <th>Credit</th>
+            <th>S. No.</th>
+            <th>Item Name</th>
+            <th>Qty Sold</th>
+            <th>Amount</th>
+            <th>Tax (%)</th>
+            <th>Tax Amount</th>
           </tr>
         </thead>
         <tbody>
           <tr>
+            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -74,6 +108,7 @@
             <td></td>
             <td></td>  
             <td></td>
+            <td></td>
           </tr>
         </tbody>
       </table>
@@ -84,22 +119,19 @@
 
   <!-- Right Side Space -->
   <div class="right-side">
-    
-    <div class="right-header">
+     <!-- Right Side Content -->
+     <div class="right-header">
       <label for="myInput"></label>
       <input type="text" id="myInput" />
     </div>  
 
 <div class="action-buttons">
-  <button class="primary-btn">
-    <span class="material-icons">swap_vert</span> Cash Adjustments
-  </button>
-  <a href="#" class="cash2bank-link">Cash 2 Bank</a>
+  <label>Amount:</label>
+  <label> Tax:</label>
 </div>
 
 <div class="tab-container">
-  <div class="tab active">CATEGORYWISE</div>
-  <div class="tab">MONTHWISE</div>
+  <div class="tab active">TOP 10 ITEMS SOLD QUANTITYWISE</div>
 </div>
 
 <div class="bar-chart">
@@ -117,15 +149,6 @@
   </div>
 </div>
 
-<div class="quick-info">
-  <div class="quick-title">
-    <span class="material-icons">wb_sunny</span> Quick Info
-  </div>
-  <div>Cash Inflow : ₹ 00</div>
-  <div>Cash Outflow : ₹ 00</div>
-  <div class="net-cash">Net Cash Flow : ₹ 00</div>
-</div>
-
 <div class="footer-buttons">
   <button class="icon-btn"><span class="material-icons">grid_on</span></button>
   <button class="icon-btn"><span class="material-icons">picture_as_pdf</span></button>
@@ -134,7 +157,6 @@
 </div>
 
   </div>
-
-  </div>
+</div>
 
 </div>

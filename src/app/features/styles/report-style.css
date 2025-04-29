@@ -1,15 +1,50 @@
 .full-page-container {
-    display: flex;
-    padding: 16px;
-    background: #fff;
-    border-radius: 12px;
-    margin-top: 5px;
-    box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.1), 0 6px 12px rgba(0, 0, 0, 0.1);
-    font-family: 'Segoe UI', sans-serif;
-    max-width: 100%;
-    overflow-x: hidden;
-    max-height: 100%;
-  }
+  padding: 16px;
+  background: #fff;
+  border-radius: 12px;
+  margin-top: 2px;
+  box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.1), 0 6px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', sans-serif;
+  max-width: 100%;
+}
+
+.content-body {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.page-header-wrapper {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2px;
+}
+
+.page-heading {
+  font-size: 1.15rem;
+  font-weight: 560;
+  color: #1e2d3b;
+  border-left: 4px solid #1c77ef;
+  padding-left: 12px;
+}
+
+.profit-box {
+  display: flex;
+  justify-content: flex-start; /* Align content to left */
+  align-items: center;         /* Vertically center the label */
+  padding: 6px 60px;
+  background-color: #1c77ef;
+  color: #fff;
+  border: 1px solid #1c77ef;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
   
   /* Left-side container for filters and table */
   .left-side {
@@ -37,36 +72,17 @@
    
   }
   
-  /* Filter row - ensure it wraps nicely on smaller screens */
-  .filter-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    align-items: flex-end;
-    margin-bottom: 4px;
-  }
-  
-  /* Filter buttons - positioned on the right side */
-  .filter-buttons {
-    display: flex;
-    gap: 8px;
-    margin-left: auto;
-  }
-  
-  /* Quick filter buttons row */
-  .quick-filters {
-    display: flex;
-    gap: 8px;
-    margin: 8px 0 4px 40px;
-    flex-wrap: wrap;
-  }
   
   /* Responsive: Stack content on small screens */
-  @media (max-width: 1068px) {
+  @media (max-width: 1200px) {
     .full-page-container {
       flex-direction: column;
     }
   
+    .content-body {
+      flex-direction: column;
+    }
+
     .left-side {
       padding-right: 0;
       flex-direction: column;
@@ -105,7 +121,7 @@
   }
   
   /* For very small screens */
-  @media (max-width: 400px) {
+  @media (max-width: 900px) {
     .filter-row {
       flex-direction: column;
       gap: 10px;
@@ -132,7 +148,7 @@
     }
   
     .date-group {
-      min-width: 100%;
+      max-width: 100%;
     }
   
     .quick-filters {
@@ -140,24 +156,99 @@
       gap: 6px;
     }
   
-   
+    .bottom-left-container {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .left-header {
+      width: 100%;
+    }
+  
+    .footer-buttons {
+      width: 100%;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
   }
   
+
   /* Scroll functionality for long content */
   .serial-number-section {
     background: #fff;
     border: 1px solid #adaaaa;
-    padding: 15px;
+    padding: 10px;
     border-radius: 6px;
-    margin-top: 20px;
-    height: 420px;
-    overflow-y: auto; /* Enable scrolling */
-    max-height: 100%; /* Prevent shrinking */
+    margin-top: 0px;
+    height: 320px;
   }
   
   /* Ensure table scroll works on small screens */
   .table-scroll {
     overflow-x: auto;
+  }
+  
+  .filter-row {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 20px 0;
+  }
+  
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+  }
+
+  .date-group {
+    display: flex;
+    flex-direction: column;
+    width: 220px; /* Adjust field width */
+  }
+  
+  .date-group label {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  
+  .date-group input,
+  .date-group select {
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+  }
+  
+  .quick-filter-row {
+    justify-content: space-between; /* Push left and right */
+    align-items: center;
+    width: 100%;
+  }
+  
+  .left-buttons,
+  .right-buttons {
+    display: flex;
+    gap: 10px;
+  }  
+  
+  .quick-btn {
+    padding: 4px 12px;
+    background: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  
+  .filter-buttons {
+    display: flex;
+    gap: 10px;
   }
   
   /* Styling for buttons */
@@ -184,14 +275,14 @@
   .quick-btn {
     padding: 6px 12px;
     font-size: 13px;
-    background-color: #eee;
+    background-color: #a3a0a0;
     border: 1px solid #ccc;
     cursor: pointer;
     border-radius: 4px;
   }
   
   .quick-btn:hover {
-    background-color: #ddd;
+    background-color: #afafaf;
   }
   
   /* Table styles */
@@ -239,35 +330,64 @@
     font-weight: 600;
     color: #fff;
   }
+
+  .date-group {
+    display: flex;
+    flex-direction: column; /* <-- This will stack label above input */
+    margin-right: 10px;
+  }
   
-  .date-group label{
-     margin: 0 6px 0 10px;
+  .date-group label {
+    margin: 0 0 0px 0px; /* Small bottom margin */
+    font-weight: 500;
+    font-size: 14px;
   }
   
   .date-group input[type="date"],
-  .date-group input[type="text"],
-  .date-group select {
-    padding: 6px;
-    border: none;
-    border: 2px solid #ccc;
+  .date-group input[type="text"] {
+    padding: 4px 6px;
+    border: 1.5px solid #ccc;
     font-size: 14px;
     outline: none;
     transition: border-color 0.3s;
-    width: 200px;
+    width: 195px;
+    border-radius: 4px;
+    font-size: 15px;
+    color: #696767;
   }
-  
-  .date-group input[type="date"]:focus {
-    border-color: #1c77ef;
+
+  .date-group select{
+    padding: 4px 6px;
+    border: 1.5px solid #ccc;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s;
+    width: 210px;
+    border-radius: 4px;
+    
+    font-size: 15px;
+    color: #696767;
   }
-  
-  
+
   .right-header {
-    font-size: 26px;
-    font-weight: bold;
-    color: #0056b3;
+    height: 40px; /* increased height */
+    background-color: #1c77ef; /* blue background */
+    border: 2px solid #1c77ef; /* optional border styling */
+    color: white;
+    font-size: 16px;
+    padding: 10px;
+    outline: none;
+    box-sizing: border-box;    
+    display: flex;
+    flex-direction: column;
     margin-bottom: 10px;
-    text-align: right;
+    margin-top: -10px;
   }
+  
+  .right-header input[type="text"]::placeholder {
+    color: #dce7ff;
+  }
+  
   
   .action-buttons {
     display: flex;
@@ -297,6 +417,7 @@
     padding: 10px 0;
     font-weight: 600;
     background: #ddd;
+    border: 1px solid #ddd;
     cursor: pointer;
     font-size: 14px;
   }
@@ -304,6 +425,7 @@
   .tab.active {
     background: #2980f2;
     color: white;
+    border: 1px solid #2980f2;
   }
   
   .bar-chart {
@@ -351,7 +473,6 @@
     align-items: center;
     background: #007bff;
     padding: 6px 0;
-    border-radius: 8px;
     margin-top: 20px;
   }
   
@@ -367,4 +488,36 @@
   .icon-btn:hover {
     color: #ffdd57;
   }
+  
+
+  .bottom-left-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 0 0 0;
+    gap: 20px;
+    margin-top: 4px;
+  }
+  
+  .left-input {
+    flex-grow: 1; /* input will stretch */
+  }
+  
+  .left-input input[type="text"] {
+    width: 100%;
+    max-width: 300px;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  
+
+
+  
+  
+
+
   

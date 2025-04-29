@@ -2,62 +2,78 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <div class="full-page-container">
+  
+  <div class="page-header-wrapper">
+    <label class="page-heading">Payment Paid</label>
+  </div>
+
+  <div class="content-body">
 
   <div class="left-side">
     
-    <!-- Row 1: Date + Buttons -->
     <div class="filter-row">
-        <div class="date-group"> 
+
+        <!-- Row 1 -->
+        <div class="row">
+          <div class="date-group">
             <label>Payment Type</label>
             <select>
-              <option>Any</option>     
+              <option>Any</option>
               <option>Expense</option>
               <option>Supplier</option>
               <option>Staff</option>
             </select>
           </div>
           <div class="date-group">
-            <label>Keyward</label>
+            <label>Keyword</label>
             <input type="text" />
           </div>
           <div class="date-group">
             <label>Narration/Remarks</label>
             <input type="text" />
           </div>
-          <div class="date-group"> 
-            <label>Payment Mode</label>
-           <select>
-             <option>Today</option>     
-             <option>Yesterday</option>
-             <option>This Week</option>
-           </select>
-         </div>
-      <div class="date-group">
-        <label>From</label>
-        <input type="date" />
-      </div>
-      <div class="date-group">
-        <label>Upto</label>
-        <input type="date" />
-      </div>
-      <div class="filter-buttons">
-        <button class="primary-btn">
-          <span class="material-icons">search</span> Search
-        </button>
-        <button class="primary-btn reset">
-          <span class="material-icons">refresh</span> Reset
-        </button>
-      </div>
+        </div>
       
-    </div>    
-
-    <!-- Row 2: Quick Filter Buttons -->
-    <div class="quick-filters">
+        <!-- Row 2 -->
+        <div class="row">
+          <div class="date-group">
+            <label>Payment Mode</label>
+            <select>
+              <option>Cash</option>
+              <option>Card</option>
+              <option>Bank</option>
+            </select>
+          </div>
+          <div class="date-group">
+            <label>From</label>
+            <input type="date" />
+          </div>
+          <div class="date-group">
+            <label>Upto</label>
+            <input type="date" />
+          </div>
+        </div>
+      
+<!-- Row: Quick Filters Left + Search/Reset Right -->
+<div class="row quick-filter-row">
+    <div class="left-buttons">
       <button class="quick-btn">Today</button>
       <button class="quick-btn">Yesterday</button>
       <button class="quick-btn">7 Days</button>
       <button class="quick-btn">30 Days</button>
     </div>
+    <div class="right-buttons">
+      <button class="primary-btn">
+        <span class="material-icons">search</span> Search
+      </button>
+      <button class="primary-btn reset">
+        <span class="material-icons">refresh</span> Reset
+      </button>
+    </div>
+  </div>
+      
+ </div>
+      
 
     <div class="serial-number-section">
 
@@ -70,6 +86,7 @@
             <th>Date</th>
             <th>Type</th>
             <th>Name</th>
+            <th>Amount</th>
             <th>Pay Mode</th>
             <th>Payment Ref.</th>
             <th>Remarks</th>
@@ -84,11 +101,13 @@
             <td></td>
             <td></td>
             <td></td>
+            <td></td>
           </tr>
           <tr>
             <td></td>
             <td></td>
             <td></td>
+            <td></td>  
             <td></td>
             <td></td>
             <td></td>
@@ -103,17 +122,16 @@
 
   <!-- Right Side Space -->
   <div class="right-side">
-    <!-- You can add content here later -->
      <!-- Right Side Content -->
-<div class="right-header">
-   ₹ 5,848.00 Cr
-</div>
+     <div class="right-header">
+      <label for="myInput"></label>
+      <input type="text" id="myInput" />
+    </div>  
 
 <div class="action-buttons">
-  <button class="primary-btn">
-    <span class="material-icons">swap_vert</span> Cash Adjustments
-  </button>
-  <a href="#" class="cash2bank-link">Cash 2 Bank</a>
+  <label>Paid by cash:</label>
+  <label>Paid through bank:</label>
+  <label>Paid through others:</label>
 </div>
 
 <div class="tab-container">
@@ -153,4 +171,6 @@
 </div>
 
   </div>
+</div>
+
 </div>

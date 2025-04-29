@@ -2,9 +2,9 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <div class="full-page-container">
-  
+
   <div class="page-header-wrapper">
-    <label class="page-heading">Business Book</label>
+    <label class="page-heading">Payment Received</label>
   </div>
 
   <div class="content-body">
@@ -12,9 +12,33 @@
   <div class="left-side">
     
     <div class="filter-row">
+
+        <!-- Row 1 -->
+        <div class="row">
+          <div class="date-group">
+            <label>Customer Name</label>
+            <input type="text" />
+          </div>
+          <div class="date-group">
+            <label>Contact No</label>
+            <input type="text" />
+          </div>
+          <div class="date-group">
+            <label>Narration/Remarks</label>
+            <input type="text" />
+          </div>
+        </div>
       
         <!-- Row 2 -->
         <div class="row">
+          <div class="date-group">
+            <label>Payment Mode</label>
+            <select>
+              <option>Cash</option>
+              <option>Card</option>
+              <option>Bank</option>
+            </select>
+          </div>
           <div class="date-group">
             <label>From</label>
             <input type="date" />
@@ -52,16 +76,24 @@
     <div class="table-scroll">
       <table class="item-table">
         <thead>
-          <tr> 
+          <tr>
+            <th>S. No.</th>
             <th>Date</th>
-            <th>Particulars</th>
-            <th>Type</th>
-            <th>Debit</th>
-            <th>Credit</th>
+            <th>Receipt No</th>
+            <th>Customer Name</th>
+            <th>Contact No</th>
+            <th>Amount</th>
+            <th>Pay Mode</th>
+            <th>Payment Ref.</th>
+            <th>Linked To</th>
           </tr>
         </thead>
         <tbody>
           <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -74,6 +106,10 @@
             <td></td>
             <td></td>  
             <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
           </tr>
         </tbody>
       </table>
@@ -84,11 +120,17 @@
 
   <!-- Right Side Space -->
   <div class="right-side">
-
+    
     <div class="right-header">
       <label for="myInput"></label>
       <input type="text" id="myInput" />
     </div>  
+
+<div class="action-buttons">
+  <label>Received in cash:</label>
+  <label>Received through bank:</label>
+  <label>Received through others:</label>
+</div>
 
 <div class="tab-container">
   <div class="tab active">CATEGORYWISE</div>
@@ -127,6 +169,7 @@
 </div>
 
   </div>
-</div>
+
+  </div>
 
 </div>
