@@ -446,6 +446,166 @@ export const routes: Routes = [
               },
             ]
           },
+          {
+            path: 'purchases',
+            children:[
+              {
+                path: 'purchase-aging',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/purchases/purchase-aging/purchase-aging.component').then(m => m.PurchaseAgingComponent),
+              },
+              {
+                path: 'itemwise-purchase',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/purchases/itemwise-purchase/itemwise-purchase.component').then(m => m.ItemwisePurchaseComponent),
+              },
+              {
+                path: 'billwise-purchase',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/purchases/billwise-purchase/billwise-purchase.component').then(m => m.BillwisePurchaseComponent),
+              },
+              {
+                path: 'itemwise-spurchase-summary',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/purchases/itemwise-purchase-summary/itemwise-purchase-summary.component').then(m => m.ItemwisePurchaseSummaryComponent),
+              },
+              {
+                path: 'billwise-purchase-summary',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/purchases/billwise-purchase-summary/billwise-purchase-summary.component').then(m => m.BillwisePurchaseSummaryComponent),
+              },
+              {
+                path: 'supplierwise-purchase-summary',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/purchases/supplierwise-purchase-summary/supplierwise-purchase-summary.component').then(m => m.SupplierwisePurchaseSummaryComponent),
+              },
+              {
+                path: 'gst-purchase',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/purchases/gst-purchase/gst-purchase.component').then(m => m.GstPurchaseComponent),
+              },
+            ]
+          },
+          {
+            path: 'customers',
+            children:[
+              {
+                path: 'amount-due',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/customers/amount-due/amount-due.component').then(m => m.AmountDueComponent),
+              },
+              {
+                path: 'payment-history',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/customers/payment-history/payment-history.component').then(m => m.PaymentHistoryComponent),
+              },
+              {
+                path: 'account-balance',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/customers/account-balance/account-balance.component').then(m => m.AccountBalanceComponent),
+              },
+            ]
+          },
+          {
+            path: 'suppliers',
+            children:[
+              {
+                path: 'payment-history',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/suppliers/payment-history/payment-history.component').then(m => m.PaymentHistoryComponent),
+              },
+              {
+                path: 'account-balance',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/suppliers/account-balance/account-balance.component').then(m => m.AccountBalanceComponent),
+              },
+            ]
+          },
+          {
+            path: 'expenses',
+            children:[
+              {
+                path: 'search-expense',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/expenses/search-expense/search-expense.component').then(m => m.SearchExpenseComponent),
+              },
+              {
+                path: 'search-indirect-expense',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/expenses/search-indirect-expense/search-indirect-expense.component').then(m => m.SearchIndirectExpenseComponent),
+              },
+            ]
+          },
+          {
+            path: 'staff',
+            children:[
+              {
+                path: 'search-salary',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/staff/search-salary/search-salary.component').then(m => m.SearchSalaryComponent),
+              },
+              {
+                path: 'commission',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/staff/commission/commission.component').then(m => m.CommissionComponent),
+              },
+              {
+                path: 'search-attendance',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/staff/search-attendance/search-attendance.component').then(m => m.SearchAttendanceComponent),
+              },
+              {
+                path: 'payment-history',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/staff/payment-history/payment-history.component').then(m => m.PaymentHistoryComponent),
+              },
+            ]
+          },
+          {
+            path: 'tcs',
+            children:[
+              {
+                path: 'tcs-payable',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/tcs/tcs-payable/tcs-payable.component').then(m => m.TcsPayableComponent),
+              },
+              {
+                path: 'tcs-receivable',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/tcs/tcs-receivable/tcs-receivable.component').then(m => m.TcsReceivableComponent),
+              },
+            ]
+          },
+          {
+            path: 'gstr',
+            children:[
+              {
+                path: 'gstr-1',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/gstr/gstr-1/gstr-1.component').then(m => m.Gstr1Component),
+              },
+              {
+                path: 'gstr-3',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/gstr/gstr-3/gstr-3.component').then(m => m.Gstr3Component),
+              },
+              {
+                path: 'gstr-sale',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/gstr/gstr-sale/gstr-sale.component').then(m => m.GstrSaleComponent),
+              },
+              {
+                path: 'gstr-purchase',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/gstr/gstr-purchase/gstr-purchase.component').then(m => m.GstrPurchaseComponent),
+              },
+              {
+                path: 'gstr-indirect-expense',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/gstr/gstr-indirect-expense/gstr-indirect-expense.component').then(m => m.GstrIndirectExpenseComponent),
+              },
+            ]
+          },
         ]
       },
     ], 

@@ -245,9 +245,10 @@
     gap: 6px; /* Space between icon and label */
     border-radius: 4px;
   }
-  h1
+  
+  
   .primary-btn:hover {
-    background-color: #2d88ff;
+    background-color: #2e87fd;
   }
   
   .primary-btn i,

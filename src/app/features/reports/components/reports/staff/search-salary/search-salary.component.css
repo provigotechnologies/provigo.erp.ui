@@ -1,0 +1,18 @@
+.footer-buttons {
+    display: flex;
+    gap: 20px;
+    background: #007bff;
+    padding: 6px 12px;
+    margin-top: -14px !important;
+  }
+
+  .full-page-container {
+    max-width: 900px !important;
+    margin: 6px 0 0 150px !important;
+  }
+
+  @media (max-width: 1300px) {
+    .full-page-container {
+      margin: 10px !important;
+    }
+  }

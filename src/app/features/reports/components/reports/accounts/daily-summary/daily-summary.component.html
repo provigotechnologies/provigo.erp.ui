@@ -1,1 +1,48 @@
-<p>daily-summary works!</p>
+<div class="dashboard">
+    <!-- First Row -->
+    <div class="row">
+      <div class="big-box blue">
+        <div class="value">₹ {{ amountReceived.toFixed(2) }}</div>
+        <div class="label">Amount Received</div>
+      </div>
+      <div class="info-box">
+        <div class="label">Total Expenses</div>
+        <div class="value blue-text">₹ {{ totalExpenses.toFixed(2) }}</div>
+      </div>
+      <div class="info-box">
+        <div class="label">Number of Invoices</div>
+        <div class="value blue-text">{{ numberOfInvoices }}</div>
+      </div>
+      <div class="info-box">
+        <div class="label">No. of Sale Returns</div>
+        <div class="value blue-text">{{ numberOfSaleReturns }}</div>
+      </div>
+    </div>
+  
+    <!-- Second Row -->
+    <div class="row">
+      <div class="big-box dark-blue">
+        <div class="value">₹ {{ totalNetSales.toFixed(2) }}</div>
+        <div class="label">Total Net Sales</div>
+      </div>
+      <div class="info-box">
+        <div class="label">Total Purchases</div>
+        <div class="value blue-text">₹ {{ totalPurchases.toFixed(2) }}</div>
+      </div>
+      <div class="info-box">
+        <div class="label">Number of Unpaid Invoices</div>
+        <div class="value blue-text">{{ numberOfUnpaidInvoices }}</div>
+      </div>
+      <div class="info-box">
+        <div class="label">Total Sale Returns</div>
+        <div class="value blue-text">₹ {{ totalSaleReturns.toFixed(2) }}</div>
+      </div>
+    </div>
+  
+    <!-- Footer Date and Search -->
+    <div class="footer">
+        <input type="date" [value]="selectedDate" (change)="onDateChange($event)" />
+        <button class="search-btn">🔍</button>
+    </div>
+  </div>
+  

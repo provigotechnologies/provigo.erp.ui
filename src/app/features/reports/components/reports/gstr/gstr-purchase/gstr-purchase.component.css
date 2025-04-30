@@ -1,0 +1,15 @@
+
+.right-buttons {
+    margin-top: 15px !important;
+  }  
+  
+
+  @media (max-width: 600px) {
+    .right-buttons {
+        justify-content: flex-start !important;
+      } 
+  }
+
+  .serial-number-section {
+    height: 400px !important;  
+  }

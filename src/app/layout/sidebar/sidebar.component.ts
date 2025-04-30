@@ -24,6 +24,7 @@ export class SidebarComponent implements OnInit {
   menuOpen: boolean = false;
   activeSubMenu: string | null = null;
   activeNestedSubMenu: string | null = null;
+  activeInnerSubMenu: string | null = null;
   isMobile: boolean = false;
 
   constructor(private router: Router) {
@@ -78,6 +79,10 @@ export class SidebarComponent implements OnInit {
     this.activeNestedSubMenu = this.activeNestedSubMenu === menu ? null : menu;
   }
 
+  toggleInnerSubMenu(menu: string): void {
+    this.activeInnerSubMenu = this.activeInnerSubMenu === menu ? null : menu;
+  }
+  
   // ✅ Detect screen size change
   @HostListener('window:resize')
   onWindowResize(): void {
