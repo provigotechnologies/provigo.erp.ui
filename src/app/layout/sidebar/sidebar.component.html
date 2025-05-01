@@ -64,7 +64,6 @@
                 <li><a [routerLink]="['/sales/manage-salereturn']">Manage Sale Returns</a></li>
               </ul>
             </li>
-
             
              <!-- Quotation with Nested Submenu -->
             <li class="has-submenu"
@@ -137,6 +136,25 @@
                 <li><a [routerLink]="['/sales/manage-saleorder']">Manage Sale Orders</a></li>
               </ul>
             </li>
+
+            
+          <!-- Invoice with Nested Submenu -->
+          <li class="has-submenu"
+          [class.active]="activeNestedSubMenu === 'invoice'"
+          (mouseenter)="!isMobile && (activeNestedSubMenu = 'invoice')"
+          (mouseleave)="!isMobile && (activeNestedSubMenu = null)"
+          (click)="isMobile && toggleNestedSubMenu('invoice')">
+
+          <a href="#">Recurring Invoice</a>
+
+         <ul
+            *ngIf="activeNestedSubMenu === 'invoice'"
+            [class.nested-submenu]="!isMobile"
+            [class.mobile-visible]="isMobile">
+            <li><a [routerLink]="['/sales/recurring-invoice']">New Recurring Invoice</a></li>
+            <li><a [routerLink]="['/sales/recurring-manage-invoice']">Manage Recurring Invoices</a></li>
+          </ul>
+        </li>
 
             <!-- Credit Note with Nested Submenu -->
             <li class="has-submenu"
@@ -476,8 +494,8 @@
            <li><a [routerLink]="['/reports/inventory/stock-availability']">Stock Availability</a></li>
            <li><a [routerLink]="['/reports/inventory/stock-adjustment']">Stock Adjustment</a></li>
            <li><a [routerLink]="['/reports/inventory/consumable-stock']">Consumable Stock</a></li>
-           <li><a [routerLink]="['/reports/inventory/sale-return']">Fast Moving Items</a></li>
-           <li><a [routerLink]="['/reports/inventory/manage-salereturn']">Items Not Moving</a></li>
+           <li><a [routerLink]="['/reports/inventory/fast-moving-items']">Fast Moving Items</a></li>
+           <li><a [routerLink]="['/reports/inventory/items-not-moving']">Items Not Moving</a></li>
            <li><a [routerLink]="['/reports/inventory/available-serials']">Available Serials</a></li>
            <li><a [routerLink]="['/reports/inventory/item-list']">Item List</a></li>
          </ul>

@@ -1,4 +1,9 @@
 <div class="dashboard">
+
+  <div class="page-header-wrapper">
+    <label class="page-heading">Daily Summary</label>
+  </div>
+
     <!-- First Row -->
     <div class="row">
       <div class="big-box blue">
@@ -36,6 +41,29 @@
       <div class="info-box">
         <div class="label">Total Sale Returns</div>
         <div class="value blue-text">₹ {{ totalSaleReturns.toFixed(2) }}</div>
+      </div>
+    </div>
+  
+    <div class="bars-panel">
+      <div class="bar-section">
+        <div class="bar-title">Hourly Invoice Amount Pattern</div>
+        <div *ngFor="let item of topItems" class="bar-item">
+          <div class="bar" [style.width.%]="item.qty * 100"> {{ item.name }} : {{ item.qty }}</div>
+        </div>
+      </div>
+
+      <div class="bar-section">
+        <div class="bar-title">Top 10 Items Sold (by net quantity)</div>
+        <div *ngFor="let item of topItems" class="bar-item">
+          <div class="bar" [style.width.%]="item.qty * 100"> {{ item.name }} : {{ item.qty }}</div>
+        </div>
+      </div>
+  
+      <div class="bar-section">
+        <div class="bar-title">Top 10 Customers (by amount)</div>
+        <div *ngFor="let cust of topCustomers" class="bar-item">
+          <div class="bar blue" [style.width.%]="cust.amount"> {{ cust.name }} : ₹{{ cust.amount }}</div>
+        </div>
       </div>
     </div>
   

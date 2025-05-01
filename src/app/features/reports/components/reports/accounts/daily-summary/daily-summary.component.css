@@ -1,14 +1,38 @@
 .dashboard {
-    padding: 16px;
-    font-family: Arial, sans-serif;
-    color: #333;
+    padding: 16px; 
+  background: #fff;
+  border-radius: 12px;
+  margin: 15px 0 0 30px;
+  box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.1), 0 6px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', sans-serif;
+  max-width: 90%;
   }
   
+  .page-header-wrapper {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2px;
+  }
+  
+  .page-heading {
+    font-size: 1.15rem;
+    font-weight: 560;
+    color: #1e2d3b;
+    border-left: 4px solid #1c77ef;
+    padding-left: 12px;
+  }
+
   .row {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
-    margin-bottom: 12px;
+    margin: 12px 0 10px 0 ;
   }
   
   .big-box {
@@ -52,6 +76,56 @@
     color: #1976d2;
   }
   
+  .harts-panel {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .chart-box {
+    flex: 1 1 200px;
+    background: #eee;
+    padding: 10px;
+  }
+  
+  .chart-placeholder {
+    height: 80px;
+    background: white;
+    margin-top: 5px;
+  }
+  
+  .bars-panel {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .bar-section {
+    flex: 1 2 100px;
+  }
+  
+  .bar-title {
+    background: #a3a2a2;
+    color: white;
+    padding: 5px;
+  }
+  
+  .bar-item {
+    background: #e0e0e0;
+    margin-top: 2px;
+  }
+  
+  .bar {
+    background: #2196f3;
+    color: white;
+    padding: 2px 5px;
+    font-size: 12px;
+  }
+  
+  .bar.blue {
+    background: #0b62a4;
+  }
+
   .footer {
     display: flex;
     justify-content: flex-end;

@@ -149,6 +149,16 @@ export const routes: Routes = [
               import('./features/sales/components/sales/manage-quotation/manage-quotation.component').then(m => m.ManageQuotationComponent),
           },
           {
+            path: 'recurring-invoice',
+            loadComponent: () =>
+              import('./features/sales/components/sales/recurring-invoice/recurring-invoice.component').then(m => m.RecurringInvoiceComponent),
+          },
+          {
+            path: 'manage-invoice',
+            loadComponent: () =>
+              import('./features/sales/components/sales/manage-invoice/manage-invoice.component').then(m => m.ManageInvoiceComponent),
+          },
+          {
             path: 'deliverynote',
             loadComponent: () =>
               import('./features/sales/components/sales/deliverynote/deliverynote.component').then(m => m.DeliverynoteComponent),
@@ -373,6 +383,16 @@ export const routes: Routes = [
                 path: 'consumable-stock',
                 loadComponent: () =>
                   import('./features/reports/components/reports/inventory/consumable-stock/consumable-stock.component').then(m => m.ConsumableStockComponent),
+              },
+              {
+                path: 'fast-moving-items',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/inventory/fast-moving-items/fast-moving-items.component').then(m => m.FastMovingItemsComponent),
+              },
+              {
+                path: 'items-not-moving',
+                loadComponent: () =>
+                  import('./features/reports/components/reports/inventory/items-not-moving/items-not-moving.component').then(m => m.ItemsNotMovingComponent),
               },
               {
                 path: 'available-serials',
