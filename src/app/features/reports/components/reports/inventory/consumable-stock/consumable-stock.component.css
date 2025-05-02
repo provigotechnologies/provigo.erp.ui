@@ -12,16 +12,8 @@
   }
 
   .serial-number-section {
+    height: 450px !important;
     margin-top: 20px !important;
   }
 
-  .full-page-container {
-    max-width: 900px !important;
-    margin: 40px 0 0 150px !important;
-  }
 
-  @media (max-width: 1300px) {
-    .full-page-container {
-      margin: 10px !important;
-    }
-  }

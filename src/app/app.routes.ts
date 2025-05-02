@@ -154,9 +154,9 @@ export const routes: Routes = [
               import('./features/sales/components/sales/recurring-invoice/recurring-invoice.component').then(m => m.RecurringInvoiceComponent),
           },
           {
-            path: 'manage-invoice',
+            path: 'manage-recurring-invoice',
             loadComponent: () =>
-              import('./features/sales/components/sales/manage-invoice/manage-invoice.component').then(m => m.ManageInvoiceComponent),
+              import('./features/sales/components/sales/manage-recurring-invoice/manage-recurring-invoice.component').then(m => m.ManageRecurringInvoiceComponent),
           },
           {
             path: 'deliverynote',
@@ -485,7 +485,7 @@ export const routes: Routes = [
                   import('./features/reports/components/reports/purchases/billwise-purchase/billwise-purchase.component').then(m => m.BillwisePurchaseComponent),
               },
               {
-                path: 'itemwise-spurchase-summary',
+                path: 'itemwise-purchase-summary',
                 loadComponent: () =>
                   import('./features/reports/components/reports/purchases/itemwise-purchase-summary/itemwise-purchase-summary.component').then(m => m.ItemwisePurchaseSummaryComponent),
               },

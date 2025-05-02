@@ -15,6 +15,17 @@
       
         <!-- Row 2 -->
         <div class="row">
+          <div class="date-group">
+            <label>Group</label>
+            <select>
+              <option></option>
+              <option></option>
+            </select>
+          </div>
+          <div class="date-group">
+            <label>Item Name</label>
+            <input type="text" />
+          </div>
             <div class="date-group">
                 <label>From</label>
                 <input type="date" />
@@ -23,19 +34,6 @@
                 <label>Upto</label>
                 <input type="date" />
               </div>
-          <div class="date-group">
-            <label>Type</label>
-            <select>
-              <option>All</option>
-              <option>GST</option>
-              <option>Non GST</option>
-              <option>Bill of Supply</option>
-            </select>
-          </div>
-          <div class="date-group">
-            <label>Keyword</label>
-            <input type="text" />
-          </div>
         </div>
       
         <!-- Quick filter row -->
@@ -68,8 +66,6 @@
           <tr>
             <th>Item Name</th>
             <th>Item Code</th>
-            <th>Group</th>
-            <th>Unit</th>
             <th>Qty Sold</th>
             <th>Total Sale Amount</th>
             <th>Profit</th>
@@ -81,16 +77,12 @@
             <td></td>
             <td></td>
             <td></td>
-            <td></td>    
-            <td></td>
-            <td></td>
+            <td></td>   
           </tr>
           <tr>
             <td></td>
             <td></td>
             <td></td>  
-            <td></td>
-            <td></td>
             <td></td>
             <td></td>
           </tr>
@@ -99,47 +91,15 @@
     </div>
 
     </div>
-  </div>
 
-  <!-- Right Side Space -->
-  <div class="right-side">
-     <!-- Right Side Content -->
-     <div class="right-header">
-      <label for="myInput"></label>
-      <input type="text" id="myInput" />
-    </div>  
-
-<div class="action-buttons">
-  <label>Amount:</label>
-  <label> Tax:</label>
-</div>
-
-<div class="tab-container">
-  <div class="tab active"> CATEGORYWISE</div>
-  <div class="tab">MONTHWISE</div>
-</div>
-
-<div class="bar-chart">
-  <div class="bar">
-    <div class="bar-label">Supplier Refunds : ₹ 00</div>
-    <div class="bar-fill"></div>
-  </div>
-  <div class="bar">
-    <div class="bar-label">Supplier Payments : ₹ 00</div>
-    <div class="bar-fill" ></div>
-  </div>
-  <div class="bar">
-    <div class="bar-label">Sale Returns : ₹ 00</div>
-    <div class="bar-fill" ></div>
-  </div>
-</div>
-
-<div class="footer-buttons">
-  <button class="icon-btn"><span class="material-icons">grid_on</span></button>
-  <button class="icon-btn"><span class="material-icons">picture_as_pdf</span></button>
-  <button class="icon-btn"><span class="material-icons">email</span></button>
-  <button class="icon-btn"><span class="material-icons">print</span></button>
-</div>
+    <div class="bottom-left-container">
+      <div class="footer-buttons">
+        <button class="icon-btn"><span class="material-icons">grid_on</span></button>
+        <button class="icon-btn"><span class="material-icons">picture_as_pdf</span></button>
+        <button class="icon-btn"><span class="material-icons">email</span></button>
+        <button class="icon-btn"><span class="material-icons">print</span></button>
+      </div>
+    </div>
 
   </div>
 </div>

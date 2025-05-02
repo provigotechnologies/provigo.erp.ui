@@ -1,76 +1,64 @@
-<div class="dashboard">
+<div class="dashboard-container">
 
   <div class="page-header-wrapper">
     <label class="page-heading">Daily Summary</label>
   </div>
 
-    <!-- First Row -->
-    <div class="row">
-      <div class="big-box blue">
-        <div class="value">₹ {{ amountReceived.toFixed(2) }}</div>
-        <div class="label">Amount Received</div>
-      </div>
-      <div class="info-box">
-        <div class="label">Total Expenses</div>
-        <div class="value blue-text">₹ {{ totalExpenses.toFixed(2) }}</div>
-      </div>
-      <div class="info-box">
-        <div class="label">Number of Invoices</div>
-        <div class="value blue-text">{{ numberOfInvoices }}</div>
-      </div>
-      <div class="info-box">
-        <div class="label">No. of Sale Returns</div>
-        <div class="value blue-text">{{ numberOfSaleReturns }}</div>
-      </div>
+  <div class="left-panel">
+    <div class="card amount-received">
+      <div class="amount">₹ 300.00</div>
+      <div class="label">Amount Received</div>
     </div>
-  
-    <!-- Second Row -->
-    <div class="row">
-      <div class="big-box dark-blue">
-        <div class="value">₹ {{ totalNetSales.toFixed(2) }}</div>
-        <div class="label">Total Net Sales</div>
-      </div>
-      <div class="info-box">
-        <div class="label">Total Purchases</div>
-        <div class="value blue-text">₹ {{ totalPurchases.toFixed(2) }}</div>
-      </div>
-      <div class="info-box">
-        <div class="label">Number of Unpaid Invoices</div>
-        <div class="value blue-text">{{ numberOfUnpaidInvoices }}</div>
-      </div>
-      <div class="info-box">
-        <div class="label">Total Sale Returns</div>
-        <div class="value blue-text">₹ {{ totalSaleReturns.toFixed(2) }}</div>
-      </div>
+    <div class="card net-sales">
+      <div class="amount">₹ 300.00</div>
+      <div class="label">Total Net Sales</div>
     </div>
-  
-    <div class="bars-panel">
-      <div class="bar-section">
-        <div class="bar-title">Hourly Invoice Amount Pattern</div>
-        <div *ngFor="let item of topItems" class="bar-item">
-          <div class="bar" [style.width.%]="item.qty * 100"> {{ item.name }} : {{ item.qty }}</div>
-        </div>
-      </div>
 
-      <div class="bar-section">
-        <div class="bar-title">Top 10 Items Sold (by net quantity)</div>
-        <div *ngFor="let item of topItems" class="bar-item">
-          <div class="bar" [style.width.%]="item.qty * 100"> {{ item.name }} : {{ item.qty }}</div>
-        </div>
-      </div>
-  
-      <div class="bar-section">
-        <div class="bar-title">Top 10 Customers (by amount)</div>
-        <div *ngFor="let cust of topCustomers" class="bar-item">
-          <div class="bar blue" [style.width.%]="cust.amount"> {{ cust.name }} : ₹{{ cust.amount }}</div>
-        </div>
-      </div>
+    <div class="chart-card">
+      <div class="chart-title">Hourly Invoice Amt Pattern</div>
+      <div class="chart-box"></div>
     </div>
-  
-    <!-- Footer Date and Search -->
-    <div class="footer">
-        <input type="date" [value]="selectedDate" (change)="onDateChange($event)" />
-        <button class="search-btn">🔍</button>
+
+    <div class="chart-card">
+      <div class="chart-title">Hourly Invoice Count Pattern</div>
+      <div class="chart-box"></div>
     </div>
   </div>
-  
+
+  <div class="right-panel">
+    <!-- ✅ 2-row layout for summary boxes -->
+    <div class="summary-section">
+      <div class="summary-row">
+        <div class="summary-box"><div>Total Expenses</div><span>₹ 0.00</span></div>
+        <div class="summary-box"><div>Number of Invoices</div><span>1</span></div>
+        <div class="summary-box"><div>No. of Sale Returns</div><span>0</span></div>
+      </div>
+      <div class="summary-row">
+        <div class="summary-box"><div>Total Purchases</div><span>₹ 0.00</span></div>
+        <div class="summary-box"><div>Number of Unpaid Invoices</div><span>0</span></div>
+        <div class="summary-box"><div>Total Sale Returns</div><span>₹ 0.00</span></div>
+      </div>
+    </div>
+
+    <div class="bar-charts">
+      <div class="bar-card">
+        <div class="bar-title">Top 10 Items Sold (by net quantity)</div>
+        <div class="bar-list">
+          <div class="bar">TESTING1 : 1</div>
+          <div class="bar">TESTING2 : 3</div>
+          <div class="bar">TESTING3 : 2</div>
+           
+        </div>
+      </div>
+      <div class="bar-card">
+        <div class="bar-title">Top 10 Customers (by amount)</div>
+        <div class="bar">CASH : ₹ 300.00</div>
+      </div>
+    </div>
+    
+    <div class="bottom-right">
+      <input type="date" class="date-picker" />
+      <button class="search-btn">🔍</button>
+    </div>
+  </div>
+</div>

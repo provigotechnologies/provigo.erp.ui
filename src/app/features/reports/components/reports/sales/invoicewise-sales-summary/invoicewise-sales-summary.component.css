@@ -1,18 +1,17 @@
-.full-page-container {
-    margin-top: 30px !important;
+
+.bottom-left-container {
+  justify-content: flex-end !important;
+}
+
+.footer-buttons {
+  display: flex;
+  gap: 20px;
+  background: #007bff;
+  padding: 6px 12px;
+  margin-top: -4px !important;
+  justify-content: flex-end;
+}
+
+.row {
+    gap: 2px !important;
   }
-  
-  @media (max-width: 700px){
-    .full-page-container {
-      margin-top: 10px !important;
-    }
-  }
-  
-  
-  .row {
-      gap: 2px !important;
-    }
-    
-    .footer-buttons {
-      margin-top: 170px !important;
-    }

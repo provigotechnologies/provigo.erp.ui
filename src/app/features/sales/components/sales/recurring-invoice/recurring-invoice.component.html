@@ -15,7 +15,7 @@
           </label>
         
           <label>
-            Invoice Date
+            Start Date
             <input type="date" />
           </label>
   
@@ -37,7 +37,7 @@
           </label>  
   
           <label>
-            Due Date
+            End Date
             <input type="date" />
           </label>
           </div>
@@ -58,13 +58,22 @@
           </label>
           
           <label>
-            Contact No 
-            <input type="text" />
-          </label>
-  
+            <span>Frequency </span>
+            <select> 
+              <option>Daily</option>
+              <option>Weekly</option>     
+              <option>Monthly</option>
+              <option>Custom</option>
+            </select>
+          </label> 
+          
           <label>
-            Address
-            <input type="text" />
+            <span>Repeat Unit </span>
+            <select>
+              <option>Day(s)</option>
+              <option>Week(s)</option>     
+              <option>Month(s)</option>
+            </select>
           </label>
   
           <label>
@@ -79,9 +88,9 @@
           <!-- 🔹 Row 1: Horizontal Input Fields -->
               <div class="input-row">
                 <label class="stacked-label">
-                  <span>Serial No<span class="required">*</span></span>
+                  <span>Serial No</span>
                  <div class="rupee-wrapper"  style="display: flex; align-items: center;">
-                  <span style="padding: 6px; background-color: #007bff; height: 13px; color: white;">₹</span>
+                  <span style="padding: 6px; background-color: #007bff; height: 13px; color: white;"></span>
                    <input type="text" />
                   </div>
                 </label>
@@ -110,7 +119,7 @@
                 </label>
         
                 <label class="stacked-label">
-                  <span>M.R.P<span class="required">*</span></span>
+                  <span>M.R.P</span>
                  <div class="rupee-wrapper"  style="display: flex; align-items: center;">
                   <span style="padding: 6px; background-color: #007bff; height: 13px; color: white;">₹</span>
                    <input type="text" />
@@ -118,7 +127,7 @@
                 </label>
   
                 <label class="stacked-label">
-                  <span>Disc(%)<span class="required">*</span></span>
+                  <span>Disc(%)</span>
                  <div class="rupee-wrapper"  style="display: flex; align-items: center;">
                   <span style="padding: 6px; background-color: #007bff; height: 13px; color: white;">₹</span>
                    <input type="text" />
@@ -243,14 +252,6 @@
           <div class="footer-columns">
   
           <div class="grid-container">
-            <div class="group">
-              <label>Total Quantity</label>
-              <input type="text" value="0" readonly class="highlight" style="width: 120px;" />
-            </div>
-            <div class="group">
-              <label>Sold By</label>
-              <select><option>Select</option></select>
-            </div>
         
             <div class="label">
               <div class="checkbox-label">
@@ -263,39 +264,11 @@
               <span>or</span>
               <input type="text" placeholder="₹" />
             </div>
-        
-            <div class="label">
-              <div class="checkbox-label">
-                <input type="checkbox" checked />
-                <span>Add reference</span>
-              </div>
-            </div>
-            <div class="input-pair">
-              <select><option>P.O. No.</option></select>
-              <span></span><span></span> <span></span>
-              <input type="text" placeholder="Document No." />
-            </div>
-        
-            <div class="label">
-              <div class="checkbox-label">
-                <input type="checkbox" checked />
-                <span>Add shipping</span>
-              </div>
-            </div>
-            <div class="input-pair">
-              <input type="text" placeholder="₹ Amount" />
-              <span></span><span></span> <span></span>
-              <select><option>Shipping Tax (%)</option></select>
-            </div>   
           </div>
   
            <!-- WRAP these two in a flex row -->
            <div class="textarea-column">
             <div class="textarea-row">
-              <div class="group textarea">
-                <label>Delivery Terms</label>
-                <textarea rows="4" cols="28"></textarea>
-              </div>
               <div class="group textarea">
                 <label>Remarks (Private Use)</label>
                 <textarea rows="4" cols="28"></textarea>
