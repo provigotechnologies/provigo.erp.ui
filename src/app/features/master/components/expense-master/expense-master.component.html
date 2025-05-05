@@ -1,61 +1,79 @@
-<div class="bank-form">
+<form #expenseForm="ngForm" (ngSubmit)="addTable()" novalidate class="bank-form">
+
+  <button type="button" class="close-btn">✖</button>
 
   <div class="page-header-wrapper">
     <label class="page-heading">Add New Expense</label>
   </div>
-    <!-- Table Name Input -->
-    <label for="expenseName">
-      <span>Expense Name <span class="required">*</span></span>
-    </label>
-    <input type="text" id="expenseName" name="expenseName" [(ngModel)]="expenseName" (input)="error = ''" />
-  
-    <!-- Error Message -->
-    <div *ngIf="error" class="error-message">{{ error }}</div>
-  
-     <!-- Buttons -->
-     <div class="button-group">
-      <button class="primary-btn btn-add" type="button" (click)="addTable()">Add</button>
-      <button class="primary-btn btn-cancel" type="button" (click)="cancel()">Cancel</button>
-    </div>
-  
-     <!-- 🔽 Added Table Section -->
-     <div class="table-wrapper">
-        <table class="bank-table">
-          <thead>
-            <tr>
-              <th>S.No</th>
-              <th>Expense Name</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td></td>
-              <td>
-                <button>✏️</button>
-                <button>🗑️</button>
-              </td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td></td>
-              <td>
-                <button>✏️</button>
-                <button>🗑️</button>
-              </td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td></td>
-              <td>
-                <button>✏️</button>
-                <button>🗑️</button>
-              </td>
-            </tr>
-            <!-- More rows will go here -->
-          </tbody>
-        </table>
-      </div>
+
+  <!-- Expense Name Input -->
+  <label for="expenseName">
+    <span>Expense Name <span class="required">*</span></span>
+  </label>
+  <input
+    type="text"
+    id="expenseName"
+    name="expenseName"
+    required
+    minlength="3"
+    pattern="^[a-zA-Z\s]+$"
+    [(ngModel)]="expenseName"
+    #expenseNameRef="ngModel"
+    (input)="error = ''"
+  />
+
+  <!-- Validation Messages -->
+  <div *ngIf="(expenseNameRef.invalid && (expenseNameRef.touched || error))" class="error-message">
+    <div *ngIf="expenseNameRef.errors?.['required']">Expense name is required.</div>
+    <div *ngIf="expenseNameRef.errors?.['minlength']">Must be at least 3 characters.</div>
+    <div *ngIf="expenseNameRef.errors?.['pattern']">Only letters and spaces allowed.</div>
+    <div *ngIf="error && !expenseNameRef.errors">{{ error }}</div>
   </div>
-  
+
+  <!-- Buttons -->
+  <div class="button-group">
+    <button
+      class="primary-btn btn-add"
+      type="button"
+      [disabled]="expenseForm.invalid"
+      (click)="addTable()"
+    >Add</button>
+    <button class="primary-btn btn-cancel" type="button" (click)="cancel()">Cancel</button>
+  </div>
+
+  <!-- Table Section -->
+  <div class="table-wrapper">
+    <table class="bank-table">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Holiday Name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Show 3 empty rows if list is empty -->
+        <ng-container *ngIf="expenseList.length === 0">
+          <tr *ngFor="let row of [1,2,3]">
+            <td>{{ row }}</td>
+            <td style="color: gray;">-</td>
+            <td>
+              <button disabled>✏️</button>
+              <button disabled>🗑️</button>
+            </td>
+          </tr>
+        </ng-container>
+
+        <!-- Show data rows -->
+        <tr *ngFor="let name of expenseList; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ name }}</td>
+          <td>
+            <button type="button" (click)="editTable(i)">✏️</button>
+            <button type="button" (click)="deleteTable(i)">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</form>

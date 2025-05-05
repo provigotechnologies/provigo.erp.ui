@@ -1,28 +1,44 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common'; 
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-designation-master',
   standalone: true,
-  imports: [FormsModule, CommonModule],  
+  imports: [CommonModule, FormsModule],
   templateUrl: './designation-master.component.html',
-  styleUrls: [
-    './designation-master.component.css',
-    '../../../styles/masters-style.css'   ]
+  styleUrls: ['./designation-master.component.css', '../../../styles/masters-style.css']
 })
 export class DesignationMasterComponent {
+  @Output() close = new EventEmitter<void>();
+
   designationName = '';
   error = '';
   designationList: string[] = [];
 
   addTable() {
-    if (!this.designationName.trim()) {
-      this.error = 'Brand name is required';
+    const trimmedName = this.designationName.trim();
+
+    if (!trimmedName) {
+      this.error = 'Designation name is required';
       return;
     }
 
-    this.designationList.push(this.designationName.trim());
+    if (!/^[a-zA-Z\s]+$/.test(trimmedName)) {
+      this.error = 'Only letters and spaces allowed';
+      return;
+    }
+
+    const isDuplicate = this.designationList.some(
+      name => name.toLowerCase() === trimmedName.toLowerCase()
+    );
+
+    if (isDuplicate) {
+      this.error = 'Designation name already exists';
+      return;
+    }
+
+    this.designationList.push(trimmedName);
     this.designationName = '';
     this.error = '';
   }
@@ -35,10 +51,14 @@ export class DesignationMasterComponent {
   editTable(index: number) {
     this.designationName = this.designationList[index];
     this.designationList.splice(index, 1);
+    this.error = '';
   }
 
   deleteTable(index: number) {
     this.designationList.splice(index, 1);
   }
-}
 
+  closeComponent() {
+    this.close.emit();
+  }
+}

@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { provideRouter } from '@angular/router';
+import { MainComponent } from './layout/main/main.component'; // Assuming this is your dashboard
 import { PriceCatelogComponent } from './features/inventory/components/inventory/add-stock-adjustment/price-catelog.component'; 
 
 export const routes: Routes = [
@@ -9,9 +10,13 @@ export const routes: Routes = [
       import('./layout/shell/shell.component').then(m => m.ShellComponent),
     children: [
       {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
+      },
+      {
         path: 'dashboard',
-        loadComponent: () =>
-          import('./features/dashboard/components/dashboard/dashboard.component').then(m => m.DashboardComponent),
+        component: MainComponent
       },
       
       {

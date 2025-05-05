@@ -402,7 +402,7 @@
        </li>
 
        <li><a [routerLink]="['/master/company-master']">Company Master</a></li>
-       <li><a [routerLink]="['/master/bankname']">Bank Name</a></li>
+       <li (click)="openBankNameDialog()">Bank Name</li>
        <li><a [routerLink]="['/master/bank-master']">Bank Master</a></li>
        <li><a [routerLink]="['/master/brand-master']">Brand Master</a></li>
        <li><a [routerLink]="['/master/group-master']">Group Master</a></li>    

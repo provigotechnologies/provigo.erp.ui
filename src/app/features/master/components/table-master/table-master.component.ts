@@ -1,28 +1,46 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common'; // <-- Add this import
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-table-master',
   standalone: true,
-  imports: [FormsModule, CommonModule],  // <-- Add CommonModule here
+  imports: [CommonModule, FormsModule],
   templateUrl: './table-master.component.html',
   styleUrls: [
     './table-master.component.css',
     '../../../styles/masters-style.css'   ]
 })
 export class TableMasterComponent {
+  @Output() close = new EventEmitter<void>();
+
   tableName = '';
   error = '';
   tableList: string[] = [];
 
   addTable() {
-    if (!this.tableName.trim()) {
+    const trimmedName = this.tableName.trim();
+
+    if (!trimmedName) {
       this.error = 'Table name is required';
       return;
     }
 
-    this.tableList.push(this.tableName.trim());
+    if (!/^[a-zA-Z\s]+$/.test(trimmedName)) {
+      this.error = 'Only letters and spaces allowed';
+      return;
+    }
+
+    const isDuplicate = this.tableList.some(
+      name => name.toLowerCase() === trimmedName.toLowerCase()
+    );
+
+    if (isDuplicate) {
+      this.error = 'Table name already exists';
+      return;
+    }
+
+    this.tableList.push(trimmedName);
     this.tableName = '';
     this.error = '';
   }
@@ -35,9 +53,14 @@ export class TableMasterComponent {
   editTable(index: number) {
     this.tableName = this.tableList[index];
     this.tableList.splice(index, 1);
+    this.error = '';
   }
 
   deleteTable(index: number) {
     this.tableList.splice(index, 1);
+  }
+
+  closeComponent() {
+    this.close.emit();
   }
 }

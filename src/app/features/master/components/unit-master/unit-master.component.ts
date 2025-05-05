@@ -1,28 +1,46 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common'; // <-- Add this import
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-unit-master',
   standalone: true,
-  imports: [FormsModule, CommonModule],  // <-- Add CommonModule here
+  imports: [CommonModule, FormsModule],
   templateUrl: './unit-master.component.html',
   styleUrls: [
     './unit-master.component.css',
     '../../../styles/masters-style.css'   ]
 })
 export class UnitMasterComponent {
+  @Output() close = new EventEmitter<void>();
+
   unitName = '';
   error = '';
   unitList: string[] = [];
 
   addTable() {
-    if (!this.unitName.trim()) {
+    const trimmedName = this.unitName.trim();
+
+    if (!trimmedName) {
       this.error = 'Unit name is required';
       return;
     }
 
-    this.unitList.push(this.unitName.trim());
+    if (!/^[a-zA-Z\s]+$/.test(trimmedName)) {
+      this.error = 'Only letters and spaces allowed';
+      return;
+    }
+
+    const isDuplicate = this.unitList.some(
+      name => name.toLowerCase() === trimmedName.toLowerCase()
+    );
+
+    if (isDuplicate) {
+      this.error = 'Unit name already exists';
+      return;
+    }
+
+    this.unitList.push(trimmedName);
     this.unitName = '';
     this.error = '';
   }
@@ -35,9 +53,14 @@ export class UnitMasterComponent {
   editTable(index: number) {
     this.unitName = this.unitList[index];
     this.unitList.splice(index, 1);
+    this.error = '';
   }
 
   deleteTable(index: number) {
     this.unitList.splice(index, 1);
+  }
+
+  closeComponent() {
+    this.close.emit();
   }
 }

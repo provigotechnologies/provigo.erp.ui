@@ -1,0 +1,10 @@
+.bank-form {
+    margin: 40px auto !important;
+    height: 450px !important;
+  }
+
+  @media (max-width: 768px) {
+    .bank-form {
+        margin: 10px auto !important;
+    }
+}

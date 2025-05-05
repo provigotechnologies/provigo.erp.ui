@@ -1,9 +1,10 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, Inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Router, NavigationEnd, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
-import { CommonModule } from '@angular/common';
-import { Router, NavigationEnd } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';  // Import MatDialog
+import { BankNameComponent } from '../../features/master/components/bankname/bankname.component';
 import { filter } from 'rxjs/operators';
-import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -27,44 +28,58 @@ export class SidebarComponent implements OnInit {
   activeInnerSubMenu: string | null = null;
   isMobile: boolean = false;
 
-  constructor(private router: Router) {
-    this.checkScreenSize();
+  private previousUrl: string | null = null;
+  private justNavigated: boolean = false;
+  private isBrowserEnv: boolean;
 
-    // ✅ Auto-close sidebar on route change (mobile only)
-    this.router.events
-  .pipe(filter(event => event instanceof NavigationEnd))
-  .subscribe(() => {
-    if (this.isMobile && this.menuOpen) {
-      // ✅ Close sidebar ONLY if route actually changed AND it's open
-      setTimeout(() => {
-        this.menuOpen = false;
-        this.activeSubMenu = null;
-        this.activeNestedSubMenu = null;
-      }, 100); // slight delay ensures submenu toggles don't conflict
+  constructor(
+    private router: Router,
+    private dialog: MatDialog,  // Inject MatDialog
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    this.isBrowserEnv = isPlatformBrowser(this.platformId);
+
+    if (this.isBrowserEnv) {
+      this.checkScreenSize();
+
+      this.router.events
+        .pipe(filter(event => event instanceof NavigationEnd))
+        .subscribe((event: NavigationEnd) => {
+          if (this.isMobile && this.menuOpen) {
+            if (this.previousUrl !== event.urlAfterRedirects) {
+              this.justNavigated = true;
+
+              setTimeout(() => {
+                this.menuOpen = false;
+                this.activeSubMenu = null;
+                this.activeNestedSubMenu = null;
+                this.justNavigated = false;
+              }, 200);
+            }
+          }
+          this.previousUrl = event.urlAfterRedirects;
+        });
     }
-  });
-
   }
 
   ngOnInit(): void {
-    this.checkScreenSize();
+    if (this.isBrowserEnv) {
+      this.checkScreenSize();
+      this.menuOpen = !this.isMobile;
 
-    // ✅ Ensure sidebar state on load
-    this.menuOpen = !this.isMobile;
-
-    // ✅ Live time clock update
-    setInterval(() => {
-      this.time = new Date().toLocaleTimeString();
-    }, 1000);
+      setInterval(() => { 
+        this.time = new Date().toLocaleTimeString();
+      }, 1000);
+    }
   }
 
-  // ✅ Hamburger toggle
   toggleMenu(): void {
     this.menuOpen = !this.menuOpen;
   }
 
-  // ✅ First-level submenu toggle
   toggleSubMenu(menu: string): void {
+    if (this.justNavigated) return;
+
     if (this.activeSubMenu === menu) {
       this.activeSubMenu = null;
       this.activeNestedSubMenu = null;
@@ -74,37 +89,40 @@ export class SidebarComponent implements OnInit {
     }
   }
 
-  // ✅ Nested submenu toggle
   toggleNestedSubMenu(menu: string): void {
-    this.activeNestedSubMenu = this.activeNestedSubMenu === menu ? null : menu;
+    if (this.justNavigated) return;
+    this.activeNestedSubMenu =
+      this.activeNestedSubMenu === menu ? null : menu;
   }
 
   toggleInnerSubMenu(menu: string): void {
-    this.activeInnerSubMenu = this.activeInnerSubMenu === menu ? null : menu;
+    if (this.justNavigated) return;
+    this.activeInnerSubMenu =
+      this.activeInnerSubMenu === menu ? null : menu;
   }
-  
-  // ✅ Detect screen size change
+
   @HostListener('window:resize')
   onWindowResize(): void {
+    if (!this.isBrowserEnv) return;
+
     const wasMobile = this.isMobile;
     this.checkScreenSize();
 
     if (!wasMobile && this.isMobile) {
-      // 📱 Switched to mobile → hide sidebar
       this.menuOpen = false;
       this.activeSubMenu = null;
       this.activeNestedSubMenu = null;
     }
 
     if (wasMobile && !this.isMobile) {
-      // 🖥️ Switched to desktop → show sidebar
       this.menuOpen = true;
     }
   }
 
-  // ✅ Detect click outside to close sidebar (mobile only)
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent): void {
+    if (!this.isBrowserEnv) return;
+
     if (this.isMobile && this.menuOpen) {
       const sidebar = document.querySelector('.sidebar');
       const toggleBtn = document.querySelector('.menu-toggle');
@@ -120,8 +138,16 @@ export class SidebarComponent implements OnInit {
     }
   }
 
-  // ✅ Check screen size
   private checkScreenSize(): void {
-    this.isMobile = window.innerWidth <= 768;
+    if (this.isBrowserEnv) {
+      this.isMobile = window.innerWidth <= 768;
+    }
+  }
+
+  // Open BankNameComponent Dialog
+  openBankNameDialog(): void {
+    this.dialog.open(BankNameComponent, {
+      panelClass: 'custom-dialog',
+    });
   }
 }

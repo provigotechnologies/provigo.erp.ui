@@ -14,9 +14,22 @@
     0 6px 12px rgba(0, 0, 0, 0.1);
   }
   
-  .page-header-wrapper {
+  .page-header-wrapper {  
     width: 100%;
     box-sizing: border-box;
+  }
+  
+  .close-btn {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: #999;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0px 6px 2px ;
+    border-top-right-radius: 6px;
   }
   
   .page-heading {
@@ -40,13 +53,14 @@
   }
   
   input[type="text"] {
-    padding: 6px 4px;
+    padding: 8px 4px;
     font-size: 13px;
     border: none;
     border-bottom: 2px solid #ccc;
     margin-bottom: 5px;
     outline: none;
     transition: border-color 0.3s ease;
+    width: 300px;
   }
   
   input[type="text"]:focus {
@@ -75,9 +89,16 @@
     border: none;
     cursor: pointer;
     border-radius: 4px;
-
   }
   
+  .button-group [type="submit"] {
+    padding: 7px 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
   .btn-add::before {
     content: "add";
     font-family: 'Material Icons';
@@ -96,19 +117,24 @@
   
    
   button:first-child {
-    background-color: #1c77ef;
+    background-color: #797979;
     color: white;
   }
-  
+
   button:last-child {
     background-color: #ea2e21;
     color: white;
   }
   
-  button:first-child:hover {
-    background-color: #2e87fd; 
+  .btn-add {
+    background-color: #1c77ef !important;
+    color: white;
   }
-  
+
+  .btn-add:hover{
+    background-color: #2e87fd !important; 
+  }
+
   button:last-child:hover {
     background-color: #fa3a2c; /* Cancel button hover */
   }
@@ -189,7 +215,7 @@
   /* Optional: slightly rounded buttons for better look */
   .bank-table button {
     background-color: #e7e7e7;
-    border: 1px solid #0a0a0a; /* slightly lighter border */
+    border: 1px solid #646262; /* slightly lighter border */
     font-size: 14px;
     border-radius: 2px;
   }
@@ -203,7 +229,7 @@
     @media (max-width: 768px) {
         .bank-form {
             max-width: 500px;
-            margin: 60px auto;
+            margin: 10px auto;
             min-height: 310px; 
         }
   

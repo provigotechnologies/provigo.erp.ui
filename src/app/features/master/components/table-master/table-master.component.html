@@ -1,60 +1,74 @@
-<div class="bank-form">
+<form #tableForm="ngForm" (ngSubmit)="addTable()" novalidate class="bank-form">
 
+  <!-- Page Header -->
   <div class="page-header-wrapper">
     <label class="page-heading">Add New Table</label>
   </div>
+
   <!-- Table Name Input -->
   <label for="tableName">
     <span>Table Name <span class="required">*</span></span>
   </label>
-  <input type="text" id="tableName" name="tableName" [(ngModel)]="tableName" (input)="error = ''" />
+  <input
+    type="text"
+    id="tableName"
+    name="tableName"
+    required
+    minlength="3"
+    pattern="^[a-zA-Z0-9\s]+$"
+    [(ngModel)]="tableName"
+    #tableNameRef="ngModel"
+    (input)="error = ''"
+/>
 
-  <!-- Error Message -->
-  <div *ngIf="error" class="error-message">{{ error }}</div>
+  <!-- Validation Messages -->
+  <div *ngIf="tableNameRef.invalid && (tableNameRef.touched || error)" class="error-message">
+    <div *ngIf="tableNameRef.errors?.['required']">Table name is required.</div>
+    <div *ngIf="tableNameRef.errors?.['minlength']">Must be at least 3 characters.</div>
+    <div *ngIf="tableNameRef.errors?.['pattern']">Only letters, numbers, and spaces allowed.</div>
+    <div *ngIf="error && !tableNameRef.errors">{{ error }}</div>
+  </div>
 
-   <!-- Buttons -->
-   <div class="button-group">
-    <button class="primary-btn btn-add" type="button" (click)="addTable()">Add</button>
+  <!-- Buttons -->
+  <div class="button-group">
+    <button class="primary-btn btn-add" type="button" [disabled]="tableForm.invalid" (click)="addTable()">Add</button>
     <button class="primary-btn btn-cancel" type="button" (click)="cancel()">Cancel</button>
   </div>
 
-   <!-- 🔽 Added Table Section -->
-   <div class="table-wrapper">
-      <table class="bank-table">
-        <thead>
-          <tr>
-            <th>S.No</th>
-            <th>Table Name</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td></td>
+  <!-- Table List Section -->
+  <div class="table-wrapper">
+    <table class="bank-table">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Table Name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <!-- Empty view -->
+        <ng-container *ngIf="tableList.length === 0">
+          <tr *ngFor="let i of [1, 2, 3]">
+            <td>{{ i }}</td>
+            <td style="color: gray;">-</td>
             <td>
-              <button>✏️</button>
-              <button>🗑️</button>
+              <button disabled>✏️</button>
+              <button disabled>🗑️</button>
             </td>
           </tr>
-          <tr>
-            <td>2</td>
-            <td></td>
-            <td>
-              <button>✏️</button>
-              <button>🗑️</button>
-            </td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td></td>
-            <td>
-              <button>✏️</button>
-              <button>🗑️</button>
-            </td>
-          </tr>
-          <!-- More rows will go here -->
-        </tbody>
-      </table>
-    </div>
-</div>
+        </ng-container>
+
+        <!-- Dynamic view -->
+        <tr *ngFor="let name of tableList; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ name }}</td>
+          <td>
+            <button type="button" (click)="editTable(i)">✏️</button>
+            <button type="button" (click)="deleteTable(i)">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</form>
