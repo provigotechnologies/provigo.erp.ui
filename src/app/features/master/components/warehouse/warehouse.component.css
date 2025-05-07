@@ -3,6 +3,7 @@
     height: 450px !important;
   }
 
+
   @media (max-width: 768px) {
     .bank-form {
         margin: 10px auto !important;

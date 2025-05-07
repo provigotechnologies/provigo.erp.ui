@@ -2,8 +2,6 @@ import { Component, OnInit, HostListener, Inject, PLATFORM_ID } from '@angular/c
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Router, NavigationEnd, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
-import { MatDialog } from '@angular/material/dialog';  // Import MatDialog
-import { BankNameComponent } from '../../features/master/components/bankname/bankname.component';
 import { filter } from 'rxjs/operators';
 
 @Component({
@@ -34,7 +32,6 @@ export class SidebarComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private dialog: MatDialog,  // Inject MatDialog
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.isBrowserEnv = isPlatformBrowser(this.platformId);
@@ -143,11 +140,18 @@ export class SidebarComponent implements OnInit {
       this.isMobile = window.innerWidth <= 768;
     }
   }
-
-  // Open BankNameComponent Dialog
-  openBankNameDialog(): void {
-    this.dialog.open(BankNameComponent, {
-      panelClass: 'custom-dialog',
-    });
+  
+  navigateOrToggle(menu: string, route: string) {
+    this.activeSubMenu = menu;
+  
+    if (this.isMobile) {
+      this.menuOpen = false;
+      this.activeSubMenu = null;
+      this.activeNestedSubMenu = null;
+    }
+  
+    this.router.navigate([route]);
   }
+  
+  
 }

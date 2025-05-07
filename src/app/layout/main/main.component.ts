@@ -1,25 +1,24 @@
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { BankNameComponent } from '../../features/master/components/bankname/bankname.component';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
+  standalone: true,
   selector: 'app-main',
   templateUrl: './main.component.html',
-  styleUrls: ['./main.component.css']
+  styleUrls: ['./main.component.css'],
+  imports: [CommonModule]
 })
 export class MainComponent {
-  activeTab: string = 'sales';
+  bankName = '';
+  error = '';
+  bankList: string[] = [];
+  amount = '';
+  description = '';
 
-  constructor(public dialog: MatDialog) {}
+  selectedTab: 'activity' | 'customer' | 'supplier' | 'received' | 'paid' = 'activity';
 
-  openBankNameDialog(): void {
-    const dialogRef = this.dialog.open(BankNameComponent, {
-      width: '500px',
-      height: '400px',
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+  selectTab(tab: 'activity' | 'customer' | 'supplier' | 'received' | 'paid') {
+    this.selectedTab = tab;
   }
 }

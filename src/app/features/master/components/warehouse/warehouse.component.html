@@ -1,66 +1,86 @@
-<div class="bank-form">
+<form #warehouseForm="ngForm" (ngSubmit)="addTable()" novalidate class="bank-form">
+  
+  <div class="page-header-wrapper">
+    <label class="page-heading">Add New Warehouse</label>
+  </div>
 
-    <div class="page-header-wrapper">
-      <label class="page-heading">Add New Warehouse</label>
-    </div>
-      <!-- Table Name Input -->
-      <label for="warehouseName">
-        <span>Warehouse Name <span class="required">*</span></span>
-      </label>
-      <input type="text" id="warehouseName" name="warehouseName" [(ngModel)]="warehouseName" (input)="error = ''" />
-    
-      <label for="location">
-        <span>Location <span class="required">*</span></span>
-      </label>
-      <input type="text" id="location" name="location"/>
-    
-      <!-- Error Message -->
-      <div *ngIf="error" class="error-message">{{ error }}</div>
-    
-       <!-- Buttons -->
-       <div class="button-group">
-        <button class="primary-btn btn-add" type="button" (click)="addTable()">Add</button>
-        <button class="primary-btn btn-cancel" type="button" (click)="cancel()">Cancel</button>
-      </div>
-    
-       <!-- 🔽 Added Table Section -->
-       <div class="table-wrapper">
-          <table class="bank-table">
-            <thead>
-              <tr>
-                <th>S.No</th>
-                <th>Warehouse Name</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td></td>
-                <td>
-                  <button>✏️</button>
-                  <button>🗑️</button>
-                </td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td></td>
-                <td>
-                  <button>✏️</button>
-                  <button>🗑️</button>
-                </td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td></td>
-                <td>
-                  <button>✏️</button>
-                  <button>🗑️</button>
-                </td>
-              </tr>
-              <!-- More rows will go here -->
-            </tbody>
-          </table>
-        </div>
-    </div>
-    
+  <!-- Warehouse Name Input -->
+  <label for="warehouseName">
+    <span>Warehouse Name <span class="required">*</span></span>
+  </label>
+  <input
+    type="text"
+    id="warehouseName"
+    name="warehouseName"
+    [(ngModel)]="warehouseName"
+    required
+    minlength="3"
+    pattern="^[a-zA-Z\s]+$"
+    #warehouseNameRef="ngModel"
+    (input)="error = ''"
+  />
+  <div *ngIf="submitted && warehouseNameRef.invalid" class="error-message">
+    <div *ngIf="warehouseNameRef.errors?.['required']">Warehouse name is required.</div>
+    <div *ngIf="warehouseNameRef.errors?.['minlength']">Minimum 3 characters required.</div>
+    <div *ngIf="warehouseNameRef.errors?.['pattern']">Only letters and spaces allowed.</div>
+  </div>
+
+  <!-- Location Input -->
+  <label for="location">
+    <span>Location <span class="required">*</span></span>
+  </label>
+  <input
+    type="text"
+    id="location"
+    name="location"
+    [(ngModel)]="location"
+    required
+    minlength="2"
+    pattern="^[a-zA-Z\s]+$"
+    #locationRef="ngModel"
+    (input)="error = ''"
+  />
+  <div *ngIf="submitted && locationRef.invalid" class="error-message">
+    <div *ngIf="locationRef.errors?.['required']">Location is required.</div>
+    <div *ngIf="locationRef.errors?.['minlength']">Minimum 2 characters required.</div>
+    <div *ngIf="locationRef.errors?.['pattern']">Only letters and spaces allowed.</div>
+  </div>
+
+  <!-- Global Error -->
+  <div *ngIf="error && locationRef.valid && warehouseNameRef.valid" class="error-message">{{ error }}</div>
+
+  <!-- Buttons -->
+  <div class="button-group">
+    <button class="primary-btn btn-add" type="button" (click)="addTable()">Add</button>
+    <button class="primary-btn btn-cancel" type="button" (click)="cancel()">Cancel</button>
+  </div>
+
+  <!-- Table Section -->
+  <div class="table-wrapper">
+    <table class="bank-table">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Warehouse Name</th>
+          <th>Location</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="warehouseList.length === 0">
+          <td colspan="4" style="text-align: center; color: gray;">No warehouse added yet.</td>
+        </tr>
+        <tr *ngFor="let item of warehouseList; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.location }}</td>
+          <td>
+            <button type="button" (click)="editTable(i)">✏️</button>
+            <button type="button" (click)="deleteTable(i)">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  </form>

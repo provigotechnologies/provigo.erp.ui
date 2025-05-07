@@ -1,7 +1,6 @@
 
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common'; // <-- Add this import
 
 @Component({
   selector: 'app-bank-master',

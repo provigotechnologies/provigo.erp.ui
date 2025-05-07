@@ -1,36 +1,38 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-designation-master',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './designation-master.component.html',
-  styleUrls: ['./designation-master.component.css', '../../../styles/masters-style.css']
+  styleUrls: [
+    './designation-master.component.css',
+    '../../../styles/masters-style.css'
+  ]
 })
 export class DesignationMasterComponent {
-  @Output() close = new EventEmitter<void>();
-
   designationName = '';
   error = '';
   designationList: string[] = [];
+  submitted = false;
+
+  isEditMode = false;
+  editingIndex: number | null = null;
+
+  filterAlphabets() {
+    this.designationName = this.designationName.replace(/[^a-zA-Z\s]/g, '');
+  }
 
   addTable() {
+    this.submitted = true;
     const trimmedName = this.designationName.trim();
 
-    if (!trimmedName) {
-      this.error = 'Designation name is required';
-      return;
-    }
+    if (!trimmedName || trimmedName.length < 4 || !/^[a-zA-Z\s]+$/.test(trimmedName)) return;
 
-    if (!/^[a-zA-Z\s]+$/.test(trimmedName)) {
-      this.error = 'Only letters and spaces allowed';
-      return;
-    }
-
-    const isDuplicate = this.designationList.some(
-      name => name.toLowerCase() === trimmedName.toLowerCase()
+    const isDuplicate = this.designationList.some((name, i) =>
+      name.toLowerCase() === trimmedName.toLowerCase() && i !== this.editingIndex
     );
 
     if (isDuplicate) {
@@ -38,27 +40,44 @@ export class DesignationMasterComponent {
       return;
     }
 
-    this.designationList.push(trimmedName);
-    this.designationName = '';
-    this.error = '';
-  }
+    if (this.isEditMode && this.editingIndex !== null) {
+      this.designationList[this.editingIndex] = trimmedName;
+    } else {
+      this.designationList.push(trimmedName);
+    }
 
-  cancel() {
-    this.designationName = '';
-    this.error = '';
+    this.resetForm();
   }
 
   editTable(index: number) {
     this.designationName = this.designationList[index];
-    this.designationList.splice(index, 1);
+    this.isEditMode = true;
+    this.editingIndex = index;
     this.error = '';
   }
 
   deleteTable(index: number) {
+    const confirmDelete = window.confirm('Do you want to delete this data?');
+    if (!confirmDelete) return;
+
     this.designationList.splice(index, 1);
+
+    if (this.editingIndex === index) {
+      this.resetForm();
+    }
   }
 
-  closeComponent() {
-    this.close.emit();
+  cancel() {
+    this.resetForm();
+  }
+
+  private resetForm() {
+    this.designationName = '';
+    this.error = '';
+    this.submitted = false;
+    this.isEditMode = false;
+    this.editingIndex = null;
   }
 }
+
+

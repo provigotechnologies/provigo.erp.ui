@@ -1,41 +1,45 @@
-<form #unitForm="ngForm" class="bank-form" (ngSubmit)="addTable()" novalidate>
+<form #unitForm="ngForm" (ngSubmit)="addTable()" novalidate class="bank-form">
 
-  <!-- Page Header -->
   <div class="page-header-wrapper">
     <label class="page-heading">Add New Unit</label>
   </div>
 
-  <!-- Unit Name Input -->
-  <label for="unitName">
-    <span>Unit Name <span class="required">*</span></span>
-  </label>
-  <input
-    type="text"
-    id="unitName"
-    name="unitName"
-    required
-    minlength="2"
-    pattern="^[a-zA-Z0-9\s]+$"
-    [(ngModel)]="unitName"
-    #unitNameRef="ngModel"
-    (input)="error = ''"
+ <!-- Brand Name Input -->
+ <label for="unitName">
+  Unit Name <span class="required">*</span>
+</label>
+<input
+  type="text"
+  id="unitName"
+  name="unitName"
+  required
+  minlength="4"
+  pattern="^[a-zA-Z\s]+$"
+  [(ngModel)]="unitName"
+  #unitNameRef="ngModel"
+  (input)="filterAlphabets(); error = ''"
 />
 
-  <!-- Error Messages -->
-  <div *ngIf="unitNameRef.invalid && (unitNameRef.touched || error)" class="error-message">
-    <div *ngIf="unitNameRef.errors?.['required']">Unit name is required.</div>
-    <div *ngIf="unitNameRef.errors?.['minlength']">Must be at least 2 characters.</div>
-    <div *ngIf="unitNameRef.errors?.['pattern']">Only letters, numbers, and spaces allowed.</div>
-    <div *ngIf="error && !unitNameRef.errors">{{ error }}</div>
-  </div>
+<!-- Validation Messages -->
+<div *ngIf="(unitNameRef.invalid && submitted)" class="error-message">
+  <div *ngIf="unitNameRef.errors?.['required']">Unit name is required.</div>
+  <div *ngIf="unitNameRef.errors?.['minlength']">Must be at least 4 characters.</div>
+  <div *ngIf="unitNameRef.errors?.['pattern']">Only letters and spaces allowed.</div>
+</div>
+
+<div *ngIf="error && !unitNameRef.errors" class="error-message">{{ error }}</div>
+  
 
   <!-- Buttons -->
   <div class="button-group">
-    <button class="primary-btn btn-add" type="button" [disabled]="unitForm.invalid" (click)="addTable()">Add</button>
-    <button class="primary-btn btn-cancel" type="button" (click)="cancel()">Cancel</button>
+
+    <button class="primary-btn btn-add" type="submit">
+      {{ isEditMode ? 'Update' : 'Add' }}
+    </button>
+     <button class="primary-btn btn-cancel" type="button" (click)="cancel()">Cancel</button>
   </div>
 
-  <!-- Added Unit Table -->
+  <!-- Table Section -->
   <div class="table-wrapper">
     <table class="bank-table">
       <thead>
@@ -46,20 +50,14 @@
         </tr>
       </thead>
       <tbody>
-
-        <!-- Placeholder rows if list is empty -->
+        <!-- Show 3 empty rows if list is empty -->
         <ng-container *ngIf="unitList.length === 0">
-          <tr *ngFor="let i of [1, 2, 3]">
-            <td>{{ i }}</td>
-            <td style="color: gray;">-</td>
-            <td>
-              <button disabled>✏️</button>
-              <button disabled>🗑️</button>
-            </td>
+          <tr>
+            <td colspan="3" style="text-align:center; color: gray;">No Unit added yet.</td>
           </tr>
         </ng-container>
 
-        <!-- Dynamic rows -->
+        <!-- Show data rows -->
         <tr *ngFor="let name of unitList; let i = index">
           <td>{{ i + 1 }}</td>
           <td>{{ name }}</td>
@@ -68,7 +66,6 @@
             <button type="button" (click)="deleteTable(i)">🗑️</button>
           </td>
         </tr>
-
       </tbody>
     </table>
   </div>

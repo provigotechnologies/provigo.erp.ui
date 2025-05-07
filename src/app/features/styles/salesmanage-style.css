@@ -105,6 +105,10 @@
     background: #186bdf;
   }
   
+  .search-box ::placeholder{
+    color: #dadada;
+  }
+  
   /* Add Button */
   .top-buttons {
     display: flex;

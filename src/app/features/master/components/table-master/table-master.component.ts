@@ -1,38 +1,38 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-table-master',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './table-master.component.html',
   styleUrls: [
     './table-master.component.css',
-    '../../../styles/masters-style.css'   ]
+    '../../../styles/masters-style.css'
+  ]
 })
 export class TableMasterComponent {
-  @Output() close = new EventEmitter<void>();
-
   tableName = '';
   error = '';
   tableList: string[] = [];
+  submitted = false;
+
+  isEditMode = false;
+  editingIndex: number | null = null;
+
+  filterAlphabets() {
+    this.tableName = this.tableName.replace(/[^a-zA-Z\s]/g, '');
+  }
 
   addTable() {
+    this.submitted = true;
     const trimmedName = this.tableName.trim();
 
-    if (!trimmedName) {
-      this.error = 'Table name is required';
-      return;
-    }
+    if (!trimmedName || trimmedName.length < 4 || !/^[a-zA-Z\s]+$/.test(trimmedName)) return;
 
-    if (!/^[a-zA-Z\s]+$/.test(trimmedName)) {
-      this.error = 'Only letters and spaces allowed';
-      return;
-    }
-
-    const isDuplicate = this.tableList.some(
-      name => name.toLowerCase() === trimmedName.toLowerCase()
+    const isDuplicate = this.tableList.some((name, i) =>
+      name.toLowerCase() === trimmedName.toLowerCase() && i !== this.editingIndex
     );
 
     if (isDuplicate) {
@@ -40,27 +40,44 @@ export class TableMasterComponent {
       return;
     }
 
-    this.tableList.push(trimmedName);
-    this.tableName = '';
-    this.error = '';
-  }
+    if (this.isEditMode && this.editingIndex !== null) {
+      this.tableList[this.editingIndex] = trimmedName;
+    } else {
+      this.tableList.push(trimmedName);
+    }
 
-  cancel() {
-    this.tableName = '';
-    this.error = '';
+    this.resetForm();
   }
 
   editTable(index: number) {
     this.tableName = this.tableList[index];
-    this.tableList.splice(index, 1);
+    this.isEditMode = true;
+    this.editingIndex = index;
     this.error = '';
   }
 
   deleteTable(index: number) {
+    const confirmDelete = window.confirm('Do you want to delete this data?');
+    if (!confirmDelete) return;
+
     this.tableList.splice(index, 1);
+
+    if (this.editingIndex === index) {
+      this.resetForm();
+    }
   }
 
-  closeComponent() {
-    this.close.emit();
+  cancel() {
+    this.resetForm();
+  }
+
+  private resetForm() {
+    this.tableName = '';
+    this.error = '';
+    this.submitted = false;
+    this.isEditMode = false;
+    this.editingIndex = null;
   }
 }
+
+

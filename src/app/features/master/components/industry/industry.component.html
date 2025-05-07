@@ -1,61 +1,72 @@
-<div class="bank-form">
+<form #industryForm="ngForm" (ngSubmit)="addTable()" novalidate class="bank-form">
 
-    <div class="page-header-wrapper">
-      <label class="page-heading">Add New Industry</label>
-    </div>
-      <!-- Table Name Input -->
-      <label for="industryName">
-        <span>Industry Name <span class="required">*</span></span>
-      </label>
-      <input type="text" id="industryName" name="industryName" [(ngModel)]="industryName" (input)="error = ''" />
-    
-      <!-- Error Message -->
-      <div *ngIf="error" class="error-message">{{ error }}</div>
-    
-       <!-- Buttons -->
-       <div class="button-group">
-        <button class="primary-btn btn-add" type="button" (click)="addTable()">Add</button>
-        <button class="primary-btn btn-cancel" type="button" (click)="cancel()">Cancel</button>
-      </div>
-    
-       <!-- 🔽 Added Table Section -->
-       <div class="table-wrapper">
-          <table class="bank-table">
-            <thead>
-              <tr>
-                <th>S.No</th>
-                <th>Industry Name</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td></td>
-                <td>
-                  <button>✏️</button>
-                  <button>🗑️</button>
-                </td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td></td>
-                <td>
-                  <button>✏️</button>
-                  <button>🗑️</button>
-                </td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td></td>
-                <td>
-                  <button>✏️</button>
-                  <button>🗑️</button>
-                </td>
-              </tr>
-              <!-- More rows will go here -->
-            </tbody>
-          </table>
-        </div>
-    </div>
-    
+  <div class="page-header-wrapper">
+    <label class="page-heading">Add New Industry</label>
+  </div>
+
+ <!-- Brand Name Input -->
+ <label for="industryName">
+  Industry Name <span class="required">*</span>
+</label>
+<input
+  type="text"
+  id="industryName"
+  name="industryName"
+  required
+  minlength="4"
+  pattern="^[a-zA-Z\s]+$"
+  [(ngModel)]="industryName"
+  #industryNameRef="ngModel"
+  (input)="filterAlphabets(); error = ''"
+/>
+
+<!-- Validation Messages -->
+<div *ngIf="(industryNameRef.invalid && submitted)" class="error-message">
+  <div *ngIf="industryNameRef.errors?.['required']">Industry name is required.</div>
+  <div *ngIf="industryNameRef.errors?.['minlength']">Must be at least 4 characters.</div>
+  <div *ngIf="industryNameRef.errors?.['pattern']">Only letters and spaces allowed.</div>
+</div>
+
+<div *ngIf="error && !industryNameRef.errors" class="error-message">{{ error }}</div>
+  
+
+  <!-- Buttons -->
+  <div class="button-group">
+
+    <button class="primary-btn btn-add" type="submit">
+      {{ isEditMode ? 'Update' : 'Add' }}
+    </button>
+     <button class="primary-btn btn-cancel" type="button" (click)="cancel()">Cancel</button>
+  </div>
+
+  <!-- Table Section -->
+  <div class="table-wrapper">
+    <table class="bank-table">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Industry Name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Show 3 empty rows if list is empty -->
+        <ng-container *ngIf="industryList.length === 0">
+          <tr>
+            <td colspan="3" style="text-align:center; color: gray;">No Industry added yet.</td>
+          </tr>
+        </ng-container>
+
+        <!-- Show data rows -->
+        <tr *ngFor="let name of industryList; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ name }}</td>
+          <td>
+            <button type="button" (click)="editTable(i)">✏️</button>
+            <button type="button" (click)="deleteTable(i)">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</form>

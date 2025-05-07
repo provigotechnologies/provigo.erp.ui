@@ -1,44 +1,42 @@
 <form #designationForm="ngForm" (ngSubmit)="addTable()" novalidate class="bank-form">
 
-  <button type="button" class="close-btn">✖</button>
-
   <div class="page-header-wrapper">
     <label class="page-heading">Add New Designation</label>
   </div>
 
-  <!-- Designation Name Input -->
-  <label for="designationName">
-    <span>Designation Name <span class="required">*</span></span>
-  </label>
-  <input
-    type="text"
-    id="designationName"
-    name="designationName"
-    required
-    minlength="3"
-    pattern="^[a-zA-Z\s]+$"
-    [(ngModel)]="designationName"
-    #designationNameRef="ngModel"
-    (input)="error = ''"
-  />
+ <!-- Brand Name Input -->
+ <label for="designationName">
+  Designation Name <span class="required">*</span>
+</label>
+<input
+  type="text"
+  id="designationName"
+  name="designationName"
+  required
+  minlength="4"
+  pattern="^[a-zA-Z\s]+$"
+  [(ngModel)]="designationName"
+  #designationNameRef="ngModel"
+  (input)="filterAlphabets(); error = ''"
+/>
 
-  <!-- Validation Messages -->
-  <div *ngIf="(designationNameRef.invalid && (designationNameRef.touched || error))" class="error-message">
-    <div *ngIf="designationNameRef.errors?.['required']">Designation name is required.</div>
-    <div *ngIf="designationNameRef.errors?.['minlength']">Must be at least 3 characters.</div>
-    <div *ngIf="designationNameRef.errors?.['pattern']">Only letters and spaces allowed.</div>
-    <div *ngIf="error && !designationNameRef.errors">{{ error }}</div>
-  </div>
+<!-- Validation Messages -->
+<div *ngIf="(designationNameRef.invalid && submitted)" class="error-message">
+  <div *ngIf="designationNameRef.errors?.['required']">Designation name is required.</div>
+  <div *ngIf="designationNameRef.errors?.['minlength']">Must be at least 4 characters.</div>
+  <div *ngIf="designationNameRef.errors?.['pattern']">Only letters and spaces allowed.</div>
+</div>
+
+<div *ngIf="error && !designationNameRef.errors" class="error-message">{{ error }}</div>
+  
 
   <!-- Buttons -->
   <div class="button-group">
-    <button
-      class="primary-btn btn-add"
-      type="button"
-      [disabled]="designationForm.invalid"
-      (click)="addTable()"
-    >Add</button>
-    <button class="primary-btn btn-cancel" type="button" (click)="cancel()">Cancel</button>
+
+    <button class="primary-btn btn-add" type="submit">
+      {{ isEditMode ? 'Update' : 'Add' }}
+    </button>
+     <button class="primary-btn btn-cancel" type="button" (click)="cancel()">Cancel</button>
   </div>
 
   <!-- Table Section -->
@@ -47,20 +45,15 @@
       <thead>
         <tr>
           <th>S.No</th>
-          <th>Holiday Name</th>
+          <th>Designation Name</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <!-- Show 3 empty rows if list is empty -->
         <ng-container *ngIf="designationList.length === 0">
-          <tr *ngFor="let row of [1,2,3]">
-            <td>{{ row }}</td>
-            <td style="color: gray;">-</td>
-            <td>
-              <button disabled>✏️</button>
-              <button disabled>🗑️</button>
-            </td>
+          <tr>
+            <td colspan="3" style="text-align:center; color: gray;">No Designation added yet.</td>
           </tr>
         </ng-container>
 
@@ -76,5 +69,4 @@
       </tbody>
     </table>
   </div>
-
 </form>

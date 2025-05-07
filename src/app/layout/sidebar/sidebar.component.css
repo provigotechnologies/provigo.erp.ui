@@ -58,6 +58,7 @@
   text-decoration: none;
   gap: 8px;
   transition: background 0.2s;
+  cursor: pointer;
 }
 
 .sidebar ul li a:hover {
@@ -106,13 +107,15 @@ mat-icon {
   font-size: 20px;
 }
 
+
+.icon-dashboard { color: #e2e203; }
 .icon-sale { color: #4caf50; }
-.icon-purchase { color: #2196f3; }
-.icon-inventory { color: #ffc107; }
-.icon-master { color: #f44336; }
+.icon-purchase { color: #00bcd4; }
+.icon-inventory { color: #f44336; }
+.icon-master { color: #ff9800; }
 .icon-manufacture { color: #4caf50; }
 .icon-accounts { color: #3f51b5; }
-.icon-expense { color: #ffc107; }
+.icon-expense { color: #ffff07; }
 .icon-customer { color: #00bcd4; }
 .icon-staff { color: #9c27b0; }
 .icon-tools { color: #ff9800; }

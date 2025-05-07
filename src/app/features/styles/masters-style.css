@@ -223,6 +223,13 @@
   .bank-table button:hover{
     background-color: #d3d2d2;
   }
+ 
+  
+  .empty-message {
+    text-align: center;
+    color: gray;
+    font-style: italic;
+  }
   
   
   /* Media Query for mobile screens */
