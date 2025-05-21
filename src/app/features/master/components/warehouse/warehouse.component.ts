@@ -18,6 +18,12 @@ export class WarehouseComponent {
   error = '';
   submitted = false;
 
+  isEditMode = false;
+  editingIndex: number | null = null;
+
+  confirmDeleteIndex: number | null = null;
+  showConfirmDelete = false;
+
   warehouseList: { name: string; location: string }[] = [];
 
   addTable() {
@@ -64,7 +70,35 @@ export class WarehouseComponent {
     this.submitted = false;
   }
 
+  
   deleteTable(index: number) {
-    this.warehouseList.splice(index, 1);
+    this.confirmDeleteIndex = index;
+    this.showConfirmDelete = true;
   }
+
+  confirmDelete() {
+    if (this.confirmDeleteIndex !== null) {
+      this.warehouseList.splice(this.confirmDeleteIndex, 1);
+
+      if (this.editingIndex === this.confirmDeleteIndex) {
+        this.resetForm();
+      }
+    }
+    this.cancelDelete();
+  }
+
+  cancelDelete() {
+    this.confirmDeleteIndex = null;
+    this.showConfirmDelete = false;
+    this.submitted = false;
+  }
+
+    private resetForm() {
+    this.warehouseName = '';
+    this.error = '';
+    this.submitted = false;
+    this.isEditMode = false;
+    this.editingIndex = null;
+  }
+
 }

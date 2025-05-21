@@ -14,7 +14,6 @@
   </div>
 </div>
 
-
   <div class="page-header-wrapper">
     <label class="page-heading">Add New Bank</label>
   </div>
@@ -36,7 +35,7 @@
 />
 
 <!-- Validation Messages -->
-<div *ngIf="(bankNameRef.invalid && submitted && bankNameRef.touched)" class="error-message">
+<div *ngIf="(bankNameRef.invalid && submitted)" class="error-message">
   <div *ngIf="bankNameRef.errors?.['required']">Bank name is required.</div>
   <div *ngIf="bankNameRef.errors?.['minlength']">Must be at least 4 characters.</div>
   <div *ngIf="bankNameRef.errors?.['pattern']">Only letters and spaces allowed.</div>

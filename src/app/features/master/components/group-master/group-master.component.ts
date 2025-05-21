@@ -25,6 +25,8 @@ export class GroupMasterComponent {
 
   isEditMode = false;
   editingIndex: number | null = null;
+  confirmDeleteIndex: number | null = null;
+  showConfirmDelete = false;
 
   groupList: {
     groupName: string;
@@ -38,6 +40,40 @@ export class GroupMasterComponent {
   filterAlphabets() {
     this.groupName = this.groupName.replace(/[^a-zA-Z\s]/g, '');
   }
+
+allowOnlyNumbersWithDecimal(event: KeyboardEvent) {
+  const inputChar = event.key;
+  const currentValue = (event.target as HTMLInputElement).value;
+
+  // Allow digits
+  if (/^[0-9]$/.test(inputChar)) {
+    return;
+  }
+
+  // Allow only one decimal point
+  if (inputChar === '.' && !currentValue.includes('.')) {
+    return;
+  }
+
+  // Block everything else
+  event.preventDefault();
+}
+
+filterDecimal(field: 'cgst' | 'sgst' | 'igst' | 'cess') {
+  let value = this[field];
+
+  // Remove letters and special characters, allow only digits and one dot
+  value = value.replace(/[^0-9.]/g, '');
+
+  // Ensure only one dot is allowed
+  const parts = value.split('.');
+  if (parts.length > 2) {
+    value = parts[0] + '.' + parts.slice(1).join('');
+  }
+
+  this[field] = value;
+}
+
 
   addTable() {
     this.submitted = true;
@@ -87,14 +123,24 @@ export class GroupMasterComponent {
   }
 
   deleteTable(index: number) {
-    const confirmDelete = window.confirm('Do you want to delete this group?');
-    if (!confirmDelete) return;
+    this.confirmDeleteIndex = index;
+    this.showConfirmDelete = true;
+  }
 
-    this.groupList.splice(index, 1);
-
-    if (this.editingIndex === index) {
-      this.resetForm();
+  confirmDelete() {
+    if (this.confirmDeleteIndex !== null) {
+      this.groupList.splice(this.confirmDeleteIndex, 1);
+      if (this.editingIndex === this.confirmDeleteIndex) {
+        this.resetForm();
+      }
     }
+    this.cancelDelete();
+  }
+
+  cancelDelete() {
+    this.confirmDeleteIndex = null;
+    this.showConfirmDelete = false;
+    this.submitted = false;
   }
 
   cancel() {
@@ -115,4 +161,3 @@ export class GroupMasterComponent {
     this.editingIndex = null;
   }
 }
-

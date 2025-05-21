@@ -21,6 +21,10 @@ export class DepartmentMasterComponent {
   isEditMode = false;
   editingIndex: number | null = null;
 
+  // For custom confirmation alert
+  confirmDeleteIndex: number | null = null;
+  showConfirmDelete = false;
+
   filterAlphabets() {
     this.departmentName = this.departmentName.replace(/[^a-zA-Z\s]/g, '');
   }
@@ -54,17 +58,29 @@ export class DepartmentMasterComponent {
     this.isEditMode = true;
     this.editingIndex = index;
     this.error = '';
+     this.submitted = false;
   }
 
   deleteTable(index: number) {
-    const confirmDelete = window.confirm('Do you want to delete this data?');
-    if (!confirmDelete) return;
+    this.confirmDeleteIndex = index;
+    this.showConfirmDelete = true;
+  }
 
-    this.departmentList.splice(index, 1);
+  confirmDelete() {
+    if (this.confirmDeleteIndex !== null) {
+      this.departmentList.splice(this.confirmDeleteIndex, 1);
 
-    if (this.editingIndex === index) {
-      this.resetForm();
+      if (this.editingIndex === this.confirmDeleteIndex) {
+        this.resetForm();
+      }
     }
+    this.cancelDelete();
+  }
+
+  cancelDelete() {
+    this.confirmDeleteIndex = null;
+    this.showConfirmDelete = false;
+    this.submitted = false;
   }
 
   cancel() {
@@ -79,15 +95,3 @@ export class DepartmentMasterComponent {
     this.editingIndex = null;
   }
 }
-
-  // deleteTable(index: number) {
-  //   const confirmDelete = window.confirm('Do you want to delete this data?');
-  //   if (!confirmDelete) return;
-  
-  //   this.brandList.splice(index, 1);
-  
-  //   if (this.editingIndex === index) {
-  //     this.cancel(); // Reset if the row being edited is deleted
-  //   }
-  // }
-

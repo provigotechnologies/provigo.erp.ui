@@ -21,6 +21,10 @@ export class ExpenseMasterComponent {
   isEditMode = false;
   editingIndex: number | null = null;
 
+  // For custom confirmation alert
+  confirmDeleteIndex: number | null = null;
+  showConfirmDelete = false;
+
   filterAlphabets() {
     this.expenseName = this.expenseName.replace(/[^a-zA-Z\s]/g, '');
   }
@@ -36,7 +40,7 @@ export class ExpenseMasterComponent {
     );
 
     if (isDuplicate) {
-      this.error = 'Designation name already exists';
+      this.error = 'Expense name already exists';
       return;
     }
 
@@ -54,17 +58,29 @@ export class ExpenseMasterComponent {
     this.isEditMode = true;
     this.editingIndex = index;
     this.error = '';
+     this.submitted = false;
   }
 
   deleteTable(index: number) {
-    const confirmDelete = window.confirm('Do you want to delete this data?');
-    if (!confirmDelete) return;
+    this.confirmDeleteIndex = index;
+    this.showConfirmDelete = true;
+  }
 
-    this.expenseList.splice(index, 1);
+  confirmDelete() {
+    if (this.confirmDeleteIndex !== null) {
+      this.expenseList.splice(this.confirmDeleteIndex, 1);
 
-    if (this.editingIndex === index) {
-      this.resetForm();
+      if (this.editingIndex === this.confirmDeleteIndex) {
+        this.resetForm();
+      }
     }
+    this.cancelDelete();
+  }
+
+  cancelDelete() {
+    this.confirmDeleteIndex = null;
+    this.showConfirmDelete = false;
+    this.submitted = false;
   }
 
   cancel() {
@@ -79,5 +95,3 @@ export class ExpenseMasterComponent {
     this.editingIndex = null;
   }
 }
-
-
