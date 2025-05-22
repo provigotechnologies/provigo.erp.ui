@@ -28,17 +28,16 @@
   name="tableName"
   required
   minlength="4"
+  maxlength="10"
   pattern="^[a-zA-Z\s]+$"
   [(ngModel)]="tableName"
   #tableNameRef="ngModel"
-  (input)="filterAlphabets(); error = ''"
+  (input)=" error = ''"
 />
 
 <!-- Validation Messages -->
 <div *ngIf="(tableNameRef.invalid && submitted)" class="error-message">
   <div *ngIf="tableNameRef.errors?.['required']">Table name is required.</div>
-  <div *ngIf="tableNameRef.errors?.['minlength']">Must be at least 4 characters.</div>
-  <div *ngIf="tableNameRef.errors?.['pattern']">Only letters and spaces allowed.</div>
 </div>
 
 <div *ngIf="error && !tableNameRef.errors" class="error-message">{{ error }}</div>

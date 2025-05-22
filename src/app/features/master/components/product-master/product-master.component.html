@@ -1,135 +1,259 @@
-<!-- Main Layout Container -->
-<div class="product-main-container">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-  <!-- Heading Section -->
-<div class="page-header-wrapper">
-  <label class="page-heading">Add New Product</label>
+<form #groupForm="ngForm" (ngSubmit)="addTable()" novalidate class="group-form">
+
+<div *ngIf="showConfirm" class="custom-alert">
+  <div class="custom-alert-box">
+    <div class="error-message-row">
+      <i class="fas fa-exclamation-triangle warning-icon"></i>
+      <span>{{ error }}</span>
+    </div>
+    <button (click)="showConfirm = false">Ok</button>
+  </div>
 </div>
+
+  <!-- Main Layout Container -->
+  <div class="product-main-container">
+
+    <!-- Heading Section -->
+    <div class="page-header-wrapper">
+      <label class="page-heading">Add New Product</label>
+    </div>
+
     <!-- Left Side -->
     <div class="product-container">
+
       <!-- Left Container 1 -->
       <div class="product-inner-container">
-        <!-- Category -->
+
+        <!-- Group -->
         <div class="form-row">
-          <label for="category">Group <span class="required">*</span></label>
-          <select id="category">
-            <option value="">Select Group</option>
-            <option value="cat1">Cat 1</option>
-            <option value="cat2">Cat 2</option>
-          </select>
+          <label for="group">Group <span class="required">*</span></label>
+          <div class="form-input-group">
+            <select id="group" name="group" [(ngModel)]="group" required #groupRef="ngModel">
+              <option value="">Select Group</option>
+              <option value="cat1">Cat 1</option>
+              <option value="cat2">Cat 2</option>
+            </select>
+            <div *ngIf="groupRef.invalid && submitted" class="error-message">Group is required.</div>
+          </div>
         </div>
-  
+
         <!-- Brand -->
         <div class="form-row">
           <label for="brand">Brand <span class="required">*</span></label>
-          <select id="brand">
-            <option value="">Select Brand</option>
-            <option value="brand1">Brand 1</option>
-            <option value="brand2">Brand 2</option>
-          </select>
+          <div class="form-input-group">
+            <select id="brand" name="brand" [(ngModel)]="brand" required #brandRef="ngModel">
+              <option value="">Select Brand</option>
+              <option value="brand1">Brand 1</option>
+              <option value="brand2">Brand 2</option>
+            </select>
+            <div *ngIf="brandRef.invalid && submitted" class="error-message">Brand is required.</div>
+          </div>
         </div>
-  
+
         <!-- Barcode -->
         <div class="form-row">
-          <label for="itemcode">Item Code</label>
-          <input type="text" id="itemcode" />
+          <label for="itemCode">Item Code</label>
+          <input
+            type="text"
+            id="itemCode"
+            name="itemCode"
+            [(ngModel)]="itemCode"
+            maxlength="50"
+          />
         </div>
-  
+
         <!-- Product Name -->
         <div class="form-row">
           <label for="productName">Product Name <span class="required">*</span></label>
-          <input type="text" id="productName" />
-        </div>
+            <div class="form-input-group">
+                  <input
+                     type="text"
+                    id="productName"
+                    name="productName"
+                    required
+                    minlength="4"
+                    maxlength="50"
+                    pattern="^[a-zA-Z\s]+$"
+                    [(ngModel)]="productName"
+                    #productNameRef="ngModel"
+                    (input)="error = ''"
+                  />
+                    <div *ngIf="(productNameRef.invalid && submitted)" class="error-message">
+                     <div *ngIf="productNameRef.errors?.['required']">Product name is required.</div>
+                    </div> 
+                 </div>  
+             </div>
+
+              <div *ngIf="error && !productNameRef.errors" class="error-message">{{ error }}</div>
   
-        <!-- Price -->
+        <!-- Print Name -->
         <div class="form-row">
-          <label for="printname">Print Name</label>
-          <input type="text" id="printname" />
-        </div>
-      </div>
-  
-      <!-- Left Container 2 -->
-      <div class="product-inner-container">
-        <!-- Purchase Price -->
-        <div class="form-row">
-            <label>Purchase Price <span class="required">*</span></label>
-            <div class="input-flex-wrapper"> <!-- NEW WRAPPER -->
-              <div class="rupee-wrapper">
-                <span class="currency-symbol">₹</span>
-                <input type="text" />
-              </div>    
-            </div>        
-        </div>
-  
-        <!-- Sale Price -->
-        <div class="form-row">
-            <label>Sale Price <span class="required">*</span></label>
-            <div class="input-flex-wrapper"> <!-- NEW WRAPPER -->
-              <div class="rupee-wrapper">
-                <span class="currency-symbol">₹</span>
-                <input type="text" />
-              </div>    
-            </div>          
-        </div>
-  
-        <!-- Min Sale Price -->
-        <div class="form-row">
-            <label>Min.Sale Price </label>
-            <div class="input-flex-wrapper"> <!-- NEW WRAPPER -->
-              <div class="rupee-wrapper">
-                <span class="currency-symbol">₹</span>
-                <input type="text" />
-              </div>    
-            </div>         
-        </div>
-  
-        <!-- MRP -->
-        <div class="form-row">
-            <label>M.R.P </label>
-            <div class="input-flex-wrapper"> <!-- NEW WRAPPER -->
-              <div class="rupee-wrapper">
-                <span class="currency-symbol">₹</span>
-                <input type="text" />
-              </div>    
+          <label for="printName">Print Name <span class="required">*</span></label>
+          <div class="form-input-group">
+            <input
+              type="text"
+              id="printName"
+              name="printName"
+              [(ngModel)]="printName"
+              required
+              minlength="4"
+              maxlength="50"
+              pattern="^[a-zA-Z\s]+$"
+              #printNameRef="ngModel"
+              (input)="error = ''"
+            />
+            <div *ngIf="printNameRef.invalid && submitted" class="error-message">
+              <div *ngIf="printNameRef.errors?.['required']">Print name is required.</div>
             </div>
+          </div>
+        </div>
+
       </div>
 
-    </div>
-  
-      <!-- Left Container 3 -->
+      <!-- Left Container 2 -->
+      <div class="product-inner-container">
+
+        <!-- Purchase Price -->
+         <div class="form-row">
+          <label>Purchase Price</label>
+          <div class="input-flex-wrapper"> <!-- NEW WRAPPER -->
+           <div class="form-input-group">
+            <div class="rupee-wrapper">
+              <span class="currency-symbol">₹</span>
+             <input
+              type="text"
+              name="purchasePrice"
+              [(ngModel)]="purchasePrice"
+              required
+              minlength="1"
+              maxlength="10"
+              pattern="^[0-9]+$"
+              inputmode="numeric"
+              #purchasePriceRef="ngModel"
+             (keypress)="allowOnlyNumbers($event, 'purchasePrice')"
+            />
+             <div *ngIf="purchasePriceRef.invalid && submitted" class="error-message">
+            <div *ngIf="purchasePriceRef.errors?.['required']">Purchase price is required.</div>
+          </div>
+            </div>  
+            </div>  
+          </div>        
+          </div>
+
+           <div class="form-row">
+          <label>Sale Price</label>
+          <div class="input-flex-wrapper"> <!-- NEW WRAPPER -->
+            <div class="rupee-wrapper">
+              <span class="currency-symbol">₹</span>
+             <input
+              type="text"
+              name="salePrice"
+              [(ngModel)]="salePrice"
+              required
+              minlength="1"
+              maxlength="10"
+              pattern="^[0-9]+$"
+              inputmode="numeric"
+              #salePriceRef="ngModel"
+             (keypress)="allowOnlyNumbers($event, 'salePrice')"
+            />
+             <div *ngIf="salePriceRef.invalid && submitted" class="error-message">
+            <div *ngIf="salePriceRef.errors?.['required']">Sale price is required.</div>
+          </div>
+            </div>    
+          </div>        
+          </div>
+
+        <!-- MRP -->
+        
+           <div class="form-row">
+          <label>MRP</label>
+          <div class="input-flex-wrapper"> <!-- NEW WRAPPER -->
+            <div class="rupee-wrapper">
+              <span class="currency-symbol">₹</span>
+             <input
+              type="text"
+              name="mrp"
+              [(ngModel)]="mrp"
+              required
+              minlength="1"
+              maxlength="10"
+              pattern="^[0-9]+$"
+              inputmode="numeric"
+              #mrpRef="ngModel"
+             (keypress)="allowOnlyNumbers($event, 'mrp')"
+            />
+            </div>    
+          </div>        
+          </div>
+
+      </div>
+
+         <!-- Left Container 3 -->
       <div class="product-inner-container">
         <div class="form-row">
-          <label for="unitselect">Unit  <span class="required">*</span></label>
-          <select id="unitselect">
-            <option value="">Select Unit</option>
-            <option value="unit">Kg</option>
-            <option value="unit">Box</option>
-          </select>
+          <label for="unit">Unit <span class="required">*</span></label>
+          <div class="form-input-group">
+            <select id="unit" name="unit" [(ngModel)]="unit" required #unitRef="ngModel">
+              <option value="">Select Unit</option>
+              <option value=""></option>
+              <option value=""></option>
+            </select>
+            <div *ngIf="unitRef.invalid && submitted" class="error-message">Unit is required.</div>
+          </div>
         </div>
+
         <div class="form-row">
-          <label for="stock">Opening Stock</label>
-          <input type="text" id="stock" />
-        </div>
+          <label>Opening Stock</label>
+          <div class="input-flex-wrapper"> <!-- NEW WRAPPER -->
+             <input
+              type="text"
+              name="openingStock"
+              [(ngModel)]="openingStock"
+              required
+              minlength="1"
+              maxlength="10"
+              pattern="^[0-9]+$"
+              inputmode="numeric"
+              #openingStockRef="ngModel"
+             (keypress)="allowOnlyNumbers($event, 'openingStock')"
+            />
+          </div>        
+          </div>
+
         <div class="form-row">
           <label>Opening Stock Value</label>
           <div class="input-flex-wrapper"> <!-- NEW WRAPPER -->
             <div class="rupee-wrapper">
               <span class="currency-symbol">₹</span>
-              <input type="text" />
+             <input
+              type="text"
+              name="stockValue"
+              [(ngModel)]="stockValue"
+              required
+              minlength="1"
+              maxlength="10"
+              pattern="^[0-9]+$"
+              inputmode="numeric"
+              #stockValueRef="ngModel"
+             (keypress)="allowOnlyNumbers($event, 'stockValue')"
+            />
             </div>    
           </div>        
-      </div>
+          </div>
       </div>
 
     </div>
-  
-    <!-- Right Side -->
+
+     <!-- Right Side -->
     <div class="product-container">
       <!-- Right Container 1 -->
       <div class="product-inner-container">
         <div class="form-row">
           <label>HSN/ SAC Code</label>
-          <input type="text" />
+          <input type="text" maxlength="20"/>
         </div>
         <div class="form-row">
           <div class="gst-container">
@@ -140,14 +264,30 @@
                 <div class="input-flex-wrapper"> <!-- NEW WRAPPER -->
                   <div class="rupee-wrapper">
                     <span class="currency-symbol">CGST</span>
-                    <input type="text" />
-                    <span class="currency-symbol">%</span>
+                  <input
+                   type="text"
+                   name="cgst"
+                   [(ngModel)]="cgst"
+                   maxlength="5"
+                   inputmode="decimal"
+                   (keypress)="allowOnlyNumbersWithDecimal($event)"
+                   (input)="filterDecimal('cgst')"
+                      />              
+                  <span class="currency-symbol">%</span>
                   </div>    
                 </div>  
                 <div class="input-flex-wrapper"> <!-- NEW WRAPPER -->
                   <div class="rupee-wrapper">
                     <span class="currency-symbol">Cess</span>
-                    <input type="text" />
+                    <input
+                     type="text"
+                     name="cess"
+                     [(ngModel)]="cess"
+                     maxlength="5"
+                     inputmode="decimal"
+                     (keypress)="allowOnlyNumbersWithDecimal($event)"
+                     (input)="filterDecimal('cess')"
+                      />          
                     <span class="currency-symbol">%</span>
                   </div>    
                 </div>  
@@ -156,38 +296,84 @@
                 <div class="input-flex-wrapper"> <!-- NEW WRAPPER -->
                   <div class="rupee-wrapper">
                     <span class="currency-symbol">SGST</span>
-                    <input type="text" />
-                    <span class="currency-symbol">%</span>
+                   <input
+                    type="text"
+                    name="sgst"
+                    [(ngModel)]="sgst"
+                    maxlength="5"
+                    inputmode="decimal"
+                    (keypress)="allowOnlyNumbersWithDecimal($event)"
+                    (input)="filterDecimal('sgst')"
+                      />             
+                   <span class="currency-symbol">%</span>
                   </div>    
                 </div>  
                 <div class="input-flex-wrapper"> <!-- NEW WRAPPER -->
                   <div class="rupee-wrapper">
                     <span class="currency-symbol">IGST</span>
-                    <input type="text" />
+                      <input
+                   type="text"
+                   name="igst"
+                   [(ngModel)]="igst"
+                   maxlength="5"
+                   inputmode="decimal"
+                   (keypress)="allowOnlyNumbersWithDecimal($event)"
+                   (input)="filterDecimal('igst')"
+                      />  
                     <span class="currency-symbol">%</span>
                   </div>    
                 </div>  
                 </div>
             </div>
           </div>
-        </div>            
+        </div>              
       </div>
   
       <!-- Right Container 2 -->
       <div class="product-inner-container">
         <div class="form-row">
-          <label>Sale Discount </label>
+          <label> Sale Discount</label>
           <div class="input-flex-wrapper"> <!-- NEW WRAPPER -->
             <div class="rupee-wrapper">
-              <span class="currency-symbol">%</span>
-              <input type="text" />
+              <span class="currency-symbol">₹</span>
+                  <input
+                    type="text"
+                     id="saleDiscount"
+                     name="saleDiscount"
+                     required
+                     minlength="4"
+                     maxlength="10"
+                     pattern="^[0-9]+$"
+                     inputmode="numeric"
+                     [(ngModel)]="saleDiscount"
+                     #saleDiscountRef="ngModel"
+                     (keypress)="allowOnlyNumbers($event, 'saleDiscount')"
+                     (input)="filterNumbers('saleDiscount'); error = ''"
+                   />
             </div>    
           </div>        
       </div>
+
         <div class="form-row">
-          <label>Low Level Limit</label>
-          <input type="text" />
-        </div>
+          <label> Low Level Limit</label>
+          <div class="input-flex-wrapper"> <!-- NEW WRAPPER -->
+                  <input
+                    type="text"
+                     id="lowLevelLimit"
+                     name="lowLevelLimit"
+                     required
+                     minlength="4"
+                     maxlength="10"
+                     pattern="^[0-9]+$"
+                     inputmode="numeric"
+                     [(ngModel)]="lowLevelLimit"
+                     #lowLevelLimitRef="ngModel"
+                     (keypress)="allowOnlyNumbers($event, 'lowLevelLimit')"
+                     (input)="filterNumbers('lowLevelLimit'); error = ''"
+                   />
+           </div>        
+      </div>
+
         <div class="form-row">
           <label for="unitselect">Product Type</label>
           <select id="unitselect">
@@ -206,11 +392,11 @@
         </div>
         <div class="form-row">
           <label>Serial No</label>
-          <input type="text" />
+          <input type="text" maxlength="20"/>
         </div>
         <div class="form-row">
           <label>Product Description</label>
-          <textarea rows="3"></textarea>
+          <textarea rows="3" maxlength="500"></textarea>
         </div>
      </div>
 
@@ -224,18 +410,19 @@
     
       <!-- Second Row - 2 Checkboxes -->
       <div class="form-row checkbox-row">
-        <label><input type="checkbox" /> <span class="checkmark"></span> Print Description</label>
-        <label style="color: red;"><input type="checkbox" /> <span class="checkmark"></span> Not For Sale</label>
+       <label><input type="checkbox" /> <span class="checkmark"></span> Print Description</label>     
+         <label style="color: red;"><input type="checkbox" /> <span class="checkmark"></span> Not For Sale</label>
       </div>
     </div>    
 
+    
+    <!-- Submit Button -->
     <div class="right-buttons">
-      <button class="primary-btn">
-         <i class="material-icons">save</i> Save
+      <button class="primary-btn btn-add" type="submit">
+        <i class="material-icons">save</i> Save
       </button>
-   </div>
+    </div>
 
+    </div>
   </div>
-
-  </div>
-  
+</form>

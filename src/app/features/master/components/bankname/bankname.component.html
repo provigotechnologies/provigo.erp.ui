@@ -28,16 +28,16 @@
   name="bankName"
   required
   minlength="4"
+  maxlength="100"
   pattern="^[a-zA-Z\s]+$"
   [(ngModel)]="bankName"
   #bankNameRef="ngModel"
-  (input)="filterAlphabets(); error = ''"
+   (input)="filterAlphabets(); error = ''"
 />
 
 <!-- Validation Messages -->
 <div *ngIf="(bankNameRef.invalid && submitted)" class="error-message">
   <div *ngIf="bankNameRef.errors?.['required']">Bank name is required.</div>
-  <div *ngIf="bankNameRef.errors?.['minlength']">Must be at least 4 characters.</div>
   <div *ngIf="bankNameRef.errors?.['pattern']">Only letters and spaces allowed.</div>
 </div>
 

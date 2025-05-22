@@ -27,6 +27,8 @@ export class ServiceMasterComponent {
   cess = '';
   serviceDescription = '';
 
+  showConfirm = false;
+
    serviceList: {
     group: string;
     itemCode: string;
@@ -60,12 +62,14 @@ export class ServiceMasterComponent {
   addTable() {
   this.submitted = true;
 
+  // Required field check
   if (!this.group || !this.serviceName || !this.serviceCharge || !this.minserviceCharge) {
     this.error = 'Please fill all required fields.';
-    return; // stop if required fields are missing
+    this.showConfirm = true; // show alert box
+    return;
   }
 
-  // If valid, add to serviceList
+  // If valid, push to list
   this.serviceList.push({
     group: this.group,
     itemCode: this.itemCode,
@@ -85,9 +89,6 @@ export class ServiceMasterComponent {
   this.resetForm();
 }
 
- filterAlphabets() {
-    this.serviceName = this.serviceName.replace(/[^a-zA-Z\s]/g, '');
-  }
 
  filterNumbers(field: 'serviceCharge' | 'minserviceCharge' | 'saleDiscount') {
     if (field === 'serviceCharge') {
@@ -145,6 +146,10 @@ filterDecimal(field: 'cgst' | 'sgst' | 'igst' | 'cess') {
 
   this[field] = value;
 }
+
+ userWarning(index: number) {
+    this.showConfirm = true;
+  }
 
 resetForm() {
   this.group = '';

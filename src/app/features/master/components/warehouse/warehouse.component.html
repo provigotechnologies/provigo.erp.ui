@@ -29,6 +29,7 @@
     [(ngModel)]="warehouseName"
     required
     minlength="3"
+    maxlength="50"
     pattern="^[a-zA-Z\s]+$"
     #warehouseNameRef="ngModel"
     (input)="error = ''"
@@ -50,6 +51,7 @@
     [(ngModel)]="location"
     required
     minlength="2"
+    maxlength="50"
     pattern="^[a-zA-Z\s]+$"
     #locationRef="ngModel"
     (input)="error = ''"

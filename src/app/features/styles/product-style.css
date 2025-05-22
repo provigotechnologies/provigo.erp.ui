@@ -155,6 +155,48 @@
   margin-left: 4px;
 }
 
+.custom-alert {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex; justify-content: center; align-items: center;
+  z-index: 1000;
+}
+
+.custom-alert-box {
+  background-color: white;
+  padding: 20px 30px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.custom-alert-box button {
+  margin-top: 10px;
+  padding: 6px 16px;
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+.error-message-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  color: #000; /* red text */
+  margin-bottom: 10px;
+}
+
+.warning-icon {
+  font-size: 20px;
+  color: #fbd945; /* red icon */
+}
+
+
+
 /* =================== */
 /* Checkbox Styles     */
 /* =================== */

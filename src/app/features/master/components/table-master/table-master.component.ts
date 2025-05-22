@@ -25,10 +25,6 @@ export class TableMasterComponent {
   confirmDeleteIndex: number | null = null;
   showConfirmDelete = false;
 
-  filterAlphabets() {
-    this.tableName = this.tableName.replace(/[^a-zA-Z\s]/g, '');
-  }
-
   addTable() {
     this.submitted = true;
     const trimmedName = this.tableName.trim();

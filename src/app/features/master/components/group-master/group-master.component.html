@@ -27,6 +27,7 @@
           name="groupName"
           required
           minlength="4"
+          maxlength="50"
           pattern="^[a-zA-Z\s]+$"
           [(ngModel)]="groupName"
           #groupNameRef="ngModel"
@@ -34,7 +35,6 @@
         />
         <div *ngIf="(groupNameRef.invalid && submitted)" class="error-message">
           <div *ngIf="groupNameRef.errors?.['required']">Group name is required.</div>
-          <div *ngIf="groupNameRef.errors?.['minlength']">Must be at least 4 characters.</div>
           <div *ngIf="groupNameRef.errors?.['pattern']">Only letters and spaces allowed.</div>
         </div>
       </div>
@@ -44,7 +44,12 @@
 
     <div class="form-group">
       <label for="hsnCode">HSN/ SAC Code</label>
-      <input type="text" id="hsnCode" name="hsnCode" [(ngModel)]="hsnCode" />
+      <input
+       type="text"
+        id="hsnCode" 
+        name="hsnCode" 
+        [(ngModel)]="hsnCode"
+        maxlength="20" />
     </div>
   </div>
 
@@ -60,6 +65,7 @@
            name="cgst"
            [(ngModel)]="cgst"
            inputmode="decimal"
+           maxlength="5"
            (keypress)="allowOnlyNumbersWithDecimal($event)"
            (input)="filterDecimal('cgst')"
            />
@@ -72,6 +78,7 @@
            name="cess"
            [(ngModel)]="cess"
            inputmode="decimal"
+           maxlength="5"
            (keypress)="allowOnlyNumbersWithDecimal($event)"
            (input)="filterDecimal('cess')"
            />
@@ -86,6 +93,7 @@
            name="sgst"
            [(ngModel)]="sgst"
            inputmode="decimal"
+           maxlength="5"
            (keypress)="allowOnlyNumbersWithDecimal($event)"
            (input)="filterDecimal('sgst')"
            />
@@ -98,6 +106,7 @@
            name="igst"
            [(ngModel)]="igst"
            inputmode="decimal"
+           maxlength="5"
            (keypress)="allowOnlyNumbersWithDecimal($event)"
            (input)="filterDecimal('igst')"
            />

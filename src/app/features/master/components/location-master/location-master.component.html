@@ -28,6 +28,7 @@
   name="locationName"
   required
   minlength="4"
+  maxlength="50"
   pattern="^[a-zA-Z\s]+$"
   [(ngModel)]="locationName"
   #locationNameRef="ngModel"
@@ -37,7 +38,6 @@
 <!-- Validation Messages -->
 <div *ngIf="(locationNameRef.invalid && submitted)" class="error-message">
   <div *ngIf="locationNameRef.errors?.['required']">Location is required.</div>
-  <div *ngIf="locationNameRef.errors?.['minlength']">Must be at least 4 characters.</div>
   <div *ngIf="locationNameRef.errors?.['pattern']">Only letters and spaces allowed.</div>
 </div>
 

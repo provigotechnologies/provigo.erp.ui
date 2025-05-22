@@ -28,6 +28,7 @@
   name="expenseName"
   required
   minlength="4"
+  maxlength="50"
   pattern="^[a-zA-Z\s]+$"
   [(ngModel)]="expenseName"
   #expenseNameRef="ngModel"
@@ -37,7 +38,6 @@
 <!-- Validation Messages -->
 <div *ngIf="(expenseNameRef.invalid && submitted)" class="error-message">
   <div *ngIf="expenseNameRef.errors?.['required']">Expense name is required.</div>
-  <div *ngIf="expenseNameRef.errors?.['minlength']">Must be at least 4 characters.</div>
   <div *ngIf="expenseNameRef.errors?.['pattern']">Only letters and spaces allowed.</div>
 </div>
 

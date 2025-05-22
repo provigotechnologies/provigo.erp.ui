@@ -1,5 +1,17 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
 <form #groupForm="ngForm" (ngSubmit)="addTable()" novalidate class="group-form">
+
+<div *ngIf="showConfirm" class="custom-alert">
+  <div class="custom-alert-box">
+    <div class="error-message-row">
+      <i class="fas fa-exclamation-triangle warning-icon"></i>
+      <span>{{ error }}</span>
+    </div>
+    <button (click)="showConfirm = false">Ok</button>
+  </div>
+</div>
+
 
 <!-- Main Layout Container -->
 <div class="product-main-container">
@@ -30,7 +42,13 @@
         <!-- Barcode -->
         <div class="form-row">
           <label for="itemcode">Item Code</label>
-          <input type="text" id="itemcode" [(ngModel)]="itemCode" name="itemCode" />
+          <input 
+           type="text" 
+           id="itemcode" 
+           maxlength="50"
+           [(ngModel)]="itemCode"
+           name="itemCode"
+            />
         </div>
   
         <!-- Product Name -->
@@ -43,25 +61,38 @@
                     name="serviceName"
                     required
                     minlength="4"
+                    maxlength="50"
                     pattern="^[a-zA-Z\s]+$"
                     [(ngModel)]="serviceName"
                     #serviceNameRef="ngModel"
-                    (input)="filterAlphabets(); error = ''"
                   />
                     <div *ngIf="(serviceNameRef.invalid && submitted)" class="error-message">
-                   <div *ngIf="serviceNameRef.errors?.['required']">Service name is required.</div>
-                   <div *ngIf="serviceNameRef.errors?.['minlength']">Must be at least 4 characters.</div>
-                   <div *ngIf="serviceNameRef.errors?.['pattern']">Only letters and spaces allowed.</div>
-                 </div> 
+                     <div *ngIf="serviceNameRef.errors?.['required']">Service name is required.</div>
+                    </div> 
                  </div>  
-                  </div>
+             </div>
 
               <div *ngIf="error && !serviceNameRef.errors" class="error-message">{{ error }}</div>
   
         <!-- Price -->
         <div class="form-row">
-          <label for="printname">Print Name</label>
-          <input type="text" id="printname" [(ngModel)]="printName" name="printName" />
+          <label for="printName">Print Name <span class="required">*</span></label>
+            <div class="form-input-group">
+           <input
+               type="text"
+               id="printName"
+               name="printName"
+               required
+               minlength="4"
+               maxlength="50"
+               pattern="^[a-zA-Z\s]+$"
+               [(ngModel)]="printName"
+               #printNameRef="ngModel"
+               />
+                <div *ngIf="(printNameRef.invalid && submitted)" class="error-message">
+                  <div *ngIf="printNameRef.errors?.['required']">Print name is required.</div>
+                </div> 
+           </div>
         </div>
       </div>
   
@@ -70,7 +101,7 @@
         <!-- Sale Price -->
         <div class="form-row">
             <label>Service Charge <span class="required">*</span></label>
-            <div class="input-flex-wrapper"> <!-- NEW WRAPPER -->
+            <div class="form-input-group">
               <div class="rupee-wrapper">
                 <span class="currency-symbol">₹</span>
                  <input
@@ -79,6 +110,7 @@
                      name="serviceCharge"
                      required
                      minlength="4"
+                     maxlength="10"
                      pattern="^[0-9]+$"
                      inputmode="numeric"
                      [(ngModel)]="serviceCharge"
@@ -86,13 +118,16 @@
                      (keypress)="allowOnlyNumbers($event, 'serviceCharge')"
                      (input)="filterNumbers('serviceCharge'); error = ''"
                    />
+                     <div *ngIf="(serviceNameRef.invalid && submitted)" class="error-message">
+                     <div *ngIf="serviceNameRef.errors?.['required']">Service charge is required.</div>
+                    </div>
               </div>    
-            </div>          
+            </div>        
         </div>
   
         <!-- Min Sale Price -->
         <div class="form-row">
-            <label>Min.Service Charge<span class="required">*</span></label>
+            <label>Min.Service Charge</label>
             <div class="input-flex-wrapper"> <!-- NEW WRAPPER -->
               <div class="rupee-wrapper">
                 <span class="currency-symbol">₹</span>
@@ -100,8 +135,8 @@
                     type="text"
                      id="minserviceCharge"
                      name="minserviceCharge"
-                     required
                      minlength="4"
+                     maxlength="10"
                      pattern="^[0-9]+$"
                      inputmode="numeric"
                      [(ngModel)]="minserviceCharge"
@@ -127,6 +162,7 @@
                      name="saleDiscount"
                      required
                      minlength="4"
+                     maxlength="10"
                      pattern="^[0-9]+$"
                      inputmode="numeric"
                      [(ngModel)]="saleDiscount"
@@ -147,7 +183,12 @@
       <div class="product-inner-container">
         <div class="form-row">
           <label>HSN/ SAC Code</label>
-          <input type="text" id="hsnCode" [(ngModel)]="hsnCode" name="hsnCode" />
+          <input
+           type="text" 
+           id="hsnCode" 
+           maxlength="20"
+           [(ngModel)]="hsnCode" 
+           name="hsnCode" />
         </div>
 
         <div class="form-row">
@@ -163,6 +204,7 @@
                    type="text"
                    name="cgst"
                    [(ngModel)]="cgst"
+                   maxlength="5"
                    inputmode="decimal"
                    (keypress)="allowOnlyNumbersWithDecimal($event)"
                    (input)="filterDecimal('cgst')"
@@ -177,6 +219,7 @@
                      type="text"
                      name="cess"
                      [(ngModel)]="cess"
+                     maxlength="5"
                      inputmode="decimal"
                      (keypress)="allowOnlyNumbersWithDecimal($event)"
                      (input)="filterDecimal('cess')"
@@ -193,6 +236,7 @@
                     type="text"
                     name="sgst"
                     [(ngModel)]="sgst"
+                    maxlength="5"
                     inputmode="decimal"
                     (keypress)="allowOnlyNumbersWithDecimal($event)"
                     (input)="filterDecimal('sgst')"
@@ -207,6 +251,7 @@
                    type="text"
                    name="igst"
                    [(ngModel)]="igst"
+                   maxlength="5"
                    inputmode="decimal"
                    (keypress)="allowOnlyNumbersWithDecimal($event)"
                    (input)="filterDecimal('igst')"
@@ -224,7 +269,11 @@
       <div class="product-inner-container">   
         <div class="form-row">
           <label>Service Description</label>
-         <textarea rows="3" [(ngModel)]="serviceDescription" name="serviceDescription"></textarea>
+         <textarea rows="3"
+          [(ngModel)]="serviceDescription"
+           name="serviceDescription"
+           maxlength="500"
+           ></textarea>
         </div>
          <!-- First Row - 3 Checkboxes -->
          <div class="form-row checkbox-row">
@@ -237,7 +286,7 @@
   
 
     <div class="right-buttons">
-     <button class="primary-btn btn-add" type="submit">
+     <button class="primary-btn btn-add" type="submit" >
          <i class="material-icons">save</i> Save
       </button>
    </div>

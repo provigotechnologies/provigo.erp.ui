@@ -28,6 +28,7 @@
   name="brandName"
   required
   minlength="4"
+  maxlength="50"
   pattern="^[a-zA-Z\s]+$"
   [(ngModel)]="brandName"
   #brandNameRef="ngModel"
@@ -37,7 +38,6 @@
 <!-- Validation Messages -->
 <div *ngIf="(brandNameRef.invalid && submitted)" class="error-message">
   <div *ngIf="brandNameRef.errors?.['required']">Brand name is required.</div>
-  <div *ngIf="brandNameRef.errors?.['minlength']">Must be at least 4 characters.</div>
   <div *ngIf="brandNameRef.errors?.['pattern']">Only letters and spaces allowed.</div>
 </div>
 

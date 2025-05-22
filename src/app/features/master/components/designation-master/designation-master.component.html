@@ -28,6 +28,7 @@
   name="designationName"
   required
   minlength="4"
+  maxlength="50"
   pattern="^[a-zA-Z\s]+$"
   [(ngModel)]="designationName"
   #designationNameRef="ngModel"
@@ -37,7 +38,6 @@
 <!-- Validation Messages -->
 <div *ngIf="(designationNameRef.invalid && submitted)" class="error-message">
   <div *ngIf="designationNameRef.errors?.['required']">Designation name is required.</div>
-  <div *ngIf="designationNameRef.errors?.['minlength']">Must be at least 4 characters.</div>
   <div *ngIf="designationNameRef.errors?.['pattern']">Only letters and spaces allowed.</div>
 </div>
 
