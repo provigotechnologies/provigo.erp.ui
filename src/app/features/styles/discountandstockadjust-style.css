@@ -69,6 +69,14 @@
     margin-bottom: 5px;
   }
   
+  
+.error-message {
+    color: red;
+    font-size: 12px;
+    width: 100%;
+}
+
+  
   .tab-header {
     display: flex;
     margin: 2px 0 0 0 ;
@@ -186,26 +194,32 @@
     border: 2px solid #1c77ef;
   }
   
-  .rupee-inline-wrapper {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    max-width: 260px;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .rupee-inline-wrapper .currency-symbol {
-    height: 28px;
-    display: flex;
-    align-items: center;
-    padding: 0 10px;
-  }
-  
-  .rupee-inline-wrapper input[type="text"] {
-    border-left: none;
-    height: 28px;
-  }
+.input-flex-wrapper {
+  flex: 2;
+  max-width: 100%;
+}
+
+.rupee-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+}
+
+.input-flex-wrapper input[type="text"] {
+  flex: 2;
+  padding: 6px 10px;
+  font-size: 14px;
+  border: none;
+  background-color: #fff;
+  border-bottom: 2px solid #ccc;
+  outline: none;
+  width: 100%;
+  max-width: 236px;
+  height: 28px;
+  transform: translateY(-3px); /* moves the textbox up slightly */
+}
+
   
   .currency-symbol {
     padding: 5px 8px;
@@ -323,6 +337,76 @@
   border-top-right-radius: 4px;
   cursor: pointer;
 }
+
+
+
+/* alert box */
+
+.custom-alert {
+  position: fixed;
+  top: 300px;
+  left: 57%;
+  transform: translate(-50%, 0);
+  padding: 16px 20px;
+  border-radius: 6px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+    border: 1px solid #959292;
+  color: #000;
+  background: #fafafa;
+  box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.1), 
+              0 6px 12px rgba(0, 0, 0, 0.1);
+  width: 300px;
+}
+
+.custom-alert .button-group {
+  display: flex;
+  width: 100%;                   /* ✅ Stretch to full width */
+  justify-content: flex-end;     /* ✅ Align buttons to end (right) */
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.custom-alert span{
+    font-weight: 400;
+    font-size: 15px;
+}
+.custom-alert button {
+  border: none;
+  padding: 4px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: normal;
+  transition: background-color 0.3s;
+  border: 1px solid #959292;
+}
+
+.custom-alert .button-group .yes{
+  background-color: #007bff;
+  color: #fff;
+}
+
+.custom-alert .button-group .no{
+  background-color: #ededed;
+  color: #000;
+}
+
+.confirm-icon { 
+  font-size: 32px;         /* 🔼 Increase icon size */
+  color: #007bff;
+  transform: translateY(2px);
+}
+.confirm-icon-text {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
 
   /* =================== */
   /* Responsive Media Queries */

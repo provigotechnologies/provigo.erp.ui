@@ -53,7 +53,6 @@
           id="bankName"
           name="bankName"
           required
-          minlength="4"
           maxlength="100"
           pattern="^[a-zA-Z\s]+$"
           [(ngModel)]="bankName"
@@ -74,21 +73,22 @@
       <label for="accountNo">Account No <span class="required">*</span></label>
       <div class="input-wrapper">
        <input
-  type="text"
-  id="accountNo"
-  name="accountNo"
-  required
-  minlength="4"
-  maxlength="20"
-  pattern="^[0-9]+$"
-  inputmode="numeric"
-  [(ngModel)]="accountNo"
-  #accountNoRef="ngModel"
-  (keypress)="allowOnlyNumbers($event, 'accountNo')"
-  (input)="filterNumbers('accountNo'); error = ''"
-/>
+         type="text"
+         id="accountNo"
+          name="accountNo"
+         required
+         minlength="4"
+         maxlength="20"
+         pattern="^[0-9]+$"
+         inputmode="numeric"
+         [(ngModel)]="accountNo"
+         #accountNoRef="ngModel"
+          (keypress)="allowOnlyNumbers($event, 'accountNo')"
+          (input)="filterNumbers('accountNo'); error = ''"
+         />
         <div *ngIf="(accountNoRef.invalid && submitted)" class="error-message">
           <div *ngIf="accountNoRef.errors?.['required']">Account no is required.</div>
+          <div *ngIf="accountNoRef.errors?.['pattern']">Only letters and spaces allowed.</div>
         </div>
       </div>
     </div>
@@ -107,17 +107,17 @@
    <div class="form-group">
       <label for="openingBalance">Opening Balance </label>
       <div class="input-wrapper"><input
-  type="text"
-  id="openingBalance"
-  name="openingBalance"
-  pattern="^[0-9]*$"
-  inputmode="numeric"
-  maxlength="20"
-  [(ngModel)]="openingBalance"
-  #openingBalanceRef="ngModel"
-  (keypress)="allowOnlyNumbers($event, 'openingBalance')"
-  (input)="filterNumbers('openingBalance'); error = ''"
-/>
+         type="text"
+          id="openingBalance"
+         name="openingBalance"
+         pattern="^[0-9]*$"
+         inputmode="numeric"
+         maxlength="20"
+         [(ngModel)]="openingBalance"
+          #openingBalanceRef="ngModel"
+         (keypress)="allowOnlyNumbers($event, 'openingBalance')"
+         (input)="filterNumbers('openingBalance'); error = ''"
+        />
       </div>
     </div>
   </div>
@@ -127,7 +127,7 @@
     <button class="primary-btn btn-add" type="submit">
       {{ isEditMode ? 'Update' : 'Add' }}
     </button>
-    <button class="primary-btn btn-cancel" type="button" (click)="cancel()">Cancel</button>
+    <button class="primary-btn btn-cancel" (ngSubmit)="addTable()" type="button" (click)="cancel()">Cancel</button>
   </div>
 
   <!-- Table Section -->

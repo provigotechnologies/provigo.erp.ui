@@ -1,3 +1,16 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+<div *ngIf="showConfirmDelete" class="custom-alert">
+  <div class="confirm-icon-text">
+   <i class="fas fa-question-circle confirm-icon"></i>
+    <span>Do you want to delete this data?</span>
+  </div>
+  <div class="button-group">
+    <button class="yes" (click)="confirmDelete()">Yes</button>
+    <button class="no" (click)="cancelDelete()">No</button>
+  </div>
+</div>
+
 <div class="product-main-container">
 
   <!-- Heading -->
@@ -8,17 +21,9 @@
   <div class="product-container">
 
     <!-- Tabs -->
-    <div class="tab-header">
-      <div class="tab" 
-           [ngClass]="{'active': selectedTab === 'item'}"
-           (click)="selectTab('item')">
-        Item Info
-      </div>
-      <div class="tab" 
-           [ngClass]="{'active': selectedTab === 'serial'}"
-           (click)="selectTab('serial')">
-        Serial Numbers
-      </div>
+   <div class="tab-header">
+      <div class="tab" [ngClass]="{'active': selectedTab === 'item'}" (click)="selectTab('item')">Item Info</div>
+      <div class="tab" [ngClass]="{'active': selectedTab === 'serial'}" (click)="selectTab('serial')">Serial Numbers</div>
     </div>
 
     <!-- Tab Content -->
@@ -31,89 +36,139 @@
           <fieldset class="form-box">
             <legend>Item Information</legend>
 
-          <!-- Category -->
-          <div class="form-row">
-            <label for="category">Adjustment Date </label>
-            <input type="date" id="start-date" />
+           <!-- Adjustment Date -->
+            <div class="form-row">
+            <label>Adjustment Date</label>
+            <input type="date" [(ngModel)]="adjustmentForm.adjustmentDate" name="adjustmentDate" required />
           </div>
         
+          <!-- Type -->
           <div class="form-row">
             <label class="radio-label">Type</label>
             <div class="radio-options">
-              <label><input type="radio" name="billTo" checked /> Credit (+)</label>
-              <label><input type="radio" name="billTo" /> Debit (-)</label>
+              <label><input type="radio" name="adjustmentType" value="Credit" [(ngModel)]="adjustmentForm.adjustmentType" checked /> Credit (+)</label>
+              <label><input type="radio" name="adjustmentType" value="Debit" [(ngModel)]="adjustmentForm.adjustmentType" /> Debit (-)</label>
             </div>
           </div>
-        
-          <!-- Brand -->
+ 
+          <!-- Adjustment Reason -->
           <div class="form-row">
-            <label for="brand">Adjustment Reason</label>
-            <select id="brand">
-                <option value="">Stock Takeoff</option>
-                <option value="">Stock Reconcile</option>
-                <option value="">Stock Verification</option>
-                <option value="">Product Lost</option>
-                <option value="">Product Stolen</option>
-                <option value="">Donation</option>     
-                <option value="">Write-Off</option>
-                <option value="">Others</option>
-            </select>
+            <label>Adjustment Reason </label>
+              <select [(ngModel)]="adjustmentForm.adjustmentReason" name="adjustmentReason" required #adjustmentReasonRef="ngModel">
+                <option value="">-- Select --</option>
+                <option value="Stock Takeoff">Stock Takeoff</option>
+                <option value="Stock Reconcile">Stock Reconcile</option>
+                <option value="Stock Verification">Stock Verification</option>
+                <option value="Product Lost">Product Lost</option>
+                <option value="Product Stolen">Product Stolen</option>
+                <option value="Donation">Donation</option>
+                <option value="Write-Off">Write-Off</option>
+                <option value="Others">Others</option>
+              </select>
           </div>
         
-          <!-- Barcode -->
+          <!-- Item Code -->
           <div class="form-row">
-            <label for="itemcode">Item Code</label>
-            <input type="text" id="itemcode" />
+            <label>Item Code</label>
+            <input type="text" [(ngModel)]="adjustmentForm.itemCode" name="itemCode" maxlength="50" />
           </div>
         
           <!-- Product Name -->
-          <div class="form-row">
-            <label for="productName">Item Name <span class="required">*</span></label>
-            <input type="text" id="productName" />
+        <div class="form-row">
+          <label>Item Name <span class="required">*</span></label>
+            <input
+              type="text"
+              name="productName"
+              [(ngModel)]="adjustmentForm.productName"
+              required
+              minlength="4"
+              maxlength="50"
+              pattern="^[a-zA-Z\s]+$"
+              #productNameRef="ngModel"
+            />
             <span class="add-item-link">Add Item</span>
-        </div>
-        
-          <!-- Price -->
-          <div class="form-row">
-            <label for="printname">Quantity <span class="required">*</span></label>
-            <input type="text" id="printname" />
+
+            <div *ngIf="productNameRef.invalid && submitted" class="error-message">
+              <div *ngIf="productNameRef.errors?.['required']">Item name is required.</div>
+              <div *ngIf="productNameRef.errors?.['minlength']">Minimum 4 characters required.</div>
+              <div *ngIf="productNameRef.errors?.['pattern']">Only alphabets allowed.</div>
+            </div>
           </div>
+
           
-        <!-- Unit Price -->
         <div class="form-row">
-        <label for="unit-price">Unit Price <span class="required">*</span></label>
-        <div class="input-flex-wrapper rupee-inline-wrapper">
-        <span class="currency-symbol">₹</span>
-        <input type="text" id="unit-price" />
-        </div>
-        </div>
+         <label>Quantity<span class="required">*</span></label>
+          <input
+             type="text"
+             name="quantity"
+             [(ngModel)]="adjustmentForm.quantity"
+             pattern="^[0-9]+$"
+             inputmode="numeric"
+             required
+             #quantityRef="ngModel"
+             (keypress)="allowOnlyNumbers($event, 'quantity')"
+             (input)="filterNumbers('quantity'); error = ''"
+            />
+           <div *ngIf="quantityRef.invalid && submitted" class="error-message">
+             Quantity is required 
+           </div>
+          </div>
+
+           <!-- Unit Price -->
+          <div class="form-row">
+            <label>Unit Price<span class="required">*</span></label>
+             <div class="input-flex-wrapper rupee-inline-wrapper">
+              <span class="currency-symbol">₹</span>
+              <input
+                type="text"
+                name="unitPrice"
+                [(ngModel)]="adjustmentForm.unitPrice"
+                pattern="^[0-9]+$"
+                inputmode="numeric"
+                required
+                #unitPriceRef="ngModel"
+                (keypress)="allowOnlyNumbers($event, 'unitPrice')"
+                (input)="filterNumbers('unitPrice'); error = ''"
+              />
+              <div *ngIf="unitPriceRef.invalid && submitted" class="error-message">Unit Price is required </div>
+            </div>
+          </div>
         
-        <!-- Amount -->
-        <div class="form-row">
-        <label for="amount">Amount <span class="required">*</span></label>
-        <div class="input-flex-wrapper rupee-inline-wrapper">
-        <span class="currency-symbol">₹</span>
-        <input type="text" id="amount" />
-        </div>
-        </div>
-        
-        
-        <div class="form-row">
-        <label class="textarea">Remarks</label>
-        <textarea rows="3"></textarea>
-        </div>
+            <!-- Amount -->
+          <div class="form-row">
+            <label>Amount<span class="required">*</span></label>
+            <div class="input-flex-wrapper ">
+              <span class="currency-symbol">₹</span>
+              <input
+                type="text"
+                name="amount"
+                [(ngModel)]="adjustmentForm.amount"
+                pattern="^[0-9]+$"
+                inputmode="numeric"
+                required
+                #amountRef="ngModel"
+                (keypress)="allowOnlyNumbers($event, 'amount')"
+                (input)="filterNumbers('amount'); error = ''"
+              />
+              <div *ngIf="amountRef.invalid && submitted" class="error-message">Amount is required</div>
+            </div>
+          </div>
+ 
+           <!-- Remarks -->
+          <div class="form-row">
+            <label class="textarea">Remarks</label>
+            <textarea rows="3" maxlength="500" [(ngModel)]="adjustmentForm.remarks" name="remarks"></textarea>
+          </div>
         
       </fieldset>
+
       </div>
-         <!-- Save Buttons (you can show for both tabs or only item tab) -->
-    <div class="right-buttons" *ngIf="selectedTab === 'item'">
-      <button class="primary-btn">
-         <i class="material-icons">save</i> Save
-      </button>
-      <button class="primary-btn">
-        <i class="material-icons">save</i> Save & New
-      </button>
-    </div>
+        <!-- Save Buttons -->
+        <div class="right-buttons">
+          <button class="primary-btn" (click)="save()"> <i class="material-icons">save</i> Save </button>
+          <button class="primary-btn" (click)="saveAndNew()"> <i class="material-icons">save</i> Save & New </button>
+        </div>
+
       </ng-container>
 
       <!-- Serial Numbers UI -->
@@ -127,7 +182,17 @@
                 M.R.P.
                 <div class="input-group">
                   <span class="currency-symbol">₹</span>
-                  <input type="text" class="input" [(ngModel)]="serialForm.mrp" />
+                  <input 
+                    type="text"
+                    name="mrp"
+                    class="input"
+                    maxlength="20"       
+                    pattern="^[0-9]+$"
+                    inputmode="numeric"
+                    #mrpRef="ngModel"
+                    (keypress)="allowOnlyNumbers($event, 'mrp')"
+                    [(ngModel)]="serialForm.mrp"
+                   />
                 </div>
               </label>
         
@@ -135,7 +200,18 @@
                 Sale Price
                 <div class="input-group">
                   <span class="currency-symbol">₹</span>
-                  <input type="text" class="input" [(ngModel)]="serialForm.salePrice" />
+                  <input
+                   type="text"
+                   name="salePrice"
+                   [(ngModel)]="serialForm.salePrice"
+                   required
+                   minlength="1"
+                   maxlength="10"
+                   pattern="^[0-9]+$"
+                   inputmode="numeric"
+                   #salePriceRef="ngModel"
+                   (keypress)="allowOnlyNumbers($event, 'salePrice')"
+                  />
                   <button type="button" class="icon-button" (click)="navigateToPriceCatalog()">
                     <i class="material-icons">list</i>
                   </button>
@@ -147,7 +223,18 @@
                 Min. Sale Price
                 <div class="input-group">
                   <span class="currency-symbol">₹</span>
-                  <input type="text" class="input" [(ngModel)]="serialForm.minSalePrice" />
+                   <input
+                     type="text"
+                     name="minsalePrice"
+                     [(ngModel)]="serialForm.minsalePrice"
+                     required
+                     minlength="1"
+                     maxlength="10"
+                     pattern="^[0-9]+$"
+                     inputmode="numeric"
+                     #minsalePriceRef="ngModel"
+                     (keypress)="allowOnlyNumbers($event, 'minsalePrice')"
+                    />
                 </div>
               </label>
               
@@ -158,68 +245,65 @@
                 Serial No. <span class="required">*</span>
                 <div class="input-with-icon">
                   <span class="barcode-icon">||||||</span>
-                  <input type="text" class="input" [(ngModel)]="serialForm.serialNo" />
+                 <input
+                  type="text"
+                  name="serialNo"
+                  [(ngModel)]="serialForm.serialNo"
+                  required
+                  minlength="4"
+                  maxlength="50"
+                  pattern="^[a-zA-Z\s]+$"
+                  #serialNoRef="ngModel"
+                />              
                 </div>
+                 <div *ngIf="serialNoRef.invalid && submitted" class="error-message">
+                  <div *ngIf="serialNoRef.errors?.['required']">Serial no is required.</div>
+                 </div>
               </label>
             </div>
+          
           </fieldset>
         
-          <div class="save-button-wrapper">
-            <button class="primary-btn">
-              <i class="material-icons" (click)="addSerial()">save</i> Save
-           </button>
-          </div>
-        
-          
-          
+        <div class="save-button-wrapper">
+          <button class="primary-btn" (click)="addSerial()"><i class="material-icons">save</i> Save</button>
+        </div>
+    
 
-          <div class="table-scroll">
-
-            <table class="item-table">
-              <thead>
-                <tr>
-                  <th>S. No.</th>
-                  <th>Serial Number</th>
-                  <th>Agent</th>
-                  <th>Wholesale</th>
-                  <th>Sale Price</th>
-                  <th>Min.Sale Price</th>
-                  <th>M.R.P</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <!-- Repeat for other items -->
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
-            </div>
-
+          <!-- Serial Number Table -->
+        <div class="table-scroll">
+          <table class="item-table">
+            <thead>
+              <tr>
+                <th>S. No.</th>
+                <th>Serial Number</th>
+                <th>Agent</th>
+                <th>Wholesale</th>
+                <th>Sale Price</th>
+                <th>Min. Sale Price</th>
+                <th>M.R.P</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="serialList.length === 0">
+                <td colspan="8" class="text-center text-muted">No serial numbers added.</td>
+              </tr>
+              <tr *ngFor="let item of serialList; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ item.serialNo }}</td>
+                <td>{{ item.agent }}</td>
+                <td>{{ item.wholeSale }}</td>
+                <td>{{ item.salePrice }}</td>
+                <td>{{ item.minsalePrice }}</td>
+                <td>{{ item.mrp }}</td>
+                <td>
+                  <button type="button" (click)="editTable(i)">✏️</button>
+                  <button type="button" (click)="deleteTable(i)">🗑️</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
             
         </div>
         

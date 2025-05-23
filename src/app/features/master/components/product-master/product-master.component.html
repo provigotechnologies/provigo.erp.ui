@@ -119,7 +119,6 @@
          <div class="form-row">
           <label>Purchase Price</label>
           <div class="input-flex-wrapper"> <!-- NEW WRAPPER -->
-           <div class="form-input-group">
             <div class="rupee-wrapper">
               <span class="currency-symbol">₹</span>
              <input
@@ -135,9 +134,8 @@
              (keypress)="allowOnlyNumbers($event, 'purchasePrice')"
             />
              <div *ngIf="purchasePriceRef.invalid && submitted" class="error-message">
-            <div *ngIf="purchasePriceRef.errors?.['required']">Purchase price is required.</div>
-          </div>
-            </div>  
+              <div *ngIf="purchasePriceRef.errors?.['required']">Purchase price is required.</div>
+             </div>
             </div>  
           </div>        
           </div>

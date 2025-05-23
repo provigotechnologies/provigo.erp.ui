@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -16,38 +17,237 @@ import { Router } from '@angular/router';
 export class AddStockAdjustmentComponent {
   selectedTab: 'item' | 'serial' = 'item';
 
-  serialForm = {
-    mrp: null,
-    salePrice: null,
-    minSalePrice: null,
-    serialNo: '',
-    agent: '',
-    wholesale: '',
+  submitted: boolean = false;
+  error = '';
+
+  adjustmentForm = {
+    adjustmentDate: '',
+    adjustmentType: '',
+    adjustmentReason: '',
+    itemCode: '',
+    productName: '',
+    quantity: '',
+    unitPrice: '',
+    amount: '',
+    remarks: ''
   };
 
-  serialList: any[] = [];
+  serialForm = {
+    mrp: '',
+    salePrice: '',
+    minsalePrice: '',
+    serialNo: '',
+    agent: '',
+    wholeSale: '',
+  };
+
+  isEditMode = false;
+  editingIndex: number | null = null;
+
+  showConfirmDelete = false;
+  confirmDeleteIndex: number | null = null;
+
+ serialList: {
+    mrp: string;
+    salePrice: string;
+    minsalePrice: string;
+    serialNo: string;
+    agent: string;
+    wholeSale: string;
+  }[] = [];
+  constructor(private router: Router) {}
 
   selectTab(tab: 'item' | 'serial') {
     this.selectedTab = tab;
+    this.submitted = false;
   }
 
-  addSerial() {
-    if (this.serialForm.serialNo.trim()) {
-      this.serialList.push({ ...this.serialForm });
-      this.serialForm = {
-        mrp: null,
-        salePrice: null,
-        minSalePrice: null,
-        serialNo: '',
-        agent: '',
-        wholesale: ''
-      };
+    numberOnlyError: {
+    minsalePrice: boolean;
+    salePrice: boolean;
+    amount: boolean;
+    mrp: boolean;
+    unitPrice: boolean;
+    quantity: boolean;
+    } = {
+    minsalePrice: false,
+    salePrice: false,
+    mrp: false,
+    unitPrice: false,
+    quantity: false,
+    amount: false,
+  };
+
+ allowOnlyNumbers(event: KeyboardEvent, field: 'minsalePrice' | 'salePrice' | 'amount' | 'mrp' |'unitPrice' |'quantity') {
+    const allowedKeys = ['Backspace', 'ArrowLeft', 'ArrowRight', 'Tab', 'Delete'];
+    const isNumber = /^[0-9]$/.test(event.key);
+
+    if (!isNumber && !allowedKeys.includes(event.key)) {
+      event.preventDefault();
+      this.numberOnlyError[field] = true;
+
+      setTimeout(() => {
+        this.numberOnlyError[field] = false;
+      }, 2000);
     }
   }
 
-  constructor(private router: Router) {}
+  isNumeric(value: string): boolean {
+    return /^\d+(\.\d{1,2})?$/.test(value);
+  }
 
+  save() {
+    this.submitted = true;
+
+    const { productName, adjustmentReason, quantity, unitPrice, amount } = this.adjustmentForm;
+
+    if (
+      !productName ||
+      !adjustmentReason ||
+      !quantity ||
+      !unitPrice ||
+      !amount ||
+      !this.isNumeric(quantity) ||
+      !this.isNumeric(unitPrice) ||
+      !this.isNumeric(amount)
+    ) {
+      return;
+    }
+
+    console.log("Item saved:", this.adjustmentForm);
+  }
+
+  saveAndNew() {
+    this.save();
+
+    if (this.submitted) {
+      this.adjustmentForm = {
+        adjustmentDate: '',
+        adjustmentType: '',
+        adjustmentReason: '',
+        itemCode: '',
+        productName: '',
+        quantity: '',
+        unitPrice: '',
+        amount: '',
+        remarks: ''
+      };
+      this.submitted = false;
+    }
+  }
+
+  addSerial() {
+    this.submitted = true;
+
+    const { serialNo, mrp, salePrice, minsalePrice, agent, wholeSale } = this.serialForm;
+
+    if (
+      !serialNo ||
+      (mrp && !this.isNumeric(mrp)) ||
+      (salePrice && !this.isNumeric(salePrice)) ||
+      (minsalePrice && !this.isNumeric(minsalePrice))
+    ) {
+      return;
+    }
+
+    if (this.isEditMode && this.editingIndex !== null) {
+      // Update existing serial
+      this.serialList[this.editingIndex] = { ...this.serialForm };
+      this.isEditMode = false;
+      this.editingIndex = null;
+    } else {
+      // Add new serial
+      this.serialList.push({ ...this.serialForm });
+    }
+
+    this.resetSerialForm();
+    this.submitted = false;
+  }
+
+  resetSerialForm() {
+    this.serialForm = {
+      mrp: '',
+      salePrice: '',
+      minsalePrice: '',
+      serialNo: '',
+      agent: '',
+      wholeSale: '',
+    };
+  }
+
+    resetAdjustmentForm() {
+    this.adjustmentForm = {
+        adjustmentDate: '',
+        adjustmentType: '',
+        adjustmentReason: '',
+        itemCode: '',
+        productName: '',
+        quantity: '',
+        unitPrice: '',
+        amount: '',
+        remarks: '',
+    };
+  }
+
+    filterAlphabets() {
+    // this.accountName = this.accountName.replace(/[^a-zA-Z\s]/g, '');
+    // this.bankName = this.bankName.replace(/[^a-zA-Z\s]/g, '');
+  }
+
+  filterNumbers(field: 'accountNo' | 'openingBalance' | 'quantity' | 'unitPrice' | 'amount') {
+    // if (field === 'accountNo') {
+    //   this.accountNo = this.accountNo.replace(/[^0-9]/g, '');
+    // } else if (field === 'openingBalance') {
+    //   this.openingBalance = this.openingBalance.replace(/[^0-9]/g, '');
+    // }
+  }
+
+editTable(index: number) {
+  const item = this.serialList[index];
+
+  this.serialForm = {
+    mrp: item.mrp,
+    salePrice: item.salePrice,
+    minsalePrice: item.minsalePrice,
+    serialNo: item.serialNo,
+    agent: item.agent,
+    wholeSale: item.wholeSale,
+  };
+
+  this.isEditMode = true;
+  this.editingIndex = index;
+  this.error = '';
+}
+
+
+  deleteTable(index: number) {
+    this.confirmDeleteIndex = index;
+    this.showConfirmDelete = true;
+  }
+
+  confirmDelete() {
+    if (this.confirmDeleteIndex !== null) {
+      this.serialList.splice(this.confirmDeleteIndex, 1);
+      if (this.editingIndex === this.confirmDeleteIndex) {
+        this.resetSerialForm();
+      }
+    }
+    this.cancelDelete();
+  }
+
+  cancelDelete() {
+    this.confirmDeleteIndex = null;
+    this.showConfirmDelete = false;
+    this.submitted = false;
+  }
+
+  cancel() {
+    this.resetSerialForm();
+  }
+
+  
   navigateToPriceCatalog() {
     this.router.navigate(['/inventory/price-catelog']);
   }
+
 }
