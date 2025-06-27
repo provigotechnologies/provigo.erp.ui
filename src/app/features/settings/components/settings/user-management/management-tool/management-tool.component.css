@@ -1,0 +1,360 @@
+
+:host {
+  background-color: #f4f4f4;
+  height: 100%;
+}
+
+.settings-container {
+  display: flex;
+  flex: 1;                   
+  overflow: hidden;         
+}
+
+.page-header-wrapper {
+  position: relative;
+  width: 100%;           
+  box-sizing: border-box;
+  margin: 10px 0;
+  padding-right: 0;      
+}
+
+.close-btn {
+  position: absolute;
+  right: 4px;            
+  background: none;
+  border: none;
+  font-size: 26px;
+  cursor: pointer;
+  color: #b5b3b3;
+}
+
+.settings-container {
+  display: flex;
+  align-items: stretch; 
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+}
+  
+.page-heading {
+  font-size: 14px;
+  font-weight: 560;
+  color: #a5a6a6;
+  padding-left: 10px;
+  margin-bottom: 18px;
+}
+
+.tab-content {
+  position: relative;
+  border: 1px solid #ccc;
+  padding: 20px 12px 12px 12px; 
+  margin: 20px;
+  height: 75%;
+  width: 800px;
+}
+
+.tab-content h3 {
+  position: absolute;
+  top: -10px;        
+  left: 8px;       
+  background: #f5f5f5;  
+  padding: 0 8px;      
+  color: #003366;
+  margin: 0;
+  pointer-events: none; 
+  font-size: 14px;
+  font-weight:lighter;
+}
+
+
+.sidebar {
+  width: 180px;
+  background: #003147;
+  color: white;
+  padding: 1rem 0;
+  height: auto;        
+  min-height: 100%;    
+  display: flex;
+  flex-direction: column;
+}
+
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  padding: 12px 20px;
+  cursor: pointer;
+}
+
+.sidebar li.active {
+  background: #fff;
+  color: #949495;
+}
+
+.sidebar li:hover
+{
+  background: #003b57;
+}
+
+
+/*Manage users*/
+.manage-user-container {
+  padding: 20px;
+  max-width: 900px;
+  font-size: 13px;
+}
+
+.btn-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: -20px 20px 20px 20px; /* shift up slightly */
+  width: 100%;
+  max-width: 825px;
+  padding-top: 10px;
+}
+
+.form-user {
+  display: flex;
+  font-size: 13px;
+  align-items: center;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.link-row {
+  display: flex;
+  font-size: 14px;
+  align-items: center;
+  margin: 20px 0 15px 100px;
+  flex-wrap: wrap;
+  gap: 20px;
+  font-size: 0.90rem;
+  font-weight: 500;
+}
+
+.styled-select {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  min-width: 200px;
+  margin-left: 20px;
+  outline: none;
+  background-color: #fbfbfb;
+}
+
+.add-user {
+  text-decoration: underline;
+  font-size: 0.90rem;
+  font-weight: 500;
+  margin-left: 50px;
+  color: #108eef;
+  cursor: pointer;
+}
+
+.set-password {
+    text-decoration: underline;
+    cursor: pointer;
+    color: #04a704;
+    margin-right: 16px;
+}
+
+.delete-user {
+  text-decoration: underline;
+  cursor: pointer;
+  color: red;
+}
+
+.checkbox-group {
+  margin: 20px 25px 0 0;
+}
+
+.checkbox-group label {
+  margin-right: 40px; /* or as needed */
+  display: inline-flex;
+  align-items: center;
+}
+
+
+.checkbox-group input[type="checkbox"] {
+  margin-left: 18px;  /* 👈 small space between label text and checkbox */
+  vertical-align: middle;
+}
+
+
+input[type="checkbox"] {
+  accent-color: #108eef; /* Microsoft blue shade */
+  margin-right: 6px;
+}
+
+
+.save-btn-row {
+  justify-content: flex-end;
+}
+
+.btn-wrapper {
+  display: flex;
+  justify-content: flex-end; /* Push content to the right */
+}
+
+.note-wrapper {
+  display: flex;
+  justify-content: space-between; /* ← Distribute space between Note and Save button */
+  align-items: center;
+  margin: 10px 20px;
+  gap: 10px;
+}
+
+.note-box {
+  font-size: 13px;
+  color: #333;
+  font-weight: 500;
+  flex: 1; /* ← Allow note to take available space */
+}
+
+.save-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.save-btn i {
+  margin-right: 5px;
+}
+
+
+
+/* Medium screens (tablets, small desktops) */
+@media (max-width: 1024px) {
+  .item-container {
+    max-width: 95%;
+    margin-left: 20px;
+    height: auto; /* allow height to adjust */
+  }
+
+  .sidebar {
+    width: 120px;
+    padding: 0.5rem 0;
+  }
+
+  .sidebar li {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+   .tab-content {
+    width: 80%;   /* use percentage width */
+    max-width: 600px;  /* max width to not grow too big */
+    margin: 15px auto; /* center horizontally */
+    font-size: 14px;
+    height: auto;
+  }
+
+  .page-heading {
+    font-size: 12px;
+    margin-bottom: 12px;
+  }
+
+  .tab-content h3 {
+    font-size: 12px;
+    top: -8px;
+    left: 6px;
+  }
+}
+
+/* Small screens (phones, small tablets) */
+@media (max-width: 768px) {
+  .item-container {
+    flex-direction: column;
+    margin: 10px 10px 0 10px;
+    height: auto;
+  }
+
+  .settings-container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+  }
+
+  .sidebar ul {
+    display: flex;
+    width: 100%;
+  }
+
+  .sidebar li {
+    flex: 1 0 auto;
+    padding: 10px 8px;
+    font-size: 13px;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .tab-content {
+    width: 95%;
+    max-width: 400px;
+    margin: 10px auto;
+    padding: 15px 10px;
+    font-size: 13px;
+    height: auto;
+  }
+
+  .page-heading {
+    font-size: 13px;
+  }
+
+  .tab-content h3 {
+    font-size: 13px;
+    top: -7px;
+    left: 6px;
+  }
+}
+
+/* Extra small screens (phones in portrait) */
+@media (max-width: 600px) {
+  .item-container {
+    margin: 5px 5px 0 5px;
+  }
+
+  .sidebar li {
+    font-size: 12px;
+    padding: 8px 6px;
+  }
+
+  .page-heading {
+    font-size: 11px;
+  }
+
+    .tab-content {
+    width: 95%;  /* almost full width */
+    max-width: 500px;  /* no max-width */
+    margin: 5px auto;
+    padding: 12px 8px;
+    font-size: 12px;
+    height: auto;
+  }
+
+  .tab-content h3 {
+    font-size: 12px;
+    top: -6px;
+    left: 4px;
+  }
+
+  .close-btn {
+    font-size: 22px;
+  }
+}

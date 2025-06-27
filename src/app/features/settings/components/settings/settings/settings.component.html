@@ -1,0 +1,45 @@
+   <div class="item-container">
+
+   <div class="page-header-wrapper">
+      <label class="page-heading">Application Settings</label>
+    </div>
+
+   <div class="settings-container">
+    <aside class="sidebar">
+     <ul>
+        <li (click)="setActive('company')" [class.active]="activeSetting === 'company'">Company</li>
+        <li (click)="setActive('general')" [class.active]="activeSetting === 'general'">General</li>
+        <li (click)="setActive('billing')" [class.active]="activeSetting === 'billing'">Billing</li>
+        <li (click)="setActive('taxation')" [class.active]="activeSetting === 'taxation'">Taxation</li>
+        <li (click)="setActive('sequences')" [class.active]="activeSetting === 'sequences'">Sequences</li>
+        <li (click)="setActive('printing')" [class.active]="activeSetting === 'printing'">Printing</li>
+        <li (click)="setActive('wallet')" [class.active]="activeSetting === 'wallet'">Wallet</li>
+        <li (click)="setActive('email')" [class.active]="activeSetting === 'email'">Email</li>
+        <li (click)="setActive('biometric')" [class.active]="activeSetting === 'biometric'">Biometric</li>
+        <li (click)="setActive('users')" [class.active]="activeSetting === 'users'">Users</li>
+        <li (click)="setActive('backup')" [class.active]="activeSetting === 'backup'">Backup</li>
+        <li (click)="setActive('reset')" [class.active]="activeSetting === 'reset'">Reset</li>
+     </ul>
+    </aside>
+
+   <main class="content">
+
+      <app-general *ngIf="activeSetting === 'general'"></app-general>
+      <app-company *ngIf="activeSetting === 'company'"></app-company>
+      <app-billing *ngIf="activeSetting === 'billing'"></app-billing>
+      <app-taxation *ngIf="activeSetting === 'taxation'"></app-taxation>
+      <app-sequences *ngIf="activeSetting === 'sequences'"></app-sequences>
+      <app-printing *ngIf="activeSetting === 'printing'"></app-printing>
+      <app-wallet *ngIf="activeSetting === 'wallet'"></app-wallet>
+      <app-email *ngIf="activeSetting === 'email'"></app-email>
+      <app-biometric *ngIf="activeSetting === 'biometric'"></app-biometric>
+      <app-users *ngIf="activeSetting === 'users'"></app-users>
+      <app-backup *ngIf="activeSetting === 'backup'"></app-backup>
+      <app-reset *ngIf="activeSetting === 'reset'"></app-reset>
+
+  </main>
+
+ </div>
+ </div>
+   
+

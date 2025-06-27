@@ -1,0 +1,48 @@
+<div class="settings-title">Company Profile</div>
+
+<div class="row">
+  <div class="label">NAME</div>
+  <div class="value">{{ company.name }}</div>
+</div>
+
+<div class="row">
+  <div class="column">
+    <div class="label">TAX METHOD</div>
+    <div class="value">{{ company.taxMethod }}</div>
+  </div>
+  <div class="column">
+    <div class="label">GSTIN</div>
+    <div class="value">{{ company.gstin }}</div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="label">ADDRESS</div>
+  <div class="value">{{ company.address }}</div>
+</div>
+
+<div class="row">
+  <div class="column">
+    <div class="label">ZIP CODE</div>
+    <div class="value">{{ company.pinCode }}</div>
+  </div>
+  <div class="column">
+    <div class="label">PHONE NO.</div>
+    <div class="value">{{ company.phone }}</div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="label">COUNTRY</div>
+  <div class="value">{{ company.country }}</div>
+</div>
+
+<div class="row">
+  <div class="label">EMAIL</div>
+  <div class="value">{{ company.email }}</div>
+</div>
+
+<p class="footer-text">
+  For changing company details, logo, signature, tax method and GSTIN number click here to
+  <a (click)="openEditDialog()">edit company profile</a>.
+</p>

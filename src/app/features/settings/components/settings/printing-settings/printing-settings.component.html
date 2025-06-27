@@ -1,0 +1,315 @@
+<div class="settings-title">Printing Settings</div>
+
+<!-- Tab Row -->
+<div class="tab-links">
+  <a href="javascript:void(0)" [class.active]="activeTab === 'general'" (click)="selectTab('general')">General Configuration</a>
+  <a href="javascript:void(0)" [class.active]="activeTab === 'document'" (click)="selectTab('document')">Document Configuration</a>
+  <a href="javascript:void(0)" [class.active]="activeTab === 'header'" (click)="selectTab('header')">Document Header and Terms</a>
+  <a href="javascript:void(0)" [class.active]="activeTab === 'printers'" (click)="selectTab('printers')">Default Printers</a> 
+</div>
+
+<!-- Tab Content -->
+<div class="grid" *ngIf="activeTab === 'general'">
+  <div class="setting-card">
+    <div class="label-container">
+      <label class="red">Printing Template</label>
+      <small>Select template you prefer for printing invoices/bills</small>
+    </div>
+    <div class="input-container">
+      <a href="#">A4 Trend 4</a>
+    </div>
+  </div>
+
+  <div class="setting-card">
+    <div class="label-container">
+      <label>Print Preview</label>
+      <small>Show print preview while creating invoice</small>
+    </div>
+    <div class="input-container">
+      <input type="checkbox" checked>
+    </div>
+  </div>
+
+  <div class="setting-card">
+    <div class="label-container">
+      <label>Watermark</label>
+      <small>Text to be shown as watermark in printed documents</small>
+    </div>
+    <div class="input-container">
+      <input type="text">
+    </div>
+  </div>
+
+  <div class="setting-card">
+    <div class="label-container">
+      <label>Payment Receipt</label>
+      <small>Generate payment receipt on saving customer payments</small>
+    </div>
+    <div class="input-container">
+      <input type="checkbox">
+    </div>
+  </div>
+
+  <div class="setting-card">
+    <div class="label-container">
+      <label>Barcode Print Engine</label>
+      <small>Select print engine for printing barcodes/labels</small>
+    </div>
+    <div class="input-container">
+      <select>
+        <option>A4 Multi</option>
+        <option>Zebra</option>
+        <option>TSC</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="setting-card">
+    <div class="label-container">
+      <label>Authorized Signatory</label>
+      <small>Text to be shown in place of authorized signatory</small>
+    </div>
+    <div class="input-container">
+      <input type="text">
+    </div>
+  </div>
+
+  <div class="setting-card">
+    <div class="label-container">
+      <label>Print PoS Invoice/Bill</label>
+      <small>Allows printing of PoS invoice/bill in PoS billing engine</small>
+    </div>
+    <div class="input-container">
+      <input type="checkbox" checked>
+    </div>
+  </div>
+
+  <div class="setting-card">
+    <div class="label-container">
+      <label>Multi-Language Print</label>
+      <small>Allows item name printing in multiple languages</small>
+    </div>
+    <div class="input-container">
+      <input type="checkbox">
+    </div>
+  </div>
+
+  <div class="setting-card">
+    <div class="label-container">
+      <label>Invoice Print Count</label>
+      <small>Enter no. of copies to be printed of cash and customer invoices</small>
+    </div>
+    <div class="input-container">
+      <input type="text">
+      <input type="text">
+    </div>
+  </div>
+
+  <div class="setting-card">
+    <div class="label-container">
+      <label>Print QR Code</label>
+      <small>Print QR code of UPI web link on sale invoice/bill</small>
+    </div>
+    <div class="input-container">
+      <a href="#">Setup QR Code</a>
+    </div>
+  </div>
+
+  <div class="setting-card">
+    <div class="label-container">
+      <label>Invoice Item Group</label>
+      <small>Allows you to print sale invoice particulars in group</small>
+    </div>
+    <div class="input-container">
+      <select>
+        <option>None</option>
+        <option>Item Group</option>
+        <option>Part-Labour</option>
+        <option>Product-Service</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="grid" *ngIf="activeTab === 'document'">
+  <div class="setting-card">
+    <div class="label-container">
+      <label class="red">Customer Balance</label>
+      <small>Show customer account balanace on printed documents</small>
+    </div>
+    <div class="input-container">
+       <input type="checkbox">
+    </div>
+  </div>
+
+  <div class="setting-card">
+    <div class="label-container">
+      <label>Amount Paid</label>
+      <small>Show amount paid and balanace on printed documents</small>
+    </div>
+    <div class="input-container">
+      <input type="checkbox" checked>
+    </div>
+  </div>
+
+  <div class="setting-card">
+    <div class="label-container">
+      <label>MRP Based Discount</label>
+      <small>Show mrp based total discount on PoS invoices/bills</small>
+    </div>
+    <div class="input-container">
+      <input type="checkbox">
+    </div>
+  </div>
+
+  <div class="setting-card">
+    <div class="label-container">
+      <label>Staff Name</label>
+      <small>Show staff name on printed documents</small>
+    </div>
+    <div class="input-container">
+      <input type="checkbox">
+    </div>
+  </div>
+
+  <div class="setting-card">
+    <div class="label-container">
+      <label>M.R.P Column</label>
+      <small>Show M.R.P column on printed documents</small>
+    </div>
+    <div class="input-container">
+      <input type="checkbox">
+    </div>
+  </div>
+
+  <div class="setting-card">
+    <div class="label-container">
+      <label>Mobile Numbers</label>
+      <small>Show mobile numbers on printed invoice documents</small>
+    </div>
+    <div class="input-container">
+      <input type="checkbox" checked>
+    </div>
+  </div>
+
+  <div class="setting-card">
+    <div class="label-container">
+      <label>Print Item Description</label>
+      <small>Show item description on printed documents</small>
+    </div>
+    <div class="input-container">
+      <input type="checkbox" checked>
+    </div>
+  </div>
+
+  <div class="setting-card">
+    <div class="label-container">
+      <label>Delivery Doc Sale Price</label>
+      <small>Show sale price on printed delivery documents</small>
+    </div>
+    <div class="input-container">
+      <input type="checkbox" checked>
+    </div>
+  </div>
+
+  <div class="setting-card">
+    <div class="label-container">
+      <label>Print Due Date</label>
+      <small>Show due date on printed A4 invoice documents</small>
+    </div>
+    <div class="input-container">
+       <input type="checkbox">
+    </div>
+  </div>
+
+</div>
+
+<div class="grid" *ngIf="activeTab === 'header'">
+
+  <div class="document-section">
+  <div class="document-box">
+    <p>For changing A4/A5 documents headers, address, terms and footer</p>
+    <a href="javascript:void(0)" (click)="startA4Configuration()">Start A4/A5 Document Headers and Terms</a>
+  </div>
+
+  <div class="document-box">
+    <p>For changing PoS/Thermal documents headers, address, terms and footer</p>
+    <a href="javascript:void(0)" (click)="startPosConfiguration()">Start PoS/Thermal Document Headers and Terms</a>
+  </div>
+</div>
+
+</div>
+
+<div class="grid" *ngIf="activeTab === 'printers'">
+
+  <div class="setting-card">
+    <div class="label-container">
+      <label>Document Printing (A4/A5)</label>
+      <small>Select printer for printing A4/A5 size documents</small>
+    </div>
+    <div class="input-container">
+      <select>
+        <option></option>
+        <option>PoS 58 Series</option>
+        <option>OneNote (Desktop)</option>
+        <option>Microsoft Print to PDF</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="setting-card">
+    <div class="label-container">
+      <label>Thermal Receipt Printing</label>
+      <small>Select printer for printing 72/58mm size thermal receipts</small>
+    </div>
+    <div class="input-container">
+      <select>
+        <option></option>
+        <option>PoS 58 Series</option>
+        <option>OneNote (Desktop)</option>
+        <option>Microsoft Print to PDF</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="setting-card">
+    <div class="label-container">
+      <label>Barcode Printing (A4)</label>
+      <small>Select printer for printing barcode on A4 label sheets</small>
+    </div>
+    <div class="input-container">
+      <select>
+        <option></option>
+        <option>PoS 58 Series</option>
+        <option>OneNote (Desktop)</option>
+        <option>Microsoft Print to PDF</option>
+      </select>
+    </div>
+  </div>
+
+ <!-- Wrapper just for 4th card and red-note -->
+<div class="card-note-wrapper">
+  <div class="setting-card">
+    <div class="label-container">
+      <label>Barcode Printing (ZPL/TSC)</label>
+      <small>Select zebra printers for printing barcodes</small>
+    </div>
+    <div class="input-container">
+      <select>
+        <option></option>
+        <option>PoS 58 Series</option>
+        <option>OneNote (Desktop)</option>
+        <option>Microsoft Print to PDF</option>
+      </select>
+    </div>
+  </div>
+
+     <div class="red-note">
+        Important: You don not need to select printer if you are using only one printer and its marked as default.
+   </div>
+</div>
+
+
+
+
+
