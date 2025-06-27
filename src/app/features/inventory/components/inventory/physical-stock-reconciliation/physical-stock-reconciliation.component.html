@@ -49,8 +49,6 @@
             />
             <div *ngIf="itemNameRef.invalid && submitted" class="error-message">
               <div *ngIf="itemNameRef.errors?.['required']">Item name is required.</div>
-              <div *ngIf="itemNameRef.errors?.['minlength']">Minimum 4 characters required.</div>
-              <div *ngIf="itemNameRef.errors?.['pattern']">Only alphabets allowed.</div>
             </div>
           </div>
 

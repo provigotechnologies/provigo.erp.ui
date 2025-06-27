@@ -40,21 +40,40 @@
               <label for="date">End Date </label>
               <input type="date" id="start-date" />
             </div>
-    
-            <div class="form-row">
-              <label for="name"> Name <span class="required">*</span></label>
-              <input type="text" id="name" />
+
+         <div class="form-row">
+            <label>Name<span class="required">*</span></label>
+            <div class="input-flex-wrapper rupee-inline-wrapper">
+              <input
+                type="text"
+                name="name"
+                [(ngModel)]="discountForm.name"
+                pattern="^[a-zA-Z\s]+$"
+                minlength="4"
+                maxlength="50"
+                required
+                #nameRef="ngModel"
+              />
+             <span class="add-item-link">Add Item</span>
+             
+            <div *ngIf="nameRef.invalid && submitted" class="error-message">
+              <div *ngIf="nameRef.errors?.['required']">Name is required.</div>
+              <div *ngIf="nameRef.errors?.['minlength']">Minimum 4 characters required.</div>
+              <div *ngIf="nameRef.errors?.['pattern']">Only alphabets allowed.</div>
+            </div>
           </div>
-    
-            <!-- Brand -->
-            <div class="form-row">
-              <label for="discounttype">Discount Type</label>
-              <select id="discounttype">
+          </div>
+
+
+               <div class="form-row">
+            <label>Discount Type </label>
+              <select [(ngModel)]="discountForm.discountType" name="discountType" required #discountTypeRef="ngModel">
+                <option value="">-- Select --</option>
                   <option value="">Percent</option>
                   <option value="">Amount</option>
                   <option value="">Buy X Get X Free</option>
               </select>
-            </div>
+          </div>
             
             <div class="form-row">
               <label for="quantity">Quantity <span class="required">*</span></label>
@@ -63,32 +82,65 @@
                   <option value="">Equal to (=)</option>
                   <option value="">Greater than (>)</option>
                 </select>
-                <input id="quantity" type="text" />
+                   <input
+                   type="text"
+                   name="quantity"
+                   [(ngModel)]="discountForm.quantity"
+                   pattern="^[0-9]+$"
+                   inputmode="numeric"
+                   required
+                   #quantityRef="ngModel"
+                   (keypress)="allowOnlyNumbers($event, 'quantity')"
+                   (input)="filterNumbers('quantity'); error = ''"
+                   />
+                  <div *ngIf="quantityRef.invalid && submitted" class="error-message">Quantity is required</div>
               </div>
             </div>
             
     
             <!-- Barcode -->
             <div class="form-row">
-              <label for="freequantity">Free Quantity</label>
-              <input type="text" id="freequantity" />
+              <label for="freeQuantity">Free Quantity</label>
+               <input
+                type="text"
+                name="freeQuantity"
+                [(ngModel)]="discountForm.freeQuantity"
+                pattern="^[0-9]+$"
+                inputmode="numeric"
+                required
+                #freeQuantityRef="ngModel"
+                (keypress)="allowOnlyNumbers($event, 'freeQuantity')"
+                (input)="filterNumbers('freeQuantity'); error = ''"
+              />
             </div>
-      
-            <div class="form-row">
-              <label for="Percent">Percent <span class="required">*</span></label>
-              <div class="input-flex-wrapper rupee-inline-wrapper">
-                <span class="currency-symbol">%</span>
-                <input type="text" id="Percent" />
-              </div>
+
+              <div class="form-row">
+            <label>Percent<span class="required">*</span></label>
+            <div class="input-flex-wrapper rupee-inline-wrapper">
+              <span class="currency-symbol">₹</span>
+              <input
+                type="text"
+                name="percent"
+                [(ngModel)]="discountForm.percent"
+                pattern="^[0-9]+$"
+                inputmode="numeric"
+                required
+                #percentRef="ngModel"
+                (keypress)="allowOnlyNumbers($event, 'percent')"
+                (input)="filterNumbers('percent'); error = ''"
+              />
+              <div *ngIf="percentRef.invalid && submitted" class="error-message">Percent is required</div>
             </div>
-      
-          <div class="form-row">
-            <label for="customertype">Apply To</label>
-            <select id="customertype">
+          </div>
+    
+
+             <div class="form-row">
+            <label>Apply To </label>
+              <select [(ngModel)]="discountForm.custType" name="custType" required #custTypeRef="ngModel">
                 <option value="">All</option>
                 <option value="">Walking customers</option>
                 <option value="">Member customers</option>
-            </select>
+              </select>
           </div>
     
         <div class="form-row">
@@ -98,12 +150,11 @@
         
       </fieldset>
       </div>
-         <!-- Save Buttons (you can show for both tabs or only item tab) -->
-      <div class="right-buttons" *ngIf="selectedTab === 'scheme'">
-        <button class="primary-btn">
-          <i class="material-icons">save</i> Save
-        </button>
-      </div>
+
+       <div class="right-buttons">
+          <button class="primary-btn" (click)="save()"> <i class="material-icons">save</i> Save </button>
+        </div>
+
       </ng-container>
 
 
@@ -111,29 +162,29 @@
       <ng-container *ngIf="selectedTab === 'mapitem'">
         
         <div class="form-wrapper">
-          <div class="form-group">
-            <label for="group">Group</label>
-            <select id="group">
+         <div class="form-group">
+            <label>Group </label>
+              <select [(ngModel)]="mapForm.group" name="group" required #groupRef="ngModel">  
               <option value="">Select Group</option>
               <option value=""></option>
-            </select>
-          </div>
-      
-          <div class="form-group">
-            <label for="brand">Brand</label>
-            <select id="brand">
+              </select>
+           </div>
+
+           <div class="form-group">
+            <label>Brand </label>
+              <select [(ngModel)]="mapForm.brand" name="brand" required #brandRef="ngModel">  
               <option value="">Select Brand</option>
               <option value=""></option>
-            </select>
-          </div>
+              </select>
+           </div>
       
-          <div class="form-group">
-            <label for="location">Location/Rack</label>
-            <select id="location">
+           <div class="form-group">
+            <label>Loaction </label>
+              <select [(ngModel)]="mapForm.location" name="location" required #locationRef="ngModel">  
               <option value="">Select Location</option>
               <option value=""></option>
-            </select>
-          </div>
+              </select>
+           </div>
       
           <div class="form-group">
             <label for="search">Enter text to search</label>
@@ -159,33 +210,32 @@
           </div>
       
           <div class="table-scroll">
-            <table class="item-table">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Item Name</th>
-                  <th>Existing Scheme</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><input type="checkbox" /></td>
-                  <td>Item 1</td>
-                  <td>Scheme 1</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox" /></td>
-                  <td>Item 2</td>
-                  <td>Scheme 2</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox" /></td>
-                  <td>Item 3</td>
-                  <td>Scheme 3</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <table class="item-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Item Name</th>
+                <th>Existing Scheme</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="mapList.length === 0">
+                <td colspan="8" class="text-center text-muted">No discount mapped items added.</td>
+              </tr>
+              <tr *ngFor="let item of mapList; let i = index">
+                <td><input type="checkbox"></td>
+                <td>{{ item.group }}</td>
+                <td>{{ item.brand }}</td>
+                 <td>{{ item.location }}</td>
+                <td>
+                  <button type="button" (click)="editTable(i)">✏️</button>
+                  <button type="button" (click)="deleteTable(i)">🗑️</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
         </fieldset>
 
         </div>

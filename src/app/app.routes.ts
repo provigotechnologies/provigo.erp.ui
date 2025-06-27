@@ -1,8 +1,14 @@
 import { Routes } from '@angular/router';
 import { MainComponent } from './layout/main/main.component'; // Assuming this is your dashboard
 import { PriceCatelogComponent } from './features/inventory/components/inventory/add-stock-adjustment/price-catelog.component'; 
+import { LoginComponent } from './auth/login/login.component'; // <-- Import your login component
 
 export const routes: Routes = [
+  {
+     path: '',
+    loadComponent: () =>
+      import('./auth/login/login.component').then(m => m.LoginComponent),
+  },
   {
     path: '',
     loadComponent: () =>
@@ -17,7 +23,7 @@ export const routes: Routes = [
         path: 'dashboard',
         component: MainComponent
       },
-      
+                  
       {
         path: 'master',
         children: [
@@ -30,11 +36,6 @@ export const routes: Routes = [
             path: 'bank-master',
             loadComponent: () =>
               import('./features/master/components/bank-master/bank-master.component').then(m => m.BankMasterComponent),
-          },
-          {
-            path: 'company-master',
-            loadComponent: () =>
-              import('./features/master/components/company-master/company-master.component').then(m => m.CompanyMasterComponent),
           },
           {
             path: 'group-master',
@@ -117,8 +118,7 @@ export const routes: Routes = [
               import('./features/master/components/warehouse/warehouse.component').then(m => m.WarehouseComponent),
           }
         ]
-      },
-      
+      },        
       {
         path: 'sales',
         children: [
@@ -130,7 +130,7 @@ export const routes: Routes = [
           {
             path: 'manage-invoice',
             loadComponent: () =>
-              import('./features/sales/components/sales/manage-invoice/manage-invoice.component').then(m => m.ManageInvoiceComponent),
+              import('./features/sales/components/sales-manage/manage-invoice/manage-invoice.component').then(m => m.ManageInvoiceComponent),
           },
           {
             path: 'sale-return',
@@ -140,7 +140,7 @@ export const routes: Routes = [
           {
             path: 'manage-salereturn',
             loadComponent: () =>
-              import('./features/sales/components/sales/manage-salereturn/manage-salereturn.component').then(m => m.ManageSaleReturnComponent),
+              import('./features/sales/components/sales-manage/manage-salereturn/manage-salereturn.component').then(m => m.ManageSaleReturnComponent),
           },
           {
             path: 'quotation',
@@ -150,7 +150,7 @@ export const routes: Routes = [
           {
             path: 'manage-quotation',
             loadComponent: () =>
-              import('./features/sales/components/sales/manage-quotation/manage-quotation.component').then(m => m.ManageQuotationComponent),
+              import('./features/sales/components/sales-manage/manage-quotation/manage-quotation.component').then(m => m.ManageQuotationComponent),
           },
           {
             path: 'recurring-invoice',
@@ -160,7 +160,7 @@ export const routes: Routes = [
           {
             path: 'manage-recurring-invoice',
             loadComponent: () =>
-              import('./features/sales/components/sales/manage-recurring-invoice/manage-recurring-invoice.component').then(m => m.ManageRecurringInvoiceComponent),
+              import('./features/sales/components/sales-manage/manage-recurring-invoice/manage-recurring-invoice.component').then(m => m.ManageRecurringInvoiceComponent),
           },
           {
             path: 'deliverynote',
@@ -170,7 +170,7 @@ export const routes: Routes = [
           {
             path: 'manage-deliverynote',
             loadComponent: () =>
-              import('./features/sales/components/sales/manage-deliverynote/manage-deliverynote.component').then(m => m.ManageDeliverynoteComponent),
+              import('./features/sales/components/sales-manage/manage-deliverynote/manage-deliverynote.component').then(m => m.ManageDeliverynoteComponent),
           },
           {
             path: 'proforma-invoice',
@@ -180,7 +180,7 @@ export const routes: Routes = [
           {
             path: 'manage-proforma-invoice',
             loadComponent: () =>
-              import('./features/sales/components/sales/manage-proforma-invoice/manage-proforma-invoice.component').then(m => m.ManageProformaInvoiceComponent),
+              import('./features/sales/components/sales-manage/manage-proforma-invoice/manage-proforma-invoice.component').then(m => m.ManageProformaInvoiceComponent),
           },
           {
             path: 'saleorder',
@@ -190,7 +190,7 @@ export const routes: Routes = [
           {
             path: 'manage-saleorder',
             loadComponent: () =>
-              import('./features/sales/components/sales/manage-saleorder/manage-saleorder.component').then(m => m.ManageSaleorderComponent),
+              import('./features/sales/components/sales-manage/manage-saleorder/manage-saleorder.component').then(m => m.ManageSaleorderComponent),
           },
           {
             path: 'creditnote',
@@ -200,7 +200,7 @@ export const routes: Routes = [
           {
             path: 'manage-creditnote',
             loadComponent: () =>
-              import('./features/sales/components/sales/manage-creditnote/manage-creditnote.component').then(m => m.ManageCreditnoteComponent),
+              import('./features/sales/components/sales-manage/manage-creditnote/manage-creditnote.component').then(m => m.ManageCreditnoteComponent),
           },
           {
             path: 'debitnote',
@@ -210,12 +210,11 @@ export const routes: Routes = [
           {
             path: 'manage-debitnote',
             loadComponent: () =>
-              import('./features/sales/components/sales/manage-debitnote/manage-debitnote.component').then(m => m.ManageDebitnoteComponent),
+              import('./features/sales/components/sales-manage/manage-debitnote/manage-debitnote.component').then(m => m.ManageDebitnoteComponent),
           }
         ]
       },
-
-      {
+		{
         path: 'purchase',
         children: [
             {
@@ -631,6 +630,41 @@ export const routes: Routes = [
           },
         ]
       },
+      
+      {
+         path: 'settings',
+         loadComponent: () =>
+         import('./features/settings/components/settings/settings/settings.component').then(m => m.SettingsComponent),
+         children: [
+         {
+           path: 'billing',
+           loadComponent: () =>
+           import('./features/settings/components/settings/billing-settings/billing-settings.component').then(m => m.BillingSettingsComponent),
+          },
+          {
+            path: 'users',
+            loadComponent: () =>
+            import('./features/settings/components/settings/user-management/user-management.component').then(m => m.UserManagementComponent),
+          },
+          {
+            path: '',
+            redirectTo: 'billing',
+            pathMatch: 'full'
+          }
+          ]
+        },
+       {
+          path: 'management-tool',
+          loadComponent: () =>
+          import('./features/settings/components/settings/user-management/management-tool/management-tool.component').then(m => m.ManagementToolComponent),
+          children: [
+          {
+          path: 'add-user',
+          loadComponent: () =>
+          import('./features/settings/components/settings/user-management/add-user/add-user.component').then(m => m.AddUserComponent),
+          }
+       ]
+        },
     ], 
   },
 ];

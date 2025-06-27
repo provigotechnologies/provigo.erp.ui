@@ -1158,6 +1158,18 @@
         </ul>
          </li>
 
+          <!-- Settings with Submenu -->
+         <li class="menu-item-with-submenu sale-spacing"
+           [class.active]="activeSubMenu === 'settings'"
+           (mouseenter)="!isMobile && (activeSubMenu = 'settings')"
+           (mouseleave)="!isMobile && (activeSubMenu = null)">
+  
+           <a [routerLink]="['/settings']" (click)="toggleSubMenu('settings')">
+            <mat-icon class="icon-settings">settings</mat-icon> Settings
+          </a>
+
+         </li>
+
       </ul>
 
     <!-- Optional: Footer -->

@@ -71,7 +71,7 @@
   left: 220px;
   width: 220px;
   background-color: #003147;
-  border: 2px solid #ccc;
+  border-left: 2px solid #ccc;
   z-index: 100;
   padding: 0;
 }
@@ -115,12 +115,12 @@ mat-icon {
 .icon-master { color: #ff9800; }
 .icon-manufacture { color: #4caf50; }
 .icon-accounts { color: #3f51b5; }
-.icon-expense { color: #ffff07; }
+.icon-expense { color: #e2e203; }
 .icon-customer { color: #00bcd4; }
 .icon-staff { color: #9c27b0; }
 .icon-tools { color: #ff9800; }
 .icon-report { color: #00bcd4; }
-.icon-settings { color: #4caf50; }
+.icon-settings { color: #e2e203; }
 
 .has-submenu > a::after {
   content: '▶';

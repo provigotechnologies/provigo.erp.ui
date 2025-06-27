@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-purchase-bill',
@@ -13,139 +13,311 @@ import { CommonModule } from '@angular/common';
     '../../../../styles/sales-style.css'
   ]
 })
-export class PurchaseBillComponent implements OnInit {
-  activeTab: number = 1;
-  todayDate: string = '';
-  itemList: any[] = [];
-
-  form: FormGroup;
-  editIndex: number = -1;
-
-  constructor(private fb: FormBuilder) {
-    this.form = this.fb.group({
-      itemName: [''],
-      tag: [''],
-      qty: [''],
-      unit: [''],
-      unitPrice: [''],
-      discount: [''],
-      tax: [''],
-      cess: [''],
-      netPrice: [''],
-      amtBeforeTax: ['']
-    });
-  }
-
-  ngOnInit(): void {
-    const today = new Date();
-    this.todayDate = today.toISOString().split('T')[0];
-
-    // 3 demo rows
-    this.itemList = [
-      {
-        itemName: 'Coca Cola 500ml', tag: 'Cold Drink', qty: 3, unit: 'Bottle',
-        unitPrice: 30, discount: 0, tax: 5, cess: 0, netPrice: 94.5, amtBeforeTax: 90
-      },
-      {
-        itemName: 'Veg Sandwich', tag: 'Snack', qty: 2, unit: 'Plate',
-        unitPrice: 50, discount: 10, tax: 5, cess: 0, netPrice: 94.5, amtBeforeTax: 90
-      },
-      {
-        itemName: 'Mineral Water 1L', tag: 'Water', qty: 1, unit: 'Bottle',
-        unitPrice: 20, discount: 0, tax: 0, cess: 0, netPrice: 20, amtBeforeTax: 20
-      }
-    ];
-  }
-
-  saveItem() {
-    let value = this.form.value;
-
-    const qty = parseFloat(value.qty) || 0;
-    const unitPrice = parseFloat(value.unitPrice) || 0;
-    const discount = parseFloat(value.discount) || 0;
-    const tax = parseFloat(value.tax) || 0;
-    const cess = parseFloat(value.cess) || 0;
-
-    const grossAmount = qty * unitPrice;
-    const discountAmount = grossAmount * (discount / 100);
-    const amtBeforeTax = grossAmount - discountAmount;
-
-    const taxAmount = amtBeforeTax * (tax / 100);
-    const cessAmount = amtBeforeTax * (cess / 100);
-
-    const netPrice = amtBeforeTax + taxAmount + cessAmount;
-
-    value.amtBeforeTax = amtBeforeTax.toFixed(2);
-    value.netPrice = netPrice.toFixed(2);
-
-    if (this.editIndex === -1) {
-      this.itemList.push(value);
-    } else {
-      this.itemList[this.editIndex] = value;
-      this.editIndex = -1;
-    }
-
-    this.form.reset();
-  }
-
-  editItem(index: number) {
-    this.form.patchValue(this.itemList[index]);
-    this.editIndex = index;
-  }
-
-  removeItem(index: number) {
-    this.itemList.splice(index, 1);
-    if (this.editIndex === index) {
-      this.editIndex = -1;
-      this.form.reset();
-    }
-  }
-
-  getTotalAmount(): string {
-    const total = this.itemList.reduce((sum, item) => sum + parseFloat(item.amtBeforeTax), 0);
-    return total.toFixed(2);
-  }
+export class PurchaseBillComponent {
 
   selectedTab: 'bill' | 'serial' = 'bill';
+  submitted: boolean = false;
+  error = '';
 
-  serialForm = {
-    mrp: null,
-    salePrice: null,
-    minSalePrice: null,
-    serialNo: '',
-    agent: '',
-    wholesale: '',
+  // Form objects
+  purchaseForm = {
+    billNo: '', orderNo: '', ewayrNo: '', ipurchaseDate: '', purchaseType: '', supply: '',
+    dueDate: '', supplierName: '', orderDate: '', contactNo: '', address: '', custGst: '',
+    serialNo: '', itemName: '', unit: '', quantity: '', purchasePrice: '', mrp: '', discount: '',
+    tax: '', cess: '', amount: '', netPrice: '', unitPrice: '', amntbeforeTax: '', tag: '',
+    totalQuantity: '', employee: '', discountAmount: '', discountPercent: '', reference: '',
+    referenceNo: '', shipAmount: '', shipPercent: '', delivery: '', remarks: '', date: '',
+    mode: '', txnId: '', payAmount: ''
   };
 
-  serialList: any[] = [];
+  serialForm = {
+    itemName: '', mrp: '', salePrice: '', minsalePrice: '', serialNo: '', agentPrice: '', wholesalePrice: ''
+  };
+
+  // Bind variables from purchaseForm
+  get itemName() { return this.purchaseForm.itemName; }
+  get quantity() { return this.purchaseForm.quantity; }
+  get unit() { return this.purchaseForm.unit; }
+  get unitPrice() { return this.purchaseForm.unitPrice; }
+  get serialNo() { return this.purchaseForm.serialNo; }
+  get mrp() { return this.purchaseForm.mrp; }
+  get discount() { return this.purchaseForm.discount; }
+  get tax() { return this.purchaseForm.tax; }
+  get cess() { return this.purchaseForm.cess; }
+  get amount() { return this.purchaseForm.amount; }
+  get netPrice() { return this.purchaseForm.netPrice; }
+  get amntbeforeTax() { return this.purchaseForm.amntbeforeTax; }
+
+  itemList: {
+    serialNo: string;
+    itemName: string;
+    unit: string;
+    quantity: string;
+    unitPrice: string;
+    mrp: string;
+    discount: string;
+    tax: string;
+    cess: string;
+    amount: string;
+    netPrice: string;
+    amntbeforeTax: string;
+  }[] = [];
+
+  serialList: {
+    itemName: string;
+    mrp: string;
+    salePrice: string;
+    minsalePrice: string;
+    serialNo: string;
+    agentPrice: string;
+    wholesalePrice: string;
+  }[] = [];
+
+  isEditMode = false;
+  editingIndex: number | null = null;
+  showConfirm = false;
+
+  showConfirmDelete = false;
+  confirmDeleteIndex: number | null = null;
+
+  numberOnlyError: {
+    minsalePrice: boolean;
+    salePrice: boolean;
+    amount: boolean;
+    mrp: boolean;
+    unitPrice: boolean;
+    quantity: boolean;
+    agentPrice: boolean;
+    wholesalePrice: boolean;
+  } = {
+    minsalePrice: false,
+    salePrice: false,
+    mrp: false,
+    unitPrice: false,
+    quantity: false,
+    amount: false,
+    agentPrice: false,
+    wholesalePrice: false
+  };
+
+  constructor(private router: Router) {}
 
   selectTab(tab: 'bill' | 'serial') {
     this.selectedTab = tab;
+    this.submitted = false;
+  }
+
+  addItem() {
+    this.submitted = true;
+    this.error = '';
+
+    if (
+      !this.itemName.trim() || !/^[a-zA-Z\s]+$/.test(this.itemName) ||
+      !this.quantity.trim() || !/^[0-9]+$/.test(this.quantity) ||
+      !this.unitPrice.trim() || !/^[0-9]+$/.test(this.unitPrice)
+    ) {
+      return;
+    }
+
+    const newItem = {
+      serialNo: this.serialNo.trim(),
+      itemName: this.itemName.trim(),
+      unit: this.unit.trim(),
+      quantity: this.quantity.trim(),
+      unitPrice: this.unitPrice.trim(),
+      mrp: this.mrp.trim(),
+      discount: this.discount.trim(),
+      tax: this.tax.trim(),
+      cess: this.cess.trim(),
+      amount: this.amount.trim(),
+      netPrice: this.netPrice.trim(),
+      amntbeforeTax: this.amntbeforeTax.trim()
+    };
+
+    if (this.isEditMode && this.editingIndex !== null) {
+      this.itemList[this.editingIndex] = newItem;
+    } else {
+      this.itemList.push(newItem);
+    }
+
+    this.resetForm();
   }
 
   addSerial() {
-    if (this.serialForm.serialNo.trim()) {
+    this.submitted = true;
+    const { itemName, serialNo, mrp, salePrice, minsalePrice, agentPrice, wholesalePrice } = this.serialForm;
+
+    if (!serialNo || (mrp && !this.isNumeric(mrp)) || (salePrice && !this.isNumeric(salePrice)) || (minsalePrice && !this.isNumeric(minsalePrice))) {
+      return;
+    }
+
+    if (this.isEditMode && this.editingIndex !== null) {
+      this.serialList[this.editingIndex] = { ...this.serialForm };
+      this.isEditMode = false;
+      this.editingIndex = null;
+    } else {
       this.serialList.push({ ...this.serialForm });
-      this.serialForm = {
-        mrp: null,
-        salePrice: null,
-        minSalePrice: null,
-        serialNo: '',
-        agent: '',
-        wholesale: ''
-      };
+    }
+
+    this.resetSerialForm();
+    this.submitted = false;
+  }
+
+  isNumeric(value: string): boolean {
+    return /^\d+(\.\d{1,2})?$/.test(value);
+  }
+
+  allowOnlyNumbers(event: KeyboardEvent, field: keyof typeof this.numberOnlyError) {
+    const allowedKeys = ['Backspace', 'ArrowLeft', 'ArrowRight', 'Tab', 'Delete'];
+    const isNumber = /^[0-9]$/.test(event.key);
+
+    if (!isNumber && !allowedKeys.includes(event.key)) {
+      event.preventDefault();
+      this.numberOnlyError[field] = true;
+
+      setTimeout(() => {
+        this.numberOnlyError[field] = false;
+      }, 2000);
     }
   }
 
-  isAddSchemeModalOpen = false;
-
-  openAddSchemeModal() {
-    this.isAddSchemeModalOpen = true;
-  }
   
-  closeAddSchemeModal() {
-    this.isAddSchemeModalOpen = false;
-  }
-  
+  allowOnlyNumbersWithDecimal(event: KeyboardEvent) {
+  const inputChar = event.key;
+  const currentValue = (event.target as HTMLInputElement).value;
 
+  // Allow digits
+  if (/^[0-9]$/.test(inputChar)) {
+    return;
+  }
+
+  // Allow only one decimal point
+  if (inputChar === '.' && !currentValue.includes('.')) {
+    return;
+  }
+
+  // Block everything else
+  event.preventDefault();
+}
+
+  save() {
+    this.submitted = true;
+  }
+
+  saveAndNew() {
+    this.save();
+    if (this.submitted) {
+      this.resetAdjustmentForm();
+      this.submitted = false;
+    }
+  }
+
+  saveItems() {
+  this.error = '';
+  this.showConfirm = false;
+
+  console.log('Item list:', this.itemList);
+
+   if (this.itemList.length === 0) {
+    this.error = 'Please add at least one item in purchase bill.';
+    this.showConfirm = true;
+    return;
+  }
+
+  alert('Processing completed successfully.');
+}
+
+
+ saveSerial() {
+  this.error = '';
+  this.showConfirm = false;
+
+  if (!this.serialForm.itemName || this.serialForm.itemName.trim() === '') {
+     this.error = 'You cannot add more item tags!!';
+    this.showConfirm = true;
+    return;
+  }
+
+  // Proceed to save...
+  alert('Processing completed successfully.');
+}
+
+
+  resetForm() {
+    this.purchaseForm.itemName = '';
+    this.purchaseForm.unit = '';
+    this.purchaseForm.quantity = '';
+    this.purchaseForm.unitPrice = '';
+    this.purchaseForm.mrp = '';
+    this.purchaseForm.discount = '';
+    this.purchaseForm.tax = '';
+    this.purchaseForm.cess = '';
+    this.purchaseForm.amount = '';
+    this.purchaseForm.netPrice = '';
+    this.purchaseForm.amntbeforeTax = '';
+    this.purchaseForm.serialNo = '';
+  }
+
+  resetSerialForm() {
+    this.serialForm = {
+     itemName: '', mrp: '', salePrice: '', minsalePrice: '', serialNo: '', agentPrice: '', wholesalePrice: ''
+    };
+  }
+
+  resetAdjustmentForm() {
+    this.purchaseForm = {
+      billNo: '', orderNo: '', ewayrNo: '', ipurchaseDate: '', purchaseType: '', supply: '',
+      dueDate: '', supplierName: '', orderDate: '', contactNo: '', address: '', custGst: '',
+      serialNo: '', itemName: '', unit: '', quantity: '', purchasePrice: '', mrp: '', discount: '',
+      tax: '', cess: '', amount: '', netPrice: '', unitPrice: '', amntbeforeTax: '', tag: '',
+      totalQuantity: '', employee: '', discountAmount: '', discountPercent: '', reference: '',
+      referenceNo: '', shipAmount: '', shipPercent: '', delivery: '', remarks: '', date: '',
+      mode: '', txnId: '', payAmount: ''
+    };
+  }
+
+  editTable(index: number) {
+    const item = this.serialList[index];
+    this.serialForm = {
+      itemName: item.itemName,
+      mrp: item.mrp,
+      salePrice: item.salePrice,
+      minsalePrice: item.minsalePrice,
+      serialNo: item.serialNo,
+      agentPrice: item.agentPrice,
+      wholesalePrice: item.wholesalePrice
+    };
+    this.isEditMode = true;
+    this.editingIndex = index;
+    this.error = '';
+  }
+
+  deleteTable(index: number) {
+    this.confirmDeleteIndex = index;
+    this.showConfirmDelete = true;
+  }
+
+  confirmDelete() {
+    if (this.confirmDeleteIndex !== null) {
+      this.serialList.splice(this.confirmDeleteIndex, 1);
+      if (this.editingIndex === this.confirmDeleteIndex) {
+        this.resetSerialForm();
+      }
+    }
+    this.cancelDelete();
+  }
+
+  cancelDelete() {
+    this.confirmDeleteIndex = null;
+    this.showConfirmDelete = false;
+    this.submitted = false;
+  }
+
+  cancel() {
+    this.resetSerialForm();
+  }
+
+  navigateToPriceCatalog() {
+    this.router.navigate(['/inventory/price-catelog']);
+  }
 }

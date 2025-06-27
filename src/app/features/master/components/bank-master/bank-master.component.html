@@ -2,6 +2,16 @@
 
 <form #groupForm="ngForm" (ngSubmit)="addTable()" novalidate class="group-form">
 
+  <div *ngIf="showConfirm" class="custom-warning">
+  <div class="custom-warning-box">
+    <div class="error-message-row">
+      <i class="fas fa-exclamation-triangle warning-icon"></i>
+      <span>{{ error }}</span>
+    </div>
+    <button (click)="showConfirm = false">Ok</button>
+  </div>
+</div>
+
   <!-- Custom Confirmation Alert Box -->
 <div *ngIf="showConfirmDelete" class="custom-alert">
   <div class="confirm-icon-text">
@@ -28,7 +38,6 @@
           id="accountName"
           name="accountName"
           required
-          minlength="4"
           maxlength="50"
           pattern="^[a-zA-Z\s]+$"
           [(ngModel)]="accountName"
@@ -37,7 +46,6 @@
         />
         <div *ngIf="(accountNameRef.invalid && submitted)" class="error-message">
           <div *ngIf="accountNameRef.errors?.['required']">Account name is required.</div>
-          <div *ngIf="accountNameRef.errors?.['minlength']">Must be at least 4 characters.</div>
           <div *ngIf="accountNameRef.errors?.['pattern']">Only letters and spaces allowed.</div>
         </div>
       </div>
@@ -88,7 +96,6 @@
          />
         <div *ngIf="(accountNoRef.invalid && submitted)" class="error-message">
           <div *ngIf="accountNoRef.errors?.['required']">Account no is required.</div>
-          <div *ngIf="accountNoRef.errors?.['pattern']">Only letters and spaces allowed.</div>
         </div>
       </div>
     </div>

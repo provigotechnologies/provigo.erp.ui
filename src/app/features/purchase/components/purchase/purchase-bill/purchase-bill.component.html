@@ -1,3 +1,14 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+<div *ngIf="showConfirm" class="custom-alert">
+  <div class="custom-alert-box">
+    <div class="error-message-row">
+      <i class="fas fa-exclamation-triangle warning-icon"></i>
+      <span>{{ error }}</span>
+    </div>
+    <button (click)="showConfirm = false">Ok</button>
+  </div>
+</div>
 
 <div class="product-main-container">
 
@@ -176,81 +187,46 @@
               
             </div>      
 
-          <div class="table-container">
-            <table class="item-table">
-              <thead>
-                <tr>
-                  <th>S.No</th>
-                  <th>Item Name</th>
-                  <th>Tag</th>
-                  <th>Quantity</th>
-                  <th>Unit</th>
-                  <th>Unit Price</th>
-                  <th>Disc (%)</th>
-                  <th>Tax (%)</th>
-                  <th>Cess (%)</th>
-                  <th>Net Price</th>
-                  <th>Amount Before Tax</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td> </td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td> 
-                  <td>
-                    <button>✏️</button>
-                    <button>🗑️</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td> </td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>
-                    <button>✏️</button>
-                    <button>🗑️</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td> </td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>
-                    <button>✏️</button>
-                    <button>🗑️</button>
-                  </td>
-                </tr>
-               
-              </tbody>
-              
-            </table>
-          </div>
+           <div class="table-container">
+          <table class="item-table">
+            <thead>
+              <tr>
+                <th>S.No</th>
+                <th>Item Name</th>
+                <th>Quantity</th>
+                <th>Unit</th>
+                <th>Unit Price</th>
+                <th>Disc (%)</th>
+                <th>Tax (%)</th>
+                <th>Cess (%)</th>
+                <th>Net Price</th>
+                <th>Amount Before Tax</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="itemList.length === 0">
+                <td colspan="12" class="text-center text-muted">No Items added yet.</td>
+              </tr>
+              <tr *ngFor="let item of itemList; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ item.itemName }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.unit }}</td>
+                <td>{{ item.unitPrice }}</td>
+                <td>{{ item.discount }}</td>     
+                <td>{{ item.tax }}</td>
+                <td>{{ item.cess }}</td>
+                <td>{{ item.netPrice }}</td>
+                <td>{{ item.amntbeforeTax }}</td>
+                <td>
+                  <button type="button" (click)="editTable(i)">✏️</button>
+                  <button type="button" (click)="deleteTable(i)">🗑️</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+             </div>
 
       </div>
      
@@ -308,11 +284,24 @@
             <label>Txn. ID</label>
             <input type="text" />
             <label>               
-              <span>Amount</span>
-            </label>
-            <input type="text" />
-            <label>Balance</label>
-            <input type="text" />
+                <span>Amount</span>
+              </label>
+               <input
+                  type="text"
+                  name="amount"
+                  [(ngModel)]="amount"
+                  pattern="^[0-9]+$"
+                  maxlength="10"
+                  inputmode="numeric"
+                  #amountRef="ngModel"
+                  (keypress)="allowOnlyNumbersWithDecimal($event)"
+                  (input)= "error = ''"
+                    />
+              <label>Balance</label>
+              <input
+                style="background-color: rgb(244, 241, 241);"
+                type="text"
+                readonly />
           </div>
         </div>
 
@@ -350,14 +339,15 @@
         </div>
 
         <!-- Right Save Buttons -->
-        <div class="right-buttons">
-           <button class="primary-btn">
-             <i class="material-icons">print</i> Save and Print
-           </button>
-           <button class="primary-btn">
-              <i class="material-icons">save</i> Save
-           </button>
-        </div>
+         <div class="right-buttons">
+             <button class="primary-btn"  (click)="saveItems()">
+               <i class="material-icons">print</i> Save and Print
+             </button>
+             <button class="primary-btn" (click)="saveItems()">
+                <i class="material-icons">save</i> Save
+             </button>
+          </div>
+          
       </div>
 
            </form>
@@ -377,53 +367,141 @@
             </select>
           </div>
       
-          <div class="form-group">
-            <label for="text">Serial No </label>
-            <input type="text" id="text"/>
-          </div>
+          <div class="serial-row">
+             
+              <label>
+                M.R.P.
+                <div class="input-group">
+                  <span class="currency-symbol">₹</span>
+                  <input 
+                    type="text"
+                    name="mrp"
+                    class="input"
+                    maxlength="20"       
+                    pattern="^[0-9]+$"
+                    inputmode="numeric"
+                    #mrpRef="ngModel"
+                    (keypress)="allowOnlyNumbersWithDecimal($event)"
+                    [(ngModel)]="serialForm.mrp"
+                   />
+                </div>
+              </label>
+              </div>
+        
+               <div class="serial-row"><label>
+                Sale Price
+                <div class="input-group">
+                  <span class="currency-symbol">₹</span>
+                  <input
+                   type="text"
+                   name="salePrice"
+                   [(ngModel)]="serialForm.salePrice"
+                   required
+                   minlength="1"
+                   maxlength="10"
+                   pattern="^[0-9]+$"
+                   inputmode="numeric"
+                   #salePriceRef="ngModel"
+                   (keypress)="allowOnlyNumbersWithDecimal($event)"
+                  />
+                  <button type="button" class="icon-button" (click)="navigateToPriceCatalog()">
+                    <i class="material-icons">list</i>
+                  </button>
+                  
+                </div>
+              </label></div>
+              
+               <div class="serial-row"> <label class="min-sale-price-shift">
+                Min. Sale Price
+                <div class="input-group">
+                  <span class="currency-symbol">₹</span>
+                   <input
+                     type="text"
+                     name="minsalePrice"
+                     [(ngModel)]="serialForm.minsalePrice"
+                     required
+                     minlength="1"
+                     maxlength="10"
+                     pattern="^[0-9]+$"
+                     inputmode="numeric"
+                     #minsalePriceRef="ngModel"
+                     (keypress)="allowOnlyNumbersWithDecimal($event)"
+                    />
+                </div>
+              </label></div>
+                     
+            <div class="serial-row">
+              <label>
+                Serial No. 
+                <div class="input-with-icon">
+                  <span class="barcode-icon">||||||</span>
+                 <input
+                  type="text"
+                  name="serialNo"
+                  [(ngModel)]="serialForm.serialNo"
+                  required
+                  minlength="4"
+                  maxlength="50"
+                  pattern="^[a-zA-Z\s]+$"
+                  #serialNoRef="ngModel"
+                />              
+                </div>
+                 <div *ngIf="serialNoRef.invalid && submitted" class="error-message">
+                  <div *ngIf="serialNoRef.errors?.['required']">Serial no is required.</div>
+                 </div>
+              </label>
+            </div>
       
           <div class="save-button">
-            <button class="primary-btn">
+            <button class="primaryy-btn" (click)="saveSerial()">
               <i class="material-icons">save</i>Save
             </button>
           </div>
           <div class="reset-button">
-            <button class="primary-btn">
-              <i class="material-icons">reset</i> Reset
+            <button class="primaryy-btn">
+              <i class="material-icons">refresh</i> Reset
             </button>
           </div>
         </div>
       
         <div class="serial-number-section">
                   
-          <div class="table-scroll">
-            <table class="item-table">
-              <thead>
-                <tr>
-                  <th>S.No</th>
-                  <th>Item Name</th>
-                  <th>Existing Scheme</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td></td>
-                  <td>Item 1</td>
-                  <td>Scheme 1</td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td>Item 2</td>
-                  <td>Scheme 2</td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td>Item 3</td>
-                  <td>Scheme 3</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <div class="table-container">
+          <table class="item-table">
+            <thead>
+              <tr>
+                <th>S.No</th>
+                <th>Item Name</th>
+                <th>Serial Number</th>
+                <th>Sale Price</th>
+                <th>Agent Price</th>
+                <th>Wholesale Price</th>
+                <th>Min. Sale Price</th>
+                <th>M.R.P</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="serialList.length === 0">
+                <td colspan="12" class="text-center text-muted">No Items added yet.</td>
+              </tr>
+              <tr *ngFor="let item of serialList; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ item.itemName }}</td>
+                <td>{{ item.serialNo }}</td>
+                <td>{{ item.salePrice }}</td>
+                <td>{{ item.agentPrice }}</td>
+                <td>{{ item.wholesalePrice }}</td>     
+                <td>{{ item.minsalePrice }}</td>
+                <td>{{ item.mrp }}</td>
+                <td>
+                  <button type="button" (click)="editTable(i)">✏️</button>
+                  <button type="button" (click)="deleteTable(i)">🗑️</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+             </div>
 
         </div>
       </ng-container>

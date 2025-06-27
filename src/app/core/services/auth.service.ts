@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { last, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = 'https://your-api-url.com/api/auth';
+  private baseUrl = 'https://localhost:7082';
 
   constructor(private http: HttpClient) {}
 
@@ -14,7 +14,15 @@ export class AuthService {
     return this.http.post(`${this.baseUrl}/login`, credentials);
   }
 
-  register(data: { name: string; email: string; password: string }): Observable<any> {
+  register(data: {
+    firstname: string;
+    lastname: string;
+    phonenumber: string;
+    email: string;
+    password: string;
+    role: string;
+    isactive: boolean;
+  }): Observable<any> {
     return this.http.post(`${this.baseUrl}/register`, data);
   }
 
@@ -24,5 +32,21 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     return !!localStorage.getItem('token');
+  }
+
+  getActiveUsers(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/users/active`);
+  }
+
+  updateUser(userId: string, data: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/update/users/${userId}`, data);
+  }
+
+  deleteUser(userId: string): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/delete/users/${userId}`);
+  }
+
+  changePassword(userId: string, newPassword: string): Observable<any> {
+    return this.http.put(`${this.baseUrl}/users/${userId}/password`, { password: newPassword });
   }
 }

@@ -50,7 +50,7 @@ processItems() {
   console.log('Stock list:', this.stockList);
 
   if (this.stockList.length === 0) {
-    this.error = 'Please add at least one stock item before processing.';
+    this.error = 'Please add at least one item before processing.';
     this.showConfirm = true;
     return;
   }
@@ -74,14 +74,13 @@ processItems() {
 }
 
 
-
   addStock() {
     this.submitted = true;
     this.error = '';
 
     if (
       !this.itemName.trim()    ||  !/^[a-zA-Z\s]+$/.test(this.itemName) ||
-      !this.availableStock.trim() ||  !/^[a-zA-Z\s]+$/.test(this.availableStock) ||
+      !this.availableStock.trim() ||  !/^[0-9]+$/.test(this.availableStock) ||
       !this.physicalStock.trim()  ||  !/^[0-9]+$/.test(this.physicalStock)
     ) {
       return;
