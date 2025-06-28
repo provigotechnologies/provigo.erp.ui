@@ -634,17 +634,17 @@ export const routes: Routes = [
       {
          path: 'settings',
          loadComponent: () =>
-         import('./features/settings/components/settings/settings/settings.component').then(m => m.SettingsComponent),
+         import('./features/settings/components//settings/settings.component').then(m => m.SettingsComponent),
          children: [
          {
            path: 'billing',
            loadComponent: () =>
-           import('./features/settings/components/settings/billing-settings/billing-settings.component').then(m => m.BillingSettingsComponent),
+           import('./features/settings/components/billing-settings/billing-settings.component').then(m => m.BillingSettingsComponent),
           },
           {
             path: 'users',
             loadComponent: () =>
-            import('./features/settings/components/settings/user-management/user-management.component').then(m => m.UserManagementComponent),
+            import('./features/settings/components//user-management/user-management/user-management.component').then(m => m.UserManagementComponent),
           },
           {
             path: '',
@@ -656,12 +656,12 @@ export const routes: Routes = [
        {
           path: 'management-tool',
           loadComponent: () =>
-          import('./features/settings/components/settings/user-management/management-tool/management-tool.component').then(m => m.ManagementToolComponent),
+          import('./features/settings/components/user-management/management-tool/management-tool.component').then(m => m.ManagementToolComponent),
           children: [
           {
           path: 'add-user',
           loadComponent: () =>
-          import('./features/settings/components/settings/user-management/add-user/add-user.component').then(m => m.AddUserComponent),
+          import('./features/settings/components/user-management/add-user/add-user.component').then(m => m.AddUserComponent),
           }
        ]
         },
