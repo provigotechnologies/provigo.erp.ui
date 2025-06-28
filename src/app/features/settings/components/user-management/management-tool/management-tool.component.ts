@@ -14,7 +14,7 @@ import { UpdateUserDialogComponent } from '../update-user-dialog/update-user-dia
   standalone: true,
   imports: [FormsModule, CommonModule, RouterModule],
   templateUrl: './management-tool.component.html',
-  styleUrls: ['./management-tool.component.css
+  styleUrls: ['./management-tool.component.css']
 })
 export class ManagementToolComponent {
   selectedTab: string = 'access';
