@@ -1,4 +1,3 @@
-
 :host {
   background-color: #f4f4f4;
   height: 100%;
@@ -67,7 +66,6 @@
   font-weight:lighter;
 }
 
-
 .sidebar {
   width: 180px;
   background: #003147;
@@ -78,7 +76,6 @@
   display: flex;
   flex-direction: column;
 }
-
 
 .sidebar ul {
   list-style: none;
@@ -96,13 +93,10 @@
   color: #949495;
 }
 
-.sidebar li:hover
-{
+.sidebar li:hover {
   background: #003b57;
 }
 
-
-/*Manage users*/
 .manage-user-container {
   padding: 20px;
   max-width: 900px;
@@ -113,7 +107,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  margin: -20px 20px 20px 20px; /* shift up slightly */
+  margin: -20px 20px 20px 20px;
   width: 100%;
   max-width: 825px;
   padding-top: 10px;
@@ -162,10 +156,10 @@
 }
 
 .set-password {
-    text-decoration: underline;
-    cursor: pointer;
-    color: #04a704;
-    margin-right: 16px;
+  text-decoration: underline;
+  cursor: pointer;
+  color: #04a704;
+  margin-right: 16px;
 }
 
 .delete-user {
@@ -179,23 +173,20 @@
 }
 
 .checkbox-group label {
-  margin-right: 40px; /* or as needed */
+  margin-right: 40px;
   display: inline-flex;
   align-items: center;
 }
 
-
 .checkbox-group input[type="checkbox"] {
-  margin-left: 18px;  /* 👈 small space between label text and checkbox */
+  margin-left: 18px;
   vertical-align: middle;
 }
 
-
 input[type="checkbox"] {
-  accent-color: #108eef; /* Microsoft blue shade */
+  accent-color: #108eef;
   margin-right: 6px;
 }
-
 
 .save-btn-row {
   justify-content: flex-end;
@@ -203,12 +194,12 @@ input[type="checkbox"] {
 
 .btn-wrapper {
   display: flex;
-  justify-content: flex-end; /* Push content to the right */
+  justify-content: flex-end;
 }
 
 .note-wrapper {
   display: flex;
-  justify-content: space-between; /* ← Distribute space between Note and Save button */
+  justify-content: space-between;
   align-items: center;
   margin: 10px 20px;
   gap: 10px;
@@ -236,8 +227,6 @@ input[type="checkbox"] {
   margin-right: 5px;
 }
 
-
-/* Links */
 .module-links {
   display: flex;
   gap: 10px;
@@ -252,29 +241,25 @@ input[type="checkbox"] {
   transition: all 0.2s ease;
 }
 
-/* Active (clicked) link style */
 .module-link.active {
-    display: inline-block;
-    color: #0c92a4c7;
-    text-decoration: underline;
+  display: inline-block;
+  color: #0c92a4c7;
+  text-decoration: underline;
 }
 
-
-/* Table Scroll */
- .table-scroll {
+.table-scroll {
   max-height: 280px;
   overflow-y: auto;
   overflow-x: hidden;
   border: 1px solid #ccc;
   margin-top: 4px;
   position: relative;
-
-  scrollbar-width: thin; /* Firefox */
+  scrollbar-width: thin;
   scrollbar-color: #ccc transparent;
 }
-  
+
 .table-scroll::-webkit-scrollbar {
-  width: 2px; /* Make it thin */
+  width: 2px;
 }
 
 .table-scroll::-webkit-scrollbar-track {
@@ -286,91 +271,88 @@ input[type="checkbox"] {
   border-radius: 3px;
 }
 
-  .item-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 14px;
-  }
-  
-  .item-table th,
-  .item-table td {
-    border: 1px solid #ccc;
-    text-align: left;
-  }
-  
-  .item-table th {
-    position: sticky;
-    top: 0;
-    background-color: #2980f2;
-    color: #fff;
-    font-weight: 600;
-    z-index: 1;
-    padding: 4px;
-    font-size: 13px;
-    text-align: center;
-    white-space: nowrap;
-  }
-  
-  .item-table td {
-    border: 1px solid #e0e0e0;
-    font-size: 13px;
-    white-space: nowrap;
-    text-align: center;
-    padding: 6px;
-  } 
-  
-  .item-table td:first-child {
-     text-align: left;
-     padding-left: 12px; /* Add left padding */
-    }
+.item-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
 
-  .item-table input[type="checkbox"] {
-    appearance: none;
-    height: 14px;
-    width: 14px;
-    border: 2px solid #cfcfcf;
-    border-radius: 3px;
-    cursor: pointer;
-    position: relative;
-    background-color: white;
-    
-  }
-  
-  .item-table input[type="checkbox"]:checked {
-    background-color: #2980f2;
-    border-color: #2980f2;
-  }
-  
-  .item-table input[type="checkbox"]:checked::after {
-    content: '';
-    position: absolute;
-    left: 3px;
-    top: 0px;
-    width: 4px;
-    height: 8px;
-    border: solid white;
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
-  }
-  
+.item-table th,
+.item-table td {
+  border: 1px solid #ccc;
+  text-align: left;
+}
 
-  .item-table tr:nth-child(even) {
-    background-color: #f1f4f9;
-  }
-  
-  .item-table tr:nth-child(odd) {
-    background-color: #ffffff;
-  }
+.item-table th {
+  position: sticky;
+  top: 0;
+  background-color: #2980f2;
+  color: #fff;
+  font-weight: 600;
+  z-index: 1;
+  padding: 4px;
+  font-size: 13px;
+  text-align: center;
+  white-space: nowrap;
+}
 
-  .item-table th {
-    font-weight: 400;
-    color: #f8f8f8;
-  }
+.item-table td {
+  border: 1px solid #e0e0e0;
+  font-size: 13px;
+  white-space: nowrap;
+  text-align: center;
+  padding: 6px;
+} 
 
-  /* Reduce width of the first (Name) column */
+.item-table td:first-child {
+  text-align: left;
+  padding-left: 12px;
+}
+
+.item-table input[type="checkbox"] {
+  appearance: none;
+  height: 14px;
+  width: 14px;
+  border: 2px solid #cfcfcf;
+  border-radius: 3px;
+  cursor: pointer;
+  position: relative;
+  background-color: white;
+}
+
+.item-table input[type="checkbox"]:checked {
+  background-color: #2980f2;
+  border-color: #2980f2;
+}
+
+.item-table input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 0px;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.item-table tr:nth-child(even) {
+  background-color: #f1f4f9;
+}
+
+.item-table tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+.item-table th {
+  font-weight: 400;
+  color: #f8f8f8;
+}
+
 .item-table th:first-child,
 .item-table td:first-child {
-  width: 200px; /* Adjust this value as needed */
+  width: 200px;
   max-width: 300px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -430,63 +412,40 @@ input[type="checkbox"] {
   margin-right: 4px;
 }
 
-
-/* Medium screens (tablets, small desktops) */
+/* Tablets (width up to 1024px) */
 @media (max-width: 1024px) {
-  .item-container {
-    max-width: 95%;
-    margin-left: 20px;
-    height: auto; /* allow height to adjust */
+  .tab-content {
+    width: 100%;
+    margin: 20px auto;
+    height: auto;
   }
 
   .sidebar {
-    width: 120px;
-    padding: 0.5rem 0;
+    width: 140px;
   }
 
-  .sidebar li {
-    padding: 8px 12px;
-    font-size: 14px;
+  .btn-wrapper,
+  .note-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-   .tab-content {
-    width: 80%;   /* use percentage width */
-    max-width: 600px;  /* max width to not grow too big */
-    margin: 15px auto; /* center horizontally */
-    font-size: 14px;
-    height: auto;
-  }
-
-  .page-heading {
-    font-size: 12px;
-    margin-bottom: 12px;
-  }
-
-  .tab-content h3 {
-    font-size: 12px;
-    top: -8px;
-    left: 6px;
+  .manage-user-container {
+    padding: 10px;
   }
 }
 
-/* Small screens (phones, small tablets) */
+/* Mobiles (width up to 768px) */
 @media (max-width: 768px) {
-  .item-container {
-    flex-direction: column;
-    margin: 10px 10px 0 10px;
-    height: auto;
-  }
-
   .settings-container {
     flex-direction: column;
   }
 
   .sidebar {
-    width: 100%;
-    min-height: auto;
-    display: flex;
     flex-direction: row;
     overflow-x: auto;
+    width: 100%;
+    min-height: auto;
   }
 
   .sidebar ul {
@@ -495,8 +454,8 @@ input[type="checkbox"] {
   }
 
   .sidebar li {
-    flex: 1 0 auto;
-    padding: 10px 8px;
+    flex: 1;
+    padding: 10px;
     font-size: 13px;
     white-space: nowrap;
     text-align: center;
@@ -504,28 +463,29 @@ input[type="checkbox"] {
 
   .tab-content {
     width: 95%;
-    max-width: 400px;
-    margin: 10px auto;
     padding: 15px 10px;
-    font-size: 13px;
+    margin: 15px auto;
     height: auto;
   }
 
-  .page-heading {
-    font-size: 13px;
+  .form-user,
+  .link-row,
+  .checkbox-group {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  .tab-content h3 {
-    font-size: 13px;
-    top: -7px;
-    left: 6px;
+  .note-wrapper {
+    flex-direction: column;
+    gap: 10px;
   }
 }
 
-/* Extra small screens (phones in portrait) */
+/* Extra small devices (phones under 600px) */
 @media (max-width: 600px) {
-  .item-container {
-    margin: 5px 5px 0 5px;
+  .tab-content {
+    padding: 10px;
+    font-size: 13px;
   }
 
   .sidebar li {
@@ -533,26 +493,26 @@ input[type="checkbox"] {
     padding: 8px 6px;
   }
 
-  .page-heading {
-    font-size: 11px;
+  .module-links {
+    flex-wrap: wrap;
+    gap: 8px;
   }
 
-    .tab-content {
-    width: 95%;  /* almost full width */
-    max-width: 500px;  /* no max-width */
-    margin: 5px auto;
-    padding: 12px 8px;
+  .item-table th,
+  .item-table td {
     font-size: 12px;
-    height: auto;
+    padding: 4px;
   }
 
-  .tab-content h3 {
-    font-size: 12px;
-    top: -6px;
-    left: 4px;
+  .item-table th:first-child,
+  .item-table td:first-child {
+    width: auto;
+    max-width: 100%;
   }
 
-  .close-btn {
-    font-size: 22px;
+  .item-table th.name-column.wide,
+  .item-table td.name-column.wide {
+    width: auto;
+    max-width: 100%;
   }
 }

@@ -11,7 +11,7 @@ import { TaxationSettingsComponent } from '../taxation-settings/taxation-setting
 import { DocumentSequencesComponent } from '../document-sequences/document-sequences.component';
 import { PrintingSettingsComponent } from '../printing-settings/printing-settings.component';
 import {WalletComponent} from '../wallet/wallet.component';
-import { EmailManagementComponent } from '../email-managemen/email-management/email-management.component';
+import { EmailManagementComponent } from '../email-management/email-management/email-management.component';
 import { BiometricManagementComponent } from '../biometric-management/biometric-management.component';
 import { UserManagementComponent } from '../user-management/user-management/user-management.component';
 import { BackupSettingsComponent } from '../backup-settings/backup-settings.component';

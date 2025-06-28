@@ -14,8 +14,9 @@
 
 .settings-container {
   display: flex;
-  flex: 1;                    /* ✅ take remaining space */
-  overflow: hidden;          /* ✅ prevent outer scroll */
+  flex: 1;
+  min-height: 0;           /* ⚠️ required for flex + scroll */
+  overflow: hidden;
 }
 
 .page-header-wrapper {
@@ -46,10 +47,8 @@
   background: #003147;
   color: white;
   padding: 1rem 0;
-  height: auto;        /* Let it grow naturally */
-  min-height: 100%;    /* Ensure it matches content */
-  display: flex;
-  flex-direction: column;
+  overflow-y: auto;       /* ✅ allow scroll if long */
+  max-height: 100%;
 }
 
 
@@ -76,55 +75,56 @@
 
 .content {
   flex: 1;
+  overflow-y: auto;
+  height: 100%;
   padding: 0 14px 0 16px;
   background: #f7f7f7;
-  overflow-y: auto;          /* ✅ inner scroll only */
-  height: 100%;              /* ✅ fill parent height */
 }
 
+/* Common thin scrollbar style */
+.sidebar::-webkit-scrollbar,
 .content::-webkit-scrollbar {
-  width: 6px;
+  width: 6px;               /* smaller width */
+  height: 4px;              /* for horizontal scroll if needed */
 }
+
+.sidebar::-webkit-scrollbar-thumb,
 .content::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.2);  /* light thumb */
+  border-radius: 10px;                   /* rounded edges */
 }
+
+.sidebar::-webkit-scrollbar-track,
+.content::-webkit-scrollbar-track {
+  background: transparent;               /* no visible track */
+}
+
 
 .content h2 {
   color: #003366;
 }
 
-
 @media (max-width: 768px) {
+  .settings-container {
+    flex-direction: column;
+  }
 
   .sidebar {
-    width: 130px;            /* full width on small screens */
-    min-height: auto;       /* reset height */
-    padding: 4px 0;
+    width: 100%;
+    max-height: 180px;
+    overflow-y: auto; /* ✅ vertical scroll if list overflows */
   }
 
   .content {
-    padding: 10px;          /* tighter padding */
-  }
-
-  .grid {
-    grid-template-columns: 1fr; /* 1 column grid on small screens */
-  }
-
-  .input-container {
-    width: 100%;
-    padding-left: 10px;
-    margin-top: 6px;
-  }
-
-  .label-container {
-    width: 100%;
+    height: auto;
+    max-height: calc(100vh - 180px - 60px); /* 60px: approx header height */
+    overflow-y: auto;
   }
 }
 
-/* Mobile (below 600px) */
 @media (max-width: 600px) {
   .item-container {
-    margin: 0;  
+    margin: 0;
+    max-width: 100%;
   }
 }

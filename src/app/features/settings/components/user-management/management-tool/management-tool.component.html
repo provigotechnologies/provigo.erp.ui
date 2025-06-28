@@ -31,7 +31,7 @@
       class="styled-select"
     >
       <option [ngValue]="null">--Select--</option>
-      <option *ngFor="let user of users" [ngValue]="user">{{ user.firstName }}</option>
+      <option *ngFor="let user of users" [ngValue]="user">{{ user.email }}</option>
     </select>
   </div>
 
@@ -116,7 +116,7 @@
       <label for="userSelect">Select User</label>
       <select id="userSelect" [(ngModel)]="selectedUser" (ngModelChange)="onUserChange($event)" class="styled-select">
         <option  [ngValue]="null">--Select--</option>
-        <option *ngFor="let user of users"  [ngValue]="user">{{ user.firstName }}</option>
+        <option *ngFor="let user of users"  [ngValue]="user">{{ user.email }}</option>
       </select>
 
      <a (click)="openAddUserDialog()" class="add-user">Add User</a>

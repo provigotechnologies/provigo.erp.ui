@@ -8,7 +8,10 @@ import { CommonModule } from '@angular/common';
   selector: 'app-update-user-dialog',
   standalone: true,
   templateUrl: './update-user-dialog.component.html',
-  styleUrls: ['./update-user-dialog.component.css'],
+  styleUrls: [
+    './update-user-dialog.component.css',
+    '../../../../styles/adduser-style.css'
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -17,6 +20,7 @@ import { CommonModule } from '@angular/common';
 })
 export class UpdateUserDialogComponent {
   userForm: FormGroup;
+  submitted = false;
 
   constructor(
     private fb: FormBuilder,
@@ -24,12 +28,12 @@ export class UpdateUserDialogComponent {
     private dialogRef: MatDialogRef<UpdateUserDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.userForm = this.fb.group({
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: [''], // keep optional for update
-      phonenumber: [''],
+     this.userForm = this.fb.group({
+      firstname: ['', [Validators.required, Validators.pattern(/^[A-Za-z ]+$/)]], // ✅ letters only
+      lastname: ['', [Validators.required, Validators.pattern(/^[A-Za-z ]+$/)]],  // ✅ letters only
+      email: ['', [Validators.required, Validators.email, gmailOnlyValidator]], 
+      password: ['', Validators.required],                                       // ✅ required only
+      phonenumber: ['', [Validators.pattern(/^[0-9]*$/)]],                       // ✅ numbers only
       role: ['', Validators.required],
       isActive: [true, Validators.required]
     });
@@ -44,12 +48,29 @@ export class UpdateUserDialogComponent {
       firstname: user.firstName,
       lastname: user.lastName,
       email: user.email,
-      password: user.password, 
+      password: user.passwordHash, 
       phonenumber: user.phoneNumber,
       role: user.role,
-      isActive: user.isActive
+      isActive: user.status
     });
   }
+
+  allowOnlyLetters(event: KeyboardEvent): void {
+  const allowedKeys = ['Backspace', 'Tab', 'ArrowLeft', 'ArrowRight'];
+  const isLetter = /^[a-zA-Z ]$/.test(event.key);
+  if (!isLetter && !allowedKeys.includes(event.key)) {
+    event.preventDefault();
+  }
+}
+
+allowOnlyNumbers(event: KeyboardEvent): void {
+  const allowedKeys = ['Backspace', 'Tab', 'ArrowLeft', 'ArrowRight'];
+  const isNumber = /^[0-9]$/.test(event.key);
+  if (!isNumber && !allowedKeys.includes(event.key)) {
+    event.preventDefault();
+  }
+}
+
 
 onSubmit(): void {
   if (this.userForm.valid && this.data?.user?.id) {
@@ -77,3 +98,13 @@ onSubmit(): void {
   }
 }
 
+
+import { AbstractControl, ValidationErrors } from '@angular/forms';
+
+export function gmailOnlyValidator(control: AbstractControl): ValidationErrors | null {
+  const email = control.value;
+  if (email && !email.endsWith('@gmail.com')) {
+    return { gmailOnly: true };
+  }
+  return null;
+}

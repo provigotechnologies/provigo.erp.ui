@@ -8,7 +8,10 @@ import { CommonModule } from '@angular/common';
   selector: 'app-add-user-dialog',
   standalone: true,
   templateUrl: './add-user-dialog.component.html',
-  styleUrls: ['./add-user-dialog.component.css'],
+  styleUrls: [
+    './add-user-dialog.component.css',
+    '../../../../styles/adduser-style.css'
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -17,6 +20,8 @@ import { CommonModule } from '@angular/common';
 })
 export class AddUserDialogComponent {
   userForm: FormGroup;
+  submitted = false;
+
 
 constructor(
   private fb: FormBuilder,
@@ -25,40 +30,73 @@ constructor(
   @Inject(MAT_DIALOG_DATA) public data: any // ✅ get passed user here
 ) {
   this.userForm = this.fb.group({
-    firstname: ['', Validators.required],
-    lastname: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', Validators.required],
-    phonenumber: [''],
-    role: ['', Validators.required],
-    isActive: [true, Validators.required]
-  });
+  firstname: ['', [Validators.required, Validators.pattern(/^[A-Za-z ]+$/)]], // ✅ letters only
+  lastname: ['', [Validators.required, Validators.pattern(/^[A-Za-z ]+$/)]],  // ✅ letters only
+  email: ['', [Validators.required, Validators.email, gmailOnlyValidator]], 
+  password: ['', Validators.required],                                       // ✅ required only
+  phonenumber: ['', [Validators.pattern(/^[0-9]*$/)]],                       // ✅ numbers only
+  role: ['', Validators.required],
+  isActive: [true, Validators.required]
+});
+
+}
+
+allowOnlyLetters(event: KeyboardEvent): void {
+  const allowedKeys = ['Backspace', 'Tab', 'ArrowLeft', 'ArrowRight'];
+  const isLetter = /^[a-zA-Z ]$/.test(event.key);
+  if (!isLetter && !allowedKeys.includes(event.key)) {
+    event.preventDefault();
+  }
+}
+
+allowOnlyNumbers(event: KeyboardEvent): void {
+  const allowedKeys = ['Backspace', 'Tab', 'ArrowLeft', 'ArrowRight'];
+  const isNumber = /^[0-9]$/.test(event.key);
+  if (!isNumber && !allowedKeys.includes(event.key)) {
+    event.preventDefault();
+  }
 }
 
 
 onSubmit(): void {
-  if (this.userForm.valid) {
-    const formValue = this.userForm.value;
+    this.submitted = true;
+  this.userForm.markAllAsTouched(); // 👈 Force all fields to show error if invalid
 
-    const newUser = {
-      ...formValue,
-      isActive: formValue.isActive === true // ✅ FIX: send as boolean
-    };
-
-    this.authService.register(newUser).subscribe({
-      next: () => {
-        alert('User created successfully!');
-        this.dialogRef.close(true);
-      },
-      error: (err) => {
-        alert('Failed to create user.');
-        console.error('Register error:', err); // ✅ See exact backend error
-      }
-    });
+  if (this.userForm.invalid) {
+    return; // Don't submit if form is invalid
   }
+
+  const formValue = this.userForm.value;
+  const newUser = {
+    ...formValue,
+    isActive: formValue.isActive === true
+  };
+
+  this.authService.register(newUser).subscribe({
+    next: () => {
+      alert('User created successfully!');
+      this.dialogRef.close(true);
+    },
+    error: (err) => {
+      alert('Failed to create user.');
+      console.error('Register error:', err);
+    }
+  });
 }
+
 
   onCancel(): void {
     this.dialogRef.close(); // ✅ Close without saving
   }
+}
+
+
+import { AbstractControl, ValidationErrors } from '@angular/forms';
+
+export function gmailOnlyValidator(control: AbstractControl): ValidationErrors | null {
+  const email = control.value;
+  if (email && !email.endsWith('@gmail.com')) {
+    return { gmailOnly: true };
+  }
+  return null;
 }
