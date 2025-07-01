@@ -170,5 +170,22 @@
   margin-top: 4px;
 }
 
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
 
+.password-wrapper input {
+  flex: 1;
+  padding-right: 30px; /* make space for icon */
+}
+
+.toggle-icon {
+  position: absolute;
+  right: 8px;
+  cursor: pointer;
+  color: #555;
+  user-select: none;
+}
 

@@ -59,11 +59,11 @@ allowOnlyNumbers(event: KeyboardEvent): void {
 
 
 onSubmit(): void {
-    this.submitted = true;
-  this.userForm.markAllAsTouched(); // 👈 Force all fields to show error if invalid
+  this.submitted = true;
+  this.userForm.markAllAsTouched();
 
   if (this.userForm.invalid) {
-    return; // Don't submit if form is invalid
+    return;
   }
 
   const formValue = this.userForm.value;
@@ -78,8 +78,12 @@ onSubmit(): void {
       this.dialogRef.close(true);
     },
     error: (err) => {
-      alert('Failed to create user.');
-      console.error('Register error:', err);
+      if (err.status === 400 && err.error === 'Email already registered.') {
+        this.userForm.get('email')?.setErrors({ emailTaken: true }); // 👈 Set form error
+      } else {
+        alert('Failed to create user.');
+        console.error('Register error:', err);
+      }
     }
   });
 }

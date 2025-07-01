@@ -50,49 +50,32 @@
   </div>
 
   <!-- Table -->
+  <!-- Show only if a user is selected -->
+<div *ngIf="selectedUser">
   <div class="table-scroll">
     <table class="item-table">
       <thead>
-    <tr>
-      <th
-        class="name-column"
-        [ngClass]="{ wide: selectedModule === 'Report' || selectedModule === 'Misc' }"
-      >
-       Name
-      </th>
-
-       <th *ngIf="selectedModule !== 'Report' && selectedModule !== 'Misc'">View</th>
-       <th *ngIf="selectedModule !== 'Report' && selectedModule !== 'Misc'">Add</th>
-       <th *ngIf="selectedModule !== 'Report' && selectedModule !== 'Misc'">Modify</th>
-       <th *ngIf="selectedModule !== 'Report' && selectedModule !== 'Misc'">Delete</th>
-       <th *ngIf="selectedModule === 'Report' || selectedModule === 'Misc'">Enable</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr *ngFor="let row of moduleData[selectedModule]">
-         <td
-          class="name-column"
-          [ngClass]="{ wide: selectedModule === 'Report' || selectedModule === 'Misc' }"
-        >
-         {{ row }}
-        </td>
-
-      <ng-container *ngIf="selectedModule !== 'Report' && selectedModule !== 'Misc'">
-        <td><input type="checkbox" /></td>
-        <td><input type="checkbox" /></td>
-        <td><input type="checkbox" /></td>
-        <td><input type="checkbox" /></td>
-      </ng-container>
-
-       <ng-container *ngIf="selectedModule === 'Report' || selectedModule === 'Misc'">
-        <td><input type="checkbox" /></td>
-       </ng-container>
-       </tr>
-    </tbody>
-   
+        <tr>
+          <th>Name</th>
+          <th>View</th>
+          <th>Add</th>
+          <th>Modify</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of moduleData[selectedModule]">
+          <td>{{ row.name }}</td>
+          <td><input type="checkbox" [(ngModel)]="row.view" /></td>
+          <td><input type="checkbox" [(ngModel)]="row.add" /></td>
+          <td><input type="checkbox" [(ngModel)]="row.modify" /></td>
+          <td><input type="checkbox" [(ngModel)]="row.delete" /></td>
+        </tr>
+      </tbody>
     </table>
   </div>
+</div>
+
  </div>
 
   </div>
@@ -102,7 +85,7 @@
     <div class="note-box">
       Note: Admin role will override these settings
     </div>
-    <button class="save-btn">
+    <button class="save-btn" (click)="saveAllAccessRights()">
      <i class="fas fa-save"></i> Save
     </button>
   </div>

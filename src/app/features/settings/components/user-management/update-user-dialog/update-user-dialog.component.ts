@@ -21,6 +21,7 @@ import { CommonModule } from '@angular/common';
 export class UpdateUserDialogComponent {
   userForm: FormGroup;
   submitted = false;
+  showPassword: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -61,6 +62,10 @@ export class UpdateUserDialogComponent {
   if (!isLetter && !allowedKeys.includes(event.key)) {
     event.preventDefault();
   }
+}
+
+  togglePasswordVisibility() {
+  this.showPassword = !this.showPassword;
 }
 
 allowOnlyNumbers(event: KeyboardEvent): void {

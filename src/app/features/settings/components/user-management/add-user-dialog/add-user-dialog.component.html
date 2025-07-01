@@ -35,6 +35,7 @@
           <span *ngIf="userForm.get('email')?.errors?.['required']">Email is required</span>
           <span *ngIf="userForm.get('email')?.errors?.['email']">Invalid email format</span>
           <span *ngIf="userForm.get('email')?.errors?.['gmailOnly']">Email must end with &#64;gmail.com</span>
+          <span *ngIf="userForm.get('email')?.errors?.['emailTaken']">Email already registered</span> 
         </div>
       </div>
 

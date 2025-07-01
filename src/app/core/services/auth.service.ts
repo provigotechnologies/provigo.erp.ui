@@ -34,8 +34,8 @@ export class AuthService {
     return !!localStorage.getItem('token');
   }
 
-  getActiveUsers(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/users/active`);
+  getAllUsers(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/users/email`);
   }
 
   updateUser(userId: string, data: any): Observable<any> {

@@ -8,6 +8,9 @@ import { AuthService } from '../../../../../core/services/auth.service';
 import { UserService } from '../../../../../core/services/user.service';
 import { AddUserDialogComponent } from '../add-user-dialog/add-user-dialog.component';
 import { UpdateUserDialogComponent } from '../update-user-dialog/update-user-dialog.component';
+import { SettingsService } from '../../../../../core/services/settings.service';
+import { SettingAccess } from '../../../../../shared/interface/setting-access';
+import { BaseAccess } from '../../../../../shared/interface/base-access';
 import { json } from 'node:stream/consumers';
 
 @Component({
@@ -23,6 +26,9 @@ export class ManagementToolComponent {
   selectedModule: string = 'Sale';
 
   users: any[] = [];
+  userAccessData: any = {};
+
+  moduleData: { [key: string]: { id: number; name: string; view?: boolean; add?: boolean; modify?: boolean; delete?: boolean; enable?: boolean }[] } = {};
 
   private _selectedUser: any = null;
   get selectedUser() {
@@ -54,139 +60,7 @@ changeTab(tab: string) {
     'Master Config.',
     'Misc'
   ];
-
-  // Module Data
-  moduleData: { [key: string]: string[] } = {
-    Sale: [
-      'Customer',
-      'Customer payment',
-      'Customer account adjustment / write-off',
-      'Customer loan',
-      'Manage online store orders',
-      'Online store discount coupons',
-      'Manage online store item, categories and collections',
-      'Manage online store settings',
-      'Invoice',
-      'Quotation',
-      'Proforma invoice',
-      'Delivery note',
-      'Sale credit note',
-      'Sale debit note',
-      'Sale order',
-      'Sale return'
-    ],
-    Purchase: [
-      'Purchase bill', 
-      'Purchase order', 
-      'Purchase return', 
-      'Purchase debit note',
-      'Purchase credit note', 
-      'Supplier', 'Supplier payment',
-      'Supplier account adjustment'
-    ],
-    Inventory: ['Stock adjustment', 'Physical stock reconcile', 'Bill of material', 'Assembled good'],
-    Staff: [
-     'Expense', 
-     'Indirect expense',
-     'Staff',
-     'Staff attendance',
-     'Staff payment',
-     'Staff account adjustment / write-off',
-     'Setup staff salary',
-     'Generate staff salary ',
-     'Reminder Management'
-    ],
-    Account: ['Bank book', 'Cash book', 'Loan account', 'Asset account', 'Capital account', 'Other income account', 'Tax payment'],
-    Report: [
-      'Cash book report',
-      'Business book report',
-      'Payment paid report',
-      'Payment received report',
-      'Daily summary report',
-      'Input output tax report',
-      'Profit loss summary report',
-      'Business book report',
-      'Chart of accounts report',
-      'Balance sheet report',
-      'Item register report',
-      'Stock summary report',
-      'Low level stock report',
-      'Stock availability report',
-      'Stock adjustment report',
-      'Consumable stock report',
-      'Fast moving item report',
-      'Item not moving report',
-      'Available serial report',
-      'Item list report',
-      'Daily summary report',
-      'Sale ageing report',
-      'Itemwise sale report',
-      'Invoicewise sale report',
-      'Invoicewise profit margin report',
-      'Itemwise profit margin report',
-      'Customerwise profit margin report',
-      'Invoicewise sale summary report',
-      'Customerwise sale summary report',
-      'Itemwise sale summary report',
-      'Active recurring report',
-      'Customer amount due report',
-      'Customer payment history report',
-      'Customer account balances report',
-      'Purchase ageing report',
-      'Billwise purchase report',
-      'Itemwise purchase report',
-      'Billwise purchase summary report',
-      'Itemwise purchase summary report',
-      'Supplierwise purchase summary report',
-      'Supplier payment history report',
-      'Suppplier account balances report',
-      'Expense report',
-      'Indirect expense report',
-      'Staff salary report',
-      'Staff commission report',
-      'Staff attendance report',
-      'Staff payment history report',
-      'TCS payable report',
-      'TCS receivable report',
-      'GSTR 1 report',
-      'GSTR 3B report',
-      'GST sale compatible report',
-      'GST purchase compatible report',
-      'GST indirect expense compatible report',
-      'Customer ledger report',
-      'Supplier ledger report',
-      'Staff ledger report',
-      'Business analysis report'
-    ],
-    'Master Config.': [
-      'Item master', 
-      'Discount schemes master',
-      'Brand master',
-      'Bank master',
-      'Group master',
-      'Unit master', 
-      'Expense master',
-      'Holiday master',
-      'Department master',
-      'Designation master',
-      'Location master',
-      'Industry master', 
-      'Service master',
-      'Table master',
-      'Warehouse master'
-    ],
-    'Misc': [
-      'Lock date in all transactions',
-      'Allow cloud backup restore',
-      'Allow to send SMS manually',
-      'Allow to generate and manage e-invoice',
-      'Allow to generate and manage e-way bill',
-      'Generate barcode',
-      'Allow item bulk import',
-      'Allow customer bulk import',
-      'Disable credit sale'
-    ]
-  };
+   
 
   isAdmin: boolean = false;
   isReadOnly: boolean = false;
@@ -195,11 +69,12 @@ changeTab(tab: string) {
   constructor(
     private authService: AuthService,
     private dialog: MatDialog,
-    private dialogRef: MatDialogRef<ManagementToolComponent>
+    private dialogRef: MatDialogRef<ManagementToolComponent>,
+    private SettingsService: SettingsService
   ) {}
 
   ngOnInit() {
-    this.authService.getActiveUsers().subscribe({
+    this.authService.getAllUsers().subscribe({
       next: (data) => {
         this.users = data;
       },
@@ -215,14 +90,43 @@ changeTab(tab: string) {
     return user.id;
   }
 
-  onUserChange(user: any) {
-    this.selectedUser = user;
-    this.selectedModule = 'Sale';
-  }
 
-  onModuleClick(module: string) {
-    this.selectedModule = module;
-  }
+onUserChange(user: any) {
+  this.selectedUser = user;
+  this.selectedModule = 'Sale';
+  this.moduleData = {}; // Important
+
+  this.SettingsService.getUserAccess(user.id).subscribe((access) => {
+    this.userAccessData = access;
+    this.onModuleClick('Sale'); // Load default module
+  });
+}
+
+
+onModuleClick(module: string) {
+  this.selectedModule = module;
+
+  // 👇 Skip reload if data already exists (and avoid overwriting user input)
+  if (this.moduleData[module]) return;
+
+  this.SettingsService.getModuleSettings(module).subscribe(settings => {
+    const accessKey = `${module.toLowerCase()}Access`;
+    const accessList = this.userAccessData?.[accessKey] || [];
+
+    this.moduleData[module] = settings.map((item: any) => {
+      const access = accessList.find((a: any) => a.settingId === item.id);
+      return {
+        id: item.id,
+        name: item.name,
+        view: access?.view ?? false,
+        add: access?.add ?? false,
+        modify: access?.modify ?? false,
+        delete: access?.delete ?? false
+      };
+    });
+  });
+}
+
 
   openAddUserDialog(): void {
     const dialogRef = this.dialog.open(AddUserDialogComponent, {
@@ -248,17 +152,23 @@ changeTab(tab: string) {
     });
   }
 
-  updateCheckboxStates(user: any): void {
-    if (user) {
-      this.isActive = user.status?.toLowerCase() === 'active';
-      this.isAdmin = user.role?.toLowerCase() === 'admin';
-      this.isReadOnly = user.hasOwnProperty('isReadOnly') ? !!user.isReadOnly : false;
-    } else {
-      this.isActive = false;
-      this.isAdmin = false;
-      this.isReadOnly = false;
-    }
+ updateCheckboxStates(user: any): void {
+  if (user) {
+    // ✅ Status is a boolean already
+    this.isActive = user.status === true;
+
+    // ✅ Role comparison - safe case-insensitive
+    this.isAdmin = user.role?.toLowerCase() === 'admin';
+
+    // ✅ Only tick ReadOnly if available
+    this.isReadOnly = !!user.isReadOnly;
+  } else {
+    this.isActive = false;
+    this.isAdmin = false;
+    this.isReadOnly = false;
   }
+}
+
 
   confirmAndDeleteUser(): void {
     if (!this.selectedUser) return;
@@ -281,4 +191,62 @@ changeTab(tab: string) {
       });
     }
   }
+
+
+saveAllAccessRights(): void {
+  if (!this.selectedUser) return;
+
+  const now = new Date().toISOString();
+  const userId = this.selectedUser.id;
+
+  const sanitizeAccess = (data: any[] = [], accessList: BaseAccess[] = []): BaseAccess[] =>
+  data.map(item => {
+    const existing = accessList.find(x => x.settingId === item.id);
+
+    return {
+      id: existing?.id ?? 0,           // 👈 Use existing ID if present
+      userId,
+      settingId: item.id,
+      view: item.view ?? false,
+      add: item.add ?? false,
+      modify: item.modify ?? false,
+      delete: item.delete ?? false,
+      createdAt: existing?.createdAt ?? now,   // Preserve original createdAt
+      lastUpdatedAt: now
+    };
+  });
+
+const access: SettingAccess = {
+  saleAccess: sanitizeAccess(this.moduleData['Sale'], this.userAccessData?.saleAccess),
+  purchaseAccess: sanitizeAccess(this.moduleData['Purchase'], this.userAccessData?.purchaseAccess),
+  inventoryAccess: sanitizeAccess(this.moduleData['Inventory'], this.userAccessData?.inventoryAccess),
+  staffAccess: sanitizeAccess(this.moduleData['Staff'], this.userAccessData?.staffAccess),
+  accountAccess: sanitizeAccess(this.moduleData['Account'], this.userAccessData?.accountAccess),
+  reportAccess: sanitizeAccess(this.moduleData['Report'], this.userAccessData?.reportAccess),
+  masterAccess: sanitizeAccess(this.moduleData['Master'], this.userAccessData?.masterAccess),
+  miscAccess: sanitizeAccess(this.moduleData['Misc'], this.userAccessData?.miscAccess)
+};
+
+  this.SettingsService.saveUserAccess(userId, access).subscribe({
+    next: (response) => {
+      alert(JSON.stringify(response))
+      if(response.statusCode == 200)
+      {
+        alert('All access rights saved successfully!');
+      }
+      else{
+        alert("failed to save access user rights")
+      }
+    },
+    error: (err) => {
+      console.error('Save failed:', err);
+      alert('Failed to save access rights.');
+    }
+    
+  });
+
+}
+
+
+
 }
