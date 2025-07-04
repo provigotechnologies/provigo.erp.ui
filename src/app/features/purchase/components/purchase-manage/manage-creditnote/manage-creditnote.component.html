@@ -1,0 +1,128 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+<div class="item-container">
+
+  <div class="page-header-wrapper">
+    <label class="page-heading">Search and Manage Supplier Credit Notes</label>
+  </div>
+
+  <div class="sec-container">
+
+    <div class="header">
+      <div class="filter-left">
+        <label>Select</label>
+        <select>
+          <option>Today</option>     
+          <option>Yesterday</option>
+          <option>This Week</option>
+          <option>Last 7 days</option>
+          <option>Last 14 days</option>
+          <option>This Month</option>    
+          <option>Last 30 days</option>
+          <option>Last month</option>
+          <option>This year</option>
+          <option>Custom</option>
+        </select>
+
+        <label>From</label>
+        <input type="date" />
+
+        <label>To</label>
+        <input type="date" />
+      </div>
+
+      <div class="search-box">
+        <input type="text" placeholder="Search keyword . . .">
+        <button class="search-btn">🔍</button>
+      </div>
+
+      <div class="top-buttons">
+        <button class="add-product"><strong>+</strong> Add New Credit Note</button>
+      </div>
+    </div>
+
+    </div>
+    
+  <div class="section-container">
+
+    <div class="table-action-container">
+      <div class="action-bar">
+        <input type="checkbox" />
+        <a style="color: #2d88ff;" href="#">Select All</a>
+        <a style="color: #ff0026;" href="#" title="Delete selected purchase return(s)">Delete</a>
+
+        <div class="filter-right">
+
+        <select class="filter-dropdown">
+          <option value="all">All</option>
+          <option value="nongst">Non GST</option>
+          <option value="gst">GSt</option>
+          <option value="billsupply">Bill of Supply</option>
+        </select>
+      </div>
+      </div>
+
+      <div class="table-scroll">
+        <table class="item-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>S. No.</th>
+              <th>Date</th>
+              <th>Type</th>
+              <th>Note No</th>
+              <th>Invoice No</th>
+              <th>Customer Name</th>
+              <th>Contact No</th>
+              <th>State(PoS)</th>    
+              <th>Address</th>
+              <th>GSTIN</th>
+              <th>Total Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="checkbox" /></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>   
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" /></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>   
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div> <!-- end section-container -->
+
+  <!-- Footer (outside the container) -->
+  <div class="footer">
+    <span><strong>Total:</strong></span>
+
+    <div class="buttons">
+      <button class="export-btn">
+        <i class="fas fa-file-excel"></i> Export 2 Excel
+      </button>
+    </div>
+  </div>
+
+</div>

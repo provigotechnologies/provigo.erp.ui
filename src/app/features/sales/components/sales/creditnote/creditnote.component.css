@@ -1,0 +1,19 @@
+.footer-columns {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  
+  .section-container {
+    margin: 25px 0 0 0 !important;  
+  }
+
+
+  @media (max-width: 768px) {
+    .footer-columns {
+      flex-direction: column;
+      gap: 10px !important;
+    }
+  
+  }
+  

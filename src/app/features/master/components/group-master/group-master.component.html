@@ -1,0 +1,162 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+<form #groupForm="ngForm" (ngSubmit)="addTable()" novalidate class="group-form">
+  <!-- Custom Confirmation Alert Box -->
+  <div *ngIf="showConfirmDelete" class="custom-alert">
+    <div class="confirm-icon-text">
+      <i class="fas fa-question-circle confirm-icon"></i>
+      <span>Do you want to delete this data?</span>
+    </div>
+    <div class="button-group">
+      <button class="yes" (click)="confirmDelete()">Yes</button>
+      <button class="no" (click)="cancelDelete()">No</button>
+    </div>
+  </div>
+
+  <div class="page-header-wrapper">
+    <label class="page-heading">Add New Group</label>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label for="groupName">Group Name <span class="required">*</span></label>
+      <div class="input-wrapper">
+        <input
+          type="text"
+          id="groupName"
+          name="groupName"
+          required
+          minlength="4"
+          maxlength="50"
+          pattern="^[a-zA-Z\s]+$"
+          [(ngModel)]="groupName"
+          #groupNameRef="ngModel"
+          (input)="filterAlphabets(); error = ''"
+        />
+        <div *ngIf="(groupNameRef.invalid && submitted)" class="error-message">
+          <div *ngIf="groupNameRef.errors?.['required']">Group name is required.</div>
+          <div *ngIf="groupNameRef.errors?.['pattern']">Only letters and spaces allowed.</div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="error && !groupNameRef.errors" class="error-message">{{ error }}</div>
+
+    <div class="form-group">
+      <label for="hsnCode">HSN/ SAC Code</label>
+      <input
+       type="text"
+        id="hsnCode" 
+        name="hsnCode" 
+        [(ngModel)]="hsnCode"
+        maxlength="20" />
+    </div>
+  </div>
+
+  <!-- GST Rates Section -->
+  <div class="gst-wrapper">
+    <label for="gst">GST Rates</label>
+    <div class="gst-two-rows">
+      <div class="gst-inline">
+        <div class="gst-box">
+          <span>CGST</span>
+        <input
+           type="text"
+           name="cgst"
+           [(ngModel)]="cgst"
+           inputmode="decimal"
+           maxlength="5"
+           (keypress)="allowOnlyNumbersWithDecimal($event)"
+           (input)="filterDecimal('cgst')"
+           />
+          <span>%</span>
+        </div>
+        <div class="gst-box">
+          <span>CESS</span>
+             <input
+           type="text"
+           name="cess"
+           [(ngModel)]="cess"
+           inputmode="decimal"
+           maxlength="5"
+           (keypress)="allowOnlyNumbersWithDecimal($event)"
+           (input)="filterDecimal('cess')"
+           />
+          <span>%</span>
+        </div>
+      </div>
+      <div class="gst-below">
+        <div class="gst-box">
+          <span>SGST</span>
+             <input
+           type="text"
+           name="sgst"
+           [(ngModel)]="sgst"
+           inputmode="decimal"
+           maxlength="5"
+           (keypress)="allowOnlyNumbersWithDecimal($event)"
+           (input)="filterDecimal('sgst')"
+           />
+          <span>%</span>
+        </div>
+        <div class="gst-box">
+          <span>IGST</span>
+            <input
+           type="text"
+           name="igst"
+           [(ngModel)]="igst"
+           inputmode="decimal"
+           maxlength="5"
+           (keypress)="allowOnlyNumbersWithDecimal($event)"
+           (input)="filterDecimal('igst')"
+           />
+          <span>%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Buttons -->
+  <div class="button-group">
+    <button class="primary-btn btn-add" type="submit">
+      {{ isEditMode ? 'Update' : 'Add' }}
+    </button>
+    <button class="primary-btn btn-cancel" type="button" (click)="cancel()">Cancel</button>
+  </div>
+
+  <!-- Table Section -->
+  <div class="table-wrapper">
+    <table class="bank-table">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Group Name</th>
+          <th>HSN/ SAC Code</th>
+          <th>CGST (%)</th>
+          <th>SGST (%)</th>
+          <th>IGST (%)</th>
+          <th>CESS (%)</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="groupList.length === 0">
+          <td colspan="8" style="text-align:center; color: gray;">No groups added yet.</td>
+        </tr>
+        <tr *ngFor="let item of groupList; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ item.groupName }}</td>
+          <td>{{ item.hsnCode }}</td>
+          <td>{{ item.cgst }}</td>
+          <td>{{ item.sgst }}</td>
+          <td>{{ item.igst }}</td>
+          <td>{{ item.cess }}</td>
+          <td>
+            <button type="button" (click)="editTable(i)">✏️</button>
+            <button type="button" (click)="deleteTable(i)">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</form>

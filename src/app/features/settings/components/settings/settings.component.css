@@ -1,0 +1,130 @@
+.item-container {
+  background: #fcfcfc;
+  margin: 0 0 0 30px;
+  box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.1),
+              0 6px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', sans-serif;
+  max-width: 90%;
+  overflow: hidden;
+  height: 82vh;              /* ✅ fixed height */
+  display: flex;
+  flex-direction: column;
+  border-radius: 6px;
+}
+
+.settings-container {
+  display: flex;
+  flex: 1;
+  min-height: 0;           /* ⚠️ required for flex + scroll */
+  overflow: hidden;
+}
+
+.page-header-wrapper {
+  width: 90%;              /* fill full width */
+  box-sizing: border-box;
+  margin: 4px 0;      /* space below heading */
+}
+
+.settings-container {
+  display: flex;
+  align-items: stretch; /* key line */
+  font-family: Arial, sans-serif;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+  
+.page-heading {
+  font-size: 14px;
+  font-weight: 560;
+  color: #a5a6a6;
+  padding-left: 10px;
+  margin-bottom: 18px;
+}
+
+.sidebar {
+  width: 160px;
+  background: #003147;
+  color: white;
+  padding: 1rem 0;
+  overflow-y: auto;       /* ✅ allow scroll if long */
+  max-height: 100%;
+}
+
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  padding: 12px 20px;
+  cursor: pointer;
+}
+
+.sidebar li.active {
+  background: #fff;
+  color: #949495;
+}
+
+.sidebar li:hover
+{
+  background: #003b57;
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  height: 100%;
+  padding: 0 14px 0 16px;
+  background: #f7f7f7;
+}
+
+/* Common thin scrollbar style */
+.sidebar::-webkit-scrollbar,
+.content::-webkit-scrollbar {
+  width: 6px;               /* smaller width */
+  height: 4px;              /* for horizontal scroll if needed */
+}
+
+.sidebar::-webkit-scrollbar-thumb,
+.content::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);  /* light thumb */
+  border-radius: 10px;                   /* rounded edges */
+}
+
+.sidebar::-webkit-scrollbar-track,
+.content::-webkit-scrollbar-track {
+  background: transparent;               /* no visible track */
+}
+
+
+.content h2 {
+  color: #003366;
+}
+
+@media (max-width: 768px) {
+  .settings-container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    max-height: 180px;
+    overflow-y: auto; /* ✅ vertical scroll if list overflows */
+  }
+
+  .content {
+    height: auto;
+    max-height: calc(100vh - 180px - 60px); /* 60px: approx header height */
+    overflow-y: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .item-container {
+    margin: 0;
+    max-width: 100%;
+  }
+}

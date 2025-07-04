@@ -1,0 +1,46 @@
+<div class="modal-backdrop" *ngIf="isVisible">
+    <div class="modal-content">
+  
+      <div class="modal-header">
+        <h2>Add item to schemes</h2>
+        <button class="close-btn" (click)="closeModal()">X</button>
+      </div>
+  
+      <div class="filter-row">
+        <select><option value="">Group</option></select>
+        <select><option value="">Brand</option></select>
+        <select><option value="">Location / Rack</option></select>
+  
+        <input type="text" placeholder="Enter text to search" />
+        <button class="search-btn">
+          <i class="material-icons">search</i> Search
+        </button>
+      </div>
+  
+      <div class="item-action-bar">
+        <a href="#">Select All</a> | 
+        <a href="#">Add Item To Scheme</a>
+      </div>
+  
+      <div class="table-scroll">
+        <table class="item-table">
+          <thead>
+            <tr>
+              <th><input type="checkbox" /></th>
+              <th>Item Name</th>
+              <th>Existing Scheme</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of itemList">
+              <td><input type="checkbox" /></td>
+              <td>{{ item.name }}</td>
+              <td>{{ item.scheme || '-' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+    </div>
+  </div>
+  

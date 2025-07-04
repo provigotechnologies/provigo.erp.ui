@@ -1,0 +1,173 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+<form #groupForm="ngForm" (ngSubmit)="addTable()" novalidate class="group-form">
+
+  <div *ngIf="showConfirm" class="custom-warning">
+  <div class="custom-warning-box">
+    <div class="error-message-row">
+      <i class="fas fa-exclamation-triangle warning-icon"></i>
+      <span>{{ error }}</span>
+    </div>
+    <button (click)="showConfirm = false">Ok</button>
+  </div>
+</div>
+
+  <!-- Custom Confirmation Alert Box -->
+<div *ngIf="showConfirmDelete" class="custom-alert">
+  <div class="confirm-icon-text">
+   <i class="fas fa-question-circle confirm-icon"></i>
+    <span>Do you want to delete this data?</span>
+  </div>
+  <div class="button-group">
+    <button class="yes" (click)="confirmDelete()">Yes</button>
+    <button class="no" (click)="cancelDelete()">No</button>
+  </div>
+</div>
+
+  <div class="page-header-wrapper">
+    <label class="page-heading">Add New Bank</label>
+  </div>
+
+
+  <div class="form-row">
+    <div class="form-group">
+      <label for="accountName">Account Name <span class="required">*</span></label>
+      <div class="input-wrapper">
+        <input
+          type="text"
+          id="accountName"
+          name="accountName"
+          required
+          maxlength="50"
+          pattern="^[a-zA-Z\s]+$"
+          [(ngModel)]="accountName"
+          #accountNameRef="ngModel"
+          (input)="filterAlphabets(); error = ''"
+        />
+        <div *ngIf="(accountNameRef.invalid && submitted)" class="error-message">
+          <div *ngIf="accountNameRef.errors?.['required']">Account name is required.</div>
+          <div *ngIf="accountNameRef.errors?.['pattern']">Only letters and spaces allowed.</div>
+        </div>
+      </div>
+    </div>
+    
+    <div *ngIf="error && !accountNameRef.errors" class="error-message">{{ error }}</div>
+  
+    <div class="form-group">
+      <label for="bankName">Bank Name <span class="required">*</span></label>
+      <div class="input-wrapper">
+        <input
+          type="text"
+          id="bankName"
+          name="bankName"
+          required
+          maxlength="100"
+          pattern="^[a-zA-Z\s]+$"
+          [(ngModel)]="bankName"
+          #bankNameRef="ngModel"
+          (input)="filterAlphabets(); error = ''"
+        />
+        <div *ngIf="(bankNameRef.invalid && submitted)" class="error-message">
+          <div *ngIf="bankNameRef.errors?.['required']">Bank name is required.</div>
+          <div *ngIf="bankNameRef.errors?.['pattern']">Only letters and spaces allowed.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GST Rates Section -->
+  <div class="form-row">
+   <div class="form-group">
+      <label for="accountNo">Account No <span class="required">*</span></label>
+      <div class="input-wrapper">
+       <input
+         type="text"
+         id="accountNo"
+          name="accountNo"
+         required
+         minlength="4"
+         maxlength="20"
+         pattern="^[0-9]+$"
+         inputmode="numeric"
+         [(ngModel)]="accountNo"
+         #accountNoRef="ngModel"
+          (keypress)="allowOnlyNumbers($event, 'accountNo')"
+          (input)="filterNumbers('accountNo'); error = ''"
+         />
+        <div *ngIf="(accountNoRef.invalid && submitted)" class="error-message">
+          <div *ngIf="accountNoRef.errors?.['required']">Account no is required.</div>
+        </div>
+      </div>
+    </div>
+
+       <div class="form-group radio-group">
+      <label class="radio-label">Type</label>
+      <div class="radio-options">
+        <label><input type="radio" name="billTo" checked /> Credit (+)</label>
+        <label><input type="radio" name="billTo" /> Debit (-)</label>
+      </div>
+    </div>
+    
+  </div>
+
+    <div class="form-row">
+   <div class="form-group">
+      <label for="openingBalance">Opening Balance </label>
+      <div class="input-wrapper"><input
+         type="text"
+          id="openingBalance"
+         name="openingBalance"
+         pattern="^[0-9]*$"
+         inputmode="numeric"
+         maxlength="20"
+         [(ngModel)]="openingBalance"
+          #openingBalanceRef="ngModel"
+         (keypress)="allowOnlyNumbers($event, 'openingBalance')"
+         (input)="filterNumbers('openingBalance'); error = ''"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- Buttons -->
+  <div class="button-group">
+    <button class="primary-btn btn-add" type="submit">
+      {{ isEditMode ? 'Update' : 'Add' }}
+    </button>
+    <button class="primary-btn btn-cancel" (ngSubmit)="addTable()" type="button" (click)="cancel()">Cancel</button>
+  </div>
+
+  <!-- Table Section -->
+  <div class="table-wrapper">
+    <table class="bank-table">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>A/c Name</th>   
+          <th>Bank Name</th>
+          <th>A/c No</th>     
+          <th>Opening Bal.</th>
+          <th>Type</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="bankList.length === 0">
+          <td colspan="8" style="text-align:center; color: gray;">No banks added yet.</td>
+        </tr>
+        <tr *ngFor="let item of bankList; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ item.accountName }}</td>
+          <td>{{ item.bankName }}</td>
+          <td>{{ item.accountNo }}</td>
+          <td>{{ item.openingBalance }}</td>
+          <td>{{ item.type }}</td>
+          <td>
+            <button type="button" (click)="editTable(i)">✏️</button>
+            <button type="button" (click)="deleteTable(i)">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</form>

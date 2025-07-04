@@ -1,0 +1,36 @@
+
+
+/* Radio Section */
+.radio-group {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: 1;
+  min-width: 240px;
+}
+
+.radio-label {
+  width: 120px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #444;
+  margin-bottom: 0;
+  text-align: left;
+}
+
+.radio-options {
+  display: flex;
+  gap: 15px;
+  font-size: 13px;
+  flex-wrap: wrap;
+}
+
+input[type="radio"] {
+  accent-color: #2980f2;
+}
+
+
+
+
+
+

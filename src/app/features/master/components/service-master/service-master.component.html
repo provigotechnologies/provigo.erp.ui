@@ -1,0 +1,298 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+<form #groupForm="ngForm" (ngSubmit)="addTable()" novalidate class="group-form">
+
+<div *ngIf="showConfirm" class="custom-alert">
+  <div class="custom-alert-box">
+    <div class="error-message-row">
+      <i class="fas fa-exclamation-triangle warning-icon"></i>
+      <span>{{ error }}</span>
+    </div>
+    <button (click)="showConfirm = false">Ok</button>
+  </div>
+</div>
+
+
+<!-- Main Layout Container -->
+<div class="product-main-container">
+  
+<!-- Heading Section -->
+<div class="page-header-wrapper">
+  <label class="page-heading">Add New  Service</label>
+</div>
+    <!-- Left Side --> 
+    <div class="product-container">
+      <!-- Left Container 1 -->
+      <div class="product-inner-container">
+        <!-- Category -->
+        <div class="form-row">
+          <label for="category">Group <span class="required">*</span></label>
+          <div class="form-input-group">
+         <select id="category" [(ngModel)]="group" name="group" required #groupRef="ngModel">
+           <option value="">Select Group</option>
+           <option value="cat1">Cat 1</option>
+           <option value="cat2">Cat 2</option>
+         </select>
+          <div *ngIf="groupRef.invalid && submitted" class="error-message">
+            Group is required.
+         </div>
+         </div>
+        </div>
+  
+        <!-- Barcode -->
+        <div class="form-row">
+          <label for="itemcode">Item Code</label>
+          <input 
+           type="text" 
+           id="itemcode" 
+           maxlength="50"
+           [(ngModel)]="itemCode"
+           name="itemCode"
+            />
+        </div>
+  
+        <!-- Product Name -->
+        <div class="form-row">
+          <label for="serviceName">Service Name <span class="required">*</span></label>
+            <div class="form-input-group">
+                  <input
+                     type="text"
+                    id="serviceName"
+                    name="serviceName"
+                    required
+                    minlength="4"
+                    maxlength="50"
+                    pattern="^[a-zA-Z\s]+$"
+                    [(ngModel)]="serviceName"
+                    #serviceNameRef="ngModel"
+                  />
+                    <div *ngIf="(serviceNameRef.invalid && submitted)" class="error-message">
+                     <div *ngIf="serviceNameRef.errors?.['required']">Service name is required.</div>
+                    </div> 
+                 </div>  
+             </div>
+
+              <div *ngIf="error && !serviceNameRef.errors" class="error-message">{{ error }}</div>
+  
+        <!-- Price -->
+        <div class="form-row">
+          <label for="printName">Print Name <span class="required">*</span></label>
+            <div class="form-input-group">
+           <input
+               type="text"
+               id="printName"
+               name="printName"
+               required
+               minlength="4"
+               maxlength="50"
+               pattern="^[a-zA-Z\s]+$"
+               [(ngModel)]="printName"
+               #printNameRef="ngModel"
+               />
+                <div *ngIf="(printNameRef.invalid && submitted)" class="error-message">
+                  <div *ngIf="printNameRef.errors?.['required']">Print name is required.</div>
+                </div> 
+           </div>
+        </div>
+      </div>
+  
+      <!-- Left Container 2 -->
+      <div class="product-inner-container">
+        <!-- Sale Price -->
+        <div class="form-row">
+            <label>Service Charge <span class="required">*</span></label>
+            <div class="form-input-group">
+              <div class="rupee-wrapper">
+                <span class="currency-symbol">₹</span>
+                 <input
+                    type="text"
+                     id="serviceCharge"
+                     name="serviceCharge"
+                     required
+                     minlength="4"
+                     maxlength="10"
+                     pattern="^[0-9]+$"
+                     inputmode="numeric"
+                     [(ngModel)]="serviceCharge"
+                     #serviceChargeRef="ngModel"
+                     (keypress)="allowOnlyNumbers($event, 'serviceCharge')"
+                     (input)="filterNumbers('serviceCharge'); error = ''"
+                   />
+                     <div *ngIf="(serviceNameRef.invalid && submitted)" class="error-message">
+                     <div *ngIf="serviceNameRef.errors?.['required']">Service charge is required.</div>
+                    </div>
+              </div>    
+            </div>        
+        </div>
+  
+        <!-- Min Sale Price -->
+        <div class="form-row">
+            <label>Min.Service Charge</label>
+            <div class="input-flex-wrapper"> <!-- NEW WRAPPER -->
+              <div class="rupee-wrapper">
+                <span class="currency-symbol">₹</span>
+                 <input
+                    type="text"
+                     id="minserviceCharge"
+                     name="minserviceCharge"
+                     minlength="4"
+                     maxlength="10"
+                     pattern="^[0-9]+$"
+                     inputmode="numeric"
+                     [(ngModel)]="minserviceCharge"
+                     #minserviceChargeRef="ngModel"
+                     (keypress)="allowOnlyNumbers($event, 'minserviceCharge')"
+                     (input)="filterNumbers('minserviceCharge'); error = ''"
+                   />
+              </div>    
+            </div>         
+        </div>
+    </div>
+  
+      <!-- Left Container 3 -->
+      <div class="product-inner-container">
+        <div class="form-row">
+          <label> Sale Discount</label>
+          <div class="input-flex-wrapper"> <!-- NEW WRAPPER -->
+            <div class="rupee-wrapper">
+              <span class="currency-symbol">₹</span>
+                  <input
+                    type="text"
+                     id="saleDiscount"
+                     name="saleDiscount"
+                     required
+                     minlength="4"
+                     maxlength="10"
+                     pattern="^[0-9]+$"
+                     inputmode="numeric"
+                     [(ngModel)]="saleDiscount"
+                     #saleDiscountRef="ngModel"
+                     (keypress)="allowOnlyNumbers($event, 'saleDiscount')"
+                     (input)="filterNumbers('saleDiscount'); error = ''"
+                   />
+            </div>    
+          </div>        
+      </div>
+      </div>
+
+    </div>
+  
+    <!-- Right Side -->
+    <div class="product-container">
+      <!-- Right Container 1 -->
+      <div class="product-inner-container">
+        <div class="form-row">
+          <label>HSN/ SAC Code</label>
+          <input
+           type="text" 
+           id="hsnCode" 
+           maxlength="20"
+           [(ngModel)]="hsnCode" 
+           name="hsnCode" />
+        </div>
+
+        <div class="form-row">
+          <div class="gst-container">
+            <label class="gst-label">GST Rates 
+              <span class="required">*</span></label>
+            <div class="gst-fields">
+              <div class="gst-row">
+                <div class="input-flex-wrapper"> <!-- NEW WRAPPER -->
+                  <div class="rupee-wrapper">
+                    <span class="currency-symbol">CGST</span>
+                  <input
+                   type="text"
+                   name="cgst"
+                   [(ngModel)]="cgst"
+                   maxlength="5"
+                   inputmode="decimal"
+                   (keypress)="allowOnlyNumbersWithDecimal($event)"
+                   (input)="filterDecimal('cgst')"
+                      />              
+                  <span class="currency-symbol">%</span>
+                  </div>    
+                </div>  
+                <div class="input-flex-wrapper"> <!-- NEW WRAPPER -->
+                  <div class="rupee-wrapper">
+                    <span class="currency-symbol">Cess</span>
+                    <input
+                     type="text"
+                     name="cess"
+                     [(ngModel)]="cess"
+                     maxlength="5"
+                     inputmode="decimal"
+                     (keypress)="allowOnlyNumbersWithDecimal($event)"
+                     (input)="filterDecimal('cess')"
+                      />          
+                    <span class="currency-symbol">%</span>
+                  </div>    
+                </div>  
+                </div>
+              <div class="gst-row">
+                <div class="input-flex-wrapper"> <!-- NEW WRAPPER -->
+                  <div class="rupee-wrapper">
+                    <span class="currency-symbol">SGST</span>
+                   <input
+                    type="text"
+                    name="sgst"
+                    [(ngModel)]="sgst"
+                    maxlength="5"
+                    inputmode="decimal"
+                    (keypress)="allowOnlyNumbersWithDecimal($event)"
+                    (input)="filterDecimal('sgst')"
+                      />             
+                   <span class="currency-symbol">%</span>
+                  </div>    
+                </div>  
+                <div class="input-flex-wrapper"> <!-- NEW WRAPPER -->
+                  <div class="rupee-wrapper">
+                    <span class="currency-symbol">IGST</span>
+                      <input
+                   type="text"
+                   name="igst"
+                   [(ngModel)]="igst"
+                   maxlength="5"
+                   inputmode="decimal"
+                   (keypress)="allowOnlyNumbersWithDecimal($event)"
+                   (input)="filterDecimal('igst')"
+                      />  
+                    <span class="currency-symbol">%</span>
+                  </div>    
+                </div>  
+                </div>
+            </div>
+          </div>
+        </div>            
+      </div>
+  
+      <!-- Right Container 2 -->
+      <div class="product-inner-container">   
+        <div class="form-row">
+          <label>Service Description</label>
+         <textarea rows="3"
+          [(ngModel)]="serviceDescription"
+           name="serviceDescription"
+           maxlength="500"
+           ></textarea>
+        </div>
+         <!-- First Row - 3 Checkboxes -->
+         <div class="form-row checkbox-row">
+          <div class="checkbox-label-wrapper">
+            <input type="checkbox" id="printDescription" />
+            <label for="printDescription">Print Description (Invoice)</label>
+          </div>
+        </div>        
+     </div>
+  
+
+    <div class="right-buttons">
+     <button class="primary-btn btn-add" type="submit" >
+         <i class="material-icons">save</i> Save
+      </button>
+   </div>
+
+  </div>
+
+  </div>
+
+  </form>

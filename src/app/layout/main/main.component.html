@@ -1,0 +1,349 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div class="dashboard-wrapper"> 
+
+<div class="top-alert-bar">
+  <span class="alert-text">Alert! Configure backup locations to enable data backup.</span>
+  <div class="alert-right">
+    <button class="icon"> <i style="font-size: 20px;" class="material-icons">support_agent</i></button>
+    <span class="app-id">APP ID : 101-108-927</span>
+  </div>
+</div>
+
+  <div class="dashboard-main">
+        
+    <div class="left-section">
+
+      <div class="sale-container">
+        <div class="header-top">
+          <div class="left-title">
+            <span>Dashboard</span>
+            <button class="icons"><i class="material-icons">visibility_off</i></button>
+          </div>
+          <div class="sales-controls">
+            <select>
+              <option>Today</option>
+              <option>This Week</option>
+              <option>This Month</option>
+            </select>
+            <button class="icon"><i class="material-icons">sync</i></button>
+          </div>
+        </div>
+    
+        <div class="summary-metrics">
+          <div class="row">
+            <div class="metric-box">
+              <div class="label">GROSS SALE</div>
+              <div class="value">₹ 0</div>
+            </div>
+            <div class="metric-box">
+              <div class="label">NO. OF INVOICES</div>
+              <div class="value">0</div>
+            </div>
+          </div>
+    
+          <div class="row">
+            <div class="metric-box">
+              <div class="label">AMOUNT RECEIVED</div>
+              <div class="value">₹ 0</div>
+            </div>
+            <div class="metric-box">
+              <div class="label">AMOUNT PAID</div>
+              <div class="value">₹ 0</div>
+            </div>
+          </div>
+        </div>
+      </div>    
+        
+      <div class="quick-actions">
+      <div class="action-column">
+        <button class="action-btn dark"><i class="material-icons">description</i> New Invoice</button>
+        <button class="action-btn blue"><i class="material-icons">shopping_cart</i> Add Purchase</button>
+        <button class="action-btn blue"><i class="material-icons">person</i> Add Customer</button>
+        <button class="action-btn dark"><i class="material-icons">add_circle</i> Payment In</button>
+      </div>
+      <div class="action-column">
+        <button class="action-btn dark"><i class="material-icons">request_quote</i> New Quotation</button>
+        <button class="action-btn blue"><i class="material-icons">receipt</i> Add Expense</button>
+        <button class="action-btn blue"><i class="material-icons">alarm</i> Add Reminder</button>
+        <button class="action-btn dark"><i class="material-icons">remove_circle</i> Payment Out</button>
+      </div>
+      </div>
+  
+      <!-- Business Insights Section -->
+       <div class="business-insights">
+      <div class="insights-header">
+        <span>BUSINESS INSIGHTS</span>
+      </div>
+      <div class="insights-chart">
+        <div class="insights-controls">
+          <select>
+            <option>Paid, Overdue, Due Invoice Distribution</option>
+            <option>Paid, Overdue, Due Invoice Distribution</option>
+            <option>Paid, Overdue, Due Invoice Distribution</option>
+          </select>
+          <select>
+            <option>Last 30 days</option>
+            <option>Last 90 days</option>
+          </select>
+          <button class="icon"><i class="material-icons">sync</i></button>
+        </div>
+          <!-- Chart.js canvas -->
+          <canvas id="pieChart" style="max-width: 220px; margin: auto;"></canvas>
+       </div>
+       </div>
+
+    </div>
+
+
+    <div class="right-section">
+    
+    <div class="search-box">
+      <input type="text" placeholder="Invoice No or Customer Name or Mobile No">
+      <div class="search-controls">
+        <select>
+        <option>Search in Invoice</option>
+        <option>Search in Customer</option>
+        <option>Search in Supplier</option>
+        <option>Search in Tag</option>
+        <option>Search in Stock</option>
+      </select>
+    </div>
+      <button class="search-btn">🔍</button>
+    </div>
+
+     <!-- 🟢 Add this to show the stats box on the right -->
+     <div class="vital-stats-box">
+    <div class="vital-header">
+      <span>Vital Stats</span>
+      <button class="icon"><i class="material-icons">sync</i></button>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-item orange">
+        <div class="stat-value">₹ 0</div>
+        <div class="stat-label">Amount Outstanding</div>
+      </div>
+      <div class="stat-item teal">
+        <div class="stat-value"> 0</div>
+        <div class="stat-label">Unpaid Invoices</div>
+      </div>
+      <div class="stat-item olive">
+        <div class="stat-value"> 0</div>
+        <div class="stat-label">Unpaid Purchases</div>
+      </div>
+      <div class="stat-item orange">
+        <div class="stat-value"> 0</div>
+        <div class="stat-label">Overdue Invoices</div>
+      </div>
+      <div class="stat-item orange">
+        <div class="stat-value"> 0</div>
+        <div class="stat-label">Open Quotation</div>
+      </div>
+      <div class="stat-item orange">
+        <div class="stat-value">0</div>
+        <div class="stat-label">Staff Present Today</div>
+      </div>
+    </div>
+    </div>
+
+    <div class="product-container">
+
+      <!-- Tabs -->
+      <div class="tab-header">
+        <div class="tab" 
+             [ngClass]="{'active': selectedTab === 'activity'}"
+             (click)="selectTab('activity')">
+          Recent Activity
+        </div>
+        <div class="tab" 
+             [ngClass]="{'active': selectedTab === 'customer'}"
+             (click)="selectTab('customer')">
+          Customer Due
+        </div>
+         <div class="tab" 
+          [ngClass]="{'active': selectedTab === 'supplier'}"
+           (click)="selectTab('supplier')">
+           Supplier Due
+         </div>
+        <div class="tab" 
+          [ngClass]="{'active': selectedTab === 'received'}"
+          (click)="selectTab('received')">
+          Amount Received 
+         </div>
+        <div class="tab" 
+          [ngClass]="{'active': selectedTab === 'paid'}"
+          (click)="selectTab('paid')">
+          Amount Paid
+         </div>
+      </div>
+
+     <!-- Tab Content -->
+     <div class="product-inner-container">
+      <!-- Item Info UI -->
+      <ng-container *ngIf="selectedTab === 'activity'">
+
+        <div class="serial-number-section">
+            
+          <div class="insights-controls">
+            <select>
+              <option>All</option>
+              <option>Sale</option>
+              <option>Purchase</option>
+              <option>Expense</option>
+              <option>Amount Received</option>
+            </select>
+            <select>
+              <option>Last 30 days</option>
+              <option>Last 90 days</option>
+            </select>
+            <button class="icon"><i class="material-icons">sync</i></button>
+          </div>
+            
+              <canvas id="lineChart" height="200"></canvas>
+         </div>
+
+      </ng-container>
+
+      <!-- Serial Numbers UI -->
+      <ng-container *ngIf="selectedTab === 'customer'">
+
+        <!-- You can design this however you want -->
+        <div class="serial-number-section">
+          <fieldset class="form-box">
+
+            <div class="form-row">
+       
+            </div>
+
+          </fieldset>  
+        </div>
+        
+      </ng-container>
+
+      <!-- Serial Numbers UI -->
+      <ng-container *ngIf="selectedTab === 'supplier'">
+
+        <!-- You can design this however you want -->
+        <div class="serial-number-section">
+          <fieldset class="form-box">
+
+            <div class="form-row">
+       
+            </div>
+
+          </fieldset>  
+        </div>
+        
+      </ng-container> 
+      
+      <!-- Serial Numbers UI -->
+      <ng-container *ngIf="selectedTab === 'received'">
+
+        <!-- You can design this however you want -->
+        <div class="serial-number-section">
+           <!-- Table Section -->
+            <div class="table-wrapper">
+             <table class="bank-table">
+              <thead>
+                <tr>
+                   <th>Customer Name</th>
+                   <th>Description</th>
+                   <th>Amount</th>
+                 </tr>
+                </thead>
+               <tbody>
+                 <!-- Show 3 empty rows if list is empty -->
+                  <ng-container *ngIf="bankList.length === 0">
+                    <tr>
+                   <td ></td>
+                   </tr>
+                  </ng-container>
+               
+                    <!-- Show data rows -->
+                   <tr *ngFor="let name of bankList; let i = index">
+                    <td>{{ name }}</td>
+                   <td>{{ description }}</td>
+                   <td>{{ amount }}</td>
+                 </tr>
+              </tbody>
+            </table>
+            </div>
+        </div>
+        
+      </ng-container>
+ 
+      <!-- Serial Numbers UI -->
+      <ng-container *ngIf="selectedTab === 'paid'">
+
+        <!-- You can design this however you want -->
+        <div class="serial-number-section">
+           <!-- Table Section -->
+           <div class="table-wrapper">
+            <table class="bank-table">
+             <thead>
+               <tr>
+                  <th>Paid To</th>
+                  <th>Description</th>
+                  <th>Amount</th>
+                </tr>
+               </thead>
+              <tbody>
+                <!-- Show 3 empty rows if list is empty -->
+                 <ng-container *ngIf="bankList.length === 0">
+                   <tr>
+                  <td ></td>
+                  </tr>
+                 </ng-container>
+              
+                   <!-- Show data rows -->
+                  <tr *ngFor="let name of bankList; let i = index">
+                   <td>{{ name }}</td>
+                  <td>{{ description }}</td>
+                  <td>{{ amount }}</td>
+                </tr>
+             </tbody>
+           </table>
+         </div> 
+        </div>
+        
+      </ng-container>
+    </div>
+
+    </div>
+
+   </div>
+
+  </div>
+
+</div>
+
+<script>
+  const ctx = document.getElementById('pieChart').getContext('2d');
+  const pieChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: ['Sales', 'Purchase', 'Expense'],
+      datasets: [{
+        label: 'Business Overview',
+        data: [50000, 20000, 10000], // Replace with dynamic values if needed
+        backgroundColor: ['#28a745', '#007bff', '#dc3545'],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'bottom'
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              return `${context.label}: ₹${context.parsed}`;
+            }
+          }
+        }
+      }
+    }
+  });
+</script>
+

@@ -1,0 +1,29 @@
+
+.right-buttons {
+    margin-top: 15px !important;
+  }  
+  
+
+  @media (max-width: 600px) {
+    .right-buttons {
+        justify-content: flex-start !important;
+      } 
+  }
+
+  .footer-buttons {
+    display: flex;
+    gap: 20px;
+    background: #007bff;
+    padding: 6px 12px;
+    margin-top: -4px !important;
+  }
+  
+
+  .bottom-left-container {
+    justify-content: flex-end !important;
+  }
+
+
+  .full-page-container {
+    margin: 20px 0 0 0 !important;
+  }

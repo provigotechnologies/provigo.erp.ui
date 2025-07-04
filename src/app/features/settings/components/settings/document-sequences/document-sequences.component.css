@@ -1,0 +1,171 @@
+.sequence-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap; /* Makes it responsive on small screens */
+  margin-bottom: 10px;
+}
+
+.sequence-item {
+  position: relative;
+  width: 100%;
+  max-width: 310px; /* Controls card width */
+}
+
+.settings-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1278fd;
+  border-bottom: 2px solid #1278fd;
+  margin: 10px 0 15px 0;
+}
+
+.sequence-title {
+  position: absolute;
+  top: -10px;
+  left: 6px;
+  color: #000;
+  padding: 2px 10px;
+  font-size: 13px;
+  font-weight: bold;
+  border-radius: 4px;
+  z-index: 1;
+}
+
+.sequence-card {
+  border: 1px solid #e7e7e7;
+  padding: 2px 8px ;
+  padding-top: 14px; /* So content doesn't overlap the title */
+  background: #f7f7f7;
+  position: relative;
+  margin-top: 0px;
+}
+
+
+.sequence-card h3 {
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+
+
+.form-row, .reset-row {
+  display: flex;
+  align-items: center;
+  /* remove justify-content: space-between */
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.form-row input[type="text"]{
+  flex: 1 1 0;
+  max-width: 130px; /* Increase min width */
+  margin-left: 6px;
+  padding: 6px 8px;
+  font-size: 13px;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  transition: border-bottom 0.2s;
+}
+
+.form-row select {
+  flex: 1 1 0;
+  max-width: 145px; /* Increase min width */
+  padding: 6px 8px;
+  font-size: 13px;
+  margin-left: 6px;
+  outline: none;
+}
+
+  .form-row input[type="text"]:focus{
+    outline: none;
+    border-bottom: 2px solid #0775ea;
+}
+
+.preview-box {
+  flex: 1 1 0;
+  max-width: 110px; /* Same width as input/select */
+  background-color: #0775ea;
+  color: white;
+  padding: 6px 16px;
+  font-size: 13px;
+  font-weight: bold;
+  text-align: center;
+  margin-left: 8px;
+}
+
+
+.form-row label,
+.reset-row label {
+  flex: 0 0 110px; /* fixed label width */
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* For reset-row checkbox label and preview box alignment */
+.reset-row label {
+  flex: 0 0 auto; /* auto width for checkbox label */
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+}
+
+.required {
+  color: red;
+}
+
+.reset-row input[type="checkbox"] {
+  margin-right: 4px;
+}
+
+.reset-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  margin-top: 20px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.reset-info {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 20px;
+  width: 100%;
+}
+
+.reset-info .left-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex: 1;
+  min-width: 200px;
+  position: relative;
+}
+
+.spacer {
+  flex-grow: 1; /* Pushes link down */
+}
+
+.reset-link {
+  color: red;
+  text-decoration: underline;
+  display: inline-block;
+}
+
+.reset-info .right-side {
+  flex: 2; /* Previously was 1 */
+  min-width: 400px; /* Increase min width */
+}
+
+
+.keywords {
+  background-color: #d4fdd4;
+  border: 1px solid #d4fdd4;
+  padding-left: 10px;
+  font-size: 12px;
+  line-height: 1.4;
+}

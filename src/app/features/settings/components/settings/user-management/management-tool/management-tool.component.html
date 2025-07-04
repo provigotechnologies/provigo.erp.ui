@@ -1,0 +1,128 @@
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+   <div class="page-header-wrapper">
+      <label class="page-heading">User Management</label>
+      <button class="close-btn" (click)="onClose()">×</button>
+    </div>
+    
+  <div class="settings-container">
+
+  <div class="sidebar">
+    <ul>
+      <li [class.active]="selectedTab === 'manage'" (click)="selectedTab = 'manage'">Manage User</li>
+      <li [class.active]="selectedTab === 'access'" (click)="selectedTab = 'access'">Access Rights</li>
+      <li [class.active]="selectedTab === 'log'" (click)="selectedTab = 'log'">Security Log</li>
+    </ul>
+  </div>
+
+<div class="main-panel">
+
+  <div class="tab-content" *ngIf="selectedTab === 'access'">
+  <h3>User Access Rights</h3>
+    <div class="form-group">
+      <label for="userSelect">Select User</label>
+      <select id="userSelect" [(ngModel)]="selectedUser">
+        <option value="">Select</option>
+        <option *ngFor="let user of users trackBy: trackByUserId" [value]="user.id">{{ user.firstName }}</option>
+      </select>
+    </div>
+  </div>
+
+<!-- Move this OUTSIDE tab-content but INSIDE selectedTab === 'access' -->
+  <div *ngIf="selectedTab === 'access'" class="note-wrapper">
+    <div class="note-box">
+      Note: Admin role will override these settings
+    </div>
+    <button class="save-btn">
+     <i class="fas fa-save"></i> Save
+    </button>
+  </div>
+
+<div class="tab-content" *ngIf="selectedTab === 'manage'">
+  <h3>Manage User</h3>
+
+  <div class="manage-user-container">
+    <!-- User Selection -->
+    <div class="form-user">
+      <label for="userSelect">Select User</label>
+      <select id="userSelect" [(ngModel)]="selectedUser" (ngModelChange)="onUserChange($event)" class="styled-select">
+        <option  [ngValue]="null">--Select--</option>
+        <option *ngFor="let user of users"  [ngValue]="user">{{ user.firstName }}</option>
+      </select>
+
+     <a (click)="openAddUserDialog()" class="add-user">Add User</a>
+    </div>
+
+    <!-- Show only when a user is selected -->
+<div *ngIf="selectedUser">
+
+  <!-- Password and Delete -->
+  <div class="link-row actions">
+    <a (click)="openUpdateUserDialog()" class="link set-password">Update User</a>
+    <a (click)="confirmAndDeleteUser()" class="link delete-user">Delete User</a>
+  </div>
+
+</div>
+
+<!-- Permissions -->
+  <div class="form-group checkbox-group">
+    <label>
+      Set Admin Role 
+      <input type="checkbox" [(ngModel)]="isAdmin" />
+    </label>
+
+   <label *ngIf="isAdmin">
+     Read Only Access
+     <input type="checkbox" [(ngModel)]="isReadOnly" />
+   </label>
+
+  </div>
+
+  <div class="form-group checkbox-group">
+    <label>
+      Active
+      <input type="checkbox" [(ngModel)]="isActive" />
+    </label>
+  </div>
+  
+</div>
+
+  </div>
+
+    <div *ngIf="selectedTab === 'manage'" class="btn-wrapper">
+     <button class="save-btn">
+       <i class="fas fa-save"></i> Save
+      </button>
+    </div>
+
+    <div class="tab-content" *ngIf="selectedTab === 'log'">
+      <h3>Security Logs</h3>
+        <div class="filter-row">
+
+        <!-- Row 2 -->
+        <div class="row">
+          <div class="date-group">
+            <label>From</label>
+            <input type="date" />
+          </div>
+          <div class="date-group">
+            <label>Upto</label>
+            <input type="date" />
+          </div>
+
+      <!-- Row: Quick Filters Left + Search/Reset Right -->
+       <div class="right-buttons">
+        <button class="primary-btn">
+          <span class="material-icons">search</span> Search
+        </button>
+         </div>
+        </div>
+  
+    </div>
+    </div>
+
+     </div>
+    </div>
+
+

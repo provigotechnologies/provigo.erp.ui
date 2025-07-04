@@ -1,0 +1,123 @@
+.app-header {
+    background-color: #f4f7fa;
+    height: 45px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  .header-left .logo {
+    height: 28px;
+    object-fit: contain;
+    margin-left: 70px;
+  }
+  
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  
+  .header-right i {
+    font-size: 22px;
+    color: #666;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+  
+
+  .help-btn {
+    background-color: #003b5b;
+    color: #fff; /* Black text color */
+    border: 1px solid #ddd; /* Light border for the button */
+    padding: 6px; /* Adjust padding for spacing */
+    border-radius: 4px; /* Optional: rounded corners */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .help-btn i {
+    background-color: #fff;
+    color: #003b5b; /* Black text color */
+    margin-right: 8px; /* Add spacing between the icon and text */
+  }
+  
+  .help-btn:hover {
+    cursor: pointer;
+  }
+  
+  /* For mobile screens, adjust logo size and align it properly */
+  @media (max-width: 768px) {
+    .header-left .logo {
+     margin-left: 60px;
+      height: 24px; /* Smaller logo on mobile */
+    }
+  
+    .header-right {
+      gap: 10px; /* Adjust gap between icons */
+    }
+  
+    .header-right i {
+      font-size: 20px; /* Adjust icon size on mobile */
+    }
+  
+    .help-btn {
+      padding: 4px; /* Adjust padding on mobile */
+    }
+  
+    .help-btn i {
+      margin-right: 6px; /* Adjust spacing on mobile */
+    }
+  
+    /* Make header-left (logo) align to the left with some space for the hamburger */
+    .header-left {
+      flex-grow: 1;
+      display: flex;
+      justify-content: flex-start;
+    }
+  
+    .header-right {
+      flex-shrink: 0;
+    }
+  
+    /* Reduce the logo size slightly when there's a hamburger menu on mobile */
+    .header-left {
+      justify-content: flex-start;
+    }
+  }
+  
+  /* For very small screens, adjust layout further */
+ /* For very small screens, adjust layout further */
+@media (max-width: 576px) {
+    .app-header {
+      padding: 0 8px; /* Less padding on very small screens */
+    }
+  
+    .header-left .logo {
+      height: 22px; /* Even smaller logo */
+    }
+  
+    .header-right i {
+      font-size: 18px; /* Even smaller icons */
+    }
+  
+    /* Ensure hamburger menu visibility */
+    .hamburger-menu {
+      display: block;
+    }
+  
+    /* Instead of hiding the header-right icons, position them correctly */
+    .header-right {
+      display: flex; /* Make it visible */
+      gap: 8px; /* Adjust spacing between icons */
+      justify-content: flex-end; /* Align icons to the right */
+    }
+  }
+  
+  

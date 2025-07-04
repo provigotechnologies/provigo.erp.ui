@@ -1,0 +1,24 @@
+.settings-content {
+    padding-left: 12px;
+  }
+
+  .user-message {
+    margin-bottom: 30px;
+    font-size: 16px;
+    color: #333;
+  }
+
+  .user-message p {
+    color: #a7a5a5;
+    margin: 8px 0;
+    font-size: 14px;
+  }
+
+  .user-link a {
+    display: inline-block;
+    color: #0c92a4c7;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+ 

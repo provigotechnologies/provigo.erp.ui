@@ -1,0 +1,488 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+<div *ngIf="showConfirm" class="custom-alert">
+  <div class="custom-alert-box">
+    <div class="error-message-row">
+      <i class="fas fa-exclamation-triangle warning-icon"></i>
+      <span>{{ error }}</span>
+    </div>
+    <button (click)="showConfirm = false">Ok</button>
+  </div>
+</div>
+
+<!-- app.component.html -->
+<div class="app-container">
+    <div class="main-content">
+  
+      <!-- Invoice Info -->
+      <form class="invoice-form">
+  
+        <div class="section-container">
+  
+         <!-- Row 1 -->
+          <div class="form-row">
+        
+            <label>Note Type
+             <span class="add-item-link">Retail</span>
+              <select [(ngModel)]="noteType" name="noteType" required #noteTypeRef="ngModel">   
+              <option value="">GST</option>
+              <option>Non-GST</option>
+              <option>Bill of Supply</option>
+              </select>
+            </label>
+
+           <label> Date
+            <input type="date" [(ngModel)]="date" name="date" required />
+            </label>
+    
+           <label>Shipping Date
+            <input type="date" [(ngModel)]="shippingDate" name="shippingDate" required />
+            </label>
+
+         <label>
+            <span>Place of Supply <span class="required">*</span></span>
+            <select [(ngModel)]="supply" name="supply" required #supplyRef="ngModel">
+             <option value="">Tamil Nadu</option>
+             <option>Kerala</option>
+             </select>
+          </label>
+             
+          <div class="radio-group">
+            <label class="radio-label">Bill To</label>
+            <div class="radio-options">
+              <label><input type="radio" name="billTo"  checked />  Cash A/c</label>
+              <label><input type="radio" name="billTo"  />  Customer A/c</label>
+            </div>
+          </div>
+
+          </div>
+  
+          <!-- Row 2 -->
+          <div class="form-row">
+   
+           <label> 
+          <span>Customer <span class="required">*</span></span>
+            <input
+              type="text"
+              name="customer"
+              [(ngModel)]="customer"
+              required
+              minlength="4"
+              maxlength="50"
+              pattern="^[a-zA-Z\s]+$"
+              #customerRef="ngModel"
+            />
+            <div *ngIf="customerRef.invalid && submitted" class="error-message">
+              <div *ngIf="customerRef.errors?.['required']">Customer name is required.</div>
+              <div *ngIf="customerRef.errors?.['pattern']">Only alphabets allowed.</div>
+            </div>
+            </label>
+          
+          <label>ContacNo
+          <input
+             type="text"
+             name="contactNo"
+             [(ngModel)]="contactNo"
+             pattern="^[0-9]+$"
+             maxlength="10"
+             inputmode="numeric"
+             #contactNoRef="ngModel"
+             (keypress)="allowOnlyNumbers($event, 'contactNo')"
+             (input)="filterNumbers('contactNo'); error = ''"
+            />
+            </label>
+  
+          <label>Address 
+            <input
+              type="text"
+              name="address"
+              [(ngModel)]="address"
+              required
+              maxlength="500"
+              pattern="^[a-zA-Z\s]+$"
+              #addressRef="ngModel"
+            />
+            </label>
+
+         <label>Customer GSTIN
+            <input
+              type="text"
+              name="custGst"
+              [(ngModel)]="custGst"
+              required
+              maxlength="50"
+              #custGstRef="ngModel"
+            />
+            </label>
+
+          </div>
+        </div>
+  
+        <div class="section-container">
+  
+          <!-- 🔹 Row 1: Horizontal Input Fields -->
+              <div class="input-row">
+
+                 <label class="stacked-label">
+                  <span>Serial No</span>
+                 <div class="rupee-wrapper"  style="display: flex; align-items: center;">
+                  <span style="padding: 6px; background-color: #007bff; height: 13px; color: white;"></span>
+                    <input
+                      type="text"
+                      name="serialNo"
+                      [(ngModel)]="serialNo"
+                      required
+                      maxlength="10"
+                      #serialNoRef="ngModel"
+                    />
+                  </div>
+                </label>
+  
+               <label class="stacked-label" id="itemname">
+                  <span>Item Name<span class="required">*</span></span>
+                    <input
+                      type="text"
+                      class="header-input"
+                      name="itemName"
+                      [(ngModel)]="itemName"
+                      required
+                      maxlength="50"
+                      pattern="^[a-zA-Z\s]+$"
+                      #itemNameRef="ngModel"
+                    />
+                    <div *ngIf="itemNameRef.invalid && submitted" class="error-message">
+                      <div *ngIf="itemNameRef.errors?.['required']">Item name is required.</div>
+                    </div>
+                </label>
+  
+                <label class="stacked-label">
+                  <span>Unit<span class="required">*</span></span>
+                  <select [(ngModel)]="unit" name="unit" required #unitRef="ngModel">
+                    <option>PCS</option><option>KG</option>
+                  </select>
+                </label>
+  
+                <label class="stacked-label">
+                  <span>Quantity<span class="required">*</span></span>
+                  <input
+                   type="text"
+                   name="quantity"
+                   [(ngModel)]="quantity"
+                   pattern="^[0-9]+$"
+                   maxlength="10"
+                   inputmode="numeric"
+                   #quantityRef="ngModel"
+                   (keypress)="allowOnlyNumbers($event, 'quantity')"
+                   (input)="filterNumbers('quantity'); error = ''"
+                  />
+                </label>
+  
+                <label class="stacked-label">
+                  <span>Sale Price<span class="required">*</span></span>
+                 <div class="rupee-wrapper"  style="display: flex; align-items: center;">
+                  <span style="padding: 6px; background-color: #007bff; height: 13px; color: white;">₹</span>
+                    <input
+                      type="text"
+                      name="salePrice"
+                      [(ngModel)]="salePrice"
+                      pattern="^[0-9]+$"
+                      maxlength="20"
+                      inputmode="numeric"
+                      #salePriceRef="ngModel"
+                      (keypress)="allowOnlyNumbers($event, 'salePrice')"
+                      (input)="filterNumbers('salePrice'); error = ''"
+                    />
+                  </div>
+                </label>
+        
+                <label class="stacked-label">
+                  <span>M.R.P</span>
+                 <div class="rupee-wrapper"  style="display: flex; align-items: center;">
+                  <span style="padding: 6px; background-color: #007bff; height: 13px; color: white;">₹</span>
+                    <input
+                      type="text"
+                      name="mrp"
+                      [(ngModel)]="mrp"
+                      pattern="^[0-9]+$"
+                      maxlength="20"
+                      inputmode="numeric"
+                      #mrpRef="ngModel"
+                      (keypress)="allowOnlyNumbers($event, 'mrp')"
+                      (input)="filterNumbers('mrp'); error = ''"
+                    />
+                  </div>
+                </label>
+  
+                <label class="stacked-label">
+                  <span>Disc(%)</span>
+                 <div class="rupee-wrapper"  style="display: flex; align-items: center;">
+                  <span style="padding: 6px; background-color: #007bff; height: 13px; color: white;">₹</span>
+                   <input
+                      type="text"
+                      name="discount"
+                      [(ngModel)]="discount"
+                      pattern="^[0-9]+$"
+                      maxlength="10"
+                      inputmode="numeric"
+                      #discountRef="ngModel"
+                      (keypress)="allowOnlyNumbersWithDecimal($event)"
+                      (input)= "error = ''"
+                    />
+                  </div>
+                </label>
+  
+                <label>Tax%
+                 <select [(ngModel)]="tax" name="tax" required #taxRef="ngModel">
+                  </select>
+                </label>
+  
+                <label>Cess%
+                 <select [(ngModel)]="cess" name="cess" required #cessRef="ngModel">
+                  </select>
+                </label>
+  
+                <label class="stacked-label">
+                  <span>Amount<span class="required"></span></span>
+                 <div class="rupee-wrapper"  style="display: flex; align-items: center;">
+                  <span style="padding: 6px; background-color: #007bff; height: 13px; color: white;">₹</span>
+                    <input
+                      type="text"
+                      style="background-color: rgb(244, 241, 241);"
+                      name="amount"
+                      [(ngModel)]="amount"
+                      pattern="^[0-9]+$"
+                      maxlength="10"
+                      inputmode="numeric"
+                      #amountRef="ngModel"
+                      (keypress)="allowOnlyNumbersWithDecimal($event)"
+                      (input)= "error = ''"
+                      readonly
+                    />
+                  </div>
+                </label>
+
+              </div>
+  
+            <!-- 🔹 Row 2: Item Tag + Add -->
+            <div class="item-tags">
+  
+              <div class="radio-group">
+                <div class="radio-options">
+                  <label><input type="radio" name="tag" checked />Item Tag</label>
+                  <label><input type="radio" name="tag" />Item Code</label>
+                </div>
+              </div>
+  
+              <div class="item-fields">
+                <input id="desc" type="text" class="desc-input" placeholder="Item Description" />
+                <button type="button" class="add-btn" (click)="addItem()">
+                  <i class="material-icons">add</i> Add
+                </button>
+              </div>
+              
+            </div>    
+  
+           <div class="table-container">
+          <table class="item-table">
+            <thead>
+              <tr>
+                <th>S.No</th>
+                <th>Item Name</th>
+                <th>Tag</th>
+                <th>Quantity</th>
+                <th>Unit</th>
+                <th>Unit Price</th>
+                <th>Disc (%)</th>
+                <th>Tax (%)</th>
+                <th>Cess (%)</th>
+                <th>Net Price</th>
+                <th>Amount Before Tax</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="itemList.length === 0">
+                <td colspan="12" class="text-center text-muted">No Items added yet.</td>
+              </tr>
+              <tr *ngFor="let item of itemList; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ item.itemName }}</td>
+                <td>{{ item.tag }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.unit }}</td>
+                <td>{{ item.unitPrice }}</td>
+                <td>{{ item.discount }}</td>     
+                <td>{{ item.tax }}</td>
+                <td>{{ item.cess }}</td>
+                <td>{{ item.netPrice }}</td>
+                <td>{{ item.amntbeforeTax }}</td>
+                <td>
+                  <button type="button" (click)="editTable(i)">✏️</button>
+                  <button type="button" (click)="deleteTable(i)">🗑️</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+           </div>
+  
+        </div>
+       
+        <div class="invoice-footer-grid">
+          <div class="footer-columns">
+  
+          <div class="grid-container">
+        
+            <div class="label">
+              <div class="checkbox-label">
+                <input type="checkbox"  style="color: #007bff;" />
+                <span>Add'l discount</span>
+              </div>
+            </div>
+            <div class="input-pair">
+              <input
+                 type="text"
+                 placeholder="Discount%"
+                 name="discountPercent"
+                 [(ngModel)]="discountPercent"
+                 pattern="^[0-9]+$"
+                 maxlength="10"
+                 inputmode="numeric"
+                 #discountPercentRef="ngModel"
+                 (keypress)="allowOnlyNumbersWithDecimal($event)"
+                 (input)= "error = ''"
+                />
+              <span>or</span>
+              <input
+                type="text"
+                name="discountAmount"
+                placeholder="₹ Amount"
+                [(ngModel)]="discountAmount"
+                pattern="^[0-9]+$"
+                maxlength="20"
+                inputmode="numeric"
+                discountAmountRef="ngModel"
+                (keypress)="allowOnlyNumbersWithDecimal($event)"
+                (input)= "error = ''"
+              />
+            </div>
+        
+            <div class="label">
+              <div class="checkbox-label">
+                <input type="checkbox"  />
+                <span>Add reference</span>
+              </div>
+            </div>
+            <div class="input-pair">
+              <select><option>P.O. No.</option></select>
+              <span></span><span></span> <span></span>
+              <input
+                type="text"
+                placeholder="Document No."
+                name="mrp"
+                [(ngModel)]="mrp"
+                pattern="^[0-9]+$"
+                maxlength="20"
+                inputmode="numeric"
+                mrpRef="ngModel"
+                (keypress)="allowOnlyNumbers($event, 'mrp')"
+                (input)="filterNumbers('mrp'); error = ''"
+              />
+            </div>
+        
+            <div class="label">
+              <div class="checkbox-label">
+                <input type="checkbox"  />
+                <span>Add shipping</span>
+              </div>
+            </div>
+            <div class="input-pair">
+              <input
+                type="text"
+                placeholder="₹ Amount"
+                name="mrp"
+                [(ngModel)]="mrp"
+                pattern="^[0-9]+$"
+                maxlength="20"
+                inputmode="numeric"
+                mrpRef="ngModel"
+                (keypress)="allowOnlyNumbers($event, 'mrp')"
+                (input)="filterNumbers('mrp'); error = ''"
+              />
+              <span></span><span></span> <span></span>
+               <select [(ngModel)]="shipPercent"
+                name="shipPercent" 
+                #shipPercentRef="ngModel" 
+              >
+                <option value="">Shipping Tax%</option>
+              </select>
+            </div>  
+
+          </div>
+  
+           <!-- WRAP these two in a flex row -->
+              <div class="textarea-column">
+            <div class="textarea-row">
+              <div class="group textarea">
+                <label>Delivery Terms</label>
+                <textarea 
+                rows="4" 
+                cols="28"
+                maxlength="500"></textarea>
+              </div>
+              <div class="group textarea">
+                <label>Remarks (Private Use)</label>
+                <textarea
+                 rows="4" 
+                 cols="28"
+                 maxlength="500"></textarea>
+              </div>
+            </div>
+          </div>           
+  
+          <div class="amount-summary">
+            <div class="row">
+              <span><strong>Sub Total</strong></span>
+              <span class="value">₹ 0.00</span>
+            </div>
+            <div class="row">
+              <span>Add CGST (0%)</span>
+              <span class="value">₹ 0.00</span>
+            </div>
+            <div class="row">
+              <span>Add SGST (0%)</span>
+              <span class="value">₹ 0.00</span>
+            </div>
+            <div class="row total">
+              <span><strong>Total Amount</strong></span>
+              <span class="value"><strong>₹ 0.00</strong></span>
+            </div>
+          </div>        
+          
+          
+          </div>
+        </div>
+        
+        <!-- Bottom Sticky Actions Bar -->
+        <div class="actions-bar">
+          <!-- Left Icon Group -->
+          <div class="left-icons">
+             <button title="Reminder"><i class="material-icons">notifications</i></button>
+             <button title="Calculator"><i class="material-icons">calculate</i></button>
+          </div>
+  
+          <!-- Right Save Buttons -->
+          <div class="right-buttons">
+             <button class="primary-btn"  (click)="saveItems()">
+               <i class="material-icons">print</i> Save and Print
+             </button>
+             <button class="primary-btn" (click)="saveItems()">
+                <i class="material-icons">save</i> Save
+             </button>
+          </div>
+
+        </div>
+  
+      </form>
+      
+    </div>
+  </div>

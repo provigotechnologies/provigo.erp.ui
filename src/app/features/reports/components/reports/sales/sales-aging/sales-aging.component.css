@@ -1,0 +1,19 @@
+.full-page-container {
+  margin-top: 30px !important;
+}
+
+.row {
+    gap: 2px !important;
+  }
+  
+  .footer-buttons {
+    margin-top: 220px !important;
+  }
+
+
+  @media (max-width: 900px) {
+    .full-page-container {
+      margin: 10px !important;
+    }
+    
+  }

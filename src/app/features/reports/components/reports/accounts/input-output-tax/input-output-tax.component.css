@@ -1,0 +1,23 @@
+
+  .right-buttons {
+    margin-top: 15px !important;
+  }  
+  
+
+  @media (max-width: 600px) {
+    .right-buttons {
+        justify-content: flex-start !important;
+      } 
+  }
+
+
+  .full-page-container {
+    max-width: 1000px !important;
+    margin: 50px 0 0 100px !important;
+  }
+
+  @media (max-width: 1300px) {
+    .full-page-container {
+      margin: 10px !important;
+    }
+  }

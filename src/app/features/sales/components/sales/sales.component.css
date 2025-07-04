@@ -1,0 +1,734 @@
+.app-container {
+  display: flex;
+  width: 100%;
+}
+
+/* Sidebar will be flex child if inside .app-container */
+.main-content {
+  flex: 1;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+.invoice-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.section-container {
+  border: 1px solid #ccc;
+  padding: 8px 10px;  /* Reduced padding for less space */
+  margin: 2px 0;      /* Reduced margin to decrease space above and below */
+  background-color: #f4f7fa;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.form-row {
+  display: grid;
+  gap: 15px;  /* Reduced gap to bring items closer together */
+  margin-bottom: 6px; /* Reduced from 8px for less spacing between rows */
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  gap: 4px;
+  font-size: 13px; /* 👈 Reduced label font size globally */
+}
+
+input[type="text"],
+input[type="date"],
+select {
+  padding: 4px;
+  font-size: 13px;
+  border: 2px solid #ccc;
+  width: 100%; /* ✅ Fluid width */
+  max-width: 200px; /* ✅ Prevent being too wide on large screens */
+  box-sizing: border-box;
+}
+
+/* 🔵 Blue Radio Button */
+input[type="radio"], [type="checkbox"] {
+  accent-color: #2980f2;
+}
+
+.required {
+  color: red;
+  margin-left: 4px;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.radio-label {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.radio-group label {
+  font-size: 13px;
+}
+
+.radio-options {
+  display: flex;
+  gap: 16px; /* space between options */
+  align-items: center;
+  flex-wrap: wrap; /* optional: for responsiveness */
+}
+
+.radio-options label {
+  display: block;
+  margin-bottom: 0px;
+}
+
+input[type="text"]{
+  border: none;
+  border-bottom: 2px solid #ccc;
+  padding: 4px 8px;
+  transition: border-bottom 0.2s;
+}
+
+/* Focus effect for input fields */
+input[type="text"]:focus,
+input[type="date"]:focus,
+textarea:focus,
+select:focus { /* Added select:focus */
+  outline: none;
+  border-bottom: 2px solid #2980f2;
+  background-color: #fff;
+}
+
+input[type="text"],
+input[type="date"],
+select {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+@media (max-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  label {
+    font-size: 12px;
+  }
+}
+
+
+
+/**/
+.input-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 12px;
+  justify-content: flex-start;
+}
+
+.input-row label {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+  font-weight: 500;
+  flex: 0 0 auto; /* Fix width to use only what's needed */
+  width: 95px; /* set fixed width */
+  margin-right: 8px;
+}
+
+/* .input-row input,
+.input-row select {
+  width: 100%;
+  padding: 4px 6px;
+  font-size: 13px;
+  box-sizing: border-box;
+} */
+
+#itemname{
+   width: 200px;
+}
+
+/* Currency symbol alignment */
+.rupee-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.rupee-wrapper .symbol {
+  margin-right: 4px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* === Item Tag Section === */
+.item-tags {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 14px;
+  width: 100%;
+  justify-content: space-between; /* spread fields */
+}
+
+/* Align item-fields in same row */
+.item-fields {
+  display: flex;
+  flex: 2 1 auto;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: nowrap;
+}
+
+.primary-btn i.material-icons {
+  font-size: 16px;
+}
+
+/*table*/
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.item-table {
+  width: 100%;
+  min-width: 800px; /* Optional: ensure minimum width for table columns */
+  border-collapse: collapse;
+  margin-top: 14px;
+  font-size: 13px;
+}
+
+.table-container::-webkit-scrollbar {
+  height: 6px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 10px;
+}
+
+.item-table th,
+.item-table td {
+  border: 1px solid #ccc;
+  padding: 6px;
+  text-align: center;
+}
+
+.item-table th {
+  background-color: #2980f2;
+  font-weight: 600;
+  color: #efefea;
+}
+
+.item-table tbody {
+  background-color: #fffce6; /* Light yellow body */
+}
+
+.item-options {
+  display: flex;
+  align-items: center;
+  gap: 2px; /* Reduce from 8px to 4px or even 2px */
+  margin: 0;
+  padding: 0px;
+}
+
+.item-options label {
+  display: flex;
+  align-items: center;
+  gap: 4px; /* spacing between radio input and label text */
+  margin: 0; /* remove default spacing */
+}
+
+.add-btn {
+  background-color: #1c77ef;
+  color: #efefea;
+  border: none;
+  padding: 4px 8px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.add-btn:hover {
+  background-color: #1565c0;
+}
+
+
+/* Responsive: full width fields on small screens */
+@media (max-width: 768px) {
+  .input-row {
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    padding-left: 0;
+    margin-left: 0;
+  }
+
+  .input-row label {
+    width: 100%;
+    flex: 1 1 100%;
+    margin-right: 0;
+    box-sizing: border-box;
+  }
+
+  #itemname{
+    width: 100%;
+ }
+ 
+  .input-row input,
+  .input-row select {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .rupee-wrapper {
+    width: 200px;
+  }
+
+  .rupee-wrapper input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .item-tags {
+    flex-direction: column;
+    align-items: stretch;
+    padding-left: 0;
+    margin-left: 0;
+  }
+
+  .item-fields {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  .item-fields .primary-btn{
+    width: 200px;
+    align-items: stretch;
+   justify-content: center;
+  }
+
+  .item-fields input#desc {
+    order: -1; /* Make Item Description come first */
+  }
+
+  .add-btn {
+    flex: 1 1 auto;
+    justify-content: center;
+    width: 200px;
+  }
+}
+
+
+/**/
+.footer-columns {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.payment-tabs {
+  flex: none;
+  min-width: 270px;  /* 👈 Set a minimum width */
+  max-width: 270px;  /* 👈 Set a fixed width */
+  width: 270px !important;  display: flex;
+  flex-direction: column;
+  gap: 12px; /* reduced overall gap */
+  border: 1px solid #ccc;
+  background-color: #f4f7fa;
+  align-items: flex-start; /* 👈 aligns buttons to top-left */
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tabs button {
+  width: 80px;
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  border: 1px solid #ccc;
+  background-color: white;
+  cursor: pointer;
+}
+
+.tabs button:hover{
+   background-color: #1c77ef;
+   color: #f9f9f9;
+}
+
+.invoice-footer-grid {
+  background: #f4f7fa;
+  padding: 15px;
+  font-size: 0.85rem;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  row-gap: 15px;
+  column-gap: 12px;
+  align-items: center;
+}
+
+.label {
+  font-weight: 500;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+}
+
+.input-pair input[type="text"] {
+  padding: 4px 6px;
+  font-size: 0.85rem;
+  border: 1px solid #ccc;
+  width: 100px; /* 👈 Customize width as needed */
+  min-width: unset; /* override min-width if needed */
+}
+
+.input-pair input[type="text"]{
+  border: none;
+  border-bottom: 2px solid #ccc;
+  padding: 4px 8px;
+  transition: border-bottom 0.2s;
+}
+
+/* Focus effect for input fields with placeholder */
+.input-pair input[type="text"]:focus {
+  outline: none;
+  border-bottom: 2px solid #2980f2;
+  background-color: #fff;
+}
+
+.input-pair select {
+  width: 100px;
+}
+
+.input-pair {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.highlight {
+  background-color: #ffffcc;
+}
+
+.inline-form input[type="text"],
+.inline-form input[type="date"],
+.inline-form input[type="number"],
+.inline-form select {
+  width: 150px;  /* 👈 reduce this value as needed */
+  padding: 4px 6px;
+  font-size: 0.85rem;
+}
+
+.inline-form {
+  display: grid;
+  grid-template-columns: 60px 1fr; /* 👈 Controls label width */
+  row-gap: 10px;
+  column-gap: 8px;
+  align-items: center;
+  width: 100%;
+  padding: 0 6px 8px 8px;
+  box-sizing: border-box;
+}
+
+.inline-form label {
+  font-size: 0.82rem;
+  font-weight: 500;
+  white-space: nowrap;  /* Prevent label wrapping */
+  margin-bottom: 0;
+}
+
+.inline-form input,
+.inline-form select {
+  width: 100% !important;
+  min-width: 0;  font-size: 0.82rem;
+  padding: 6px 8px;
+  box-sizing: border-box;
+}
+
+.amount-input {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.amount-input input {
+  padding: 3px 5px;
+}
+
+/*amount-summary */
+.amount-summary {
+  max-width: 250px;
+  background-color: #f4f7fa;
+  font-size: 13px;
+  padding: 0px;
+  border-radius: 6px;
+  margin-left: 10px;
+}
+
+.amount-summary .row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  column-gap: 30px;
+}
+
+.amount-summary .value {
+  width: 100px;
+  text-align: right;
+}
+
+.amount-summary .total {
+  font-size: 15px;
+  margin-top: 8px;
+}
+
+
+
+@media (max-width: 768px) {
+  .footer-columns {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .payment-tabs {
+    width: 80%;
+    max-width: 200px; /* 👈 Reduce max-width */
+    padding: 6px 8px; /* 👈 Reduce inner padding */
+    gap: 6px;         /* Optional: less vertical gap */
+  }
+
+  .tabs button {
+    width: 72px;      /* 👈 Slightly smaller buttons */
+    padding: 3px 6px;
+    font-size: 0.75rem;
+  }
+
+  .inline-form {
+    grid-template-columns: 1fr;
+    row-gap: 2px;
+  }
+
+  .inline-form label {
+    margin-top: 4px;
+  }
+
+  .inline-form input,
+  .inline-form select {
+    width: 100%;
+    padding: 3px 5px;
+  }
+
+  .textarea-row {
+    display: flex;
+    flex-wrap: wrap; /* mobile responsive */
+  }
+  
+  .textarea textarea {
+    width: 100%;
+  }
+
+  .input-pair {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .input-pair input,
+  .input-pair select {
+    width: 100%;
+  }
+
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1250px) {
+  .footer-columns {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .grid-container {
+    flex: 1 1 55%;
+  }
+
+  .textarea-column {
+    flex: 1 1 22%;
+    max-width: 100%;
+  }
+
+  .payment-tabs {
+    width: 270px !important;
+    max-width: 270px !important;
+    min-width: 270px !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .footer-columns {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* reuse the same styles as 768px block */
+  .inline-form,
+  .input-pair,
+  .textarea-row,
+  .textarea textarea,
+  .payment-tabs {
+    width: 100% !important;
+  }
+
+  .payment-tabs {
+    width: 95%;
+    max-width: 260px;
+    padding: 10px;
+    gap: 4px;
+  }
+
+  .inline-form {
+    grid-template-columns: 1fr;
+    row-gap: 6px;
+  }
+
+  .inline-form label {
+    margin-top: 4px;
+  }
+
+  .inline-form input,
+  .inline-form select {
+    width: 100% !important;
+    padding: 3px 5px;
+  }
+}
+
+@media (max-width: 1400px) {
+  .footer-columns {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .payment-tabs {
+    width: 90%;           /* 👈 instead of 100% */
+    max-width: 270px;     /* 👈 optional: limit width on mobile */
+    padding: 8px;
+    gap: 4px;
+  }
+
+  .textarea-row {
+    flex-direction: column;
+  }
+
+  .textarea textarea {
+    width: 100%;
+  }
+}
+
+
+/**/
+.actions-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #e0e0e0;
+  position: sticky;
+  bottom: 0;
+  z-index: 100;
+  gap: 10px;
+}
+
+/* Left icons styling */
+.left-icons {
+  display: flex;
+  gap: 12px;
+}
+.left-icons button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #1c77ef;
+  cursor: pointer;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+}
+.left-icons button:hover {
+  background-color: #c9c5c5;
+}
+
+/* Center Balance */
+.balance {
+  flex: 1;
+  text-align: end;
+  color: #8b8989;
+  margin-right: 10px;
+}
+
+/* Right buttons styling */
+.right-buttons {
+  display: flex;
+  gap: 10px;
+}
+.primary-btn {
+  background-color: #1c77ef;
+  color: #efefea;
+  border: none;
+  padding: 8px 12px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+.primary-btn:hover {
+  background-color: #1565c0;
+}
+
+
+/* 🔽 Responsive tweaks for small screens */
+@media (max-width: 600px) {
+  .actions-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+  }
+
+  .left-icons,
+  .right-buttons {
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .balance {
+    text-align: center;
+    margin-right: 0;
+    font-size: 13px;
+  }
+
+  .primary-btn {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+}

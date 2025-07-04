@@ -1,0 +1,488 @@
+.supplier-container {
+  display: flex;
+  font-family: 'Segoe UI', sans-serif;
+  background: #ffffff;
+  padding: 10px;
+  height: 600px;
+  border: 2px solid #ccc;
+  overflow-y: auto;
+  border-radius: 10px;
+  box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.1), 
+              0 6px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 1100px;
+  margin: 2px auto;
+  flex-wrap: wrap;
+
+}
+
+.tab {
+  padding: 2px 10px;
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 4px 4px 0 0;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.tab.active {
+  background-color: #1c77ef;
+  color: white;
+}
+
+
+.sidebar {
+  width: 150px;
+  background: white;
+  padding: 10px;
+  text-align: center;
+  height: 550px;
+}
+
+.status {
+  margin-top: 50px;
+}
+
+.status .active {
+  color: green;
+  font-weight: bold;
+}
+
+.balance {
+  margin-top: 50px;
+}
+
+.balance .amount {
+  color: green;
+  font-weight: bold;
+}
+
+.bell-icon {
+  font-size: 28px;
+  margin: 100px 0;
+}
+
+.disable-btn, .delete-btn {
+  width: 100%;
+  padding: 6px;
+  margin-top: 30px;
+}
+
+.disable-btn {
+  background-color: #f0f0f0;
+  color: #000;
+  border: 1px solid #ccc;
+}
+
+.delete-btn {
+  background-color: red;
+  color: white;
+  border: 1px solid red;
+}
+
+.main-content-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative; /* This is important for the positioning of the tabs */
+}
+
+.tabs {
+  position: absolute;
+  left: 0;
+  display: flex;
+  gap: 6px;
+}
+
+.tab {
+  padding: 0px 8px;
+  border: 1px solid #ccc;
+  background: #f9f9f9;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+    cursor: pointer;
+  position: relative;
+  box-shadow: none;
+  z-index: 1;
+  border-bottom: none;
+}
+
+.tab.active {
+  background-color: #ffffff;
+  color: #000;
+  border-left: 2px solid #007bff;
+  border-bottom: 1px solid #ffffff; /* Seamless with content */
+}
+
+
+.main-content {
+  background: white;
+  padding: 15px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #999;
+  margin-top: 23px; /* Adjust space between tabs and content */
+}
+
+.form-section {
+  display: flex;
+  gap: 10px;
+  flex: 1;
+}
+
+.form-left, .form-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.section-box {
+  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px 12px 12px 12px; /* Top padding adjusted for title */
+  margin-bottom: 0px;
+  background-color: #f9fafb;
+  box-shadow: 0 0 6px rgba(0,0,0,0.03);
+  max-width: 400px;
+}
+
+.section-title {
+  position: absolute;
+  top: -12px;
+  left: 16px;
+  padding: 0 8px;
+  font-size: 15px;
+  background-color: #f9fafb;
+  color: #333;
+  font-weight: 500;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px; /* Reduced space between form groups */
+  gap: 4px; /* Reduced gap between the label and input */
+}
+
+.form-group label {
+  width: 120px;
+  flex: 0 0 auto;
+  font-weight: 500;
+  font-size: 14px;
+  margin-right: 8px; /* Reduced margin-right for label */
+  color: #2d3a4a;
+}
+
+ input[type="text"],
+ input[type="email"],
+ input[type="number"],
+ select,
+ textarea {
+  flex: 1;
+  max-width: 240px;
+  padding: 6px 8px;
+  font-size: 14px;
+  background-color: #fff;
+  border: 1.5px solid #ccc;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+  width: 100%;
+}
+
+input[type="text"] {
+  border: none;
+  border-bottom: 2px solid #ccc;
+  border-radius: 0;
+}
+ input[type="text"]:focus {
+  border-bottom: 2px solid #1c77ef;
+}
+
+ select:focus,
+ textarea:focus {
+  border: 2px solid #1c77ef;
+}
+
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+    gap: 10px; /* Adjust the gap between the buttons */
+}
+
+.search-button {
+  margin: 10px; /* Remove margin for the button */
+  display: flex;
+  gap: 8px; /* Adjust the gap between the button and other elements */
+}
+
+input[type="date"] {
+  width: 180px; /* Limit the width of date inputs */
+  padding: 6px 8px;
+}
+
+.right-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.primary-btn {
+  background-color: #1c77ef;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px; /* Space between icon and label */
+  border-radius: 4px;
+}
+
+.primary-btn:hover {
+  background-color: #006fe0;
+}
+
+.primary-btn i,
+.primary-btn svg {
+  font-size: 16px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.required {
+  color: red;
+  margin-left: 4px;
+}
+
+.radio-group {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #333;
+  position: relative;
+}
+
+.radio-option input[type="radio"] {
+  accent-color: #1c77ef; /* modern browsers will use this */
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+}
+
+input[type="radio"] {
+  accent-color: #1c77ef; /* Only the radio circle turns blue when selected */
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+.item-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.item-table th {
+  background-color: #2980f2;
+  color: white;
+  padding: 10px;
+  text-align: left;
+}
+
+.item-table td {
+  padding: 12px;
+  border: 1px solid #ccc;
+  white-space: nowrap;
+}
+
+.item-table tr:nth-child(even) {
+  background-color: #f1f4f9;
+}
+
+
+/* Table Scroll */
+.table-scroll {
+  overflow-x: auto;
+}
+/* Scrollbar styling for modern browsers */
+.table-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.table-scroll::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.table-scroll::-webkit-scrollbar-thumb {
+  background-color: #ccc; /* light grey */
+  border-radius: 4px;
+}
+
+.table-scroll::-webkit-scrollbar-thumb:hover {
+  background: #b3b3b3; /* slightly darker on hover */
+}
+
+/* Firefox scrollbar */
+.table-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #ccc #fff;
+}
+
+.serial-number-section{
+  height: 480px;
+}
+
+
+/* Mobile Devices: Adjust layout for small screens */
+@media (max-width: 768px) {
+  .supplier-container {
+    flex-direction: column;
+    margin: 10px;
+    height: auto;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+
+  .main-content-wrapper {
+    flex: 1;
+    width: 100%;
+    position: static;
+  }
+
+  .form-section {
+    flex-direction: column;
+  }
+
+  .form-left,
+  .form-right {
+    width: 100%;
+  }
+
+  .section-box {
+    max-width: 100%;
+    padding: 16px;
+  }
+
+  .tabs {
+    position: static;
+    flex-wrap: wrap;
+  }
+
+  .form-group label {
+    width: 100px;
+  }
+
+  .disable-btn, .delete-btn {
+    width: 100px;
+    gap: 10px;
+    margin-left: 10px;
+  }
+
+  .status {
+    margin-top: 10px;
+  }
+
+  .balance {
+    margin-top: 10px;
+  }
+  
+  .bell-icon {
+    margin: 10px 0;
+  }
+
+  .main-content {   
+    margin-top: -7px;   
+  }
+
+}
+
+/* Tablets (Medium Screens) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .supplier-container {
+    flex-direction: column;
+    margin: 0; /* Remove margin-left */
+    width: 100%; /* Full width */
+    max-width: 100% !important; /* Override the 1100px max-width */
+    padding: 10px;
+  }
+
+  .main-content-wrapper {
+    width: 100%;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+
+  .form-section {
+    flex-direction: column; /* Instead of row */
+    flex-wrap: wrap;
+  }
+
+  .form-left,
+  .form-right {
+    width: 100%;
+  }
+
+  .section-box {
+    max-width: 100%;
+  }
+
+  
+  .disable-btn, .delete-btn {
+    width: 100px;
+    gap: 10px;
+    margin-left: 10px;
+  }
+
+  .status {
+    margin-top: 10px;
+  }
+
+  .balance {
+    margin-top: 10px;
+  }
+  
+  .bell-icon {
+    margin: 10px 0;
+  }
+
+  .main-content {   
+    margin-top: 27px;   
+  }
+}
+
+@media (max-width: 1024px) {
+  .supplier-container {
+    max-width: 100%;
+    margin: 0;
+  }
+}
+

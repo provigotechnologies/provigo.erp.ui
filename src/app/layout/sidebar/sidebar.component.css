@@ -1,0 +1,202 @@
+
+.sidebar-container {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+/* Hamburger menu - shown only on small screens */
+.menu-toggle {
+  display: none;
+  position: fixed;
+  height: 35px;
+  top: 5px;
+  left: 10px;
+  background: #003147;
+  color: #fff;
+  border: none;
+  padding: 6px;
+  z-index: 1100;
+  cursor: pointer;
+}
+
+.menu-toggle.hide {
+  display: none !important;
+}
+
+/* Sidebar styles */
+.sidebar {
+  width: 220px;
+  background-color: #003147;
+  color: white;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease-in-out;
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  font-size: 15px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar ul li {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Menu item */
+.sidebar ul li a {
+  display: flex;
+  align-items: center;
+  color: white;
+  padding: 4px 10px; /* reduce from default 10px+ */
+  text-decoration: none;
+  gap: 8px;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+.sidebar ul li a:hover {
+  background-color: #004a63;
+}
+
+/* Submenu styles for desktop */
+.submenu {
+  position: absolute;
+  left: 220px;
+  width: 220px;
+  background-color: #003147;
+  border-left: 2px solid #ccc;
+  z-index: 100;
+  padding: 0;
+}
+
+.submenu li a {
+  padding: 0;
+  font-size: 14px;
+  color: white;
+}
+
+.has-submenu {
+  position: relative; /* ✅ So nested-submenu positions correctly */
+}
+
+.nested-submenu {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 100%; /* ✅ Right beside the parent item */
+  width: 220px;
+  background-color: #003147;
+  border: 2px solid #ccc;
+  z-index: 101;
+}
+
+/* Hover effect for nested submenu */
+.has-submenu:hover .nested-submenu {
+  display: block;
+}
+
+/* Icons and spacing */
+mat-icon {
+  font-size: 20px;
+}
+
+
+.icon-dashboard { color: #e2e203; }
+.icon-sale { color: #4caf50; }
+.icon-purchase { color: #00bcd4; }
+.icon-inventory { color: #f44336; }
+.icon-master { color: #ff9800; }
+.icon-manufacture { color: #4caf50; }
+.icon-accounts { color: #3f51b5; }
+.icon-expense { color: #e2e203; }
+.icon-customer { color: #00bcd4; }
+.icon-staff { color: #9c27b0; }
+.icon-tools { color: #ff9800; }
+.icon-report { color: #00bcd4; }
+.icon-settings { color: #e2e203; }
+
+.has-submenu > a::after {
+  content: '▶';
+  font-size: 12px;
+  margin-left: auto;
+  margin-right: 20px;
+  color: #aaa;
+}
+
+.footer {
+  font-size: 14px;
+  color: #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+.sale-spacing {
+  margin-top: 8px;
+}
+
+/* Responsive behavior for mobile */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    min-height: 100%; 
+    transform: translateX(-100%);
+    z-index: 1000;
+    display: none;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .sidebar.open {
+    display: flex;
+    transform: translateX(0);
+  }
+
+  .submenu,
+  .nested-submenu {
+    position: static;
+    width: 100%;
+    border: none;
+    background-color: #002535;
+    display: none;
+  }
+
+  .submenu.mobile-visible,
+  .nested-submenu.mobile-visible {
+    display: block;
+  }
+
+  .sidebar ul li a {
+    display: flex;
+    color: white;
+    padding: 4px 10px; /* reduce from default 10px+ */
+    gap: 8px;
+    transition: background 0.2s;
+  }
+
+
+  .has-submenu > a::after {
+    content: '▼';
+    margin-left: auto;
+    color: #aaa;
+  }
+
+  .menu-item-with-submenu.active > a,
+  .has-submenu.active > a {
+    background-color: #004a63;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+}
+
+
