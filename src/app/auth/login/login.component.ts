@@ -42,25 +42,30 @@ export class LoginComponent {
   }
 
 
-  onSubmit(): void {
-    if (this.loginForm.valid) {
-      const credentials = this.loginForm.value;
-      console.log("button clicked")
-      this.authService.login(credentials).subscribe({
-        next: (response) => {
-          if (response && response.token) {
-            localStorage.setItem('token', response.token);
-            this.router.navigate(['/dashboard']); // Replace with shell component route
-          } else {
-            this.errorMessage = 'Invalid credentials';
-          }
-        },
-        error: () => {
-          this.errorMessage = 'Login failed. Please check your credentials.';
-        }
-      });
-    } else {
-      this.errorMessage = 'Please fill in both fields.';
+ onSubmit(): void {
+  if (this.loginForm.valid) {
+    const credentials = this.loginForm.value;
+
+    this.authService.login(credentials).subscribe({
+       next: (response) => {
+       localStorage.setItem('token', response.token);
+       localStorage.setItem('loggedUser', JSON.stringify(response.user)); // ✅ Add this
+       this.router.navigate(['/dashboard']);
+     },
+     error: (err) => {
+      const errorMsg = typeof err.error === 'string' ? err.error : err.error?.message || '';
+
+      if (err.status === 400 && errorMsg.includes('User is inactive')) {
+        this.errorMessage = 'Your account is inactive. Contact admin.';
+      } else {
+        this.errorMessage = 'Login failed. Please check your credentials.';
+      }
     }
+   });
   }
+   else {
+    this.errorMessage = 'Please fill in both fields.';
+  }
+}
+
 }

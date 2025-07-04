@@ -1,5 +1,17 @@
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+ <!-- Delete confirmation alert -->
+<div *ngIf="showConfirmDelete" class="custom-alert">
+  <div class="confirm-icon-text">
+    <i class="fas fa-question-circle confirm-icon"></i>
+    <span>Are you sure you want to delete user "{{ confirmUserName }}"?</span>
+  </div>
+  <div class="button-group">
+    <button class="yes" (click)="confirmDeleteUser()">Yes</button>
+    <button class="no" (click)="cancelDeleteUser()">No</button>
+  </div>
+</div>
+
 
    <div class="page-header-wrapper">
       <label class="page-heading">User Management</label>
@@ -15,6 +27,7 @@
       <li [class.active]="selectedTab === 'log'" (click)="changeTab('log')">Security Log</li>
     </ul>
   </div>
+
 
 <div class="main-panel">
 
@@ -33,6 +46,9 @@
       <option [ngValue]="null">--Select--</option>
       <option *ngFor="let user of users" [ngValue]="user">{{ user.email }}</option>
     </select>
+      <div *ngIf="showMessage" class="custom-snack {{ messageClass }}">
+     {{ message }}
+    </div>
   </div>
 
   <!-- Modules + Table shown only after user is selected -->
@@ -106,94 +122,69 @@
     </div>
 
     <!-- Show only when a user is selected -->
-<div *ngIf="selectedUser">
-
+ <div *ngIf="selectedUser">
   <!-- Password and Delete -->
   <div class="link-row actions">
     <a (click)="openUpdateUserDialog()" class="link set-password">Update User</a>
     <a (click)="confirmAndDeleteUser()" class="link delete-user">Delete User</a>
   </div>
-
 </div>
 
 <!-- Permissions -->
   <div class="form-group checkbox-group">
-    <label>
-      Set Admin Role 
-      <input type="checkbox" [(ngModel)]="isAdmin" />
-    </label>
-
-   <label *ngIf="isAdmin">
-     Read Only Access
-     <input type="checkbox" [(ngModel)]="isReadOnly" />
-   </label>
-
+  <div *ngIf="showMessage"
+     class="custom-snack-inline"
+     [ngClass]="messageClass">
+     {{ message }}
   </div>
-
-  <div class="form-group checkbox-group">
-    <label>
-      Active
-      <input type="checkbox" [(ngModel)]="isActive" />
-    </label>
   </div>
   
-</div>
+ </div>
 
   </div>
 
-  <div *ngIf="selectedTab === 'manage'" class="btn-wrapper">
-     <button class="save-btn">
-       <i class="fas fa-save"></i> Save
-      </button>
+ <div class="tab-content" *ngIf="selectedTab === 'log'">
+  <h3>Security Logs</h3>
+
+  <div class="filter-row">
+    <div class="row">
+      <div class="date-group">
+        <label>From</label>
+        <input type="datetime-local" [(ngModel)]="fromDate" />
+      </div>
+
+      <div class="date-group">
+        <label>To</label>
+        <input type="datetime-local" [(ngModel)]="toDate" />
+      </div>
+
+      <div class="right-buttons">
+        <button class="primary-btn" (click)="filterLogs()">
+          <span class="material-icons">search</span> Search
+        </button>
+      </div>
+    </div>
   </div>
 
-  <div class="tab-content" *ngIf="selectedTab === 'log'">
-      <h3>Security Logs</h3>
-
-       <div class="filter-row">
-         <div class="row">
-           <div class="date-group">
-             <label>From</label>
-              <input type="datetime-local" />
-            </div>
-
-            <div class="date-group">
-              <label>To</label>
-                <input type="datetime-local" />
-             </div>
-
-             <div class="right-buttons">
-               <button class="primary-btn">
-                 <span class="material-icons">search</span> Search
-                </button>
-              </div>
-            </div>
-          </div>
- 
-        <div class="table-scroll">
-          <table class="item-table">
-          <thead>
-            <tr>
-              <th>S. No.</th>
-              <th>Event Message</th>
-              <th>Event Time</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-           </tbody>
-          </table>
-         </div>
+  <div class="table-scroll" style="min-height: 320px;">
+    <table class="item-table">
+      <thead>
+        <tr>
+          <th class="col-serial">S. No.</th>
+          <th>Event Message</th>
+          <th>Event Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let log of logs; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ log.eventMessage }}</td>
+          <td>{{ log.eventTime | date: 'medium' }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+ </div>
 
   </div>
 </div>

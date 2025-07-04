@@ -189,3 +189,29 @@
   user-select: none;
 }
 
+
+
+:host ::ng-deep .custom-snack {
+  font-size: 13px !important;
+  line-height: 1.2 !important;
+  padding: 4px 12px !important;
+  max-width: 220px !important;
+  text-align: center !important;
+  font-weight: bold !important;
+}
+
+
+.snack-success {
+  background-color: #d4edda !important;
+  color: #000 !important;
+  font-size: 13px !important;
+}
+
+.snack-error {
+  background-color: #f8d7da !important;
+  color: #000 !important;
+  font-size: 13px !important;
+}
+
+
+

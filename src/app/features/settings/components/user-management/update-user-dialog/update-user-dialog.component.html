@@ -67,10 +67,9 @@
       <div class="form-group">
        <label for="role">Role <span>*</span></label>
        <select id="role" formControlName="role">
-         <option value="">Select</option>
-         <option value="Admin">Admin</option>
-         <option value="Manager">Manager</option>
-         <option value="User">User</option>
+          <option *ngFor="let r of roles" [value]="r.id">
+          {{ r.roleName }}
+         </option>
         <!-- Add more roles if needed -->
        </select>
         <div class="error" *ngIf="userForm.get('role')?.invalid && userForm.get('role')?.touched">
@@ -92,6 +91,11 @@
 
     <!-- ✅ Place submit buttons inside the <form> -->
     <div class="dialog-actions">
+       <div *ngIf="showMessage"
+        class="custom-snack"
+       [ngClass]="messageClass">
+         {{ message }}
+      </div>
       <button type="button" (click)="onCancel()">Cancel</button>
       <button type="submit" [disabled]="!userForm.valid">Save</button>
     </div>

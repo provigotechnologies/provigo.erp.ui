@@ -10,24 +10,37 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(credentials: { email: string; password: string }): Observable<any> {
+ login(credentials: { email: string; password: string }): Observable<any> {
     return this.http.post(`${this.baseUrl}/login`, credentials);
   }
 
-  register(data: {
-    firstname: string;
-    lastname: string;
-    phonenumber: string;
-    email: string;
-    password: string;
-    role: string;
-    isactive: boolean;
-  }): Observable<any> {
-    return this.http.post(`${this.baseUrl}/register`, data);
+ register(data: {
+  firstname: string;
+  lastname: string;
+  phonenumber: string;
+  email: string;
+  password: string;
+  roleId: number;       // ✅ changed from role to roleId (int)
+  isactive: boolean;
+}): Observable<any> {
+  return this.http.post(`${this.baseUrl}/register`, data);
+}
+
+getRoles(): Observable<any[]> {
+  return this.http.get<any[]>(`${this.baseUrl}/roles`);
+}
+
+  getLogs(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/logs`);
   }
 
-  logout(): void {
-    localStorage.removeItem('token');
+  logLogout(userId: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/log-logout`, { userId });
+  }
+
+  getCurrentUser(): any {
+   const user = localStorage.getItem('loggedUser');
+   return user ? JSON.parse(user) : null;
   }
 
   isAuthenticated(): boolean {
@@ -49,4 +62,5 @@ export class AuthService {
   changePassword(userId: string, newPassword: string): Observable<any> {
     return this.http.put(`${this.baseUrl}/users/${userId}/password`, { password: newPassword });
   }
+  
 }

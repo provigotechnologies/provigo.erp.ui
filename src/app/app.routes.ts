@@ -116,7 +116,12 @@ export const routes: Routes = [
             path: 'warehouse',
             loadComponent: () =>
               import('./features/master/components/warehouse/warehouse.component').then(m => m.WarehouseComponent),
-          }
+          },
+           {
+            path: 'user-role',
+            loadComponent: () =>
+              import('./features/master/components/user-role/user-role.component').then(m => m.UserRoleComponent),
+          },
         ]
       },        
       {

@@ -4,6 +4,9 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/materia
 import { AuthService } from '../../../../../core/services/auth.service';
 import { CommonModule } from '@angular/common';
 
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 @Component({
   selector: 'app-update-user-dialog',
   standalone: true,
@@ -15,7 +18,8 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MatDialogModule // ✅ Import this
+    MatDialogModule,
+    MatSnackBarModule 
   ]
 })
 export class UpdateUserDialogComponent {
@@ -23,9 +27,17 @@ export class UpdateUserDialogComponent {
   submitted = false;
   showPassword: boolean = false;
 
+  message: string = '';
+  showMessage: boolean = false;
+  messageClass: string = '';
+
+  roles: any[] = [];
+ 
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
+    private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<UpdateUserDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
@@ -40,8 +52,12 @@ export class UpdateUserDialogComponent {
     });
 
     if (data && data.user) {
-      this.patchFormWithUser(data.user); // ✅ Prefill form
-    }
+    this.roles = [{
+      id: data.user.roleId,
+      roleName: data.user.role
+    }];
+    this.patchFormWithUser(data.user);
+  }
   }
 
   patchFormWithUser(user: any): void {
@@ -51,7 +67,7 @@ export class UpdateUserDialogComponent {
       email: user.email,
       password: user.passwordHash, 
       phonenumber: user.phoneNumber,
-      role: user.role,
+      role: user.roleId,
       isActive: user.status
     });
   }
@@ -76,27 +92,66 @@ allowOnlyNumbers(event: KeyboardEvent): void {
   }
 }
 
+showAlert(msg: string, type: 'success' | 'error') {
+  this.message = msg;
+  this.showMessage = true;
+  this.messageClass = type === 'success' ? 'snack-success' : 'snack-error';
+}
 
 onSubmit(): void {
   if (this.userForm.valid && this.data?.user?.id) {
-    const updatedUser = {
-      ...this.userForm.value,
-      isActive: this.userForm.value.isActive === true
+    const formValue = this.userForm.value;
+
+    const updatedUser: any = {
+      firstName: formValue.firstname,
+      lastName: formValue.lastname,
+      email: formValue.email,
+      phoneNumber: formValue.phonenumber,
+      isActive: formValue.isActive === true,
+      roleId: formValue.role  // ✅ This must be role ID (not name)
     };
+
+    // Include password only if entered
+    if (formValue.password && formValue.password.trim() !== '') {
+      updatedUser.password = formValue.password;
+    }
 
     this.authService.updateUser(this.data.user.id, updatedUser).subscribe({
       next: () => {
-        alert("User updated successfully.");
-        this.dialogRef.close(true); // triggers refresh in parent
+        this.showAlert('✅ User updated successfully!', 'success');
+        setTimeout(() => this.dialogRef.close(true), 2000);
       },
       error: (err) => {
-        alert("Failed to update user.");
+        this.showAlert('❌ Failed to update user!', 'error');
         console.error("Update error:", err);
       }
     });
   }
 }
 
+
+
+loadRoles() {
+  this.authService.getRoles().subscribe({
+    next: (data) => {
+      this.roles = data;
+    },
+    error: (err) => {
+      console.error('Failed to load roles', err);
+
+      // ✅ Corrected fallback logic using this.data
+      this.roles = this.data?.user?.role
+        ? [{ id: this.data.user.roleId, roleName: this.data.user.role }]
+        : [];
+    }
+  });
+}
+
+
+
+ngOnInit(): void {
+  this.loadRoles();
+}
 
   onCancel(): void {
     this.dialogRef.close();

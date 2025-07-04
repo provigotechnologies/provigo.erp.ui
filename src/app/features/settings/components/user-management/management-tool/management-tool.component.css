@@ -170,6 +170,7 @@
 
 .checkbox-group {
   margin: 20px 25px 0 0;
+  display: flex;
 }
 
 .checkbox-group label {
@@ -283,6 +284,7 @@ input[type="checkbox"] {
   text-align: left;
 }
 
+
 .item-table th {
   position: sticky;
   top: 0;
@@ -304,7 +306,11 @@ input[type="checkbox"] {
   padding: 6px;
 } 
 
+.item-table th:first-child,
 .item-table td:first-child {
+  width: 30px;           
+  max-width: 30px;
+  min-width: 20px;
   text-align: left;
   padding-left: 12px;
 }
@@ -515,4 +521,90 @@ input[type="checkbox"] {
     width: auto;
     max-width: 100%;
   }
+}
+
+
+/* snack message */
+.custom-snack {
+  padding: 4px 20px;
+  text-align: center;
+  width: fit-content;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.custom-snack-inline {
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.snack-success {
+  background-color: #d4edda;
+  color: #000;
+}
+
+.snack-error {
+  background-color: #f8d7da;
+  color: #000;
+}
+
+/* alert design */
+.custom-alert {
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  z-index: 10000;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.confirm-icon-text {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.confirm-icon {
+  font-size: 28px;
+  color: #007bff;
+}
+
+.button-group {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.button-group button {
+  padding: 6px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button-group .yes {
+  background-color: #007bff;
+  color: white;
+}
+
+.button-group .no {
+  background-color: #f0f0f0;
+  color: black;
 }

@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { AuthService } from '../../../../../core/services/auth.service';
 import { CommonModule } from '@angular/common';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-user-dialog',
@@ -15,17 +17,24 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MatDialogModule // ✅ Import this
+    MatDialogModule,
+    MatSnackBarModule // ✅ Import this
   ]
 })
 export class AddUserDialogComponent {
   userForm: FormGroup;
   submitted = false;
 
+  roles: any[] = [];
+
+  message: string = '';
+  showMessage: boolean = false;
+  messageClass: string = '';
 
 constructor(
   private fb: FormBuilder,
   private authService: AuthService,
+  private snackBar: MatSnackBar,
   private dialogRef: MatDialogRef<AddUserDialogComponent>,
   @Inject(MAT_DIALOG_DATA) public data: any // ✅ get passed user here
 ) {
@@ -57,6 +66,27 @@ allowOnlyNumbers(event: KeyboardEvent): void {
   }
 }
 
+// Call this when needed
+showAlert(msg: string, type: 'success' | 'error') {
+  this.message = msg;
+  this.showMessage = true;
+  this.messageClass = type === 'success' ? 'snack-success' : 'snack-error';
+}
+
+loadRoles() {
+  this.authService.getRoles().subscribe({
+    next: (data) => {
+      this.roles = data;
+    },
+    error: (err) => {
+      console.error('Error fetching roles:', err);
+    }
+  });
+}
+
+ngOnInit() {
+  this.loadRoles();
+}
 
 onSubmit(): void {
   this.submitted = true;
@@ -67,21 +97,29 @@ onSubmit(): void {
   }
 
   const formValue = this.userForm.value;
+
   const newUser = {
-    ...formValue,
-    isActive: formValue.isActive === true
+    firstname: formValue.firstname,
+    lastname: formValue.lastname,
+    phonenumber: formValue.phonenumber,
+    email: formValue.email,
+    password: formValue.password,
+    roleId: formValue.role,           // ✅ Rename here
+    isactive: formValue.isActive      // ✅ Match backend naming
   };
 
   this.authService.register(newUser).subscribe({
-    next: () => {
-      alert('User created successfully!');
-      this.dialogRef.close(true);
+    next: (response) => {
+      this.showAlert('✅ User created successfully!', 'success');
+      setTimeout(() => {
+        this.dialogRef.close(true);
+      }, 2000);
     },
     error: (err) => {
       if (err.status === 400 && err.error === 'Email already registered.') {
-        this.userForm.get('email')?.setErrors({ emailTaken: true }); // 👈 Set form error
+        this.userForm.get('email')?.setErrors({ emailTaken: true });
       } else {
-        alert('Failed to create user.');
+        this.showAlert('❌ Failed to user created!', 'error');
         console.error('Register error:', err);
       }
     }
@@ -89,9 +127,10 @@ onSubmit(): void {
 }
 
 
-  onCancel(): void {
-    this.dialogRef.close(); // ✅ Close without saving
-  }
+onCancel(): void {
+  this.dialogRef.close(); // ✅ Now properly defined
+}
+
 }
 
 
