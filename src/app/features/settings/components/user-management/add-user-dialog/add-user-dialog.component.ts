@@ -116,7 +116,7 @@ onSubmit(): void {
       }, 1500);
     },
     error: (err) => {
-      if (err.status === 400 && err.error === 'Email already registered.') {
+      if (err.status === 400 && err.error === 'Email  registered.') {
         this.userForm.get('email')?.setErrors({ emailTaken: true });
       } else {
         this.showAlert('❌ Failed to create user!', 'error');
