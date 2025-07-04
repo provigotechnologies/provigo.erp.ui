@@ -89,8 +89,8 @@ ngOnInit() {
 }
 
 onSubmit(): void {
-  this.submitted = true;
-  this.userForm.markAllAsTouched();
+  this.submitted = true;                  // 🔁 triggers error messages in template
+  this.userForm.markAllAsTouched();       // 🔁 highlights all invalid fields
 
   if (this.userForm.invalid) {
     return;
@@ -104,27 +104,27 @@ onSubmit(): void {
     phonenumber: formValue.phonenumber,
     email: formValue.email,
     password: formValue.password,
-    roleId: formValue.role,           // ✅ Rename here
-    isactive: formValue.isActive      // ✅ Match backend naming
+    roleId: formValue.role,
+    isactive: formValue.isActive
   };
 
   this.authService.register(newUser).subscribe({
-    next: (response) => {
+    next: () => {
       this.showAlert('✅ User created successfully!', 'success');
       setTimeout(() => {
         this.dialogRef.close(true);
-      }, 2000);
+      }, 1500);
     },
     error: (err) => {
       if (err.status === 400 && err.error === 'Email already registered.') {
         this.userForm.get('email')?.setErrors({ emailTaken: true });
       } else {
-        this.showAlert('❌ Failed to user created!', 'error');
-        console.error('Register error:', err);
+        this.showAlert('❌ Failed to create user!', 'error');
       }
     }
   });
 }
+
 
 
 onCancel(): void {

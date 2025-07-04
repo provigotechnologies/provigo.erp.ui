@@ -119,7 +119,7 @@ onSubmit(): void {
     this.authService.updateUser(this.data.user.id, updatedUser).subscribe({
       next: () => {
         this.showAlert('✅ User updated successfully!', 'success');
-        setTimeout(() => this.dialogRef.close(true), 2000);
+        setTimeout(() => this.dialogRef.close(true), 1500);
       },
       error: (err) => {
         this.showAlert('❌ Failed to update user!', 'error');
