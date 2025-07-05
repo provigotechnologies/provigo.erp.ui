@@ -116,10 +116,10 @@ onSubmit(): void {
       }, 1500);
     },
     error: (err) => {
-      if (err.status === 400 && err.error === 'Email  registered.') {
-        this.userForm.get('email')?.setErrors({ emailTaken: true });
+     if (err.status === 400 && err.error === 'Email already registered.') {
+       this.userForm.get('email')?.setErrors({ emailTaken: true }); // triggers that <span> in template
       } else {
-        this.showAlert('❌ Failed to create user!', 'error');
+       this.showAlert('❌ Failed to create user!', 'error');
       }
     }
   });
