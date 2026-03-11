@@ -1,0 +1,209 @@
+/* Card Container */
+.card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 22px 26px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* Header */
+.page-header-wrapper {
+  margin-bottom: 16px;
+}
+
+.page-heading {
+  font-size: 20px;
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+/* Alerts */
+.success-banner,
+.error-banner {
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.success-banner {
+  background: #e6f4ea;
+  border: 1px solid #a5d6a7;
+  color: #2e7d32;
+}
+
+.error-banner {
+  background: #fce4e4;
+  border: 1px solid #ef9a9a;
+  color: #c62828;
+}
+
+/* Search */
+.search-bar-wrapper {
+  margin-bottom: 14px;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 320px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.search-input:focus {
+  border-color: #2980f2;
+  outline: none;
+}
+
+/* Table */
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.styled-table thead {
+  background: #f4f8ff;
+}
+
+.styled-table th {
+  text-align: left;
+  padding: 12px 14px;
+  color: #2980f2;
+  font-weight: 700;
+}
+
+.styled-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.styled-table tr:hover {
+  background: #f9fbff;
+}
+
+/* Empty */
+.empty-text {
+  text-align: center;
+  color: #888;
+  padding: 18px;
+}
+
+/* Badges */
+.badge-active,
+.badge-inactive {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge-active {
+  background: #e6f4ea;
+  color: #2e7d32;
+}
+
+.badge-inactive {
+  background: #fce4e4;
+  color: #c62828;
+}
+
+/* Actions */
+.action-cell {
+  text-align: center;
+}
+
+.icon-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 15px;
+  padding: 6px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.icon-btn.edit {
+  color: #2980f2;
+}
+
+.icon-btn.edit:hover {
+  background: rgba(41, 128, 242, 0.1);
+}
+
+.icon-btn.delete {
+  color: #c62828;
+}
+
+.icon-btn.delete:hover {
+  background: rgba(198, 40, 40, 0.1);
+}
+
+/* Confirmation Modal */
+.custom-alert {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.confirm-icon-text {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+}
+
+.confirm-icon {
+  font-size: 22px;
+  color: #f39c12;
+}
+
+.custom-alert > div {
+  background: #fff;
+  padding: 22px 26px;
+  border-radius: 12px;
+  width: 320px;
+  text-align: center;
+}
+
+/* Buttons */
+.button-group {
+  margin-top: 18px;
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+
+.btn {
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+.btn.yes {
+  background: #c62828;
+  color: #fff;
+}
+
+.btn.no {
+  background: #ccc;
+}

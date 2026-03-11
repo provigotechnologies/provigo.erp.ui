@@ -1,7 +1,13 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\features",
+    "\\src\\app\\features\\settings",
+    "\\src\\app\\features\\settings\\components",
+    "\\src\\app\\features\\settings\\components\\user-management",
+    "\\src\\app\\features\\settings\\components\\user-management\\add-user-dialog"
   ],
-  "SelectedNode": "\\D:\\Users\\chand\\cigt.erp.ui",
   "PreviewInSolutionExplorer": false
 }

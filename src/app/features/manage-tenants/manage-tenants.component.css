@@ -1,0 +1,196 @@
+/* Error Banner */
+.error-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fdecea;
+  color: #c62828;
+  border: 1px solid #f5c6c6;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 14px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.error-banner i { font-size: 16px; }
+.error-banner-close {
+  margin-left: auto;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #c62828;
+  font-size: 16px;
+  line-height: 1;
+  padding: 0 4px;
+}
+
+/* Loading */
+.loading-row {
+  text-align: center;
+  padding: 32px;
+  color: #2980f2;
+  font-size: 14px;
+}
+
+/* No Data */
+.no-data {
+  text-align: center;
+  color: #999;
+  padding: 28px;
+  font-style: italic;
+}
+
+/* Status Badge */
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.badge-active   { background: #e8f5e9; color: #2e7d32; }
+.badge-inactive { background: #fdecea; color: #c62828; }
+.badge-active-tenant {
+  background: #1565c0;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+/* Active Tenant Cell */
+.active-tenant-cell { white-space: nowrap; }
+
+/* Set Active Button */
+.btn-set-active {
+  background: transparent;
+  border: 1px solid #1565c0;
+  color: #1565c0;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+.btn-set-active:hover {
+  background: #1565c0;
+  color: #fff;
+}
+
+/* Logo Thumbnail */
+.logo-cell { text-align: center; vertical-align: middle; padding: 6px 8px; }
+
+.tenant-logo-thumb {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+  background: #f9f9f9;
+  display: block;
+  margin: 0 auto;
+}
+
+.no-logo-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  border: 1px dashed #ccc;
+  color: #bbb;
+  font-size: 16px;
+  margin: 0 auto;
+  background: #fafafa;
+}
+
+/* Action Buttons */
+.action-cell { white-space: nowrap; }
+
+.btn-icon {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 5px 7px;
+  border-radius: 5px;
+  font-size: 13px;
+  margin: 0 2px;
+  transition: background 0.2s;
+}
+.btn-edit       { color: #2980f2; }
+.btn-edit:hover  { background: #e3f0ff; }
+.btn-delete      { color: #e53935; }
+.btn-delete:hover { background: #fdecea; }
+
+/* Footer counts */
+.sep          { color: #bbb; margin: 0 6px; }
+.active-count { color: #2e7d32; font-size: 13px; }
+.inactive-count { color: #c62828; font-size: 13px; }
+
+/* Delete Confirmation Overlay */
+.confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.custom-alert {
+  background: #fff;
+  border-radius: 10px;
+  padding: 24px 28px;
+  min-width: 300px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  text-align: center;
+}
+
+.confirm-icon-text {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  font-size: 15px;
+  color: #374151;
+  justify-content: center;
+}
+
+.confirm-icon {
+  font-size: 28px;
+  color: #f59e0b;
+}
+
+.custom-alert .button-group {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 0;
+  border: none;
+  padding: 0;
+}
+
+.custom-alert .yes,
+.custom-alert .no {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.custom-alert .yes { background: #e53935; color: #fff; }
+.custom-alert .yes:hover { background: #c62828; }
+.custom-alert .no  { background: #f1f1f1; color: #555; }
+.custom-alert .no:hover  { background: #e0e0e0; }
+

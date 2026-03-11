@@ -1,14 +1,16 @@
 import { Routes } from '@angular/router';
 import { MainComponent } from './layout/main/main.component'; // Assuming this is your dashboard
-import { PriceCatelogComponent } from './features/inventory/components/inventory/add-stock-adjustment/price-catelog.component'; 
+import { PriceCatelogComponent } from './features/inventory/components/inventory/add-stock-adjustment/price-catelog.component';
 import { LoginComponent } from './auth/login/login.component'; // <-- Import your login component
 
 export const routes: Routes = [
+  //Login route
   {
-     path: '',
+    path: '',
     loadComponent: () =>
       import('./auth/login/login.component').then(m => m.LoginComponent),
   },
+  //Dashboard route
   {
     path: '',
     loadComponent: () =>
@@ -23,7 +25,7 @@ export const routes: Routes = [
         path: 'dashboard',
         component: MainComponent
       },
-                  
+
       {
         path: 'master',
         children: [
@@ -62,7 +64,7 @@ export const routes: Routes = [
             loadComponent: () =>
               import('./features/master/components/department-master/department-master.component').then(m => m.DepartmentMasterComponent),
           },
-           {
+          {
             path: 'designation-master',
             loadComponent: () =>
               import('./features/master/components/designation-master/designation-master.component').then(m => m.DesignationMasterComponent),
@@ -117,13 +119,72 @@ export const routes: Routes = [
             loadComponent: () =>
               import('./features/master/components/warehouse/warehouse.component').then(m => m.WarehouseComponent),
           },
-           {
+          {
             path: 'user-role',
             loadComponent: () =>
               import('./features/master/components/user-role/user-role.component').then(m => m.UserRoleComponent),
           },
+          {
+            path: 'branch-master',
+            loadComponent: () =>
+              import('./features/master/components/branch-master/branch-master.component').then(m => m.BranchMasterComponent),
+          },
+          {
+            path: 'manage-products',
+            loadComponent: () =>
+              import('./features/master/components/product-master/manage-products.component').then(m => m.ManageProductsComponent),
+          },
+          {
+            path: 'add-user',
+            loadComponent: () =>
+              import('./features/master/components/add-user/add-user.component').then(m => m.AddUserComponent),
+          },
+          {
+            path: 'trainer-course/add',
+            loadComponent: () =>
+              import('./features/master/components/trainer-course/trainer-course.component').then(m => m.TrainerCourseComponent),
+          }, {
+            path: 'trainer-course/manage',
+            loadComponent: () =>
+              import('./features/master/components/manage-trainer-course/manage-trainer-course.component').then(m => m.ManageTrainerCourseComponent),
+          },
+          {
+            path: 'charge-master',
+            loadComponent: () =>
+              import('./features/master/components/charge-master/charge-master.component').then(m => m.ChargeMasterComponent),
+          },
+          {
+            path: 'manage-charges',
+            loadComponent: () =>
+              import('./features/master/components/charge-master/manage-charges.component').then(m => m.ManageChargesComponent),
+          },
+          {
+            path: 'discount-master',
+            loadComponent: () =>
+              import('./features/master/components/discount-master/discount-master.component').then(m => m.DiscountMasterComponent),
+          },
+          {
+            path: 'manage-discounts',
+            loadComponent: () =>
+              import('./features/master/components/discount-master/manage-discounts.component').then(m => m.ManageDiscountsComponent),
+          },
+          {
+            path: 'tax-master',
+            loadComponent: () =>
+              import('./features/master/components/tax-master/tax-master.component').then(m => m.TaxMasterComponent),
+          },
+          {
+            path: 'manage-taxes',
+            loadComponent: () =>
+              import('./features/master/components/tax-master/manage-taxes.component').then(m => m.ManageTaxesComponent),
+          },
+          {
+            path: 'shift-master',
+            loadComponent: () =>
+              import('./features/master/components/shift-master/shift-master.component').then(m => m.ShiftMasterComponent),
+          },
         ]
-      },        
+      },
       {
         path: 'sales',
         children: [
@@ -219,84 +280,99 @@ export const routes: Routes = [
           }
         ]
       },
-		{
+      {
         path: 'purchase',
         children: [
-            {
-              path: 'purchase-bill',
-              loadComponent: () =>
-                import('./features/purchase/components/purchase/purchase-bill/purchase-bill.component').then(m => m.PurchaseBillComponent),
-            },
-            {
-              path: 'manage-purchase-bill',
-              loadComponent: () =>
-                import('./features/purchase/components/purchase-manage/manage-purchase-bill/manage-purchase-bill.component').then(m => m.ManagePurchaseBillComponent),
-            },
-            {
-              path: 'purchase-return',
-              loadComponent: () =>
-                import('./features/purchase/components/purchase/purchase-return/purchase-return.component').then(m => m.PurchaseReturnComponent),
-            },
-            {
-              path: 'manage-purchase-return',
-              loadComponent: () =>
-                import('./features/purchase/components/purchase-manage/manage-purchase-return/manage-purchase-return.component').then(m => m.ManagePurchaseReturnComponent),
-            },
-            {
-              path: 'purchase-order',
-              loadComponent: () =>
-                import('./features/purchase/components/purchase/purchase-order/purchase-order.component').then(m => m.PurchaseOrderComponent),
-            },
-            {
-              path: 'manage-purchase-order',
-              loadComponent: () =>
-                import('./features/purchase/components/purchase-manage/manage-purchase-order/manage-purchase-order.component').then(m => m.ManagePurchaseOrderComponent),
-            },
-            {
-              path: 'creditnote',
-              loadComponent: () =>
-                import('./features/purchase/components/purchase/creditnote/creditnote.component').then(m => m.CreditnoteComponent),
-            },
-            {
-              path: 'manage-creditnote',
-              loadComponent: () =>
-                import('./features/purchase/components/purchase-manage/manage-creditnote/manage-creditnote.component').then(m => m.ManageCreditnoteComponent),
-            },
-            {
-              path: 'debitnote',
-              loadComponent: () =>
-                import('./features/purchase/components/purchase/debitnote/debitnote.component').then(m => m.DebitnoteComponent),
-            },
-            {
-              path: 'manage-debitnote',
-              loadComponent: () =>
-                import('./features/purchase/components/purchase-manage/manage-debitnote/manage-debitnote.component').then(m => m.ManageDebitnoteComponent),
-            },
-            {
-              path: 'supplier',
-              loadComponent: () =>
-                import('./features/purchase/components/purchase/supplier/profile/profile.component').then(m => m.ProfileComponent),
-            },
-            {
-              path: 'manage-supplier',
-              loadComponent: () =>
-                import('./features/purchase/components/purchase-manage/manage-supplier/manage-supplier.component').then(m => m.ManageSupplierComponent),
-            }
+          {
+            path: 'purchase-bill',
+            loadComponent: () =>
+              import('./features/purchase/components/purchase/purchase-bill/purchase-bill.component').then(m => m.PurchaseBillComponent),
+          },
+          {
+            path: 'manage-purchase-bill',
+            loadComponent: () =>
+              import('./features/purchase/components/purchase-manage/manage-purchase-bill/manage-purchase-bill.component').then(m => m.ManagePurchaseBillComponent),
+          },
+          {
+            path: 'purchase-return',
+            loadComponent: () =>
+              import('./features/purchase/components/purchase/purchase-return/purchase-return.component').then(m => m.PurchaseReturnComponent),
+          },
+          {
+            path: 'manage-purchase-return',
+            loadComponent: () =>
+              import('./features/purchase/components/purchase-manage/manage-purchase-return/manage-purchase-return.component').then(m => m.ManagePurchaseReturnComponent),
+          },
+          {
+            path: 'purchase-order',
+            loadComponent: () =>
+              import('./features/purchase/components/purchase/purchase-order/purchase-order.component').then(m => m.PurchaseOrderComponent),
+          },
+          {
+            path: 'manage-purchase-order',
+            loadComponent: () =>
+              import('./features/purchase/components/purchase-manage/manage-purchase-order/manage-purchase-order.component').then(m => m.ManagePurchaseOrderComponent),
+          },
+          {
+            path: 'creditnote',
+            loadComponent: () =>
+              import('./features/purchase/components/purchase/creditnote/creditnote.component').then(m => m.CreditnoteComponent),
+          },
+          {
+            path: 'manage-creditnote',
+            loadComponent: () =>
+              import('./features/purchase/components/purchase-manage/manage-creditnote/manage-creditnote.component').then(m => m.ManageCreditnoteComponent),
+          },
+          {
+            path: 'debitnote',
+            loadComponent: () =>
+              import('./features/purchase/components/purchase/debitnote/debitnote.component').then(m => m.DebitnoteComponent),
+          },
+          {
+            path: 'manage-debitnote',
+            loadComponent: () =>
+              import('./features/purchase/components/purchase-manage/manage-debitnote/manage-debitnote.component').then(m => m.ManageDebitnoteComponent),
+          },
+          {
+            path: 'supplier',
+            loadComponent: () =>
+              import('./features/purchase/components/purchase/supplier/profile/profile.component').then(m => m.ProfileComponent),
+          },
+          {
+            path: 'manage-supplier',
+            loadComponent: () =>
+              import('./features/purchase/components/purchase-manage/manage-supplier/manage-supplier.component').then(m => m.ManageSupplierComponent),
+          }
         ]
       },
 
       {
-        path: 'inventory',
+        path: 'orders',
         children: [
           {
-            path: 'add-stock-adjustment',
+            path: 'add-order',
             loadComponent: () =>
-              import('./features/inventory/components/inventory/add-stock-adjustment/add-stock-adjustment.component').then(m => m.AddStockAdjustmentComponent),
+              import('./features/add-order/add-order.component').then(m => m.AddOrderComponent),
           },
           {
-            path: 'manage-stock-adjustment',
+            path: 'manage-orders',
             loadComponent: () =>
-              import('./features/inventory/components/inventory/manage-stock-adjustment/manage-stock-adjustment.component').then(m => m.ManageStockAdjustmentComponent),
+              import('./features/manage-orders/manage-orders.component').then(m => m.ManageOrdersComponent),
+          },
+        ]
+      },
+      {
+        path: 'customers',
+        children: [
+          {
+            path: 'add-customer',
+            loadComponent: () =>
+              import('./features/add-customer/add-customer.component').then(m => m.AddCustomerComponent),
+          },
+          {
+            path: 'manage-customer',
+            loadComponent: () =>
+              import('./features/manage-customers/manage-customers.component').then(m => m.ManageCustomersComponent),
           },
           {
             path: 'physical-stock-reconciliation',
@@ -305,21 +381,51 @@ export const routes: Routes = [
           },
           {
             path: 'price-catelog',
-            component: PriceCatelogComponent, 
+            component: PriceCatelogComponent,
           },
         ]
       },
-      
+
+      {
+        path: 'tenants',
+        children: [
+          {
+            path: 'add-tenant',
+            loadComponent: () =>
+              import('./features/add-tenant/add-tenant.component').then(m => m.AddTenantComponent),
+          },
+          {
+            path: 'manage-tenant',
+            loadComponent: () =>
+              import('./features/manage-tenants/manage-tenants.component').then(m => m.ManageTenantsComponent),
+          },
+        ]
+      },
+      {
+        path: 'course-offering',
+        children: [
+          {
+            path: 'add',
+            loadComponent: () =>
+              import('./features/course-offering/course-offering.component').then(m => m.CourseOfferingComponent),
+          },
+          // {
+            // path: 'manage-tenant',
+            // loadComponent: () =>
+            //   import('./features/manage-tenants/manage-tenants.component').then(m => m.ManageTenantsComponent),
+          // },
+        ]
+      },
       {
         path: 'reports',
         children: [
           {
             path: 'accounts',
-            children:[
+            children: [
               {
                 path: 'cash-book',
                 loadComponent: () =>
-                import('./features/reports/components/reports/accounts/cash-book/cash-book.component').then(m => m.CashBookComponent),
+                  import('./features/reports/components/reports/accounts/cash-book/cash-book.component').then(m => m.CashBookComponent),
               },
               {
                 path: 'business-book',
@@ -365,7 +471,7 @@ export const routes: Routes = [
           },
           {
             path: 'inventory',
-            children:[
+            children: [
               {
                 path: 'item-register',
                 loadComponent: () =>
@@ -415,7 +521,7 @@ export const routes: Routes = [
           },
           {
             path: 'sales',
-            children:[
+            children: [
               {
                 path: 'sales-aging',
                 loadComponent: () =>
@@ -475,7 +581,7 @@ export const routes: Routes = [
           },
           {
             path: 'purchases',
-            children:[
+            children: [
               {
                 path: 'purchase-aging',
                 loadComponent: () =>
@@ -514,28 +620,8 @@ export const routes: Routes = [
             ]
           },
           {
-            path: 'customers',
-            children:[
-              {
-                path: 'amount-due',
-                loadComponent: () =>
-                  import('./features/reports/components/reports/customers/amount-due/amount-due.component').then(m => m.AmountDueComponent),
-              },
-              {
-                path: 'payment-history',
-                loadComponent: () =>
-                  import('./features/reports/components/reports/customers/payment-history/payment-history.component').then(m => m.PaymentHistoryComponent),
-              },
-              {
-                path: 'account-balance',
-                loadComponent: () =>
-                  import('./features/reports/components/reports/customers/account-balance/account-balance.component').then(m => m.AccountBalanceComponent),
-              },
-            ]
-          },
-          {
             path: 'suppliers',
-            children:[
+            children: [
               {
                 path: 'payment-history',
                 loadComponent: () =>
@@ -550,7 +636,7 @@ export const routes: Routes = [
           },
           {
             path: 'expenses',
-            children:[
+            children: [
               {
                 path: 'search-expense',
                 loadComponent: () =>
@@ -565,7 +651,7 @@ export const routes: Routes = [
           },
           {
             path: 'staff',
-            children:[
+            children: [
               {
                 path: 'search-salary',
                 loadComponent: () =>
@@ -590,7 +676,7 @@ export const routes: Routes = [
           },
           {
             path: 'tcs',
-            children:[
+            children: [
               {
                 path: 'tcs-payable',
                 loadComponent: () =>
@@ -605,7 +691,7 @@ export const routes: Routes = [
           },
           {
             path: 'gstr',
-            children:[
+            children: [
               {
                 path: 'gstr-1',
                 loadComponent: () =>
@@ -635,41 +721,41 @@ export const routes: Routes = [
           },
         ]
       },
-      
+
       {
-         path: 'settings',
-         loadComponent: () =>
-         import('./features/settings/components//settings/settings.component').then(m => m.SettingsComponent),
-         children: [
-         {
-           path: 'billing',
-           loadComponent: () =>
-           import('./features/settings/components/billing-settings/billing-settings.component').then(m => m.BillingSettingsComponent),
+        path: 'settings',
+        loadComponent: () =>
+          import('./features/settings/components//settings/settings.component').then(m => m.SettingsComponent),
+        children: [
+          {
+            path: 'billing',
+            loadComponent: () =>
+              import('./features/settings/components/billing-settings/billing-settings.component').then(m => m.BillingSettingsComponent),
           },
           {
             path: 'users',
             loadComponent: () =>
-            import('./features/settings/components//user-management/user-management/user-management.component').then(m => m.UserManagementComponent),
+              import('./features/settings/components//user-management/user-management/user-management.component').then(m => m.UserManagementComponent),
           },
           {
             path: '',
             redirectTo: 'billing',
             pathMatch: 'full'
           }
-          ]
-        },
-       {
-          path: 'management-tool',
-          loadComponent: () =>
+        ]
+      },
+      {
+        path: 'management-tool',
+        loadComponent: () =>
           import('./features/settings/components/user-management/management-tool/management-tool.component').then(m => m.ManagementToolComponent),
-          children: [
+        children: [
           {
-          path: 'add-user',
-          loadComponent: () =>
-          import('./features/settings/components/user-management/add-user/add-user.component').then(m => m.AddUserComponent),
+            path: 'add-user',
+            loadComponent: () =>
+              import('./features/master/components/add-user/add-user.component').then(m => m.AddUserComponent),
           }
-       ]
-        },
-    ], 
+        ]
+      },
+    ],
   },
 ];

@@ -1,0 +1,66 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+<!-- Page Header -->
+<div class="page-header">
+  <h2>Search and Manage Discounts</h2>
+</div>
+
+<!-- Search + Add -->
+<div class="top-bar">
+  <div class="search-box">
+    <input
+      type="text"
+      placeholder="Search by discount name..."
+      [(ngModel)]="searchTerm"
+      (input)="applySearch()"
+    />
+    <button class="search-btn">
+      🔍
+    </button>
+  </div>
+
+  <button class="add-btn" routerLink="/master/discount-master">
+    + Add New Discount
+  </button>
+</div>
+
+<!-- Table Card -->
+<div class="table-card">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>S.No</th>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngIf="filteredList.length === 0">
+        <td colspan="6" class="no-data">No discounts found</td>
+      </tr>
+
+      <tr *ngFor="let d of filteredList; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td class="bold">{{ d.name }}</td>
+        <td>{{ d.type }}</td>
+        <td>
+          {{ d.type === 'Percentage'
+            ? d.value + '%'
+            : '₹' + d.value }}
+        </td>
+        <td>
+          <span class="status active" *ngIf="d.isActive">Active</span>
+          <span class="status inactive" *ngIf="!d.isActive">Inactive</span>
+        </td>
+        <td class="actions">
+          <button class="icon-btn edit" (click)="editDiscount(d)"><i class="fas fa-pen"></i></button>
+          <button class="icon-btn delete" (click)="deleteDiscount(d.discountId)"><i class="fas fa-trash"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

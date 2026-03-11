@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Role } from '../../../../../core/models/role';
 
 @Component({
   selector: 'app-update-user-dialog',
@@ -31,7 +32,7 @@ export class UpdateUserDialogComponent {
   showMessage: boolean = false;
   messageClass: string = '';
 
-  roles: any[] = [];
+  roles: Role[] = [];
  
 
   constructor(
@@ -133,8 +134,8 @@ onSubmit(): void {
 
 loadRoles() {
   this.authService.getRoles().subscribe({
-    next: (data) => {
-      this.roles = data;
+    next: (res) => {
+      this.roles = res.data;
     },
     error: (err) => {
       console.error('Failed to load roles', err);

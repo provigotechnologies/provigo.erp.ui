@@ -1,0 +1,306 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+
+<div class="user-registration-container">
+  <!-- Success / Error Alerts -->
+  <div *ngIf="successMessage" class="alert alert-success">
+    <i class="fas fa-check-circle"></i>
+    <span>{{ successMessage }}</span>
+    <button class="alert-close" (click)="successMessage = ''">×</button>
+  </div>
+  
+  <div *ngIf="errorMessage" class="alert alert-error">
+    <i class="fas fa-exclamation-circle"></i>
+    <span>{{ errorMessage }}</span>
+    <button class="alert-close" (click)="errorMessage = ''">×</button>
+  </div>
+
+  <!-- Main Card -->
+  <div class="registration-card">
+    <!-- Header -->
+    <div class="card-header">
+      <div class="header-icon">
+        <i class="fas fa-user-plus"></i>
+      </div>
+      <div class="header-title">
+        <h2>Register New User</h2>
+        <p>Fill in the details to create a new user account</p>
+      </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div *ngIf="isLoading" class="loading-overlay">
+      <div class="spinner-container">
+        <i class="fas fa-spinner fa-spin"></i>
+        <span>Processing your request...</span>
+      </div>
+    </div>
+
+    <form [formGroup]="userForm" (ngSubmit)="submit()" novalidate class="registration-form">
+      <!-- Personal Information Section -->
+      <div class="form-section">
+        <div class="section-title">
+          <i class="fas fa-user"></i>
+          <h3>Personal Information</h3>
+        </div>
+        
+        <div class="form-grid">
+          <!-- First Name -->
+          <div class="form-field">
+            <label>
+              First Name <span class="required">*</span>
+              <i class="fas fa-info-circle tooltip-icon" title="Enter your first name"></i>
+            </label>
+            <div class="input-wrapper">
+              <i class="fas fa-user input-icon"></i>
+              <input 
+                type="text" 
+                formControlName="firstName" 
+                placeholder="Enter first name"
+                [class.error]="(submitted || userForm.get('firstName')?.touched) && userForm.get('firstName')?.invalid"
+                (blur)="trimField('firstName')" />
+            </div>
+            <div class="error-message" *ngIf="(submitted || userForm.get('firstName')?.touched) && userForm.get('firstName')?.errors?.['required']">
+              <i class="fas fa-exclamation-circle"></i> First name is required.
+            </div>
+            <div class="error-message" *ngIf="(submitted || userForm.get('firstName')?.touched) && userForm.get('firstName')?.errors?.['pattern']">
+              <i class="fas fa-exclamation-circle"></i> Only letters and spaces are allowed.
+            </div>
+          </div>
+
+          <!-- Last Name -->
+          <div class="form-field">
+            <label>
+              Last Name <span class="required">*</span>
+              <i class="fas fa-info-circle tooltip-icon" title="Enter your last name"></i>
+            </label>
+            <div class="input-wrapper">
+              <i class="fas fa-user input-icon"></i>
+              <input 
+                type="text" 
+                formControlName="lastName" 
+                placeholder="Enter last name"
+                [class.error]="(submitted || userForm.get('lastName')?.touched) && userForm.get('lastName')?.invalid"
+                (blur)="trimField('lastName')" />
+            </div>
+            <div class="error-message" *ngIf="(submitted || userForm.get('lastName')?.touched) && userForm.get('lastName')?.errors?.['required']">
+              <i class="fas fa-exclamation-circle"></i> Last name is required.
+            </div>
+            <div class="error-message" *ngIf="(submitted || userForm.get('lastName')?.touched) && userForm.get('lastName')?.errors?.['pattern']">
+              <i class="fas fa-exclamation-circle"></i> Only letters and spaces are allowed.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Information Section -->
+      <div class="form-section">
+        <div class="section-title">
+          <i class="fas fa-address-book"></i>
+          <h3>Contact Information</h3>
+        </div>
+        
+        <div class="form-grid">
+          <!-- Email -->
+          <div class="form-field">
+            <label>
+              Email Address <span class="required">*</span>
+              <i class="fas fa-info-circle tooltip-icon" title="Enter a valid email address"></i>
+            </label>
+            <div class="input-wrapper">
+              <i class="fas fa-envelope input-icon"></i>
+              <input 
+                type="email" 
+                formControlName="email" 
+                placeholder="example@domain.com"
+                [class.error]="(submitted || userForm.get('email')?.touched) && userForm.get('email')?.invalid"
+                (blur)="trimField('email')" />
+            </div>
+            <div class="error-message" *ngIf="(submitted || userForm.get('email')?.touched) && userForm.get('email')?.errors?.['required']">
+              <i class="fas fa-exclamation-circle"></i> Email is required.
+            </div>
+            <div class="error-message" *ngIf="(submitted || userForm.get('email')?.touched) && userForm.get('email')?.errors?.['invalidEmail']">
+              <i class="fas fa-exclamation-circle"></i> Enter a valid email (e.g. name&#64;domain.com).
+            </div>
+            <div class="error-message" *ngIf="(submitted || userForm.get('email')?.touched) && userForm.get('email')?.errors?.['emailTaken']">
+              <i class="fas fa-exclamation-circle"></i> This email is already registered.
+            </div>
+          </div>
+
+          <!-- Phone Number -->
+          <div class="form-field">
+            <label>
+              Phone Number
+              <i class="fas fa-info-circle tooltip-icon" title="10-digit mobile number starting with 6-9"></i>
+            </label>
+            <div class="input-wrapper">
+              <i class="fas fa-phone input-icon"></i>
+              <input 
+                type="text" 
+                formControlName="phoneNumber" 
+                placeholder="Enter 10-digit number" 
+                maxlength="10"
+                [class.error]="(submitted || userForm.get('phoneNumber')?.touched) && userForm.get('phoneNumber')?.invalid"
+                (keypress)="onlyDigits($event)" />
+            </div>
+            <div class="error-message" *ngIf="(submitted || userForm.get('phoneNumber')?.touched) && userForm.get('phoneNumber')?.errors?.['pattern']">
+              <i class="fas fa-exclamation-circle"></i> Must be a valid 10-digit mobile number starting with 6–9.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Account Information Section -->
+      <div class="form-section">
+        <div class="section-title">
+          <i class="fas fa-lock"></i>
+          <h3>Account Information</h3>
+        </div>
+        
+        <div class="form-grid">
+          <!-- Password -->
+          <div class="form-field">
+            <label>
+              Password <span class="required">*</span>
+              <i class="fas fa-info-circle tooltip-icon" title="Minimum 6 characters"></i>
+            </label>
+            <div class="input-wrapper">
+              <i class="fas fa-lock input-icon"></i>
+              <input 
+                [type]="showPassword ? 'text' : 'password'" 
+                formControlName="password" 
+                placeholder="Enter password (min 6 chars)"
+                [class.error]="(submitted || userForm.get('password')?.touched) && userForm.get('password')?.invalid" />
+              <span class="password-toggle" (click)="togglePassword()">
+                <i [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+              </span>
+            </div>
+            <div class="error-message" *ngIf="(submitted || userForm.get('password')?.touched) && userForm.get('password')?.errors?.['required']">
+              <i class="fas fa-exclamation-circle"></i> Password is required.
+            </div>
+            <div class="error-message" *ngIf="(submitted || userForm.get('password')?.touched) && userForm.get('password')?.errors?.['minlength']">
+              <i class="fas fa-exclamation-circle"></i> Password must be at least 6 characters.
+            </div>
+            <div class="password-strength" *ngIf="userForm.get('password')?.value?.length > 0">
+              <div class="strength-bar" [class.weak]="userForm.get('password')?.value?.length < 6"
+                   [class.medium]="userForm.get('password')?.value?.length >= 6 && userForm.get('password')?.value?.length < 8"
+                   [class.strong]="userForm.get('password')?.value?.length >= 8"></div>
+              <span class="strength-text">
+                {{ userForm.get('password')?.value?.length < 6 ? 'Weak' : 
+                   userForm.get('password')?.value?.length < 8 ? 'Medium' : 'Strong' }}
+              </span>
+            </div>
+          </div>
+
+          <!-- User Category -->
+          <div class="form-field">
+            <label>
+              User Category <span class="required">*</span>
+              <i class="fas fa-info-circle tooltip-icon" title="e.g., Admin, Staff, Manager"></i>
+            </label>
+            <div class="input-wrapper">
+              <i class="fas fa-tag input-icon"></i>
+              <input 
+                type="text" 
+                formControlName="userCategory" 
+                placeholder="Enter user category"
+                [class.error]="(submitted || userForm.get('userCategory')?.touched) && userForm.get('userCategory')?.invalid"
+                (blur)="trimField('userCategory')" />
+            </div>
+            <div class="error-message" *ngIf="(submitted || userForm.get('userCategory')?.touched) && userForm.get('userCategory')?.errors?.['required']">
+              <i class="fas fa-exclamation-circle"></i> User category is required.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Role & Branch Section -->
+      <div class="form-section">
+        <div class="section-title">
+          <i class="fas fa-briefcase"></i>
+          <h3>Assignment</h3>
+        </div>
+        
+        <div class="form-grid">
+          <!-- Role -->
+          <div class="form-field">
+            <label>
+              Role <span class="required">*</span>
+              <i class="fas fa-info-circle tooltip-icon" title="Select user role"></i>
+            </label>
+            <div class="select-wrapper">
+              <i class="fas fa-user-tag select-icon"></i>
+              <select formControlName="roleId"
+                [class.error]="(submitted || userForm.get('roleId')?.touched) && userForm.get('roleId')?.invalid">
+                <option value="" disabled>Select Role</option>
+                <option *ngFor="let r of roles" [value]="r.id">{{ r.roleName }}</option>
+              </select>
+              <i class="fas fa-chevron-down dropdown-arrow"></i>
+            </div>
+            <div class="error-message" *ngIf="(submitted || userForm.get('roleId')?.touched) && userForm.get('roleId')?.errors?.['required']">
+              <i class="fas fa-exclamation-circle"></i> Role is required.
+            </div>
+          </div>
+
+          <!-- Branch -->
+          <div class="form-field">
+            <label>
+              Branch <span class="required">*</span>
+              <i class="fas fa-info-circle tooltip-icon" title="Select user branch"></i>
+            </label>
+            <div class="select-wrapper">
+              <i class="fas fa-building select-icon"></i>
+              <select formControlName="branchId"
+                [class.error]="(submitted || userForm.get('branchId')?.touched) && userForm.get('branchId')?.invalid">
+                <option value="" disabled>Select Branch</option>
+                <option *ngFor="let b of branches" [value]="b.branchId">{{ b.branchName }}</option>
+              </select>
+              <i class="fas fa-chevron-down dropdown-arrow"></i>
+            </div>
+            <div class="error-message" *ngIf="(submitted || userForm.get('branchId')?.touched) && userForm.get('branchId')?.errors?.['required']">
+              <i class="fas fa-exclamation-circle"></i> Branch is required.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Status Section -->
+      <div class="form-section">
+        <div class="section-title">
+          <i class="fas fa-toggle-on"></i>
+          <h3>Account Status</h3>
+        </div>
+        
+        <div class="status-field">
+          <label class="status-label">Account Status</label>
+          <div class="toggle-container">
+            <label class="toggle-switch">
+              <input type="checkbox" formControlName="isActive" />
+              <span class="toggle-slider"></span>
+            </label>
+            <span class="status-badge" [class.active]="userForm.get('isActive')?.value">
+              <i [class]="userForm.get('isActive')?.value ? 'fas fa-check-circle' : 'fas fa-times-circle'"></i>
+              {{ userForm.get('isActive')?.value ? 'Active' : 'Inactive' }}
+            </span>
+          </div>
+          <p class="status-hint">
+            {{ userForm.get('isActive')?.value ? 
+               'User will be able to login immediately' : 
+               'User account will be created but disabled' }}
+          </p>
+        </div>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="form-actions">
+        <button type="button" class="btn-secondary" (click)="cancel()">
+          <i class="fas fa-times"></i>
+          Cancel
+        </button>
+        <button type="submit" class="btn-primary" [disabled]="isLoading">
+          <i class="fas" [ngClass]="isLoading ? 'fa-spinner fa-spin' : 'fa-save'"></i>
+          {{ isLoading ? 'Registering...' : 'Register User' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

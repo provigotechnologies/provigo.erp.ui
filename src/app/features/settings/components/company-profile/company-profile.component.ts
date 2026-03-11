@@ -7,7 +7,7 @@ import { CompanyEditDialogComponent } from './company-edit-dialog.component';
 @Component({
   selector: 'app-company', 
   standalone: true,
-  imports: [FormsModule, CommonModule, CompanyEditDialogComponent],
+  imports: [FormsModule, CommonModule],
   templateUrl: './company-profile.component.html',
  styleUrls: [
     './company-profile.component.css',

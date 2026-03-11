@@ -1,0 +1,295 @@
+/* ================================
+   Wrapper
+================================ */
+.customer-wrapper {
+  padding: 24px;
+  background: #ffffff;
+  border-radius: 14px;
+  margin: 20px auto;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+  font-family: 'Segoe UI', sans-serif;
+  max-width: 900px;
+}
+
+/* ================================
+   Toast Alerts
+================================ */
+.toast-alert {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 18px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.toast-alert i {
+  margin-right: 8px;
+  font-size: 15px;
+}
+
+.toast-success {
+  background: #e8f5e9;
+  color: #2e7d32;
+  border-left: 4px solid #43a047;
+}
+
+.toast-error {
+  background: #fdecea;
+  color: #c62828;
+  border-left: 4px solid #e53935;
+}
+
+.toast-close {
+  margin-left: auto;
+  background: none;
+  border: none;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  line-height: 1;
+}
+
+/* ================================
+   Card
+================================ */
+.customer-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 28px;
+  background: #ffffff;
+}
+
+/* ================================
+   Form Layout
+================================ */
+.form-row {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+}
+
+.form-group {
+  flex: 1;
+  min-width: 240px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group.full-width {
+  flex: 1 1 100%;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+.required {
+  color: #e53935;
+  margin-left: 3px;
+}
+
+/* ================================
+   Inputs / Textarea / Select
+================================ */
+.form-group input,
+.form-group textarea,
+.form-group select {
+  padding: 9px 12px;
+  font-size: 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.2s ease;
+  background: #ffffff;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-group input:hover,
+.form-group textarea:hover,
+.form-group select:hover {
+  border-color: #9ca3af;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.form-group input.input-error,
+.form-group textarea.input-error,
+.form-group select.input-error {
+  border-color: #e53935;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+/* ================================
+   Error Message
+================================ */
+.error-msg {
+  color: #e53935;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* ================================
+   Status Toggle
+================================ */
+.status-group {
+  justify-content: flex-start;
+}
+
+.toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 46px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: #ccc;
+  border-radius: 34px;
+  transition: 0.3s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+input:checked + .slider {
+  background-color: #2563eb;
+}
+
+input:checked + .slider:before {
+  transform: translateX(22px);
+}
+
+.status-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: #c62828;
+}
+
+.status-text.status-active {
+  color: #2e7d32;
+}
+
+/* ================================
+   Loading
+================================ */
+.loading-row {
+  text-align: center;
+  color: #2563eb;
+  padding: 24px;
+  font-size: 14px;
+}
+
+/* ================================
+   Buttons
+================================ */
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 16px;
+  padding-top: 18px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.btn-cancel,
+.btn-add {
+  padding: 10px 22px;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-cancel {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.btn-cancel:hover {
+  background: #e5e7eb;
+}
+
+.btn-add {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.btn-add:hover {
+  background: #1d4ed8;
+}
+
+.btn-add:disabled {
+  background: #93c5fd;
+  cursor: not-allowed;
+}
+
+/* ================================
+   Responsive
+================================ */
+@media (max-width: 600px) {
+  .form-row {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .button-group {
+    justify-content: stretch;
+    flex-direction: column;
+  }
+
+  .btn-cancel,
+  .btn-add {
+    justify-content: center;
+    width: 100%;
+  }
+}

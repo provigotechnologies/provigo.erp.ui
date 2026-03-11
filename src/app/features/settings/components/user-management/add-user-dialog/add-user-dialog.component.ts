@@ -1,10 +1,15 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { AuthService } from '../../../../../core/services/auth.service';
 import { CommonModule } from '@angular/common';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Role } from '../../../../../core/models/role';
+import { UserService, RegisterUserDto } from '../../../../../core/services/user.service';
+import { Branch } from '../../../../../core/models/branch';
+import { BranchService } from '../../../../../core/services/branch.service';
+
 
 @Component({
   selector: 'app-add-user-dialog',
@@ -21,30 +26,38 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatSnackBarModule // ✅ Import this
   ]
 })
-export class AddUserDialogComponent {
+export class AddUserDialogComponent implements OnInit {
   userForm: FormGroup;
   submitted = false;
 
-  roles: any[] = [];
+  branches: Branch[] = []; // ✅ Change this to Branch[]
+  roles: Role[] = []; // ✅ Change this to Role[]
 
   message: string = '';
   showMessage: boolean = false;
   messageClass: string = '';
+  isLoading = false;
+  successMessage = '';
+  errorMessage = '';
 
 constructor(
   private fb: FormBuilder,
   private authService: AuthService,
+  private userService: UserService,
+  private branchService: BranchService,
   private snackBar: MatSnackBar,
   private dialogRef: MatDialogRef<AddUserDialogComponent>,
   @Inject(MAT_DIALOG_DATA) public data: any // ✅ get passed user here
 ) {
   this.userForm = this.fb.group({
-  firstname: ['', [Validators.required, Validators.pattern(/^[A-Za-z ]+$/)]], // ✅ letters only
-  lastname: ['', [Validators.required, Validators.pattern(/^[A-Za-z ]+$/)]],  // ✅ letters only
+  firstName: ['', [Validators.required, Validators.pattern(/^[A-Za-z ]+$/)]], // ✅ letters only
+  lastName: ['', [Validators.required, Validators.pattern(/^[A-Za-z ]+$/)]],  // ✅ letters only
   email: ['', [Validators.required, Validators.email, gmailOnlyValidator]], 
   password: ['', Validators.required],                                       // ✅ required only
-  phonenumber: ['', [Validators.pattern(/^[0-9]*$/)]],                       // ✅ numbers only
-  role: ['', Validators.required],
+  phoneNumber: ['', [Validators.pattern(/^[0-9]*$/)]],                       // ✅ numbers only
+  roleId:       ['', [Validators.required]], // ✅ required only
+  branchId:     ['', [Validators.required]], // ✅ required only
+  userCategory:  ['', [Validators.required]], // ✅ required only
   isActive: [true, Validators.required]
 });
 
@@ -75,8 +88,8 @@ showAlert(msg: string, type: 'success' | 'error') {
 
 loadRoles() {
   this.authService.getRoles().subscribe({
-    next: (data) => {
-      this.roles = data;
+    next: (res) => {
+      this.roles = res.data;
     },
     error: (err) => {
       console.error('Error fetching roles:', err);
@@ -85,45 +98,52 @@ loadRoles() {
 }
 
 ngOnInit() {
+  this.branchService.getBranches().subscribe(res => this.branches = res); // ✅ Load branches here
   this.loadRoles();
 }
 
-onSubmit(): void {
-  this.submitted = true;                  // 🔁 triggers error messages in template
-  this.userForm.markAllAsTouched();       // 🔁 highlights all invalid fields
+submit(): void {
+    this.submitted = true;
+    this.userForm.markAllAsTouched();
+    if (this.userForm.invalid) return;
 
-  if (this.userForm.invalid) {
-    return;
-  }
+    const fv = this.userForm.value;
+    const branchId: string = fv.branchId;
 
-  const formValue = this.userForm.value;
+    const dto: RegisterUserDto = {
+      email:        fv.email.trim().toLowerCase(),
+      password:     fv.password,
+      firstName:    fv.firstName,
+      lastName:     fv.lastName,
+      phoneNumber:  fv.phoneNumber ?? '',
+      roleId:       Number(fv.roleId),
+      userCategory: fv.userCategory,
+      isActive:     fv.isActive,
+      
+    };
 
-  const newUser = {
-    firstname: formValue.firstname,
-    lastname: formValue.lastname,
-    phonenumber: formValue.phonenumber,
-    email: formValue.email,
-    password: formValue.password,
-    roleId: formValue.role,
-    isactive: formValue.isActive
-  };
+    this.isLoading = true;
+    this.successMessage = '';
+    this.errorMessage = '';
 
-  this.authService.register(newUser).subscribe({
-    next: () => {
-      this.showAlert('✅ User created successfully!', 'success');
-      setTimeout(() => {
-        this.dialogRef.close(true);
-      }, 1500);
-    },
-    error: (err) => {
-     if (err.status === 400 && err.error === 'Email already registered.') {
-       this.userForm.get('email')?.setErrors({ emailTaken: true }); // triggers that <span> in template
-      } else {
-       this.showAlert('❌ Failed to create user!', 'error');
+    this.userService.registerUser(branchId, dto).subscribe({
+      next: () => {
+        this.successMessage = 'User registered successfully!';
+        this.isLoading = false;
+        this.userForm.reset({ isActive: true });
+        this.submitted = false;
+      },
+      error: (err) => {
+        const msg = typeof err.error === 'string' ? err.error : err.error?.message;
+        if (err.status === 400 && msg?.toLowerCase().includes('email')) {
+          this.userForm.get('email')?.setErrors({ emailTaken: true });
+        } else {
+          this.errorMessage = msg || 'Failed to register user. Please try again.';
+        }
+        this.isLoading = false;
       }
-    }
-  });
-}
+    });
+  }
 
 
 

@@ -1,0 +1,237 @@
+/* =========================
+   Page Header
+========================= */
+.page-header h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+/* =========================
+   Alerts
+========================= */
+.success-banner,
+.error-banner {
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  margin-bottom: 12px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.success-banner {
+  background: #e6f4ea;
+  color: #2e7d32;
+  border: 1px solid #a5d6a7;
+}
+
+.error-banner {
+  background: #fce4e4;
+  color: #c62828;
+  border: 1px solid #ef9a9a;
+}
+
+/* =========================
+   Top Bar
+========================= */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+/* =========================
+   Search
+========================= */
+.search-box {
+  display: flex;
+  width: 420px;
+}
+
+.search-box input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px 0 0 8px;
+  font-size: 14px;
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: #2f80ed;
+}
+
+.search-btn {
+  background: #ef2b1d;
+  color: #fff;
+  border: none;
+  padding: 0 18px;
+  border-radius: 0 8px 8px 0;
+  cursor: pointer;
+}
+
+/* =========================
+   Add Button
+========================= */
+.add-btn {
+  background: #ef2b1d;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* =========================
+   Table Card
+========================= */
+.table-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 18px;
+  border: 1px solid #ddd;
+}
+
+/* =========================
+   Table
+========================= */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.data-table thead {
+  background: #2f80ed;
+  color: #fff;
+}
+
+.data-table th,
+.data-table td {
+  padding: 14px;
+  border: 1px solid #e0e0e0;
+  text-align: left;
+}
+
+.data-table tbody tr:nth-child(even) {
+  background: #f4f7fb;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+/* =========================
+   Status Pills
+========================= */
+.status {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.status.active {
+  background: #e7f7ec;
+  color: #1e8e3e;
+}
+
+.status.inactive {
+  background: #fdecea;
+  color: #d93025;
+}
+
+/* =========================
+   Actions
+========================= */
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.icon-btn {
+  border: none;
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.icon-btn.edit {
+  background: #6e6e6e;
+  color: #fff;
+}
+
+.icon-btn.delete {
+  background: #ef2b1d;
+  color: #fff;
+}
+
+/* =========================
+   Loading / Empty
+========================= */
+.loading-text {
+  text-align: center;
+  color: #666;
+  font-size: 13px;
+  padding: 10px 0;
+}
+
+.no-data {
+  text-align: center;
+  color: gray;
+  padding: 20px;
+}
+
+/* =========================
+   Delete Confirmation
+========================= */
+.custom-alert {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  background: #fff;
+  padding: 16px 20px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.2);
+  z-index: 1000;
+}
+
+.confirm-icon-text {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.confirm-icon {
+  font-size: 20px;
+  color: #2f80ed;
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.button-group button {
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.yes {
+  background: #ef2b1d;
+  color: #fff;
+}
+
+.no {
+  background: #e5e7eb;
+}

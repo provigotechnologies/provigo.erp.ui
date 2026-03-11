@@ -1,0 +1,70 @@
+/* Radio group */
+.radio-group {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: 1;
+  min-width: 240px;
+}
+
+.radio-label {
+  width: 120px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #444;
+  margin-bottom: 0;
+  text-align: left;
+}
+
+.radio-options {
+  display: flex;
+  gap: 15px;
+  font-size: 13px;
+  flex-wrap: wrap;
+}
+
+input[type="radio"] {
+  accent-color: #2980f2;
+}
+
+/* Status badges */
+.badge-active {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  background: #e6f4ea;
+  color: #2e7d32;
+}
+
+.badge-inactive {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  background: #fce4e4;
+  color: #c62828;
+}
+
+/* Success / Error banners */
+.success-banner {
+  background: #e6f4ea;
+  color: #2e7d32;
+  border: 1px solid #a5d6a7;
+  border-radius: 6px;
+  padding: 8px 14px;
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+
+.error-banner {
+  background: #fce4e4;
+  color: #c62828;
+  border: 1px solid #ef9a9a;
+  border-radius: 6px;
+  padding: 8px 14px;
+  margin-bottom: 12px;
+  font-size: 13px;
+}

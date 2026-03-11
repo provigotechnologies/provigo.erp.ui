@@ -1,208 +1,142 @@
-import { Component } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser, CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ProductService } from '../../../../core/services/product.service';
+import { Product } from '../../../../core/models/product';
+import { BranchService } from '../../../../core/services/branch.service';
+import { Branch } from '../../../../core/models/branch';
 
 @Component({
   selector: 'app-product-master',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, CommonModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './product-master.component.html',
   styleUrls: [
     './product-master.component.css',
-    '../../../styles/product-style.css'
+    '../../../styles/groupandadjustserialno-style.css'
   ]
 })
-export class ProductMasterComponent {
-  group ='';
-  brand ='';
-  itemCode ='';
-  productName ='';
-  printName ='';
-  purchasePrice ='';
-  salePrice ='';
-  mrp ='';
-  unit ='';
-  openingStock ='';
-  stockValue ='';
-  hsnCode = '';
-  cgst = '';
-  sgst = '';
-  igst = '';
-  cess = '';
-  saleDiscount ='';
-  lowLevelLimit ='';
-  productType ='';
-  location ='';
-  serialNo ='';
-  productDescription = '';
+export class ProductMasterComponent implements OnInit {
+  private platformId = inject(PLATFORM_ID);
 
-    showConfirm = false;
-
-   productList: {
-    group: string;
-    brand: string;
-    itemCode: string;
-    productName: string; 
-    printName: string;
-    purchasePrice: string;
-    salePrice: string;
-    mrp: string;
-    unit: string;
-    openingStock: string;
-    stockValue: string;
-    hsnCode: string;
-    cgst: string;
-    sgst: string;
-    igst: string;
-    cess: string;
-    saleDiscount: string;
-    lowLevelLimit: string;
-    productType: string;
-    location: string;
-    serialNo: string;
-    productDescription: string;
-  }[] = [];
+  productName = '';
+  totalFee: number | null = null;
+  isActive = true;
+  branchId = '';
 
   submitted = false;
   error = '';
+  showConfirm = false;
+  isEditMode = false;
+  editingId: number | null = null;
 
-    numberOnlyError: {
-    purchasePrice: boolean;
-    salePrice: boolean;
-    saleDiscount: boolean;
-    mrp: boolean;
-    openingStock: boolean;
-    stockValue: boolean;
-    lowLevelLimit: boolean;
-  } = {
-    purchasePrice: false,
-    salePrice: false,
-    saleDiscount: false,
-    mrp: false,
-    stockValue: false,
-    openingStock: false,
-    lowLevelLimit: false
-  };
+  successMessage = '';
+  errorMessage = '';
 
+  branches: Branch[] = [];
+  
+  constructor(private productService: ProductService, private router: Router, private branchService: BranchService) {}
 
- addTable() {
-  this.submitted = true;
+  ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      const nav = this.router.getCurrentNavigation();
+      const state = nav?.extras?.state as { product?: Product } | undefined;
+      if (state?.product) {
+        this.loadEditState(state.product);
+      } else {
+        const stored = sessionStorage.getItem('editProduct');
+        if (stored) {
+          this.loadEditState(JSON.parse(stored));
+          sessionStorage.removeItem('editProduct');
+        }
+      }
 
-  if (!this.group || !this.productName || !this.purchasePrice || !this.salePrice) {
-    this.error = 'Please fill all required fields.';
-    this.showConfirm = true; // Show alert
-    return;
-  }
-
-  // Proceed if valid
-  this.productList.push({
-    group: this.group,
-    brand: this.brand,
-    itemCode: this.itemCode,
-    productName: this.productName,
-    printName: this.printName,
-    purchasePrice: this.purchasePrice,
-    salePrice: this.salePrice,
-    mrp: this.mrp,
-    unit: this.unit,
-    openingStock: this.openingStock,
-    stockValue: this.stockValue,
-    hsnCode: this.hsnCode,
-    cgst: this.cgst,
-    sgst: this.sgst,
-    igst: this.igst,
-    cess: this.cess,
-    saleDiscount: this.saleDiscount,
-    lowLevelLimit: this.lowLevelLimit,
-    productType: this.productType,
-    location: this.location,
-    serialNo: this.serialNo,
-    productDescription: this.productDescription
-  });
-
-  this.resetForm();
-}
-
-
- filterNumbers(field: 'purchasePrice' | 'salePrice' | 'saleDiscount' | 'mrp' |'openingStock' |'stockValue' | 'lowLevelLimit') {
-    if (field === 'purchasePrice') {
-      this.purchasePrice = this.purchasePrice.replace(/[^0-9]/g, '');
-    } else if (field === 'salePrice') {
-      this.salePrice = this.salePrice.replace(/[^0-9]/g, '');
-    } else if (field === 'saleDiscount') {
-      this.saleDiscount = this.saleDiscount.replace(/[^0-9]/g, '');
-    } else if (field === 'mrp') {
-      this.mrp = this.mrp.replace(/[^0-9]/g, '');
-    }  else if (field === 'openingStock') {
-      this.openingStock = this.openingStock.replace(/[^0-9]/g, '');
-    }  else if (field === 'stockValue') {
-      this.stockValue = this.stockValue.replace(/[^0-9]/g, '');
-    } 
-  }
-
-  allowOnlyNumbers(event: KeyboardEvent, field: 'purchasePrice' | 'salePrice' | 'saleDiscount' | 'mrp' |'openingStock' |'stockValue' | 'lowLevelLimit') {
-    const allowedKeys = ['Backspace', 'ArrowLeft', 'ArrowRight', 'Tab', 'Delete'];
-    const isNumber = /^[0-9]$/.test(event.key);
-
-    if (!isNumber && !allowedKeys.includes(event.key)) {
-      event.preventDefault();
-      this.numberOnlyError[field] = true;
-
-      setTimeout(() => {
-        this.numberOnlyError[field] = false;
-      }, 2000);
+      this.loadBranches();
     }
   }
 
-  allowOnlyNumbersWithDecimal(event: KeyboardEvent) {
-  const inputChar = event.key;
-  const currentValue = (event.target as HTMLInputElement).value;
-
-  // Allow digits
-  if (/^[0-9]$/.test(inputChar)) {
-    return;
+  private loadEditState(product: Product): void {
+    this.productName = product.productName;
+    this.totalFee = product.totalFee;
+    this.isActive = product.isActive;
+    this.branchId = product.branchId;
+    this.isEditMode = true;
+    this.editingId = product.productId;
   }
 
-  // Allow only one decimal point
-  if (inputChar === '.' && !currentValue.includes('.')) {
-    return;
+  loadBranches(): void {
+    this.branchService.getBranches().subscribe({
+      next: (data) => {
+        this.branches = data;
+      },
+      error: () => {
+        this.errorMessage = 'Failed to load branches.';
+      }
+    });
   }
 
-  // Block everything else
-  event.preventDefault();
-}
+  addTable(): void {
+    this.submitted = true;
+    this.error = '';
+    this.showConfirm = false;
 
-filterDecimal(field: 'cgst' | 'sgst' | 'igst' | 'cess') {
-  let value = this[field];
+    if (!this.productName.trim()) {
+      this.error = 'Product name is required.';
+      this.showConfirm = true;
+      return;
+    }
+    if (this.totalFee === null || this.totalFee === undefined || isNaN(Number(this.totalFee))) {
+      this.error = 'Total fee is required.';
+      this.showConfirm = true;
+      return;
+    }
 
-  // Remove letters and special characters, allow only digits and one dot
-  value = value.replace(/[^0-9.]/g, '');
+    const payload: Partial<Product> = {
+      productName: this.productName.trim(),
+      totalFee: Number(this.totalFee),
+      isActive: this.isActive,
+      branchId: this.branchId
+    };
 
-  // Ensure only one dot is allowed
-  const parts = value.split('.');
-  if (parts.length > 2) {
-    value = parts[0] + '.' + parts.slice(1).join('');
+    if (this.isEditMode && this.editingId !== null) {
+      this.productService.updateProduct(this.editingId, payload).subscribe({
+        next: () => {
+          this.successMessage = 'Product updated successfully!';
+          this.resetForm();
+          setTimeout(() => (this.successMessage = ''), 3000);
+        },
+        error: () => {
+          this.errorMessage = 'Failed to update product.';
+        }
+      });
+    } else {
+      this.productService.addProduct(payload).subscribe({
+        next: () => {
+          this.successMessage = 'Product added successfully!';
+          this.resetForm();
+          setTimeout(() => (this.successMessage = ''), 3000);
+        },
+        error: () => {
+          this.errorMessage = 'Failed to add product.';
+        }
+      });
+    }
   }
 
-  this[field] = value;
-}
+  cancel(): void {
+    this.resetForm();
+    this.showConfirm = false;
+  }
 
-resetForm() {
-  this.group = '';
-  this.itemCode = '';
-  this.productName = '';
-  this.printName = '';
-  this.purchasePrice = '';
-  this.salePrice = '';
-  this.saleDiscount = '';
-  this.hsnCode = '';
-  this.cgst = '';
-  this.sgst = '';
-  this.igst = '';
-  this.cess = '';
-  this.productDescription = '';
-  this.submitted = false;
-}
-
+  private resetForm(): void {
+    this.productName = '';
+    this.totalFee = null;
+    this.isActive = true;
+    this.branchId = '';
+    this.error = '';
+    this.submitted = false;
+    this.isEditMode = false;
+    this.editingId = null;
+  }
 }

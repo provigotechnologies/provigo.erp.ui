@@ -1,0 +1,172 @@
+<div class="course-offering-container">
+  <!-- Header -->
+  <div class="header">
+    <h2>Create Course Offering</h2>
+    <p class="subtitle">Schedule a new course offering with trainer and shift details</p>
+  </div>
+
+  <!-- Main Form Card -->
+  <div class="form-card">
+    <form [formGroup]="offeringForm" (ngSubmit)="submit()">
+      <!-- Branch and Product Row -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="branchId">
+            Branch <span class="required">*</span>
+          </label>
+          <select 
+            id="branchId" 
+            formControlName="branchId" 
+            class="form-control"
+            [class.error]="branchControl?.touched && branchControl?.invalid"
+            (change)="onBranchChange()">
+            <option value="">Select Branch</option>
+            <option *ngFor="let branch of branches" [value]="branch.branchId">
+              {{ branch.branchName }}
+            </option>
+          </select>
+          <div class="error-message" *ngIf="branchControl?.touched && branchControl?.invalid">
+            Branch is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="productId"> 
+            Product <span class="required">*</span>
+          </label>
+          <select 
+            id="productId" 
+            formControlName="productId" 
+            class="form-control"
+            [class.error]="productControl?.touched && productControl?.invalid"
+            (change)="onProductChange()">
+            <option value="">Select Product</option>
+            <option *ngFor="let product of product" [value]="product.productId">
+              {{ product.productName }}
+            </option>
+          </select>
+          <div class="error-message" *ngIf="productControl?.touched && productControl?.invalid">
+            Product is required
+          </div>
+          
+          <!-- Loading indicator for products -->
+          <div class="field-loading" *ngIf="loadingProducts">
+            <span class="spinner-small"></span> Loading products...
+          </div>
+        </div>
+      </div>
+
+      <!-- Trainer Course and Shift Row -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="trainerCourseId">
+            Trainer Course <span class="required">*</span>
+          </label>
+          <select 
+            id="trainerCourseId" 
+            formControlName="trainerCourseId" 
+            class="form-control"
+            [class.error]="trainerCourseControl?.touched && trainerCourseControl?.invalid">
+            <option value="">Select Trainer Course</option>
+            <option *ngFor="let tc of trainerCourseui" [value]="tc.trainerCourseId">
+              {{ tc.trainerName }} - {{ tc.courseName }}
+            </option>
+          </select>
+          <div class="error-message" *ngIf="trainerCourseControl?.touched && trainerCourseControl?.invalid">
+            Trainer course is required
+          </div>
+          
+          <!-- Loading indicator for trainer courses -->
+          <div class="field-loading" *ngIf="loadingTrainerCourses">
+            <span class="spinner-small"></span> Loading trainer courses...
+          </div>
+          
+          <!-- No trainer courses message -->
+          <div class="field-info" *ngIf="!loadingTrainerCourses && offeringForm.value.productId && trainerCourseui.length === 0">
+            No trainer courses available for this product
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="shiftId">
+            Shift <span class="required">*</span>
+          </label>
+          <select 
+            id="shiftId" 
+            formControlName="shiftId" 
+            class="form-control"
+            [class.error]="shiftControl?.touched && shiftControl?.invalid">
+            <option value="">Select Shift</option>
+            <option *ngFor="let shift of shifts" [value]="shift.shiftId">
+              {{ shift.shiftName }}
+            </option>
+          </select>
+          <div class="error-message" *ngIf="shiftControl?.touched && shiftControl?.invalid">
+            Shift is required
+          </div>
+          
+          <!-- Loading indicator for shifts -->
+          <div class="field-loading" *ngIf="loadingShifts">
+            <span class="spinner-small"></span> Loading shifts...
+          </div>
+        </div>
+      </div>
+
+      <!-- Time Row -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="startTime">
+            Start Time <span class="required">*</span>
+          </label>
+          <input 
+            type="time" 
+            id="startTime" 
+            formControlName="startTime" 
+            class="form-control"
+            [class.error]="startTimeControl?.touched && startTimeControl?.invalid">
+          <div class="error-message" *ngIf="startTimeControl?.touched && startTimeControl?.invalid">
+            Start time is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="endTime">
+            End Time <span class="required">*</span>
+          </label>
+          <input 
+            type="time" 
+            id="endTime" 
+            formControlName="endTime" 
+            class="form-control"
+            [class.error]="endTimeControl?.touched && endTimeControl?.invalid">
+          <div class="error-message" *ngIf="endTimeControl?.touched && endTimeControl?.invalid">
+            End time is required
+          </div>
+        </div>
+      </div>
+
+      <!-- Time Validation Warning -->
+      <div class="time-warning" *ngIf="offeringForm.value.startTime && offeringForm.value.endTime && !isTimeValid()">
+        <i class="fas fa-exclamation-triangle"></i>
+        End time must be greater than start time
+      </div>
+
+      <!-- Form Actions -->
+      <div class="form-actions">
+        <button 
+          type="button" 
+          class="btn btn-secondary" 
+          (click)="offeringForm.reset(); loadBranches()">
+          Cancel
+        </button>
+        <button 
+          type="submit" 
+          class="btn btn-primary" 
+          [disabled]="offeringForm.invalid || !isTimeValid() || loading">
+          <span class="spinner-small" *ngIf="loading"></span>
+          {{ loading ? 'Creating...' : 'Create Offering' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

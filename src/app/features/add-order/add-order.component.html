@@ -1,0 +1,205 @@
+<div class="order-wrapper">
+  <div class="order-card">
+    <div class="card-header">
+      <h2>{{ isEditMode ? 'Edit Order' : 'Add Order' }}</h2>
+    </div>
+
+    <!-- Alert messages -->
+    <div class="alert alert-success" *ngIf="successMessage">{{ successMessage }}</div>
+    <div class="alert alert-error"   *ngIf="errorMessage">{{ errorMessage }}</div>
+
+    <form [formGroup]="orderForm" (ngSubmit)="submit()">
+
+      <!-- HEADER -->
+      <div class="section-title">Order Details</div>
+      <div class="invoice-header">
+        <div class="field-group">
+          <label>Branch <span class="req">*</span></label>
+          <select formControlName="branchId"
+            [class.input-error]="(submitted || orderForm.get('branchId')?.touched) && orderForm.get('branchId')?.invalid">
+            <option value="">— Select Branch —</option>
+            <option *ngFor="let b of branches" [value]="b.branchId">{{ b.branchName }}</option>
+          </select>
+          <div class="error-msg" *ngIf="(submitted || orderForm.get('branchId')?.touched) && orderForm.get('branchId')?.errors?.['required']">
+            Branch is required.
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Customer <span class="req">*</span></label>
+          <select formControlName="customerId"
+            [class.input-error]="(submitted || orderForm.get('customerId')?.touched) && orderForm.get('customerId')?.invalid">
+            <option value="">— Select Customer —</option>
+            <option *ngFor="let c of customers" [value]="c.customerId">{{ c.fullName }}</option>
+          </select>
+          <div class="error-msg" *ngIf="(submitted || orderForm.get('customerId')?.touched) && orderForm.get('customerId')?.errors?.['required']">
+            Customer is required.
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Order Date <span class="req">*</span></label>
+          <input type="date" formControlName="orderDate"
+            [class.input-error]="(submitted || orderForm.get('orderDate')?.touched) && orderForm.get('orderDate')?.invalid" />
+          <div class="error-msg" *ngIf="(submitted || orderForm.get('orderDate')?.touched) && orderForm.get('orderDate')?.errors?.['required']">
+            Order date is required.
+          </div>
+        </div>
+      </div>
+
+      <!-- ITEMS -->
+      <div class="section-title mt">Order Items</div>
+      <div class="item-table">
+        <div class="item-table-head">
+          <span>Product</span><span>Qty</span><span>Unit Price</span><span>Line Total</span><span></span>
+        </div>
+        <div class="item-entry" formArrayName="items">
+          <div *ngFor="let item of items.controls; let i = index" [formGroupName]="i">
+            <div class="item-row">
+              <div>
+                <select formControlName="productId" (change)="onProductChange(i)"
+                  [class.input-error]="(submitted || item.get('productId')?.touched) && item.get('productId')?.invalid">
+                  <option value="">— Select Product —</option>
+                  <option *ngFor="let p of products" [value]="p.productId">{{ p.productName }}</option>
+                </select>
+                <div class="error-msg" *ngIf="(submitted || item.get('productId')?.touched) && item.get('productId')?.errors?.['required']">
+                  Product is required.
+                </div>
+              </div>
+              <div>
+                <input type="number" formControlName="quantity" min="1"
+                  [class.input-error]="(submitted || item.get('quantity')?.touched) && item.get('quantity')?.invalid" />
+                <div class="error-msg" *ngIf="(submitted || item.get('quantity')?.touched) && item.get('quantity')?.errors?.['required']">
+                  Qty required.
+                </div>
+                <div class="error-msg" *ngIf="(submitted || item.get('quantity')?.touched) && item.get('quantity')?.errors?.['min']">
+                  Min qty is 1.
+                </div>
+              </div>
+              <input type="number" formControlName="price" readonly />
+              <span class="line-total">
+                ₹ {{ (item.get('quantity')?.value || 0) * (item.get('price')?.value || 0) | number:'1.2-2' }}
+              </span>
+              <button type="button" class="remove-btn" (click)="removeItem(i)" title="Remove">✕</button>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="add-btn" (click)="addItem()">+ Add Item</button>
+      </div>
+
+      <!-- TAX / DISCOUNT / CHARGE -->
+      <div class="section-title mt">Adjustments</div>
+      <div class="adjustments">
+        <div class="field-group">
+          <label>Taxes</label>
+          <select formControlName="taxes" multiple>
+            <option *ngFor="let t of taxes" [value]="t.taxId">{{ t.name }} ({{ t.rate }}%)</option>
+          </select>
+          <span class="hint">Hold Ctrl / ⌘ to select multiple</span>
+        </div>
+        <div class="field-group">
+          <label>Discounts</label>
+          <select formControlName="discounts" multiple>
+            <option *ngFor="let d of discounts" [value]="d.discountId">{{ d.name }}</option>
+          </select>
+          <span class="hint">Hold Ctrl / ⌘ to select multiple</span>
+        </div>
+        <div class="field-group">
+          <label>Charges</label>
+          <select formControlName="charges" multiple>
+            <option *ngFor="let c of charges" [value]="c.chargeId">{{ c.name }}</option>
+          </select>
+          <span class="hint">Hold Ctrl / ⌘ to select multiple</span>
+        </div>
+      </div>
+
+      <!-- TOTALS -->
+      <div class="totals-panel">
+        <div class="totals-row"><span>Subtotal</span><span>₹ {{ subTotal | number:'1.2-2' }}</span></div>
+        <div class="totals-row"><span>Tax</span><span>+ ₹ {{ taxTotal | number:'1.2-2' }}</span></div>
+        <div class="totals-row discount"><span>Discount</span><span>− ₹ {{ discountTotal | number:'1.2-2' }}</span></div>
+        <div class="totals-row"><span>Charges</span><span>+ ₹ {{ chargeTotal | number:'1.2-2' }}</span></div>
+        <div class="totals-row grand"><span>Grand Total</span><span>₹ {{ grandTotal | number:'1.2-2' }}</span></div>
+      </div>
+
+      <!-- ACTIONS -->
+      <div class="actions">
+        <button type="button" class="cancel-btn" (click)="cancel()">Cancel</button>
+        <button type="submit" class="save-btn" [disabled]="isLoading">
+          <span *ngIf="isLoading">Saving…</span>
+          <span *ngIf="!isLoading">{{ isEditMode ? 'Update Order' : 'Save' }}</span>
+        </button>
+        <button *ngIf="!isEditMode" type="button" class="pay-btn" (click)="saveAndPay()" [disabled]="isLoading">
+          <span *ngIf="isLoading">Saving…</span>
+          <span *ngIf="!isLoading">💳 Save &amp; Pay</span>
+        </button>
+      </div>
+
+    </form>
+  </div><!-- /order-card -->
+
+  <!-- ===== PAYMENT OVERLAY ===== -->
+  <div class="pay-overlay" *ngIf="showPaymentPanel">
+    <div class="pay-modal">
+
+      <div class="pay-modal-header">
+        <h3>💳 Record Payment</h3>
+        <button class="close-x" (click)="closePaymentPanel()">✕</button>
+      </div>
+
+      <div class="pay-modal-body">
+
+        <!-- Order Total (read-only) -->
+        <div class="pay-field">
+          <label>Order Total</label>
+          <div class="pay-total-display">₹ {{ grandTotal | number:'1.2-2' }}</div>
+        </div>
+
+        <!-- Mode -->
+        <div class="pay-field">
+          <label>Payment Mode <span class="req">*</span></label>
+          <div class="mode-tabs">
+            <button type="button"
+              *ngFor="let m of paymentModes"
+              [class.active]="paymentMode === m"
+              (click)="paymentMode = m">
+              {{ m === 'Online' ? '🌐 Online' : '💵 Offline' }}
+            </button>
+          </div>
+        </div>
+
+        <!-- Paid Amount -->
+        <div class="pay-field">
+          <label>Paid Amount <span class="req">*</span></label>
+          <input type="number" [(ngModel)]="paidAmount" min="0" [max]="grandTotal" class="pay-input"
+            [class.input-error]="paymentSubmitted && paidAmount <= 0" />
+          <div class="error-msg" *ngIf="paymentSubmitted && paidAmount <= 0">
+            Paid amount must be greater than 0.
+          </div>
+        </div>
+
+        <!-- Balance -->
+        <div class="pay-field">
+          <label>Balance</label>
+          <div class="balance-display" [class.positive]="balanceAmount > 0" [class.zero]="balanceAmount <= 0">
+            ₹ {{ balanceAmount | number:'1.2-2' }}
+            <span class="badge" *ngIf="balanceAmount <= 0">✔ Fully Paid</span>
+            <span class="badge partial" *ngIf="balanceAmount > 0">Partial</span>
+          </div>
+        </div>
+
+        <!-- Feedback -->
+        <div class="alert alert-success" *ngIf="paymentSuccess">{{ paymentSuccess }}</div>
+        <div class="alert alert-error"   *ngIf="paymentError">{{ paymentError }}</div>
+      </div>
+
+      <div class="pay-modal-footer">
+        <button type="button" class="cancel-btn" (click)="closePaymentPanel()">Skip</button>
+        <button type="button" class="pay-confirm-btn" (click)="confirmPayment()" [disabled]="paymentLoading">
+          <span *ngIf="paymentLoading">Processing…</span>
+          <span *ngIf="!paymentLoading">Confirm Payment</span>
+        </button>
+      </div>
+
+    </div>
+  </div><!-- /pay-overlay -->
+
+</div><!-- /order-wrapper -->

@@ -1,0 +1,141 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+<form #branchForm="ngForm" (ngSubmit)="addTable()" novalidate class="group-form">
+
+  <!-- Warning / Validation Alert -->
+  <div *ngIf="showConfirm" class="custom-warning">
+    <div class="custom-warning-box">
+      <div class="error-message-row">
+        <i class="fas fa-exclamation-triangle warning-icon"></i>
+        <span>{{ error }}</span>
+      </div>
+      <button type="button" (click)="showConfirm = false">Ok</button>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Alert -->
+  <div *ngIf="showConfirmDelete" class="custom-alert">
+    <div class="confirm-icon-text">
+      <i class="fas fa-question-circle confirm-icon"></i>
+      <span>Do you want to delete this branch?</span>
+    </div>
+    <div class="button-group">
+      <button type="button" class="yes" (click)="confirmDelete()">Yes</button>
+      <button type="button" class="no" (click)="cancelDelete()">No</button>
+    </div>
+  </div>
+
+  <!-- Page Header -->
+  <div class="page-header-wrapper">
+    <label class="page-heading">{{ isEditMode ? 'Edit Branch' : 'Add New Branch' }}</label>
+  </div>
+
+  <!-- Success / Error Messages -->
+  <div *ngIf="successMessage" class="success-banner">
+    <i class="fas fa-check-circle"></i> {{ successMessage }}
+  </div>
+  <div *ngIf="errorMessage" class="error-banner">
+    <i class="fas fa-times-circle"></i> {{ errorMessage }}
+  </div>
+
+  <!-- Row 1: Branch Name + Active Status -->
+  <div class="form-row">
+    <div class="form-group">
+      <label for="branchName">Branch Name <span class="required">*</span></label>
+      <div class="input-wrapper">
+        <input
+          type="text"
+          id="branchName"
+          name="branchName"
+          required
+          minlength="2"
+          maxlength="100"
+          [(ngModel)]="branchName"
+          #branchNameRef="ngModel"
+          (input)="error = ''"
+          placeholder="Enter branch name"
+        />
+        <div *ngIf="branchNameRef.invalid && submitted" class="error-message">
+          <div *ngIf="branchNameRef.errors?.['required']">Branch name is required.</div>
+          <div *ngIf="branchNameRef.errors?.['minlength']">Minimum 2 characters required.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group radio-group">
+      <label class="radio-label">Status</label>
+      <div class="radio-options">
+        <label>
+          <input type="radio" name="isActive" [value]="true" [(ngModel)]="isActive" /> Active
+        </label>
+        <label>
+          <input type="radio" name="isActive" [value]="false" [(ngModel)]="isActive" /> Inactive
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Row 2: Address -->
+  <div class="form-row">
+    <div class="form-group" style="flex: 1;">
+      <label for="address">Address</label>
+      <div class="input-wrapper">
+        <input
+          type="text"
+          id="address"
+          name="address"
+          maxlength="250"
+          [(ngModel)]="address"
+          placeholder="Enter address (optional)"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="button-group">
+    <button class="primary-btn btn-add" type="submit">
+      {{ isEditMode ? 'Update' : 'Add' }}
+    </button>
+    <button class="primary-btn btn-cancel" type="button" (click)="cancel()">Cancel</button>
+  </div>
+
+  <!-- Loading Indicator -->
+  <div *ngIf="isLoading" class="loading-text">Loading branches...</div>
+
+  <!-- Table Section -->
+  <div class="table-wrapper">
+    <table class="bank-table">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Branch Name</th>
+          <th>Address</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="branchList.length === 0 && !isLoading">
+          <td colspan="5" style="text-align:center; color: gray;">No branches found.</td>
+        </tr>
+        <tr *ngFor="let item of branchList; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ item.branchName }}</td>
+          <td>{{ item.address || '—' }}</td>
+          <td>
+            <span [class]="item.isActive ? 'badge-active' : 'badge-inactive'">
+              {{ item.isActive ? 'Active' : 'Inactive' }}
+            </span>
+          </td>
+          <td>
+            <button type="button" (click)="editTable(item)">✏️</button>
+            <button type="button" (click)="deleteTable(item.branchId)">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</form>
+
