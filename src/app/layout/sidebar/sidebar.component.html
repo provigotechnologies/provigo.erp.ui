@@ -2,615 +2,497 @@
 
   <div class="main-content">
 
-     <!-- ✅ Hamburger Menu Button (visible only on mobile) -->
-     <button class="menu-toggle" 
-      [class.hide]="menuOpen && isMobile" 
-      (click)="toggleMenu()">
+    <!-- ✅ Hamburger Menu Button (visible only on mobile) -->
+    <button class="menu-toggle" [class.hide]="menuOpen && isMobile" (click)="toggleMenu()">
       <mat-icon>menu</mat-icon>
-     </button>
+    </button>
 
-  <!-- ✅ Sidebar with toggle for mobile -->
-  <div class="sidebar" [class.open]="menuOpen || !isMobile">
-    
-    <ul>
-     <!-- Dashboard -->
-      <li class="menu-item-with-submenu sale-spacing"
-       [class.active]="activeSubMenu === 'dashboard'"
-       (mouseenter)="!isMobile && (activeSubMenu = 'dashboard')"
-       (mouseleave)="!isMobile && (activeSubMenu = null)">
-    
-       <a (click)="navigateOrToggle('dashboard', '/dashboard')">
-        <mat-icon class="icon-dashboard">insights</mat-icon> Dashboard
-       </a>
-       </li>
+    <!-- ✅ Sidebar with toggle for mobile -->
+    <div class="sidebar" [class.open]="menuOpen || !isMobile">
+
+      <ul>
+        <!-- Dashboard -->
+        <li class="menu-item-with-submenu sale-spacing" [class.active]="activeSubMenu === 'dashboard'"
+          (mouseenter)="!isMobile && (activeSubMenu = 'dashboard')" (mouseleave)="!isMobile && (activeSubMenu = null)">
+
+          <a (click)="navigateOrToggle('dashboard', '/dashboard')">
+            <mat-icon class="icon-dashboard">insights</mat-icon> Dashboard
+          </a>
+        </li>
 
         <!-- Sale with Submenu -->
-        <li class="menu-item-with-submenu sale-spacing"
-          [class.active]="activeSubMenu === 'sale'"
-          (mouseenter)="!isMobile && (activeSubMenu = 'sale')"
-          (mouseleave)="!isMobile && (activeSubMenu = null)">
-        
+        <li class="menu-item-with-submenu sale-spacing" [class.active]="activeSubMenu === 'sale'"
+          (mouseenter)="!isMobile && (activeSubMenu = 'sale')" (mouseleave)="!isMobile && (activeSubMenu = null)">
+
           <a href="#" (click)="toggleSubMenu('sale'); $event.preventDefault()">
-           <mat-icon class="icon-sale">receipt_long</mat-icon> Sale
+            <mat-icon class="icon-sale">receipt_long</mat-icon> Sale
           </a>
 
-         <!-- First-level submenu -->
-         <ul
-          [class.submenu]="!isMobile"
-          [class.mobile-visible]="isMobile && activeSubMenu === 'sale'"
-          *ngIf="activeSubMenu === 'sale'">
+          <!-- First-level submenu -->
+          <ul [class.submenu]="!isMobile" [class.mobile-visible]="isMobile && activeSubMenu === 'sale'"
+            *ngIf="activeSubMenu === 'sale'">
 
-           <!-- Invoice with Nested Submenu -->
-           <li class="has-submenu"
-          [class.active]="activeNestedSubMenu === 'invoice'"
-          (mouseenter)="!isMobile && (activeNestedSubMenu = 'invoice')"
-          (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
-        
-          <!-- ✅ Fix: handle submenu toggle here -->
-          <a role="button"
-             (click)="isMobile ? toggleNestedSubMenu('invoice') : null">
-            Invoice
-          </a>
-        
-          <!-- ✅ Show nested submenu properly -->
-          <ul
-            *ngIf="activeNestedSubMenu === 'invoice'"
-            [class.nested-submenu]="!isMobile"
-            [class.mobile-visible]="isMobile"
-            (click)="$event.stopPropagation()">
-        
-            <li>
-              <a [routerLink]="['/sales/invoice']"
-                 (click)="$event.stopPropagation()">New Invoice</a>
+            <!-- Invoice with Nested Submenu -->
+            <li class="has-submenu" [class.active]="activeNestedSubMenu === 'invoice'"
+              (mouseenter)="!isMobile && (activeNestedSubMenu = 'invoice')"
+              (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
+
+              <!-- ✅ Fix: handle submenu toggle here -->
+              <a role="button" (click)="isMobile ? toggleNestedSubMenu('invoice') : null">
+                Invoice
+              </a>
+
+              <!-- ✅ Show nested submenu properly -->
+              <ul *ngIf="activeNestedSubMenu === 'invoice'" [class.nested-submenu]="!isMobile"
+                [class.mobile-visible]="isMobile" (click)="$event.stopPropagation()">
+
+                <li>
+                  <a [routerLink]="['/sales/invoice']" (click)="$event.stopPropagation()">New Invoice</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/sales/manage-invoice']" (click)="$event.stopPropagation()">Manage Invoices</a>
+                </li>
+              </ul>
             </li>
-            <li>
-              <a [routerLink]="['/sales/manage-invoice']"
-                 (click)="$event.stopPropagation()">Manage Invoices</a>
+
+            <!-- Sale Return with Nested Submenu -->
+            <li class="has-submenu" [class.active]="activeNestedSubMenu === 'sale-return'"
+              (mouseenter)="!isMobile && (activeNestedSubMenu = 'sale-return')"
+              (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
+
+              <!-- ✅ Fix: handle submenu toggle here -->
+              <a role="button" (click)="isMobile ? toggleNestedSubMenu('sale-return') : null">
+                Sale Return
+              </a>
+
+              <!-- ✅ Show nested submenu properly -->
+              <ul *ngIf="activeNestedSubMenu === 'sale-return'" [class.nested-submenu]="!isMobile"
+                [class.mobile-visible]="isMobile" (click)="$event.stopPropagation()">
+
+                <li>
+                  <a [routerLink]="['/sales/sale-return']" (click)="$event.stopPropagation()">New Sale Return</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/sales/manage-salereturn']" (click)="$event.stopPropagation()">Manage Sale
+                    Returns</a>
+                </li>
+              </ul>
             </li>
-          </ul>
-           </li>
-        
-           <!-- Sale Return with Nested Submenu -->
-           <li class="has-submenu"
-          [class.active]="activeNestedSubMenu === 'sale-return'"
-          (mouseenter)="!isMobile && (activeNestedSubMenu = 'sale-return')"
-          (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
-        
-          <!-- ✅ Fix: handle submenu toggle here -->
-          <a role="button"
-             (click)="isMobile ? toggleNestedSubMenu('sale-return') : null">
-             Sale Return
-          </a>
-        
-          <!-- ✅ Show nested submenu properly -->
-          <ul
-            *ngIf="activeNestedSubMenu === 'sale-return'"
-            [class.nested-submenu]="!isMobile"
-            [class.mobile-visible]="isMobile"
-            (click)="$event.stopPropagation()">
-        
-            <li>
-              <a [routerLink]="['/sales/sale-return']"
-                 (click)="$event.stopPropagation()">New Sale Return</a>
-            </li>
-            <li>
-              <a [routerLink]="['/sales/manage-salereturn']"
-                 (click)="$event.stopPropagation()">Manage Sale Returns</a>
-            </li>
-          </ul>
-           </li>
-            
+
             <!-- Quotation with Nested Submenu -->
-            <li class="has-submenu"
-             [class.active]="activeNestedSubMenu === 'quotation'"
-             (mouseenter)="!isMobile && (activeNestedSubMenu = 'quotation')"
-             (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
-           
-             <!-- ✅ Fix: handle submenu toggle here -->
-             <a role="button"
-                (click)="isMobile ? toggleNestedSubMenu('quotation') : null">
+            <li class="has-submenu" [class.active]="activeNestedSubMenu === 'quotation'"
+              (mouseenter)="!isMobile && (activeNestedSubMenu = 'quotation')"
+              (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
+
+              <!-- ✅ Fix: handle submenu toggle here -->
+              <a role="button" (click)="isMobile ? toggleNestedSubMenu('quotation') : null">
                 Quotation
-             </a>
-           
-             <!-- ✅ Show nested submenu properly -->
-             <ul
-               *ngIf="activeNestedSubMenu === 'quotation'"
-               [class.nested-submenu]="!isMobile"
-               [class.mobile-visible]="isMobile"
-               (click)="$event.stopPropagation()">
-           
-               <li>
-                 <a [routerLink]="['/sales/quotation']"
-                    (click)="$event.stopPropagation()">New Quotation</a>
-               </li>
-               <li>
-                 <a [routerLink]="['/sales/manage-quotation']"
-                    (click)="$event.stopPropagation()">Manage Quotations</a>
-               </li>
-             </ul>
+              </a>
+
+              <!-- ✅ Show nested submenu properly -->
+              <ul *ngIf="activeNestedSubMenu === 'quotation'" [class.nested-submenu]="!isMobile"
+                [class.mobile-visible]="isMobile" (click)="$event.stopPropagation()">
+
+                <li>
+                  <a [routerLink]="['/sales/quotation']" (click)="$event.stopPropagation()">New Quotation</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/sales/manage-quotation']" (click)="$event.stopPropagation()">Manage Quotations</a>
+                </li>
+              </ul>
             </li>
 
-           <!-- Delivery Note with Nested Submenu -->
-           <li class="has-submenu"
-          [class.active]="activeNestedSubMenu === 'deliverynote'"
-          (mouseenter)="!isMobile && (activeNestedSubMenu = 'deliverynote')"
-          (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
-        
-          <!-- ✅ Fix: handle submenu toggle here -->
-          <a role="button"
-             (click)="isMobile ? toggleNestedSubMenu('deliverynote') : null">
-             Delivery Note
-          </a>
-        
-          <!-- ✅ Show nested submenu properly -->
-          <ul
-            *ngIf="activeNestedSubMenu === 'deliverynote'"
-            [class.nested-submenu]="!isMobile"
-            [class.mobile-visible]="isMobile"
-            (click)="$event.stopPropagation()">
-        
-            <li>
-              <a [routerLink]="['/sales/deliverynote']"
-                 (click)="$event.stopPropagation()">New Delivery Note</a>
+            <!-- Delivery Note with Nested Submenu -->
+            <li class="has-submenu" [class.active]="activeNestedSubMenu === 'deliverynote'"
+              (mouseenter)="!isMobile && (activeNestedSubMenu = 'deliverynote')"
+              (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
+
+              <!-- ✅ Fix: handle submenu toggle here -->
+              <a role="button" (click)="isMobile ? toggleNestedSubMenu('deliverynote') : null">
+                Delivery Note
+              </a>
+
+              <!-- ✅ Show nested submenu properly -->
+              <ul *ngIf="activeNestedSubMenu === 'deliverynote'" [class.nested-submenu]="!isMobile"
+                [class.mobile-visible]="isMobile" (click)="$event.stopPropagation()">
+
+                <li>
+                  <a [routerLink]="['/sales/deliverynote']" (click)="$event.stopPropagation()">New Delivery Note</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/sales/manage-deliverynote']" (click)="$event.stopPropagation()">Manage Delivery
+                    Notes</a>
+                </li>
+              </ul>
             </li>
-            <li>
-              <a [routerLink]="['/sales/manage-deliverynote']"
-                 (click)="$event.stopPropagation()">Manage Delivery Notes</a>
+
+            <!-- Proforma Invoice with Nested Submenu -->
+            <li class="has-submenu" [class.active]="activeNestedSubMenu === 'proforma-invoice'"
+              (mouseenter)="!isMobile && (activeNestedSubMenu = 'proforma-invoice')"
+              (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
+
+              <!-- ✅ Fix: handle submenu toggle here -->
+              <a role="button" (click)="isMobile ? toggleNestedSubMenu('proforma-invoice') : null">
+                Proforma Invoice
+              </a>
+
+              <!-- ✅ Show nested submenu properly -->
+              <ul *ngIf="activeNestedSubMenu === 'proforma-invoice'" [class.nested-submenu]="!isMobile"
+                [class.mobile-visible]="isMobile" (click)="$event.stopPropagation()">
+
+                <li>
+                  <a [routerLink]="['/sales/proforma-invoice']" (click)="$event.stopPropagation()">New Proforma
+                    Invoice</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/sales/manage-proforma-invoice']" (click)="$event.stopPropagation()">Manage
+                    Proforma Invoices</a>
+                </li>
+              </ul>
             </li>
-          </ul>
-           </li>
-        
-           <!-- Proforma Invoice with Nested Submenu -->
-           <li class="has-submenu"
-          [class.active]="activeNestedSubMenu === 'proforma-invoice'"
-          (mouseenter)="!isMobile && (activeNestedSubMenu = 'proforma-invoice')"
-          (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
-        
-          <!-- ✅ Fix: handle submenu toggle here -->
-          <a role="button"
-             (click)="isMobile ? toggleNestedSubMenu('proforma-invoice') : null">
-             Proforma Invoice
-          </a>
-        
-          <!-- ✅ Show nested submenu properly -->
-          <ul
-            *ngIf="activeNestedSubMenu === 'proforma-invoice'"
-            [class.nested-submenu]="!isMobile"
-            [class.mobile-visible]="isMobile"
-            (click)="$event.stopPropagation()">
-        
-            <li>
-              <a [routerLink]="['/sales/proforma-invoice']"
-                 (click)="$event.stopPropagation()">New Proforma Invoice</a>
-            </li>
-            <li>
-              <a [routerLink]="['/sales/manage-proforma-invoice']"
-                 (click)="$event.stopPropagation()">Manage Proforma Invoices</a>
-            </li>
-          </ul>
-           </li>
-            
-           <!-- Sale Order with Nested Submenu -->
-           <li class="has-submenu"
-             [class.active]="activeNestedSubMenu === 'saleorder'"
-             (mouseenter)="!isMobile && (activeNestedSubMenu = 'saleorder')"
-             (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
-           
-             <!-- ✅ Fix: handle submenu toggle here -->
-             <a role="button"
-                (click)="isMobile ? toggleNestedSubMenu('saleorder') : null">
+
+            <!-- Sale Order with Nested Submenu -->
+            <li class="has-submenu" [class.active]="activeNestedSubMenu === 'saleorder'"
+              (mouseenter)="!isMobile && (activeNestedSubMenu = 'saleorder')"
+              (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
+
+              <!-- ✅ Fix: handle submenu toggle here -->
+              <a role="button" (click)="isMobile ? toggleNestedSubMenu('saleorder') : null">
                 Sale Order
-             </a>
-           
-             <!-- ✅ Show nested submenu properly -->
-             <ul
-               *ngIf="activeNestedSubMenu === 'saleorder'"
-               [class.nested-submenu]="!isMobile"
-               [class.mobile-visible]="isMobile"
-               (click)="$event.stopPropagation()">
-           
-               <li>
-                 <a [routerLink]="['/sales/saleorder']"
-                    (click)="$event.stopPropagation()">New Sale Order</a>
-               </li>
-               <li>
-                 <a [routerLink]="['/sales/manage-saleorder']"
-                    (click)="$event.stopPropagation()">Manage Sale Orders</a>
-               </li>
-             </ul>
-           </li>
-            
-           <!-- Recurring Invoice with Nested Submenu -->
-           <li class="has-submenu"
-            [class.active]="activeNestedSubMenu === ' recurring-invoice'"
-            (mouseenter)="!isMobile && (activeNestedSubMenu = 'recurring-invoice')"
-            (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
-       
-           <!-- ✅ Fix: handle submenu toggle here -->
-           <a role="button"
-            (click)="isMobile ? toggleNestedSubMenu('recurring-invoice') : null">
-            Recurring Invoice
-           </a>
-       
-           <!-- ✅ Show nested submenu properly -->
-            <ul
-               *ngIf="activeNestedSubMenu === 'recurring-invoice'"
-               [class.nested-submenu]="!isMobile"
-               [class.mobile-visible]="isMobile"
-               (click)="$event.stopPropagation()">
-       
-             <li>
-                <a [routerLink]="['/sales/recurring-invoice']"
-                (click)="$event.stopPropagation()">New Recurring Invoice</a>
-             </li>
-             <li>
-               <a [routerLink]="['/sales/manage-recurring-invoice']"
-                (click)="$event.stopPropagation()">Manage Recurring Invoices</a>
-             </li>
-            </ul>
-           </li>
-       
-           <!-- Credit Note with Nested Submenu -->
-           <li class="has-submenu"
-         [class.active]="activeNestedSubMenu === 'creditnote'"
-         (mouseenter)="!isMobile && (activeNestedSubMenu = 'creditnote')"
-         (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
-       
-         <!-- ✅ Fix: handle submenu toggle here -->
-         <a role="button"
-            (click)="isMobile ? toggleNestedSubMenu('creditnote') : null">
-            Credit Note
-         </a>
-       
-         <!-- ✅ Show nested submenu properly -->
-         <ul
-           *ngIf="activeNestedSubMenu === 'creditnote'"
-           [class.nested-submenu]="!isMobile"
-           [class.mobile-visible]="isMobile"
-           (click)="$event.stopPropagation()">
-       
-           <li>
-             <a [routerLink]="['/sales/creditnote']"
-                (click)="$event.stopPropagation()">New Credit Note</a>
-           </li>
-           <li>
-             <a [routerLink]="['/sales/manage-creditnote']"
-                (click)="$event.stopPropagation()">Manage Credit Notes</a>
-           </li>
-         </ul>
-           </li>
-           
-           <!-- Debit Note with Nested Submenu -->
-           <li class="has-submenu"
-            [class.active]="activeNestedSubMenu === 'debitnote'"
-            (mouseenter)="!isMobile && (activeNestedSubMenu = 'debitnote')"
-            (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
-          
-            <!-- ✅ Fix: handle submenu toggle here -->
-            <a role="button"
-               (click)="isMobile ? toggleNestedSubMenu('debitnote') : null">
-               Debit Note
-            </a>
-          
-            <!-- ✅ Show nested submenu properly -->
-            <ul
-              *ngIf="activeNestedSubMenu === 'debitnote'"
-              [class.nested-submenu]="!isMobile"
-              [class.mobile-visible]="isMobile"
-              (click)="$event.stopPropagation()">
-          
-              <li>
-                <a [routerLink]="['/sales/debitnote']"
-                   (click)="$event.stopPropagation()">New Debit Note</a>
-              </li>
-              <li>
-                <a [routerLink]="['/sales/manage-debitnote']"
-                   (click)="$event.stopPropagation()">Manage Debit Notes</a>
-              </li>
-            </ul>
-           </li>
+              </a>
 
-           <!-- You can repeat the same structure for other menus like Quotation, Delivery Note, etc. -->
-         </ul>
+              <!-- ✅ Show nested submenu properly -->
+              <ul *ngIf="activeNestedSubMenu === 'saleorder'" [class.nested-submenu]="!isMobile"
+                [class.mobile-visible]="isMobile" (click)="$event.stopPropagation()">
+
+                <li>
+                  <a [routerLink]="['/sales/saleorder']" (click)="$event.stopPropagation()">New Sale Order</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/sales/manage-saleorder']" (click)="$event.stopPropagation()">Manage Sale
+                    Orders</a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Recurring Invoice with Nested Submenu -->
+            <li class="has-submenu" [class.active]="activeNestedSubMenu === ' recurring-invoice'"
+              (mouseenter)="!isMobile && (activeNestedSubMenu = 'recurring-invoice')"
+              (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
+
+              <!-- ✅ Fix: handle submenu toggle here -->
+              <a role="button" (click)="isMobile ? toggleNestedSubMenu('recurring-invoice') : null">
+                Recurring Invoice
+              </a>
+
+              <!-- ✅ Show nested submenu properly -->
+              <ul *ngIf="activeNestedSubMenu === 'recurring-invoice'" [class.nested-submenu]="!isMobile"
+                [class.mobile-visible]="isMobile" (click)="$event.stopPropagation()">
+
+                <li>
+                  <a [routerLink]="['/sales/recurring-invoice']" (click)="$event.stopPropagation()">New Recurring
+                    Invoice</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/sales/manage-recurring-invoice']" (click)="$event.stopPropagation()">Manage
+                    Recurring Invoices</a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Credit Note with Nested Submenu -->
+            <li class="has-submenu" [class.active]="activeNestedSubMenu === 'creditnote'"
+              (mouseenter)="!isMobile && (activeNestedSubMenu = 'creditnote')"
+              (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
+
+              <!-- ✅ Fix: handle submenu toggle here -->
+              <a role="button" (click)="isMobile ? toggleNestedSubMenu('creditnote') : null">
+                Credit Note
+              </a>
+
+              <!-- ✅ Show nested submenu properly -->
+              <ul *ngIf="activeNestedSubMenu === 'creditnote'" [class.nested-submenu]="!isMobile"
+                [class.mobile-visible]="isMobile" (click)="$event.stopPropagation()">
+
+                <li>
+                  <a [routerLink]="['/sales/creditnote']" (click)="$event.stopPropagation()">New Credit Note</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/sales/manage-creditnote']" (click)="$event.stopPropagation()">Manage Credit
+                    Notes</a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Debit Note with Nested Submenu -->
+            <li class="has-submenu" [class.active]="activeNestedSubMenu === 'debitnote'"
+              (mouseenter)="!isMobile && (activeNestedSubMenu = 'debitnote')"
+              (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
+
+              <!-- ✅ Fix: handle submenu toggle here -->
+              <a role="button" (click)="isMobile ? toggleNestedSubMenu('debitnote') : null">
+                Debit Note
+              </a>
+
+              <!-- ✅ Show nested submenu properly -->
+              <ul *ngIf="activeNestedSubMenu === 'debitnote'" [class.nested-submenu]="!isMobile"
+                [class.mobile-visible]="isMobile" (click)="$event.stopPropagation()">
+
+                <li>
+                  <a [routerLink]="['/sales/debitnote']" (click)="$event.stopPropagation()">New Debit Note</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/sales/manage-debitnote']" (click)="$event.stopPropagation()">Manage Debit
+                    Notes</a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- You can repeat the same structure for other menus like Quotation, Delivery Note, etc. -->
+          </ul>
         </li>
 
         <!-- Purchase with Submenu -->
-        <li class="menu-item-with-submenu sale-spacing"
-          [class.active]="activeSubMenu === 'purchase'"
-          (mouseenter)="!isMobile && (activeSubMenu = 'purchase')"
-          (mouseleave)="!isMobile && (activeSubMenu = null)">
-        
+        <li class="menu-item-with-submenu sale-spacing" [class.active]="activeSubMenu === 'purchase'"
+          (mouseenter)="!isMobile && (activeSubMenu = 'purchase')" (mouseleave)="!isMobile && (activeSubMenu = null)">
+
           <a href="#" (click)="toggleSubMenu('purchase'); $event.preventDefault()">
-           <mat-icon class="icon-purchase">inventory_2</mat-icon> Purchase
+            <mat-icon class="icon-purchase">inventory_2</mat-icon> Purchase
           </a>
 
-         <!-- First-level submenu -->
-         <ul
-          [class.submenu]="!isMobile"
-          [class.mobile-visible]="isMobile && activeSubMenu === 'purchase'"
-          *ngIf="activeSubMenu === 'purchase'">
+          <!-- First-level submenu -->
+          <ul [class.submenu]="!isMobile" [class.mobile-visible]="isMobile && activeSubMenu === 'purchase'"
+            *ngIf="activeSubMenu === 'purchase'">
 
-           <!-- Purchase with Nested Submenu -->
-           <li class="has-submenu"
-          [class.active]="activeNestedSubMenu === 'purchase-bill'"
-          (mouseenter)="!isMobile && (activeNestedSubMenu = 'purchase-bill')"
-          (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
-        
-          <!-- ✅ Fix: handle submenu toggle here -->
-          <a role="button"
-             (click)="isMobile ? toggleNestedSubMenu('purchase-bill') : null">
-             Purchase Bill
-          </a>
-        
-          <!-- ✅ Show nested submenu properly -->
-          <ul
-            *ngIf="activeNestedSubMenu === 'purchase-bill'"
-            [class.nested-submenu]="!isMobile"
-            [class.mobile-visible]="isMobile"
-            (click)="$event.stopPropagation()">
-        
-            <li>
-              <a [routerLink]="['/purchase/purchase-bill']"
-                 (click)="$event.stopPropagation()">New Purchase Bill</a>
+            <!-- Purchase with Nested Submenu -->
+            <li class="has-submenu" [class.active]="activeNestedSubMenu === 'purchase-bill'"
+              (mouseenter)="!isMobile && (activeNestedSubMenu = 'purchase-bill')"
+              (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
+
+              <!-- ✅ Fix: handle submenu toggle here -->
+              <a role="button" (click)="isMobile ? toggleNestedSubMenu('purchase-bill') : null">
+                Purchase Bill
+              </a>
+
+              <!-- ✅ Show nested submenu properly -->
+              <ul *ngIf="activeNestedSubMenu === 'purchase-bill'" [class.nested-submenu]="!isMobile"
+                [class.mobile-visible]="isMobile" (click)="$event.stopPropagation()">
+
+                <li>
+                  <a [routerLink]="['/purchase/purchase-bill']" (click)="$event.stopPropagation()">New Purchase Bill</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/purchase/manage-purchase-bill']" (click)="$event.stopPropagation()">Manage
+                    Purchase Bills</a>
+                </li>
+              </ul>
             </li>
-            <li>
-              <a [routerLink]="['/purchase/manage-purchase-bill']"
-                 (click)="$event.stopPropagation()">Manage Purchase Bills</a>
+
+            <!-- Purchase Return with Nested Submenu -->
+            <li class="has-submenu" [class.active]="activeNestedSubMenu === 'purchase-return'"
+              (mouseenter)="!isMobile && (activeNestedSubMenu = 'purchase-return')"
+              (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
+
+              <!-- ✅ Fix: handle submenu toggle here -->
+              <a role="button" (click)="isMobile ? toggleNestedSubMenu('purchase-return') : null">
+                Purchase Return
+              </a>
+
+              <!-- ✅ Show nested submenu properly -->
+              <ul *ngIf="activeNestedSubMenu === 'purchase-return'" [class.nested-submenu]="!isMobile"
+                [class.mobile-visible]="isMobile" (click)="$event.stopPropagation()">
+
+                <li>
+                  <a [routerLink]="['/purchase/purchase-return']" (click)="$event.stopPropagation()">New Purchase
+                    Return</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/purchase/manage-purchase-return']" (click)="$event.stopPropagation()">Manage
+                    Purchase Returns</a>
+                </li>
+              </ul>
             </li>
-          </ul>
-           </li>
-        
-           <!-- Purchase Return with Nested Submenu -->
-           <li class="has-submenu"
-          [class.active]="activeNestedSubMenu === 'purchase-return'"
-          (mouseenter)="!isMobile && (activeNestedSubMenu = 'purchase-return')"
-          (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
-        
-          <!-- ✅ Fix: handle submenu toggle here -->
-          <a role="button"
-             (click)="isMobile ? toggleNestedSubMenu('purchase-return') : null">
-             Purchase Return
-          </a>
-        
-          <!-- ✅ Show nested submenu properly -->
-          <ul
-            *ngIf="activeNestedSubMenu === 'purchase-return'"
-            [class.nested-submenu]="!isMobile"
-            [class.mobile-visible]="isMobile"
-            (click)="$event.stopPropagation()">
-        
-            <li>
-              <a [routerLink]="['/purchase/purchase-return']"
-                 (click)="$event.stopPropagation()">New Purchase Return</a>
-            </li>
-            <li>
-              <a [routerLink]="['/purchase/manage-purchase-return']"
-                 (click)="$event.stopPropagation()">Manage Purchase Returns</a>
-            </li>
-          </ul>
-           </li>
-         
-           <!-- Purchase Order with Nested Submenu -->
-           <li class="has-submenu"
-             [class.active]="activeNestedSubMenu === 'purchase-order'"
-             (mouseenter)="!isMobile && (activeNestedSubMenu = 'purchase-order')"
-             (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
-           
-             <!-- ✅ Fix: handle submenu toggle here -->
-             <a role="button"
-                (click)="isMobile ? toggleNestedSubMenu('purchase-order') : null">
+
+            <!-- Purchase Order with Nested Submenu -->
+            <li class="has-submenu" [class.active]="activeNestedSubMenu === 'purchase-order'"
+              (mouseenter)="!isMobile && (activeNestedSubMenu = 'purchase-order')"
+              (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
+
+              <!-- ✅ Fix: handle submenu toggle here -->
+              <a role="button" (click)="isMobile ? toggleNestedSubMenu('purchase-order') : null">
                 Purchase Order
-             </a>
-           
-             <!-- ✅ Show nested submenu properly -->
-             <ul
-               *ngIf="activeNestedSubMenu === 'purchase-order'"
-               [class.nested-submenu]="!isMobile"
-               [class.mobile-visible]="isMobile"
-               (click)="$event.stopPropagation()">
-           
-               <li>
-                 <a [routerLink]="['/purchase/purchase-order']"
-                    (click)="$event.stopPropagation()">New Purchase Order</a>
-               </li>
-               <li>
-                 <a [routerLink]="['/purchase/manage-purchase-order']"
-                    (click)="$event.stopPropagation()">Manage Purchase Orders</a>
-               </li>
-             </ul>
-           </li>
-          
-           <!-- Credit Note with Nested Submenu -->
-           <li class="has-submenu"
-            [class.active]="activeNestedSubMenu === 'creditnote'"
-            (mouseenter)="!isMobile && (activeNestedSubMenu = 'creditnote')"
-            (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
-       
-           <!-- ✅ Fix: handle submenu toggle here -->
-           <a role="button"
-            (click)="isMobile ? toggleNestedSubMenu('creditnote') : null">
-            Credit Note
-           </a>
-       
-           <!-- ✅ Show nested submenu properly -->
-           <ul
-             *ngIf="activeNestedSubMenu === 'creditnote'"
-             [class.nested-submenu]="!isMobile"
-             [class.mobile-visible]="isMobile"
-             (click)="$event.stopPropagation()">
-       
-            <li>
-              <a [routerLink]="['/purchase/creditnote']"
-                (click)="$event.stopPropagation()">New Credit Note</a>
+              </a>
+
+              <!-- ✅ Show nested submenu properly -->
+              <ul *ngIf="activeNestedSubMenu === 'purchase-order'" [class.nested-submenu]="!isMobile"
+                [class.mobile-visible]="isMobile" (click)="$event.stopPropagation()">
+
+                <li>
+                  <a [routerLink]="['/purchase/purchase-order']" (click)="$event.stopPropagation()">New Purchase
+                    Order</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/purchase/manage-purchase-order']" (click)="$event.stopPropagation()">Manage
+                    Purchase Orders</a>
+                </li>
+              </ul>
             </li>
-            <li>
-             <a [routerLink]="['/purchase/manage-creditnote']"
-                (click)="$event.stopPropagation()">Manage Credit Notes</a>
+
+            <!-- Credit Note with Nested Submenu -->
+            <li class="has-submenu" [class.active]="activeNestedSubMenu === 'creditnote'"
+              (mouseenter)="!isMobile && (activeNestedSubMenu = 'creditnote')"
+              (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
+
+              <!-- ✅ Fix: handle submenu toggle here -->
+              <a role="button" (click)="isMobile ? toggleNestedSubMenu('creditnote') : null">
+                Credit Note
+              </a>
+
+              <!-- ✅ Show nested submenu properly -->
+              <ul *ngIf="activeNestedSubMenu === 'creditnote'" [class.nested-submenu]="!isMobile"
+                [class.mobile-visible]="isMobile" (click)="$event.stopPropagation()">
+
+                <li>
+                  <a [routerLink]="['/purchase/creditnote']" (click)="$event.stopPropagation()">New Credit Note</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/purchase/manage-creditnote']" (click)="$event.stopPropagation()">Manage Credit
+                    Notes</a>
+                </li>
+              </ul>
             </li>
-           </ul>
-           </li>
-           
-           <!-- Debit Note with Nested Submenu -->
-           <li class="has-submenu"
-            [class.active]="activeNestedSubMenu === 'debitnote'"
-            (mouseenter)="!isMobile && (activeNestedSubMenu = 'debitnote')"
-            (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
-          
-            <!-- ✅ Fix: handle submenu toggle here -->
-            <a role="button"
-               (click)="isMobile ? toggleNestedSubMenu('debitnote') : null">
-               Debit Note
-            </a>
-          
-            <!-- ✅ Show nested submenu properly -->
-            <ul
-              *ngIf="activeNestedSubMenu === 'debitnote'"
-              [class.nested-submenu]="!isMobile"
-              [class.mobile-visible]="isMobile"
-              (click)="$event.stopPropagation()">
-          
-              <li>
-                <a [routerLink]="['/purchase/debitnote']"
-                   (click)="$event.stopPropagation()">New Debit Note</a>
-              </li>
-              <li>
-                <a [routerLink]="['/purchase/manage-debitnote']"
-                   (click)="$event.stopPropagation()">Manage Debit Notes</a>
-              </li>
-            </ul>
-           </li>
 
-           <!-- Supplier with Nested Submenu -->
-           <li class="has-submenu"
-            [class.active]="activeNestedSubMenu === 'supplier'"
-            (mouseenter)="!isMobile && (activeNestedSubMenu = 'supplier')"
-            (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
-          
-            <!-- ✅ Fix: handle submenu toggle here -->
-            <a role="button"
-               (click)="isMobile ? toggleNestedSubMenu('supplier') : null">
-               Supplier
-            </a>
-          
-            <!-- ✅ Show nested submenu properly -->
-            <ul
-              *ngIf="activeNestedSubMenu === 'supplier'"
-              [class.nested-submenu]="!isMobile"
-              [class.mobile-visible]="isMobile"
-              (click)="$event.stopPropagation()">
-          
-              <li>
-                <a [routerLink]="['/purchase/supplier']"
-                   (click)="$event.stopPropagation()">New Supplier</a>
-              </li>
-              <li>
-                <a [routerLink]="['/purchase/manage-supplier']"
-                   (click)="$event.stopPropagation()">Manage Suppliers</a>
-              </li>
-            </ul>
-           </li>
+            <!-- Debit Note with Nested Submenu -->
+            <li class="has-submenu" [class.active]="activeNestedSubMenu === 'debitnote'"
+              (mouseenter)="!isMobile && (activeNestedSubMenu = 'debitnote')"
+              (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
+
+              <!-- ✅ Fix: handle submenu toggle here -->
+              <a role="button" (click)="isMobile ? toggleNestedSubMenu('debitnote') : null">
+                Debit Note
+              </a>
+
+              <!-- ✅ Show nested submenu properly -->
+              <ul *ngIf="activeNestedSubMenu === 'debitnote'" [class.nested-submenu]="!isMobile"
+                [class.mobile-visible]="isMobile" (click)="$event.stopPropagation()">
+
+                <li>
+                  <a [routerLink]="['/purchase/debitnote']" (click)="$event.stopPropagation()">New Debit Note</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/purchase/manage-debitnote']" (click)="$event.stopPropagation()">Manage Debit
+                    Notes</a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Supplier with Nested Submenu -->
+            <li class="has-submenu" [class.active]="activeNestedSubMenu === 'supplier'"
+              (mouseenter)="!isMobile && (activeNestedSubMenu = 'supplier')"
+              (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
+
+              <!-- ✅ Fix: handle submenu toggle here -->
+              <a role="button" (click)="isMobile ? toggleNestedSubMenu('supplier') : null">
+                Supplier
+              </a>
+
+              <!-- ✅ Show nested submenu properly -->
+              <ul *ngIf="activeNestedSubMenu === 'supplier'" [class.nested-submenu]="!isMobile"
+                [class.mobile-visible]="isMobile" (click)="$event.stopPropagation()">
+
+                <li>
+                  <a [routerLink]="['/purchase/supplier']" (click)="$event.stopPropagation()">New Supplier</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/purchase/manage-supplier']" (click)="$event.stopPropagation()">Manage
+                    Suppliers</a>
+                </li>
+              </ul>
+            </li>
 
 
-           <!-- You can repeat the same structure for other menus like Quotation, Delivery Note, etc. -->
-         </ul>
+            <!-- You can repeat the same structure for other menus like Quotation, Delivery Note, etc. -->
+          </ul>
         </li>
 
         <!-- Customers with Submenu -->
-        <li class="menu-item-with-submenu sale-spacing"
-          [class.active]="activeSubMenu === 'customers'"
-          (mouseenter)="!isMobile && (activeSubMenu = 'customers')"
-          (mouseleave)="!isMobile && (activeSubMenu = null)">
-    
+        <li class="menu-item-with-submenu sale-spacing" [class.active]="activeSubMenu === 'customers'"
+          (mouseenter)="!isMobile && (activeSubMenu = 'customers')" (mouseleave)="!isMobile && (activeSubMenu = null)">
+
           <a href="#" (click)="toggleSubMenu('customers'); $event.preventDefault()">
-           <mat-icon class="icon-customers">people</mat-icon> Customers
+            <mat-icon class="icon-customers">people</mat-icon> Customers
           </a>
- 
+
           <!-- First-level submenu -->
-         <ul
-          [class.submenu]="!isMobile"
-          [class.mobile-visible]="isMobile && activeSubMenu === 'customers'"
-          *ngIf="activeSubMenu === 'customers'">
- 
-           <li><a [routerLink]="['/customers/add-customer']">Add Customer</a></li>
-           <li><a [routerLink]="['/customers/manage-customer']">Manage Customers</a></li> 
-         </ul>
+          <ul [class.submenu]="!isMobile" [class.mobile-visible]="isMobile && activeSubMenu === 'customers'"
+            *ngIf="activeSubMenu === 'customers'">
+
+            <li><a [routerLink]="['/customers/add-customer']">Add Customer</a></li>
+            <li><a [routerLink]="['/customers/manage-customer']">Manage Customers</a></li>
+          </ul>
         </li>
-  
+
         <!-- Orders with Submenu -->
-        <li class="menu-item-with-submenu sale-spacing"
-          [class.active]="activeSubMenu === 'orders'"
-          (mouseenter)="!isMobile && (activeSubMenu = 'orders')"
-          (mouseleave)="!isMobile && (activeSubMenu = null)">
+        <li class="menu-item-with-submenu sale-spacing" [class.active]="activeSubMenu === 'orders'"
+          (mouseenter)="!isMobile && (activeSubMenu = 'orders')" (mouseleave)="!isMobile && (activeSubMenu = null)">
 
           <a href="#" (click)="toggleSubMenu('orders'); $event.preventDefault()">
-           <mat-icon class="icon-orders">shopping_cart</mat-icon> Orders
+            <mat-icon class="icon-orders">shopping_cart</mat-icon> Orders
           </a>
 
           <!-- First-level submenu -->
-          <ul
-           [class.submenu]="!isMobile"
-           [class.mobile-visible]="isMobile && activeSubMenu === 'orders'"
-           *ngIf="activeSubMenu === 'orders'">
+          <ul [class.submenu]="!isMobile" [class.mobile-visible]="isMobile && activeSubMenu === 'orders'"
+            *ngIf="activeSubMenu === 'orders'">
 
             <li><a [routerLink]="['/orders/add-order']">Add Order</a></li>
             <li><a [routerLink]="['/orders/manage-orders']">Manage Orders</a></li>
           </ul>
         </li>
         <!-- Trainer Course Mapping with Submenu -->
-        <li class="menu-item-with-submenu sale-spacing"
-          [class.active]="activeSubMenu === 'trainer-course'"
+        <li class="menu-item-with-submenu sale-spacing" [class.active]="activeSubMenu === 'trainer-course'"
           (mouseenter)="!isMobile && (activeSubMenu = 'trainer-course')"
           (mouseleave)="!isMobile && (activeSubMenu = null)">
 
           <a href="#" (click)="toggleSubMenu('trainer-course'); $event.preventDefault()">
-           <mat-icon class="icon-trainer-course">business</mat-icon> Trainer Mapping
+            <mat-icon class="icon-trainer-course">business</mat-icon> Trainer Mapping
           </a>
 
           <!-- First-level submenu -->
-          <ul
-           [class.submenu]="!isMobile"
-           [class.mobile-visible]="isMobile && activeSubMenu === 'trainer-course'"
-           *ngIf="activeSubMenu === 'trainer-course'">
+          <ul [class.submenu]="!isMobile" [class.mobile-visible]="isMobile && activeSubMenu === 'trainer-course'"
+            *ngIf="activeSubMenu === 'trainer-course'">
 
             <li><a [routerLink]="['/master/trainer-course/add']">Trainer Mapping</a></li>
             <li><a [routerLink]="['/master/trainer-course/manage']">Manage Trainer Mapping</a></li>
           </ul>
         </li>
         <!-- Course Offering Course Mapping with Submenu -->
-        <li class="menu-item-with-submenu sale-spacing"
-          [class.active]="activeSubMenu === 'course-offering'"
+        <li class="menu-item-with-submenu sale-spacing" [class.active]="activeSubMenu === 'course-offering'"
           (mouseenter)="!isMobile && (activeSubMenu = 'course-offering')"
           (mouseleave)="!isMobile && (activeSubMenu = null)">
 
           <a href="#" (click)="toggleSubMenu('course-offering'); $event.preventDefault()">
-           <mat-icon class="icon-course-offering">business</mat-icon> Course Offering
-          </a>  
+            <mat-icon class="icon-course-offering">business</mat-icon> Course Offering
+          </a>
 
           <!-- First-level submenu -->
-          <ul
-           [class.submenu]="!isMobile"
-           [class.mobile-visible]="isMobile && activeSubMenu === 'course-offering'"
-           *ngIf="activeSubMenu === 'course-offering'">
+          <ul [class.submenu]="!isMobile" [class.mobile-visible]="isMobile && activeSubMenu === 'course-offering'"
+            *ngIf="activeSubMenu === 'course-offering'">
 
             <li><a [routerLink]="['/course-offering/add']">Add Course Offering</a></li>
             <!-- <li><a [routerLink]="['/master/course-offering/manage']">Manage Course Offering</a></li> -->
           </ul>
         </li>
         <!-- Tenants with Submenu -->
-        <li class="menu-item-with-submenu sale-spacing"
-          [class.active]="activeSubMenu === 'tenants'"
-          (mouseenter)="!isMobile && (activeSubMenu = 'tenants')"
-          (mouseleave)="!isMobile && (activeSubMenu = null)">
+        <li class="menu-item-with-submenu sale-spacing" [class.active]="activeSubMenu === 'tenants'"
+          (mouseenter)="!isMobile && (activeSubMenu = 'tenants')" (mouseleave)="!isMobile && (activeSubMenu = null)">
 
           <a href="#" (click)="toggleSubMenu('tenants'); $event.preventDefault()">
-           <mat-icon class="icon-tenants">business</mat-icon> Tenants
+            <mat-icon class="icon-tenants">business</mat-icon> Tenants
           </a>
 
           <!-- First-level submenu -->
-          <ul
-           [class.submenu]="!isMobile"
-           [class.mobile-visible]="isMobile && activeSubMenu === 'tenants'"
-           *ngIf="activeSubMenu === 'tenants'">
+          <ul [class.submenu]="!isMobile" [class.mobile-visible]="isMobile && activeSubMenu === 'tenants'"
+            *ngIf="activeSubMenu === 'tenants'">
 
             <li><a [routerLink]="['/tenants/add-tenant']">Add Tenant</a></li>
             <li><a [routerLink]="['/tenants/manage-tenant']">Manage Tenants</a></li>
@@ -618,755 +500,621 @@
         </li>
 
         <!-- Master with Submenu -->
-        <li class="menu-item-with-submenu sale-spacing"
-          [class.active]="activeSubMenu === 'master'"
-          (mouseenter)="!isMobile && (activeSubMenu = 'master')"
-          (mouseleave)="!isMobile && (activeSubMenu = null)">
-   
+        <li class="menu-item-with-submenu sale-spacing" [class.active]="activeSubMenu === 'master'"
+          (mouseenter)="!isMobile && (activeSubMenu = 'master')" (mouseleave)="!isMobile && (activeSubMenu = null)">
+
           <a href="#" (click)="toggleSubMenu('master'); $event.preventDefault()">
-           <mat-icon class="icon-master">table_chart</mat-icon> Master
+            <mat-icon class="icon-master">table_chart</mat-icon> Master
           </a>
 
-         <!-- First-level submenu -->
-         <ul
-            [class.submenu]="!isMobile"
-            [class.mobile-visible]="isMobile && activeSubMenu === 'master'"
+          <!-- First-level submenu -->
+          <ul [class.submenu]="!isMobile" [class.mobile-visible]="isMobile && activeSubMenu === 'master'"
             *ngIf="activeSubMenu === 'master'">
 
             <!-- Product Master with Nested Submenu -->
-            <li class="has-submenu"
-             [class.active]="activeNestedSubMenu === 'product-master'"
-             (mouseenter)="!isMobile && (activeNestedSubMenu = 'product-master')"
-             (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
-        
-             <!-- ✅ Fix: handle submenu toggle here -->
-             <a role="button"
-              (click)="isMobile ? toggleNestedSubMenu('product-master') : null">
-              Product Master
-             </a>
-        
-             <!-- ✅ Show nested submenu properly -->
-             <ul
-              *ngIf="activeNestedSubMenu === 'product-master'"
-              [class.nested-submenu]="!isMobile"
-              [class.mobile-visible]="isMobile"
-              (click)="$event.stopPropagation()">
-        
-             <li>
-               <a [routerLink]="['/master/product-master']"
-                 (click)="$event.stopPropagation()">Add Product</a>
-              </li>
-             <li>
-              <a [routerLink]="['/master/manage-products']"
-                 (click)="$event.stopPropagation()">Manage Products</a>
-             </li>
-            </ul>
-           </li>
-        
+            <li class="has-submenu" [class.active]="activeNestedSubMenu === 'product-master'"
+              (mouseenter)="!isMobile && (activeNestedSubMenu = 'product-master')"
+              (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
+
+              <!-- ✅ Fix: handle submenu toggle here -->
+              <a role="button" (click)="isMobile ? toggleNestedSubMenu('product-master') : null">
+                Product Master
+              </a>
+
+              <!-- ✅ Show nested submenu properly -->
+              <ul *ngIf="activeNestedSubMenu === 'product-master'" [class.nested-submenu]="!isMobile"
+                [class.mobile-visible]="isMobile" (click)="$event.stopPropagation()">
+
+                <li>
+                  <a [routerLink]="['/master/product-master']" (click)="$event.stopPropagation()">Add Product</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/master/manage-products']" (click)="$event.stopPropagation()">Manage Products</a>
+                </li>
+              </ul>
+            </li>
+
             <!-- Discount Scheme with Nested Submenu -->
-            <li class="has-submenu"
-             [class.active]="activeNestedSubMenu === 'discount-scheme'"
-             (mouseenter)="!isMobile && (activeNestedSubMenu = 'discount-scheme')"
-             (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
-        
-             <!-- ✅ Fix: handle submenu toggle here -->
-             <a role="button"
-              (click)="isMobile ? toggleNestedSubMenu('discount-scheme') : null">
-              Discount Scheme
-             </a>
-        
-             <!-- ✅ Show nested submenu properly -->
-             <ul
-              *ngIf="activeNestedSubMenu === 'discount-scheme'"
-              [class.nested-submenu]="!isMobile"
-              [class.mobile-visible]="isMobile"
-              (click)="$event.stopPropagation()">
-        
-             <li>
-              <a [routerLink]="['/master/discount-scheme']"
-                 (click)="$event.stopPropagation()">Add Discount Scheme</a>
-             </li>
-             <li>
-              <a [routerLink]="['/master/manage-discount-scheme']"
-                 (click)="$event.stopPropagation()">Manage Discount Schemes</a>
-             </li>
-             </ul>
+            <li class="has-submenu" [class.active]="activeNestedSubMenu === 'discount-scheme'"
+              (mouseenter)="!isMobile && (activeNestedSubMenu = 'discount-scheme')"
+              (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
+
+              <!-- ✅ Fix: handle submenu toggle here -->
+              <a role="button" (click)="isMobile ? toggleNestedSubMenu('discount-scheme') : null">
+                Discount Scheme
+              </a>
+
+              <!-- ✅ Show nested submenu properly -->
+              <ul *ngIf="activeNestedSubMenu === 'discount-scheme'" [class.nested-submenu]="!isMobile"
+                [class.mobile-visible]="isMobile" (click)="$event.stopPropagation()">
+
+                <li>
+                  <a [routerLink]="['/master/discount-scheme']" (click)="$event.stopPropagation()">Add Discount
+                    Scheme</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/master/manage-discount-scheme']" (click)="$event.stopPropagation()">Manage
+                    Discount Schemes</a>
+                </li>
+              </ul>
             </li>
 
             <li><a [routerLink]="['/master/company-master']">Company Master</a></li>
             <li><a [routerLink]="['/master/bankname']">Bank Name</a></li>
             <li><a [routerLink]="['/master/bank-master']">Bank Master</a></li>
             <li><a [routerLink]="['/master/brand-master']">Brand Master</a></li>
-            <li><a [routerLink]="['/master/group-master']">Group Master</a></li>    
+            <li><a [routerLink]="['/master/group-master']">Group Master</a></li>
             <li><a [routerLink]="['/master/table-master']">Table Master</a></li>
             <li><a [routerLink]="['/master/user-role']">User Role</a></li>
             <li><a [routerLink]="['/master/branch-master']">Branch Master</a></li>
             <li><a [routerLink]="['/master/shift-master']">Shift Master</a></li>
 
             <!-- Register User with Nested Submenu -->
-            <li class="has-submenu"
-             [class.active]="activeNestedSubMenu === 'Register User'"
-             (mouseenter)="!isMobile && (activeNestedSubMenu = 'Register User')"
-             (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
-             <a role="button"
-              (click)="isMobile ? toggleNestedSubMenu('Register User') : null">
-              Register User
-             </a>
-             <ul
-              *ngIf="activeNestedSubMenu === 'Register User'"
-              [class.nested-submenu]="!isMobile"
-              [class.mobile-visible]="isMobile"
-              (click)="$event.stopPropagation()">
-               <li>
-                <a [routerLink]="['/master/add-user']" >Add User</a>
-               </li>
-               <!-- <li>
+            <li class="has-submenu" [class.active]="activeNestedSubMenu === 'Register User'"
+              (mouseenter)="!isMobile && (activeNestedSubMenu = 'Register User')"
+              (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
+              <a role="button" (click)="isMobile ? toggleNestedSubMenu('Register User') : null">
+                Register User
+              </a>
+              <ul *ngIf="activeNestedSubMenu === 'Register User'" [class.nested-submenu]="!isMobile"
+                [class.mobile-visible]="isMobile" (click)="$event.stopPropagation()">
+                <li>
+                  <a [routerLink]="['/master/add-user']">Add User</a>
+                </li>
+                <!-- <li>
                 <a [routerLink]="['/master/manage-charges']"
                    (click)="$event.stopPropagation()">Manage Charges</a>
                </li> -->
-             </ul>
+              </ul>
             </li>
 
             <!-- Manage Charges with Nested Submenu -->
-            <li class="has-submenu"
-             [class.active]="activeNestedSubMenu === 'charge'"
-             (mouseenter)="!isMobile && (activeNestedSubMenu = 'charge')"
-             (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
-             <a role="button"
-              (click)="isMobile ? toggleNestedSubMenu('charge') : null">
-              Charge
-             </a>
-             <ul
-              *ngIf="activeNestedSubMenu === 'charge'"
-              [class.nested-submenu]="!isMobile"
-              [class.mobile-visible]="isMobile"
-              (click)="$event.stopPropagation()">
-               <li>
-                <a [routerLink]="['/master/charge-master']"
-                   (click)="$event.stopPropagation()">Add Charge</a>
-               </li>
-               <li>
-                <a [routerLink]="['/master/manage-charges']"
-                   (click)="$event.stopPropagation()">Manage Charges</a>
-               </li>
-             </ul>
+            <li class="has-submenu" [class.active]="activeNestedSubMenu === 'charge'"
+              (mouseenter)="!isMobile && (activeNestedSubMenu = 'charge')"
+              (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
+              <a role="button" (click)="isMobile ? toggleNestedSubMenu('charge') : null">
+                Charge
+              </a>
+              <ul *ngIf="activeNestedSubMenu === 'charge'" [class.nested-submenu]="!isMobile"
+                [class.mobile-visible]="isMobile" (click)="$event.stopPropagation()">
+                <li>
+                  <a [routerLink]="['/master/charge-master']" (click)="$event.stopPropagation()">Add Charge</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/master/manage-charges']" (click)="$event.stopPropagation()">Manage Charges</a>
+                </li>
+              </ul>
             </li>
 
             <!-- Discount with Nested Submenu -->
-            <li class="has-submenu"
-             [class.active]="activeNestedSubMenu === 'discount'"
-             (mouseenter)="!isMobile && (activeNestedSubMenu = 'discount')"
-             (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
-             <a role="button"
-              (click)="isMobile ? toggleNestedSubMenu('discount') : null">
-              Discount
-             </a>
-             <ul
-              *ngIf="activeNestedSubMenu === 'discount'"
-              [class.nested-submenu]="!isMobile"
-              [class.mobile-visible]="isMobile"
-              (click)="$event.stopPropagation()">
-               <li>
-                <a [routerLink]="['/master/discount-master']"
-                   (click)="$event.stopPropagation()">Add Discount</a>
-               </li>
-               <li>
-                <a [routerLink]="['/master/manage-discounts']"
-                   (click)="$event.stopPropagation()">Manage Discounts</a>
-               </li>
-             </ul>
+            <li class="has-submenu" [class.active]="activeNestedSubMenu === 'discount'"
+              (mouseenter)="!isMobile && (activeNestedSubMenu = 'discount')"
+              (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
+              <a role="button" (click)="isMobile ? toggleNestedSubMenu('discount') : null">
+                Discount
+              </a>
+              <ul *ngIf="activeNestedSubMenu === 'discount'" [class.nested-submenu]="!isMobile"
+                [class.mobile-visible]="isMobile" (click)="$event.stopPropagation()">
+                <li>
+                  <a [routerLink]="['/master/discount-master']" (click)="$event.stopPropagation()">Add Discount</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/master/manage-discounts']" (click)="$event.stopPropagation()">Manage Discounts</a>
+                </li>
+              </ul>
             </li>
 
             <!-- Tax with Nested Submenu -->
-            <li class="has-submenu"
-             [class.active]="activeNestedSubMenu === 'tax'"
-             (mouseenter)="!isMobile && (activeNestedSubMenu = 'tax')"
-             (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
-             <a role="button"
-              (click)="isMobile ? toggleNestedSubMenu('tax') : null">
-              Tax
-             </a>
-             <ul
-              *ngIf="activeNestedSubMenu === 'tax'"
-              [class.nested-submenu]="!isMobile"
-              [class.mobile-visible]="isMobile"
-              (click)="$event.stopPropagation()">
-               <li>
-                <a [routerLink]="['/master/tax-master']"
-                   (click)="$event.stopPropagation()">Add Tax</a>
-               </li>
-               <li>
-                <a [routerLink]="['/master/manage-taxes']"
-                   (click)="$event.stopPropagation()">Manage Taxes</a>
-               </li>
-             </ul>
+            <li class="has-submenu" [class.active]="activeNestedSubMenu === 'tax'"
+              (mouseenter)="!isMobile && (activeNestedSubMenu = 'tax')"
+              (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
+              <a role="button" (click)="isMobile ? toggleNestedSubMenu('tax') : null">
+                Tax
+              </a>
+              <ul *ngIf="activeNestedSubMenu === 'tax'" [class.nested-submenu]="!isMobile"
+                [class.mobile-visible]="isMobile" (click)="$event.stopPropagation()">
+                <li>
+                  <a [routerLink]="['/master/tax-master']" (click)="$event.stopPropagation()">Add Tax</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/master/manage-taxes']" (click)="$event.stopPropagation()">Manage Taxes</a>
+                </li>
+              </ul>
             </li>
 
-              <!-- Miscellaneous with Nested Submenu -->
-              <li class="has-submenu"
-              [class.active]="activeNestedSubMenu === 'miscellaneous'"
+            <!-- Miscellaneous with Nested Submenu -->
+            <li class="has-submenu" [class.active]="activeNestedSubMenu === 'miscellaneous'"
               (mouseenter)="!isMobile && (activeNestedSubMenu = 'miscellaneous')"
               (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
-         
+
               <!-- ✅ Fix: handle submenu toggle here -->
-              <a role="button"
-               (click)="isMobile ? toggleNestedSubMenu('miscellaneous') : null">
-               Miscellaneous
+              <a role="button" (click)="isMobile ? toggleNestedSubMenu('miscellaneous') : null">
+                Miscellaneous
               </a>
-         
+
               <!-- ✅ Show nested submenu properly -->
-              <ul
-               *ngIf="activeNestedSubMenu === 'miscellaneous'"
-               [class.nested-submenu]="!isMobile"
-               [class.mobile-visible]="isMobile"
-               (click)="$event.stopPropagation()">
-         
-              <li>
-               <a [routerLink]="['/master/unit-master']"
-                  (click)="$event.stopPropagation()">Unit Master</a>
-              </li>
-              <li>
-               <a [routerLink]="['/master/expense-master']"
-                  (click)="$event.stopPropagation()">Expense Master</a>
-              </li>
-              <li>
-               <a [routerLink]="['/master/holiday-master']"
-                  (click)="$event.stopPropagation()">Holiday Master</a>
-              </li>
-              <li>
-               <a [routerLink]="['/master/department-master']"
-                  (click)="$event.stopPropagation()">Department Master</a>
-              </li>
-              <li>
-               <a [routerLink]="['/master/designation-master']"
-                  (click)="$event.stopPropagation()">Designation Master</a>
-              </li>
-              <li>
-               <a [routerLink]="['/master/location-master']"
-                  (click)="$event.stopPropagation()">Location Master</a>
-              </li>      
-              <li>
-                <a [routerLink]="['/master/industry']"
-                   (click)="$event.stopPropagation()">Industry</a>
-               </li>  
-              <li>
-                <a [routerLink]="['/master/warehouse']"
-                   (click)="$event.stopPropagation()">Warehouse Master</a>
-               </li>
+              <ul *ngIf="activeNestedSubMenu === 'miscellaneous'" [class.nested-submenu]="!isMobile"
+                [class.mobile-visible]="isMobile" (click)="$event.stopPropagation()">
+
+                <li>
+                  <a [routerLink]="['/master/unit-master']" (click)="$event.stopPropagation()">Unit Master</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/master/expense-master']" (click)="$event.stopPropagation()">Expense Master</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/master/holiday-master']" (click)="$event.stopPropagation()">Holiday Master</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/master/department-master']" (click)="$event.stopPropagation()">Department
+                    Master</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/master/designation-master']" (click)="$event.stopPropagation()">Designation
+                    Master</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/master/location-master']" (click)="$event.stopPropagation()">Location Master</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/master/industry']" (click)="$event.stopPropagation()">Industry</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/master/warehouse']" (click)="$event.stopPropagation()">Warehouse Master</a>
+                </li>
               </ul>
-             </li>
+            </li>
 
           </ul>
         </li>
 
-         <!-- Report with Submenu -->
-         <li class="menu-item-with-submenu sale-spacing"
-         [class.active]="activeSubMenu === 'report'"
-         (mouseenter)="!isMobile && (activeSubMenu = 'report')"
-         (mouseleave)="!isMobile && (activeSubMenu = null)">
-       
-         <a href="#" (click)="toggleSubMenu('report'); $event.preventDefault()">
-          <mat-icon class="icon-report">assessment</mat-icon> Report
-         </a>
+        <!-- Report with Submenu -->
+        <li class="menu-item-with-submenu sale-spacing" [class.active]="activeSubMenu === 'report'"
+          (mouseenter)="!isMobile && (activeSubMenu = 'report')" (mouseleave)="!isMobile && (activeSubMenu = null)">
 
-        <!-- First-level submenu -->
-        <ul
-         [class.submenu]="!isMobile"
-         [class.mobile-visible]="isMobile && activeSubMenu === 'report'"
-         *ngIf="activeSubMenu === 'report'">
+          <a href="#" (click)="toggleSubMenu('report'); $event.preventDefault()">
+            <mat-icon class="icon-report">assessment</mat-icon> Report
+          </a>
 
-          <!-- Accounts with Nested Submenu -->
-          <li class="has-submenu"
-         [class.active]="activeNestedSubMenu === 'accounts'"
-         (mouseenter)="!isMobile && (activeNestedSubMenu = 'accounts')"
-         (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
-       
-         <!-- ✅ Fix: handle submenu toggle here -->
-         <a role="button"
-            (click)="isMobile ? toggleNestedSubMenu('accounts') : null">
-            Accounts
-         </a>
-       
-         <!-- ✅ Show nested submenu properly -->
-         <ul
-           *ngIf="activeNestedSubMenu === 'accounts'"
-           [class.nested-submenu]="!isMobile"
-           [class.mobile-visible]="isMobile"
-           (click)="$event.stopPropagation()">
-       
-           <li>
-            <a [routerLink]="['/reports/accounts/cash-book']"
-               (click)="$event.stopPropagation()">Cash Book</a>
-          </li>
-          <li>
-            <a [routerLink]="['/reports/accounts/business-book']"
-               (click)="$event.stopPropagation()">Business Book</a>
-          </li>
-          <li>
-           <a [routerLink]="['/reports/accounts/payment-paid']"
-              (click)="$event.stopPropagation()">Payment Paid</a>
-         </li>
-         <li>
-           <a [routerLink]="['/reports/accounts/payment-received']"
-              (click)="$event.stopPropagation()">Payment Received</a>
-         </li>
-         <li>
-           <a [routerLink]="['/reports/accounts/daily-summary']"
-              (click)="$event.stopPropagation()">Daily Summary</a>
-         </li>
-         <li>
-           <a [routerLink]="['/reports/accounts/input-output-tax']"
-              (click)="$event.stopPropagation()">Input / Output Tax</a>
-         </li>
-         <li>
-           <a [routerLink]="['/reports/accounts/profit-loss-summary']"
-              (click)="$event.stopPropagation()">Profit & Loss Summary</a>
-         </li>
-         <li>
-           <a [routerLink]="['/reports/accounts/payment-received']"
-              (click)="$event.stopPropagation()">Chart of Accounts</a>
-         </li>
-         <li>
-           <a [routerLink]="['/reports/accounts/payment-received']"
-              (click)="$event.stopPropagation()">Balance Sheet</a>
-         </li>
-         </ul>
-          </li>
-       
-          <!-- Inventory with Nested Submenu -->
-          <li class="has-submenu"
-            [class.active]="activeNestedSubMenu === 'inventory'"
-            (mouseenter)="!isMobile && (activeNestedSubMenu = 'inventory')"
-            (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
-       
-           <!-- ✅ Fix: handle submenu toggle here -->
-           <a role="button"
-            (click)="isMobile ? toggleNestedSubMenu('inventory') : null">
-            Inventory
-           </a>
-       
-         <!-- ✅ Show nested submenu properly -->
-         <ul
-           *ngIf="activeNestedSubMenu === 'inventory'"
-           [class.nested-submenu]="!isMobile"
-           [class.mobile-visible]="isMobile"
-           (click)="$event.stopPropagation()">
-       
-           <li>
-            <a [routerLink]="['/reports/inventory/item-register']"
-               (click)="$event.stopPropagation()">Item Register</a>
-           </li>
-           <li>
-            <a [routerLink]="['/reports/inventory/low-level-stock']"
-               (click)="$event.stopPropagation()">Low Level Stock</a>
-           </li>
-           <li>
-           <a [routerLink]="['/reports/inventory/stock-availability']"
-             (click)="$event.stopPropagation()">Stock Availability</a>
-           </li>
-           <li>
-           <a [routerLink]="['/reports/inventory/stock-adjustment']"
-              (click)="$event.stopPropagation()">Stock Adjustments</a>
-           </li>
-           <li>
-           <a [routerLink]="['/reports/inventory/consumable-stock']"
-              (click)="$event.stopPropagation()">Consumable Stock</a>
-           </li>
-           <li>
-           <a [routerLink]="['/reports/inventory/fast-moving-items']"
-              (click)="$event.stopPropagation()">Fast Moving Items</a>
-           </li>
-           <li>
-           <a [routerLink]="['/reports/inventory/items-not-moving']"
-              (click)="$event.stopPropagation()">Items Not Moving</a>
-           </li>
-           <li>
-           <a [routerLink]="['/reports/inventory/available-serials']"
-              (click)="$event.stopPropagation()">Available Serials</a>
-           </li> 
-           <li>
-            <a [routerLink]="['/reports/inventory/item-list']"
-               (click)="$event.stopPropagation()">Item List</a>
+          <!-- First-level submenu -->
+          <ul [class.submenu]="!isMobile" [class.mobile-visible]="isMobile && activeSubMenu === 'report'"
+            *ngIf="activeSubMenu === 'report'">
+
+            <!-- Accounts with Nested Submenu -->
+            <li class="has-submenu" [class.active]="activeNestedSubMenu === 'accounts'"
+              (mouseenter)="!isMobile && (activeNestedSubMenu = 'accounts')"
+              (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
+
+              <!-- ✅ Fix: handle submenu toggle here -->
+              <a role="button" (click)="isMobile ? toggleNestedSubMenu('accounts') : null">
+                Accounts
+              </a>
+
+              <!-- ✅ Show nested submenu properly -->
+              <ul *ngIf="activeNestedSubMenu === 'accounts'" [class.nested-submenu]="!isMobile"
+                [class.mobile-visible]="isMobile" (click)="$event.stopPropagation()">
+
+                <li>
+                  <a [routerLink]="['/reports/accounts/cash-book']" (click)="$event.stopPropagation()">Cash Book</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/accounts/business-book']" (click)="$event.stopPropagation()">Business
+                    Book</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/accounts/payment-paid']" (click)="$event.stopPropagation()">Payment
+                    Paid</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/accounts/payment-received']" (click)="$event.stopPropagation()">Payment
+                    Received</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/accounts/daily-summary']" (click)="$event.stopPropagation()">Daily
+                    Summary</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/accounts/input-output-tax']" (click)="$event.stopPropagation()">Input /
+                    Output Tax</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/accounts/profit-loss-summary']" (click)="$event.stopPropagation()">Profit
+                    & Loss Summary</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/accounts/payment-received']" (click)="$event.stopPropagation()">Chart of
+                    Accounts</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/accounts/payment-received']" (click)="$event.stopPropagation()">Balance
+                    Sheet</a>
+                </li>
+              </ul>
             </li>
-         </ul>
-          </li>
 
-          <!-- Sales with Nested Submenu -->
-          <li class="has-submenu"
-           [class.active]="activeNestedSubMenu === 'sales'"
-           (mouseenter)="!isMobile && (activeNestedSubMenu = 'sales')"
-           (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
-       
-         <!-- ✅ Fix: handle submenu toggle here -->
-         <a role="button"
-            (click)="isMobile ? toggleNestedSubMenu('sales') : null">
-            Sales
-         </a>
-       
-         <!-- ✅ Show nested submenu properly -->
-         <ul
-           *ngIf="activeNestedSubMenu === 'sales'"
-           [class.nested-submenu]="!isMobile"
-           [class.mobile-visible]="isMobile"
-           (click)="$event.stopPropagation()">
-       
-           <li>
-            <a [routerLink]="['/reports/sales/sales-aging']"
-               (click)="$event.stopPropagation()">Sales Aging</a>
-          </li>
-          <li>
-            <a [routerLink]="['/reports/sales/itemwise-sales']"
-               (click)="$event.stopPropagation()">Itemwise Sales</a>
-          </li>
-          <li>
-           <a [routerLink]="['/reports/sales/invoicewise-sales']"
-              (click)="$event.stopPropagation()">Invoicewise Sales</a>
-         </li>
-         <li>
-           <a [routerLink]="['/reports/sales/itemwise-profit-margin']"
-              (click)="$event.stopPropagation()">Itemwise Profit / Margin</a>
-         </li>
-         <li>
-           <a [routerLink]="['/reports/sales/invoicewise-profit-margin']"
-              (click)="$event.stopPropagation()">Invoicewise Profit / Margin</a>
-         </li>
-         <li>
-           <a [routerLink]="['/reports/sales/customerwise-profit-margin']"
-              (click)="$event.stopPropagation()">Customerwise Profit / Margin</a>
-         </li>
-         <li>
-           <a [routerLink]="['/reports/sales/itemwise-sales-summary']"
-              (click)="$event.stopPropagation()">Itemwise Sales Summary</a>
-         </li>
-         <li>
-           <a [routerLink]="['/reports/sales/invoicewise-sales-summary']"
-              (click)="$event.stopPropagation()">Invoicewise Sale Summary</a>
-         </li>
-         <li>
-           <a [routerLink]="['/reports/sales/customerwise-sales-summary']"
-              (click)="$event.stopPropagation()">Customerwise Sale Summary</a>
-         </li>
-         <li>
-          <a [routerLink]="['/reports/sales/gst-sales']"
-             (click)="$event.stopPropagation()">Gst Sale</a>
-          </li>
-          <li>
-          <a [routerLink]="['/reports/sales/active-recurring-invoice']"
-             (click)="$event.stopPropagation()">Active Recurring Invoice</a>
-          </li>
-         </ul>
-          </li>
+            <!-- Inventory with Nested Submenu -->
+            <li class="has-submenu" [class.active]="activeNestedSubMenu === 'inventory'"
+              (mouseenter)="!isMobile && (activeNestedSubMenu = 'inventory')"
+              (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
 
-          <!-- Customers with Nested Submenu -->
-          <li class="has-submenu"
-           [class.active]="activeNestedSubMenu === 'customers'"
-           (mouseenter)="!isMobile && (activeNestedSubMenu = 'customesr')"
-           (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
-       
-          <!-- ✅ Fix: handle submenu toggle here -->
-          <a role="button"
-            (click)="isMobile ? toggleNestedSubMenu('customers') : null">
-            Customers
-          </a>
-       
-          <!-- ✅ Show nested submenu properly -->
-          <ul
-           *ngIf="activeNestedSubMenu === 'customers'"
-           [class.nested-submenu]="!isMobile"
-           [class.mobile-visible]="isMobile"
-           (click)="$event.stopPropagation()">
-       
-           <li>
-             <a [routerLink]="['/reports/customers/amount-due']"
-                (click)="$event.stopPropagation()">Amount Due</a>
-           </li>
-           <li>
-             <a [routerLink]="['/reports/customers/payment-history']"
-                (click)="$event.stopPropagation()">Payment History</a>
-           </li>  
-           <li>
-            <a [routerLink]="['/reports/customers/account-balance']"
-               (click)="$event.stopPropagation()">Account Balances</a>
-           </li>
-          </ul>
-          </li>
-       
-          <!-- Purchases with Nested Submenu -->
-          <li class="has-submenu"
-           [class.active]="activeNestedSubMenu === 'purchases'"
-           (mouseenter)="!isMobile && (activeNestedSubMenu = 'purchases')"
-           (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
-       
-         <!-- ✅ Fix: handle submenu toggle here -->
-         <a role="button"
-            (click)="isMobile ? toggleNestedSubMenu('purchases') : null">
-            Purchases
-         </a>
-       
-         <!-- ✅ Show nested submenu properly -->
-         <ul
-           *ngIf="activeNestedSubMenu === 'purchases'"
-           [class.nested-submenu]="!isMobile"
-           [class.mobile-visible]="isMobile"
-           (click)="$event.stopPropagation()">
-       
-           <li>
-            <a [routerLink]="['/reports/purchases/purchase-aging']"
-               (click)="$event.stopPropagation()">Purchase Aging</a>
-          </li>
-          <li>
-            <a [routerLink]="['/reports/purchases/itemwise-purchase']"
-               (click)="$event.stopPropagation()">Itemwise Purchases</a>
-          </li>
-          <li>
-           <a [routerLink]="['/reports/purchases/billwise-purchase']"
-              (click)="$event.stopPropagation()">Billwise Purchases</a>
-         </li>
-         <li>
-           <a [routerLink]="['/reports/purchases/itemwise-purchase-summary']"
-              (click)="$event.stopPropagation()">Itemwise Purchase Summary</a>
-         </li>
-         <li>
-           <a [routerLink]="['/reports/purchases/billwise-purchase-summary']"
-              (click)="$event.stopPropagation()">Billwise Purchase Summary</a>
-         </li>
-         <li>
-           <a [routerLink]="['/reports/purchases/supplierwise-purchase-summary']"
-              (click)="$event.stopPropagation()">Supplierwise Purchases Summary</a>
-         </li>
-         <li>
-          <a [routerLink]="['/reports/purchases/gst-purchase']"
-             (click)="$event.stopPropagation()">Gst Purchase</a>
-          </li>
-         </ul>
-         </li>
-           
-         <!-- Suppliers with Nested Submenu -->
-         <li class="has-submenu"
-         [class.active]="activeNestedSubMenu === 'suppliers'"
-         (mouseenter)="!isMobile && (activeNestedSubMenu = 'suppliers')"
-         (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
-     
-        <!-- ✅ Fix: handle submenu toggle here -->
-        <a role="button"
-          (click)="isMobile ? toggleNestedSubMenu('suppliers') : null">
-          Suppliers
-        </a>
-     
-        <!-- ✅ Show nested submenu properly -->
-        <ul
-         *ngIf="activeNestedSubMenu === 'suppliers'"
-         [class.nested-submenu]="!isMobile"
-         [class.mobile-visible]="isMobile"
-         (click)="$event.stopPropagation()">
-     
-         <li>
-           <a [routerLink]="['/reports/suppliers/payment-history']"
-              (click)="$event.stopPropagation()">Payment History</a>
-         </li>  
-         <li>
-          <a [routerLink]="['/reports/suppliers/account-balance']"
-             (click)="$event.stopPropagation()">Account Balances</a>
-         </li>
-        </ul>
-         </li>
-           
-          <!-- Expenses with Nested Submenu -->
-         <li class="has-submenu"
-         [class.active]="activeNestedSubMenu === 'expenses'"
-         (mouseenter)="!isMobile && (activeNestedSubMenu = 'expenses')"
-         (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
-     
-        <!-- ✅ Fix: handle submenu toggle here -->
-        <a role="button"
-          (click)="isMobile ? toggleNestedSubMenu('expenses') : null">
-          Expenses
-        </a>
-     
-        <!-- ✅ Show nested submenu properly -->
-        <ul
-         *ngIf="activeNestedSubMenu === 'expenses'"
-         [class.nested-submenu]="!isMobile"
-         [class.mobile-visible]="isMobile"
-         (click)="$event.stopPropagation()">
-     
-         <li>
-           <a [routerLink]="['/reports/expenses/search-expense']"
-              (click)="$event.stopPropagation()">Search Expenses</a>
-         </li>  
-         <li>
-          <a [routerLink]="['/reports/expenses/search-indirect-expense']"
-             (click)="$event.stopPropagation()">Search Indirect Expenses</a>
-         </li>
-        </ul>
-         </li>
-      
-           <!-- Staffs with Nested Submenu -->
-           <li class="has-submenu"
-           [class.active]="activeNestedSubMenu === 'staff'"
-           (mouseenter)="!isMobile && (activeNestedSubMenu = 'staff')"
-           (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
-       
-          <!-- ✅ Fix: handle submenu toggle here -->
-          <a role="button"
-            (click)="isMobile ? toggleNestedSubMenu('staff') : null">
-            Staff
-          </a>
-       
-          <!-- ✅ Show nested submenu properly -->
-          <ul
-           *ngIf="activeNestedSubMenu === 'staff'"
-           [class.nested-submenu]="!isMobile"
-           [class.mobile-visible]="isMobile"
-           (click)="$event.stopPropagation()">
-       
-           <li>
-             <a [routerLink]="['/reports/staff/search-salary']"
-                (click)="$event.stopPropagation()">Search Salary</a>
-           </li>  
-           <li>
-            <a [routerLink]="['/reports/staff/commissions']"
-               (click)="$event.stopPropagation()">Commissions</a>
-           </li>
-           <li>
-            <a [routerLink]="['/reports/staff/search-attendance']"
-               (click)="$event.stopPropagation()">Search Attendance</a>
-          </li>  
-          <li>
-           <a [routerLink]="['/reports/staff/payment-history']"
-              (click)="$event.stopPropagation()">Payment History</a>
-          </li>
-          </ul>
-           </li>
-          
+              <!-- ✅ Fix: handle submenu toggle here -->
+              <a role="button" (click)="isMobile ? toggleNestedSubMenu('inventory') : null">
+                Inventory
+              </a>
+
+              <!-- ✅ Show nested submenu properly -->
+              <ul *ngIf="activeNestedSubMenu === 'inventory'" [class.nested-submenu]="!isMobile"
+                [class.mobile-visible]="isMobile" (click)="$event.stopPropagation()">
+
+                <li>
+                  <a [routerLink]="['/reports/inventory/item-register']" (click)="$event.stopPropagation()">Item
+                    Register</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/inventory/low-level-stock']" (click)="$event.stopPropagation()">Low Level
+                    Stock</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/inventory/stock-availability']" (click)="$event.stopPropagation()">Stock
+                    Availability</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/inventory/stock-adjustment']" (click)="$event.stopPropagation()">Stock
+                    Adjustments</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/inventory/consumable-stock']"
+                    (click)="$event.stopPropagation()">Consumable Stock</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/inventory/fast-moving-items']" (click)="$event.stopPropagation()">Fast
+                    Moving Items</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/inventory/items-not-moving']" (click)="$event.stopPropagation()">Items Not
+                    Moving</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/inventory/available-serials']"
+                    (click)="$event.stopPropagation()">Available Serials</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/inventory/item-list']" (click)="$event.stopPropagation()">Item List</a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Sales with Nested Submenu -->
+            <li class="has-submenu" [class.active]="activeNestedSubMenu === 'sales'"
+              (mouseenter)="!isMobile && (activeNestedSubMenu = 'sales')"
+              (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
+
+              <!-- ✅ Fix: handle submenu toggle here -->
+              <a role="button" (click)="isMobile ? toggleNestedSubMenu('sales') : null">
+                Sales
+              </a>
+
+              <!-- ✅ Show nested submenu properly -->
+              <ul *ngIf="activeNestedSubMenu === 'sales'" [class.nested-submenu]="!isMobile"
+                [class.mobile-visible]="isMobile" (click)="$event.stopPropagation()">
+
+                <li>
+                  <a [routerLink]="['/reports/sales/sales-aging']" (click)="$event.stopPropagation()">Sales Aging</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/sales/itemwise-sales']" (click)="$event.stopPropagation()">Itemwise
+                    Sales</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/sales/invoicewise-sales']" (click)="$event.stopPropagation()">Invoicewise
+                    Sales</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/sales/itemwise-profit-margin']"
+                    (click)="$event.stopPropagation()">Itemwise Profit / Margin</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/sales/invoicewise-profit-margin']"
+                    (click)="$event.stopPropagation()">Invoicewise Profit / Margin</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/sales/customerwise-profit-margin']"
+                    (click)="$event.stopPropagation()">Customerwise Profit / Margin</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/sales/itemwise-sales-summary']"
+                    (click)="$event.stopPropagation()">Itemwise Sales Summary</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/sales/invoicewise-sales-summary']"
+                    (click)="$event.stopPropagation()">Invoicewise Sale Summary</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/sales/customerwise-sales-summary']"
+                    (click)="$event.stopPropagation()">Customerwise Sale Summary</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/sales/gst-sales']" (click)="$event.stopPropagation()">Gst Sale</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/sales/active-recurring-invoice']"
+                    (click)="$event.stopPropagation()">Active Recurring Invoice</a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Customers with Nested Submenu -->
+            <li class="has-submenu" [class.active]="activeNestedSubMenu === 'customers'"
+              (mouseenter)="!isMobile && (activeNestedSubMenu = 'customesr')"
+              (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
+
+              <!-- ✅ Fix: handle submenu toggle here -->
+              <a role="button" (click)="isMobile ? toggleNestedSubMenu('customers') : null">
+                Customers
+              </a>
+
+              <!-- ✅ Show nested submenu properly -->
+              <ul *ngIf="activeNestedSubMenu === 'customers'" [class.nested-submenu]="!isMobile"
+                [class.mobile-visible]="isMobile" (click)="$event.stopPropagation()">
+
+                <li>
+                  <a [routerLink]="['/reports/customers/amount-due']" (click)="$event.stopPropagation()">Amount Due</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/customers/payment-history']" (click)="$event.stopPropagation()">Payment
+                    History</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/customers/account-balance']" (click)="$event.stopPropagation()">Account
+                    Balances</a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Purchases with Nested Submenu -->
+            <li class="has-submenu" [class.active]="activeNestedSubMenu === 'purchases'"
+              (mouseenter)="!isMobile && (activeNestedSubMenu = 'purchases')"
+              (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
+
+              <!-- ✅ Fix: handle submenu toggle here -->
+              <a role="button" (click)="isMobile ? toggleNestedSubMenu('purchases') : null">
+                Purchases
+              </a>
+
+              <!-- ✅ Show nested submenu properly -->
+              <ul *ngIf="activeNestedSubMenu === 'purchases'" [class.nested-submenu]="!isMobile"
+                [class.mobile-visible]="isMobile" (click)="$event.stopPropagation()">
+
+                <li>
+                  <a [routerLink]="['/reports/purchases/purchase-aging']" (click)="$event.stopPropagation()">Purchase
+                    Aging</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/purchases/itemwise-purchase']" (click)="$event.stopPropagation()">Itemwise
+                    Purchases</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/purchases/billwise-purchase']" (click)="$event.stopPropagation()">Billwise
+                    Purchases</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/purchases/itemwise-purchase-summary']"
+                    (click)="$event.stopPropagation()">Itemwise Purchase Summary</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/purchases/billwise-purchase-summary']"
+                    (click)="$event.stopPropagation()">Billwise Purchase Summary</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/purchases/supplierwise-purchase-summary']"
+                    (click)="$event.stopPropagation()">Supplierwise Purchases Summary</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/purchases/gst-purchase']" (click)="$event.stopPropagation()">Gst
+                    Purchase</a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Suppliers with Nested Submenu -->
+            <li class="has-submenu" [class.active]="activeNestedSubMenu === 'suppliers'"
+              (mouseenter)="!isMobile && (activeNestedSubMenu = 'suppliers')"
+              (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
+
+              <!-- ✅ Fix: handle submenu toggle here -->
+              <a role="button" (click)="isMobile ? toggleNestedSubMenu('suppliers') : null">
+                Suppliers
+              </a>
+
+              <!-- ✅ Show nested submenu properly -->
+              <ul *ngIf="activeNestedSubMenu === 'suppliers'" [class.nested-submenu]="!isMobile"
+                [class.mobile-visible]="isMobile" (click)="$event.stopPropagation()">
+
+                <li>
+                  <a [routerLink]="['/reports/suppliers/payment-history']" (click)="$event.stopPropagation()">Payment
+                    History</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/suppliers/account-balance']" (click)="$event.stopPropagation()">Account
+                    Balances</a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Expenses with Nested Submenu -->
+            <li class="has-submenu" [class.active]="activeNestedSubMenu === 'expenses'"
+              (mouseenter)="!isMobile && (activeNestedSubMenu = 'expenses')"
+              (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
+
+              <!-- ✅ Fix: handle submenu toggle here -->
+              <a role="button" (click)="isMobile ? toggleNestedSubMenu('expenses') : null">
+                Expenses
+              </a>
+
+              <!-- ✅ Show nested submenu properly -->
+              <ul *ngIf="activeNestedSubMenu === 'expenses'" [class.nested-submenu]="!isMobile"
+                [class.mobile-visible]="isMobile" (click)="$event.stopPropagation()">
+
+                <li>
+                  <a [routerLink]="['/reports/expenses/search-expense']" (click)="$event.stopPropagation()">Search
+                    Expenses</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/expenses/search-indirect-expense']"
+                    (click)="$event.stopPropagation()">Search Indirect Expenses</a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Staffs with Nested Submenu -->
+            <li class="has-submenu" [class.active]="activeNestedSubMenu === 'staff'"
+              (mouseenter)="!isMobile && (activeNestedSubMenu = 'staff')"
+              (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
+
+              <!-- ✅ Fix: handle submenu toggle here -->
+              <a role="button" (click)="isMobile ? toggleNestedSubMenu('staff') : null">
+                Staff
+              </a>
+
+              <!-- ✅ Show nested submenu properly -->
+              <ul *ngIf="activeNestedSubMenu === 'staff'" [class.nested-submenu]="!isMobile"
+                [class.mobile-visible]="isMobile" (click)="$event.stopPropagation()">
+
+                <li>
+                  <a [routerLink]="['/reports/staff/search-salary']" (click)="$event.stopPropagation()">Search
+                    Salary</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/staff/commissions']" (click)="$event.stopPropagation()">Commissions</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/staff/search-attendance']" (click)="$event.stopPropagation()">Search
+                    Attendance</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/staff/payment-history']" (click)="$event.stopPropagation()">Payment
+                    History</a>
+                </li>
+              </ul>
+            </li>
+
             <!-- TCS with Nested Submenu -->
-            <li class="has-submenu"
-              [class.active]="activeNestedSubMenu === 'tcs'"
+            <li class="has-submenu" [class.active]="activeNestedSubMenu === 'tcs'"
               (mouseenter)="!isMobile && (activeNestedSubMenu = 'tcs')"
               (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
-     
-             <!-- ✅ Fix: handle submenu toggle here -->
-              <a role="button"
-               (click)="isMobile ? toggleNestedSubMenu('tcs') : null">
-               TCS
-              </a>
-     
-           <!-- ✅ Show nested submenu properly -->
-           <ul
-             *ngIf="activeNestedSubMenu === 'tcs'"
-             [class.nested-submenu]="!isMobile"
-             [class.mobile-visible]="isMobile"
-             (click)="$event.stopPropagation()">
-     
-            <li>
-              <a [routerLink]="['/reports/tcs/tcs-payables']"
-              (click)="$event.stopPropagation()">TCS Payables From(27EQ)</a>
-            </li>  
-            <li>
-              <a [routerLink]="['/reports/tcs/tcs-receivables']"
-              (click)="$event.stopPropagation()">TCS Receivables</a>
-            </li>
-            </ul>
-           </li>
 
-           <!-- GSTR with Nested Submenu -->
-           <li class="has-submenu"
-           [class.active]="activeNestedSubMenu === 'gstr'"
-           (mouseenter)="!isMobile && (activeNestedSubMenu = 'gstr')"
-           (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
-  
-          <!-- ✅ Fix: handle submenu toggle here -->
-           <a role="button"
-            (click)="isMobile ? toggleNestedSubMenu('gstr') : null">
-            GSTR
-           </a>
-  
-          <!-- ✅ Show nested submenu properly -->
-          <ul
-          *ngIf="activeNestedSubMenu === 'gstr'"
-          [class.nested-submenu]="!isMobile"
-          [class.mobile-visible]="isMobile"
-          (click)="$event.stopPropagation()">
-  
-             <li>
-              <a [routerLink]="['/reports/gstr/gstr-1']"
-              (click)="$event.stopPropagation()">GSTR-1</a>
-             </li>  
-             <li>
-              <a [routerLink]="['/reports/gstr/gstr-3']"
-              (click)="$event.stopPropagation()">GSTR-3B</a>
-             </li>
-              <li class="has-submenu"
-              [class.active]="activeNestedSubMenu === 'gstr'"
+              <!-- ✅ Fix: handle submenu toggle here -->
+              <a role="button" (click)="isMobile ? toggleNestedSubMenu('tcs') : null">
+                TCS
+              </a>
+
+              <!-- ✅ Show nested submenu properly -->
+              <ul *ngIf="activeNestedSubMenu === 'tcs'" [class.nested-submenu]="!isMobile"
+                [class.mobile-visible]="isMobile" (click)="$event.stopPropagation()">
+
+                <li>
+                  <a [routerLink]="['/reports/tcs/tcs-payables']" (click)="$event.stopPropagation()">TCS Payables
+                    From(27EQ)</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/tcs/tcs-receivables']" (click)="$event.stopPropagation()">TCS
+                    Receivables</a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- GSTR with Nested Submenu -->
+            <li class="has-submenu" [class.active]="activeNestedSubMenu === 'gstr'"
               (mouseenter)="!isMobile && (activeNestedSubMenu = 'gstr')"
               (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
 
-               <!-- ✅ Fix: handle submenu toggle here -->
-               <a role="button"
-               (click)="isMobile ? toggleNestedSubMenu('gstr') : null">
-               Compatible
+              <!-- ✅ Fix: handle submenu toggle here -->
+              <a role="button" (click)="isMobile ? toggleNestedSubMenu('gstr') : null">
+                GSTR
               </a>
 
               <!-- ✅ Show nested submenu properly -->
-              <ul
-               *ngIf="activeNestedSubMenu === 'gstr'"
-               [class.nested-submenu]="!isMobile"
-               [class.mobile-visible]="isMobile"
-               (click)="$event.stopPropagation()">
+              <ul *ngIf="activeNestedSubMenu === 'gstr'" [class.nested-submenu]="!isMobile"
+                [class.mobile-visible]="isMobile" (click)="$event.stopPropagation()">
 
-               <li>
-               <a [routerLink]="['/reports/gstr/gstr-sale']"
-               (click)="$event.stopPropagation()">Sale</a>
-              </li>  
-              <li>
-                <a [routerLink]="['/reports/gstr/gstr-purchase']"
-               (click)="$event.stopPropagation()">Purchase</a>
-              </li> 
-              <li>
-                <a [routerLink]="['/reports/gstr/gstr-indirect-expense']"
-               (click)="$event.stopPropagation()">Indirect Expense</a>
-              </li>
-             </ul>
+                <li>
+                  <a [routerLink]="['/reports/gstr/gstr-1']" (click)="$event.stopPropagation()">GSTR-1</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/reports/gstr/gstr-3']" (click)="$event.stopPropagation()">GSTR-3B</a>
+                </li>
+                <li class="has-submenu" [class.active]="activeNestedSubMenu === 'gstr'"
+                  (mouseenter)="!isMobile && (activeNestedSubMenu = 'gstr')"
+                  (mouseleave)="!isMobile && (activeNestedSubMenu = null)">
+
+                  <!-- ✅ Fix: handle submenu toggle here -->
+                  <a role="button" (click)="isMobile ? toggleNestedSubMenu('gstr') : null">
+                    Compatible
+                  </a>
+
+                  <!-- ✅ Show nested submenu properly -->
+                  <ul *ngIf="activeNestedSubMenu === 'gstr'" [class.nested-submenu]="!isMobile"
+                    [class.mobile-visible]="isMobile" (click)="$event.stopPropagation()">
+
+                    <li>
+                      <a [routerLink]="['/reports/gstr/gstr-sale']" (click)="$event.stopPropagation()">Sale</a>
+                    </li>
+                    <li>
+                      <a [routerLink]="['/reports/gstr/gstr-purchase']" (click)="$event.stopPropagation()">Purchase</a>
+                    </li>
+                    <li>
+                      <a [routerLink]="['/reports/gstr/gstr-indirect-expense']"
+                        (click)="$event.stopPropagation()">Indirect Expense</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
             </li>
-         </ul>
+            <!-- Charges, Discounts, Taxes now grouped under Master above -->
+
+            <!-- You can repeat the same structure for other menus like Quotation, Delivery Note, etc. -->
+          </ul>
         </li>
-          <!-- Charges, Discounts, Taxes now grouped under Master above -->
 
-          <!-- You can repeat the same structure for other menus like Quotation, Delivery Note, etc. -->
-        </ul>
-         </li>
+        <!-- Settings with Submenu -->
+        <li class="menu-item-with-submenu sale-spacing" [class.active]="activeSubMenu === 'settings'"
+          (mouseenter)="!isMobile && (activeSubMenu = 'settings')" (mouseleave)="!isMobile && (activeSubMenu = null)">
 
-          <!-- Settings with Submenu -->
-         <li class="menu-item-with-submenu sale-spacing"
-           [class.active]="activeSubMenu === 'settings'"
-           (mouseenter)="!isMobile && (activeSubMenu = 'settings')"
-           (mouseleave)="!isMobile && (activeSubMenu = null)">
-  
-           <a [routerLink]="['/settings']" (click)="toggleSubMenu('settings')">
+          <a [routerLink]="['/settings']" (click)="toggleSubMenu('settings')">
             <mat-icon class="icon-settings">settings</mat-icon> Settings
           </a>
 
-         </li>
+        </li>
 
       </ul>
 
-    <!-- Optional: Footer -->
-    <div class="footer">
-      {{ today }}<br />
-      {{ time }}
-    </div>
+      <!-- Optional: Footer -->
+      <div class="footer">
+        {{ today }}<br />
+        {{ time }}
+      </div>
 
-  </div> <!-- /sidebar -->
+    </div> <!-- /sidebar -->
 
-</div>
-</div>
-
-
-
-
-
-
-
-
-
-
+  </div>
+</div> 

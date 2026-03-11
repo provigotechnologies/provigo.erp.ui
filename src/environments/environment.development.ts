@@ -1,5 +1,3 @@
-import { CourseOfferingService } from "../app/core/services/course-offering.service";
-
 export const environment = {
   production: false,
   customerApiUrl: 'https://localhost:7115/api',
@@ -15,4 +13,4 @@ export const environment = {
   paymentApiUrl: 'https://localhost:7256/api',
   razorpayKeyId: 'rzp_test_SJblYw5zUpGlcO',   // ← replace with your Razorpay test key
   tenantId: '550e8400-e29b-41d4-a716-446655440000'
-};
+};  

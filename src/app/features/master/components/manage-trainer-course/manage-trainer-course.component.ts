@@ -73,7 +73,7 @@ export class ManageTrainerCourseComponent implements OnInit {
 
     this.trainerCourseService.getTrainerCourses(this.selectedProductId, this.selectedBranchId).subscribe({
       next: (res) => {
-        console.log('Raw API Response:', res);
+        // console.log('Raw API Response:', res);
         
         // Handle different response structures
         if (Array.isArray(res)) {
@@ -285,7 +285,6 @@ export class ManageTrainerCourseComponent implements OnInit {
     
     // console.log('Getting display name for trainer:', trainer);
     
-    // Try different possible property combinations
     if (trainer.firstName || trainer.lastName) {
       return `${trainer.firstName || ''} ${trainer.lastName || ''}`.trim();
     }
